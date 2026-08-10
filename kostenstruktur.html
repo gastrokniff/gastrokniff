@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kostenstruktur Gastronomie 2026: Faustregeln als Ampel</title>
+<meta name="description" content="Wie viel Prozent vom Umsatz dürfen Ware, Personal und Miete kosten? Die Richtwerte 2026 als Ampel – grün, gelb, rot. Zum Ausdrucken fürs Büro. Kostenlos.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='2' y='2' width='96' height='96' rx='24' fill='%23211C16'/%3E%3Cpath d='M66 2 L98 2 L98 34 Z' fill='%23D9A34E'/%3E%3Cpath d='M66 2 L98 34 L66 34 Z' fill='%23B57611'/%3E%3Ctext x='20' y='74' font-family='sans-serif' font-weight='800' font-size='58' fill='%23F2F0EA'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..48,500;12..48,600;12..48,700;12..48,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#1B1611;--void2:#221B14;--panel:#26201A;--line:#3A3128;--cream:#F3EEE3;--muted:#A99C88;
+    --amber:#E7B65A;--green:#5FB980;--yellow:#E9B24C;--red:#E27C54;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:
+        radial-gradient(900px 500px at 100% -10%,rgba(231,182,90,.14),transparent 60%),
+        radial-gradient(700px 500px at -10% 110%,rgba(95,185,128,.08),transparent 60%),
+        var(--void);
+       color:var(--cream);font-family:"Inter",system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:840px;margin:0 auto;padding:32px 22px 64px}
+  h1,h2,h3{font-family:"Bricolage Grotesque",sans-serif;letter-spacing:-.02em;line-height:1.05}
+  .mono{font-family:"JetBrains Mono",monospace}
+
+  .top{display:flex;align-items:center;gap:11px;margin-bottom:30px}
+  .bmark{width:34px;height:34px;flex:none}
+  .brand{font-family:"Bricolage Grotesque";font-weight:700;font-size:25px;display:inline-flex;color:var(--cream)}
+  .bi{position:relative;display:inline-block}.bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--amber);border-radius:.04em;transform:translateX(-50%)}
+  .actions{margin-left:auto;display:flex;gap:12px;align-items:center}
+  .back{font-size:14px;color:var(--muted);text-decoration:none}
+  .printbtn{font-family:"Inter";font-size:13px;border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:8px 14px;cursor:pointer;color:var(--cream)}
+  .printbtn:hover{border-color:var(--amber);color:var(--amber)}
+
+  .eyebrow{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber)}
+  h1.title{font-size:clamp(30px,6vw,52px);font-weight:800;margin:12px 0 14px}
+  h1.title em{font-style:normal;color:var(--amber)}
+  .intro{color:var(--muted);font-size:16px;max-width:60ch;margin-bottom:34px}
+
+  /* HERO reality */
+  .hero{background:linear-gradient(180deg,var(--void2),var(--panel));border:1px solid var(--line);border-radius:22px;padding:26px;margin-bottom:26px;position:relative;overflow:hidden}
+  .hero .flash{position:absolute;inset:auto -40px -60px auto;width:220px;height:220px;background:radial-gradient(circle,rgba(95,185,128,.25),transparent 70%);pointer-events:none}
+  .hero .head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+  .hero h2{font-size:20px;font-weight:600}
+  .hero .kpi{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(40px,9vw,64px);color:var(--green);line-height:.9}
+  .hero .kpi small{display:block;font-size:13px;color:var(--muted);font-weight:400;letter-spacing:.02em;margin-top:6px}
+  .stack{display:flex;height:58px;border-radius:13px;overflow:hidden;border:1px solid var(--line);margin-bottom:14px}
+  .seg{display:flex;align-items:center;justify-content:center;font-family:"JetBrains Mono";font-weight:700;font-size:16px;color:#12100C}
+  .seg.dark{color:var(--cream)}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:12.5px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:3px;flex:none}
+  .punch{margin-top:18px;font-size:15px;color:var(--cream);border-top:1px dashed var(--line);padding-top:16px}
+  .punch b{color:var(--amber)}
+
+  /* metrics cockpit */
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:12px 22px;margin-bottom:26px}
+  .sect{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:14px 2px 6px}
+
+  .metric{display:grid;grid-template-columns:44px 1fr 96px;gap:16px;align-items:center;padding:18px 0;border-top:1px solid var(--line)}
+  .metric:first-of-type{border-top:0}
+  .ic{width:44px;height:44px;border-radius:12px;background:var(--void2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--amber)}
+  .ic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .mname{font-family:"Bricolage Grotesque";font-weight:600;font-size:16px;margin-bottom:2px}
+  .mnote{color:var(--muted);font-size:12px;margin-bottom:9px}
+  .track{display:flex;height:34px;border-radius:9px;overflow:hidden;gap:3px}
+  .z{position:relative;display:flex;align-items:center;justify-content:center;font-family:"JetBrains Mono";font-size:13px;font-weight:700;color:#141009;border-radius:5px;letter-spacing:.02em}
+  .z.g{background:var(--green)}.z.y{background:var(--yellow)}.z.r{background:var(--red)}
+  .zlabels{display:flex;justify-content:space-between;margin-top:7px;font-size:13px;color:#CDBFA9;font-family:"JetBrains Mono";font-weight:500}
+  .goal{text-align:right}
+  .goal .g{font-family:"Bricolage Grotesque";font-weight:800;font-size:24px;color:var(--green)}
+  .goal .t{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .tip{grid-column:2 / 4;font-size:13px;color:var(--muted);margin-top:-4px}
+  .tip b{color:var(--cream)}
+  @media(max-width:600px){
+    .metric{grid-template-columns:40px 1fr;grid-template-areas:"ic name" "ic track" "tip tip";row-gap:8px}
+    .ic{grid-area:ic}.mwrap{grid-area:track}.goal{display:none}.tip{grid-column:1/3}
+  }
+
+  /* 65 rule */
+  .rule{border:1px solid var(--line);border-radius:22px;padding:28px 24px;text-align:center;
+        background:radial-gradient(400px 200px at 50% 0,rgba(231,182,90,.18),transparent 70%),var(--panel);margin-bottom:26px}
+  .rule .lbl{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .rule .big{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(26px,6vw,44px);margin:8px 0;color:var(--amber)}
+  .rule p{color:var(--muted);font-size:14px;max-width:52ch;margin:0 auto}
+  .rule p b{color:var(--red)}
+
+  .cta{display:block;background:var(--amber);color:#1B1611;text-decoration:none;border-radius:16px;padding:18px 22px;margin-bottom:20px;transition:.2s}
+  .cta:hover{background:#F0C877}
+  .cta .t{font-family:"Bricolage Grotesque";font-weight:700;font-size:17px}
+  .cta .s{font-size:13px;opacity:.8}
+  .hinweis{font-size:13.5px;color:var(--muted);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .hinweis b{color:var(--cream)}
+  .foot{margin-top:26px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:18px;display:flex;gap:16px;flex-wrap:wrap}
+  .foot a{color:var(--muted);text-decoration:none}
+
+  @media print{
+    body{background:#fff;color:#241C13}
+    .brand,.hero h2,.mname,.rule .big{color:#241C13}
+    .hero,.panel,.rule,.hinweis,.foot{background:#fff;border-color:#ddd}
+    .void2,.ic{background:#f6f2ea}
+    .muted,.mnote,.intro,.zlabels,.foot,.hinweis{color:#6E6355}
+    .noprint{display:none!important}
+    .metric,.hero,.rule{break-inside:avoid}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true">
+      <rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/>
+      <path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/>
+      <text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text>
+    </svg>
+    <a href="index.html" style="text-decoration:none;color:inherit"><span class="brand">Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></a>
+    <div class="actions noprint">
+      <button class="printbtn" onclick="window.print()">🖨 Drucken / als PDF</button>
+      <a class="back" href="index.html">← zurück</a>
+    </div>
+  </div>
+
+  <div class="eyebrow">Finanzen · Faustregeln 2026</div>
+  <h1 class="title">Behalte deine Kosten <em>im Griff.</em></h1>
+  <p class="intro">Wie viel Prozent vom Umsatz dürfen Wareneinsatz, Personal und Miete kosten, bevor sich der Betrieb nicht mehr trägt? Die Richtwerte als Ampel — häng sie ins Büro und prüf jeden Monat, wo du stehst.</p>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="flash"></div>
+    <div class="head">
+      <h2>Von 100 € Umsatz bleiben heute …</h2>
+      <div class="kpi">3&nbsp;€<small>Branchenschnitt-Gewinn 2026</small></div>
+    </div>
+    <div class="stack">
+      <div class="seg" style="width:32%;background:#C98A4E">32 €</div>
+      <div class="seg dark" style="width:40%;background:#6B5842">40 €</div>
+      <div class="seg" style="width:9%;background:#D8A24E">9 €</div>
+      <div class="seg" style="width:16%;background:#B79A6A">16 €</div>
+      <div class="seg" style="width:3%;background:#5FB980" title="Gewinn"> </div>
+    </div>
+    <div class="legend">
+      <span><i class="dot" style="background:#C98A4E"></i> Wareneinsatz ~32 €</span>
+      <span><i class="dot" style="background:#6B5842"></i> Personal ~40 €</span>
+      <span><i class="dot" style="background:#D8A24E"></i> Energie ~9 €</span>
+      <span><i class="dot" style="background:#B79A6A"></i> Miete &amp; Rest ~16 €</span>
+      <span><i class="dot" style="background:#5FB980"></i> Gewinn ~3 €</span>
+    </div>
+    <p class="punch">Vor 2020 blieben noch <b>12–15 €</b> pro 100 €. Heute nur noch <b>3 €</b>. Bei so wenig Marge entscheiden nicht die Gäste über dein Überleben — <b>es entscheiden Cents.</b></p>
+  </div>
+
+  <!-- COCKPIT -->
+  <div class="panel">
+    <div class="sect">Die Ampel · Anteil am Netto-Umsatz</div>
+
+    <!-- Wareneinsatz -->
+    <div class="metric">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 8l9-5 9 5-9 5-9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div>
+      <div class="mwrap">
+        <div class="mname">Wareneinsatz</div>
+        <div class="mnote">Einkauf von Zutaten &amp; Getränken</div>
+        <div class="track"><div class="z g" style="flex:30">gesund</div><div class="z y" style="flex:5"></div><div class="z r" style="flex:15">kritisch</div></div>
+        <div class="zlabels"><span>0 %</span><span>30</span><span>35</span><span>50 %</span></div>
+      </div>
+      <div class="goal"><div class="g">≤30%</div><div class="t">Ziel</div></div>
+      <div class="tip"><b>Im Roten?</b> Lieferanten &amp; Einkauf prüfen, Portionen standardisieren, Schwund senken.</div>
+    </div>
+
+    <!-- Personal -->
+    <div class="metric">
+      <div class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5.5a3 3 0 010 5.4"/><path d="M18 20c0-2.3-1-4.4-2.5-5.6"/></svg></div>
+      <div class="mwrap">
+        <div class="mname">Personalkosten</div>
+        <div class="mnote">heute der größte Kostenblock</div>
+        <div class="track"><div class="z g" style="flex:30">gesund</div><div class="z y" style="flex:5"></div><div class="z r" style="flex:15">kritisch</div></div>
+        <div class="zlabels"><span>0 %</span><span>30</span><span>35</span><span>50 %</span></div>
+      </div>
+      <div class="goal"><div class="g">≤30%</div><div class="t">Ziel</div></div>
+      <div class="tip"><b>Je nach Konzept:</b> Fast Casual 25–30 %, Fine Dining bis 45 %. Hebel: Dienstplan an die Stoßzeiten anpassen.</div>
+    </div>
+
+    <!-- Miete -->
+    <div class="metric">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12"/><path d="M4 21h16"/><rect x="9" y="13" width="6" height="8"/></svg></div>
+      <div class="mwrap">
+        <div class="mname">Miete &amp; Nebenkosten</div>
+        <div class="mnote">Faustregel — variiert stark je Stadt</div>
+        <div class="track"><div class="z g" style="flex:10">gesund</div><div class="z y" style="flex:2"></div><div class="z r" style="flex:8">kritisch</div></div>
+        <div class="zlabels"><span>0 %</span><span>10</span><span>12</span><span>20 %</span></div>
+      </div>
+      <div class="goal"><div class="g">≤10%</div><div class="t">Ziel</div></div>
+      <div class="tip"><b>Wichtig:</b> Die Miete änderst du nach dem Einzug kaum — deshalb <b>vor</b> der Unterschrift genau rechnen.</div>
+    </div>
+
+    <!-- Energie -->
+    <div class="metric">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+      <div class="mwrap">
+        <div class="mname">Energie</div>
+        <div class="mnote">Strom, Gas, Wasser</div>
+        <div class="track"><div class="z g" style="flex:8">gesund</div><div class="z y" style="flex:2"></div><div class="z r" style="flex:10">kritisch</div></div>
+        <div class="zlabels"><span>0 %</span><span>8</span><span>10</span><span>20 %</span></div>
+      </div>
+      <div class="goal"><div class="g">≤8%</div><div class="t">Ziel</div></div>
+      <div class="tip"><b>Im Roten?</b> Geräte-Laufzeiten prüfen, Tarife vergleichen, Kühlung &amp; Licht optimieren.</div>
+    </div>
+
+    <!-- Übriges -->
+    <div class="metric">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M6 2v20l2-1.5L10 22l2-1.5L14 22l2-1.5L18 22V2l-2 1.5L14 2l-2 1.5L10 2 8 3.5 6 2z"/><path d="M9 8h6M9 12h6"/></svg></div>
+      <div class="mwrap">
+        <div class="mname">Übrige Kosten</div>
+        <div class="mnote">Versicherung, Marketing, Reinigung, Gebühren</div>
+        <div class="track"><div class="z g" style="flex:12">gesund</div><div class="z y" style="flex:6"></div><div class="z r" style="flex:12">kritisch</div></div>
+        <div class="zlabels"><span>0 %</span><span>12</span><span>18</span><span>30 %</span></div>
+      </div>
+      <div class="goal"><div class="g">≤12%</div><div class="t">Ziel</div></div>
+      <div class="tip"><b>Im Roten?</b> Verträge (Kartengebühren, Wartung, Abos) einmal im Jahr durchgehen.</div>
+    </div>
+  </div>
+
+  <!-- 65 rule -->
+  <div class="rule">
+    <div class="lbl">Die wichtigste Kennzahl</div>
+    <div class="big">Wareneinsatz + Personal ≤ 65 %</div>
+    <p>Liegt die Summe dauerhaft über <b>70 %</b>, wird es eng — dann trägt sich der Betrieb nicht mehr, egal wie voll er ist. Je niedriger, desto gesünder.</p>
+  </div>
+
+  <a class="cta noprint" href="break-even-rechner.html">
+    <span class="t">Wie viele Gäste brauchst du dafür? →</span><br>
+    <span class="s">Rechne mit dem kostenlosen Break-Even-Rechner deine Zielwerte aus.</span>
+  </a>
+
+  <p class="hinweis"><b>Ehrlich gesagt:</b> Das sind <b>Faustregeln, keine Gesetze.</b> Die gesunden Werte hängen von Konzept, Lage und Größe ab — ein Fine-Dining-Restaurant rechnet anders als ein Imbiss. Nutz die Ampel als Orientierung und Frühwarnung, nicht als endgültiges Urteil. Deine echten Zahlen kennst nur du und dein Steuerberater. <span class="noprint">Quellen u. a.: DEHOGA-Kennzahlen, Destatis, Branchen-Benchmarks 2026.</span></p>
+
+  <p class="foot">
+    <a href="index.html">Startseite</a><a href="aufschlag-vs-deckungsbeitrag.html">Aufschlag vs. Deckungsbeitrag</a><a href="break-even-rechner.html">Break-Even</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a>
+    <span>Eine Übersicht von Gastrokniff — kostenlos, aus der Praxis.</span>
+  </p>
+</div>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4874637d13da44b99b039a9db0a4fcec"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

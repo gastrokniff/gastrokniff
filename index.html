@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gastro-Rechner kostenlos: 5 Tools für deine Kalkulation</title>
+<meta name="description" content="Wareneinsatz, Deckungsbeitrag, Break-Even und Speisekarte in 2 Minuten berechnen. Kostenlos, ohne Anmeldung, direkt im Browser – aus der Praxis für Gastronomen.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='2' y='2' width='96' height='96' rx='24' fill='%23211C16'/%3E%3Cpath d='M66 2 L98 2 L98 34 Z' fill='%23D9A34E'/%3E%3Cpath d='M66 2 L98 34 L66 34 Z' fill='%23B57611'/%3E%3Ctext x='20' y='74' font-family='sans-serif' font-weight='800' font-size='58' fill='%23F2F0EA'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..48,500;12..48,600;12..48,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5EFE3;
+    --paper-warm:#F9EEDA;
+    --ink:#241C13;
+    --stone:#6E6355;
+    --line:#E4DBCB;
+    --card:#FCF7ED;
+    --accent:#C07A12;
+    --accent-soft:#F3E4C6;
+    --herb:#425A3F;
+    --good:#3E7C4F;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(1100px 640px at 88% -8%, rgba(224,164,58,.20), transparent 60%),
+      radial-gradient(900px 520px at -10% 8%, rgba(216,150,60,.10), transparent 55%),
+      var(--paper);
+    color:var(--ink);
+    font-family:"Inter",system-ui,sans-serif;line-height:1.55;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  ::selection{background:var(--accent);color:#fff}
+  h1,h2,h3,h4,.disp{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:600;letter-spacing:-.015em;line-height:1.05}
+  .mono{font-family:"JetBrains Mono",monospace}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+  .tag{
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--accent);display:inline-flex;align-items:center;gap:9px;
+  }
+  .tag::before{content:"";width:22px;height:1px;background:var(--accent)}
+
+  /* NAV */
+  header{position:fixed;inset:0 0 auto 0;z-index:100;padding:20px 0;transition:.35s;border-bottom:1px solid transparent}
+  header.scrolled{background:rgba(245,239,227,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px 0}
+  .nav{display:flex;align-items:center;justify-content:space-between}
+  .brand{display:inline-flex;align-items:center;gap:11px;font-family:"Bricolage Grotesque";font-weight:700;font-size:28px;letter-spacing:-.02em;color:var(--ink)}
+  .brand .bmark{width:36px;height:36px;display:block;flex:none;filter:drop-shadow(0 3px 8px rgba(36,28,19,.18))}
+  .brand .wm{display:inline-flex;line-height:1}
+  .bi{position:relative;display:inline-block}
+  .bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--accent);border-radius:.04em;transform:translateX(-50%)}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{font-size:14px;color:var(--stone);transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;font-weight:500;font-size:14px;
+    border-radius:999px;padding:11px 22px;cursor:pointer;border:1px solid var(--ink);
+    background:var(--ink);color:var(--paper);transition:.25s;
+  }
+  .btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--paper)}
+  .menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px;color:var(--ink);cursor:pointer;font-family:"Inter"}
+
+  /* HERO */
+  .hero{padding:150px 0 70px;position:relative}
+  .hero .tag{margin-bottom:26px}
+  .hero h1{font-size:clamp(40px,6.4vw,82px);max-width:15ch}
+  .hero h1 .u{color:var(--accent)}
+  .hero .lead{margin-top:26px;max-width:52ch;font-size:clamp(16px,2vw,19px);color:var(--stone)}
+  .warm-line{display:inline-block;margin-top:6px;color:var(--herb);font-family:"Bricolage Grotesque";font-weight:600;font-size:1.02em}
+  .hero .cta{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap}
+  .hero .trust{margin-top:40px;display:flex;gap:34px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:26px}
+  .hero .trust div{display:flex;flex-direction:column}
+  .hero .trust b{font-family:"Bricolage Grotesque";font-size:30px;color:var(--ink)}
+  .hero .trust small{color:var(--stone);font-size:13px}
+
+  .band{padding:96px 0}
+  .band-head{max-width:60ch}
+  .band-head h2{font-size:clamp(28px,4vw,46px);margin:20px 0 14px}
+  .band-head p{color:var(--stone);font-size:17px}
+
+  /* CALCULATOR */
+  .calc-sec{
+    background:
+      radial-gradient(720px 420px at 14% -5%, rgba(214,150,54,.26), transparent 62%),
+      linear-gradient(165deg,#31261A 0%,#241C13 100%);
+    color:var(--paper);position:relative;overflow:hidden;
+  }
+  .calc-sec .tag{color:var(--accent)}
+  .calc-sec .tag::before{background:var(--accent)}
+  .calc-sec h2{color:var(--paper)}
+  .calc-sec .band-head p{color:#B9B2A6}
+  .calc{
+    margin-top:44px;display:grid;grid-template-columns:1.35fr 1fr;gap:26px;align-items:start;
+  }
+  .panel{background:#352817;border:1px solid #4A3A22;border-radius:16px;padding:26px}
+  .panel h3{font-size:18px;color:var(--paper);margin-bottom:6px}
+  .panel .hint{color:#9A9184;font-size:13px;margin-bottom:20px}
+  .row{display:grid;grid-template-columns:1fr 76px 84px 92px 30px;gap:8px;margin-bottom:9px;align-items:center}
+  .row.head{color:#8A8175;font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+  .calc input,.calc select{
+    width:100%;background:#2A2013;border:1px solid #4A3A22;border-radius:8px;
+    color:var(--paper);padding:10px 11px;font-family:"Inter";font-size:14px;outline:none;transition:border .2s;
+  }
+  .calc input:focus,.calc select:focus{border-color:var(--accent)}
+  .calc input::placeholder{color:#6E655A}
+  .del{background:none;border:0;color:#6E655A;font-size:18px;cursor:pointer;line-height:1;transition:color .2s}
+  .del:hover{color:#C0685E}
+  .addrow{margin-top:10px;background:none;border:1px dashed #4A4237;color:#C6BDAF;border-radius:8px;padding:9px;width:100%;cursor:pointer;font-size:13px;font-family:"Inter";transition:.2s}
+  .addrow:hover{border-color:var(--accent);color:var(--accent)}
+  .ctrl{display:flex;flex-direction:column;gap:5px;margin-top:16px}
+  .ctrl label{font-size:12px;color:#9A9184;text-transform:uppercase;letter-spacing:.05em}
+  .segs{display:flex;gap:6px}
+  .seg{flex:1;text-align:center;background:#2A2013;border:1px solid #4A3A22;border-radius:8px;padding:9px;cursor:pointer;font-size:13px;color:#C6BDAF;transition:.2s;user-select:none}
+  .seg.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .out{background:linear-gradient(180deg,#3A2C1A,#2A2013);border:1px solid #4A3A22;border-radius:16px;padding:26px;position:sticky;top:90px}
+  .out .big{font-family:"Bricolage Grotesque";font-weight:700}
+  .kpi{display:flex;justify-content:space-between;align-items:baseline;padding:15px 0;border-bottom:1px solid #4A3A22}
+  .kpi:last-of-type{border-bottom:0}
+  .kpi span{color:#9A9184;font-size:13.5px}
+  .kpi .v{font-family:"JetBrains Mono";font-size:16px;color:var(--paper)}
+  .kpi.hero-kpi .v{font-family:"Bricolage Grotesque";font-size:30px;color:var(--accent)}
+  .gauge{margin:20px 0 6px}
+  .gauge .bar{height:9px;border-radius:999px;background:#4A3A22;overflow:hidden}
+  .gauge .fill{height:100%;width:30%;background:var(--good);border-radius:999px;transition:width .35s ease,background .35s}
+  .gauge .glabel{display:flex;justify-content:space-between;font-size:12px;color:#9A9184;margin-top:8px}
+  .note{margin-top:16px;font-size:12px;color:#8A8175;line-height:1.5}
+
+  /* TOOLS GRID */
+  .grid{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .tool{display:block;color:inherit;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;transition:.3s;position:relative;overflow:hidden}
+  .more-soon{text-align:center;color:var(--stone);font-size:14px;margin-top:26px}
+  .tool:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(33,28,22,.4)}
+  .tool .ico{width:44px;height:44px;border-radius:11px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:22px}
+  .tool h3{font-size:20px;margin-bottom:8px}
+  .tool p{color:var(--stone);font-size:14.5px;margin-bottom:16px}
+  .pill{font-family:"JetBrains Mono";font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+  .pill.live{background:var(--good);color:#fff}
+  .pill.soon{background:#EAE4D8;color:var(--stone)}
+
+  /* KNOWLEDGE */
+  .know{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .arts{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .art{background:var(--card);padding:30px;transition:background .3s}
+  .art:hover{background:var(--paper)}
+  .art .k{font-family:"JetBrains Mono";font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+  .art h3{font-size:21px;margin:14px 0 10px;line-height:1.15}
+  .art p{color:var(--stone);font-size:14.5px}
+  .art .more{margin-top:16px;font-size:13px;color:var(--ink);font-weight:500;display:inline-flex;gap:6px}
+
+  /* KONTAKT */
+  .news{text-align:center}
+  .news h2{font-size:clamp(30px,4.6vw,52px);max-width:20ch;margin:20px auto 16px}
+  .news p{color:var(--stone);max-width:48ch;margin:0 auto 30px;font-size:17px}
+  .signup{display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+  .signup input{flex:1;min-width:220px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:14px 20px;font-size:15px;font-family:"Inter";outline:none}
+  .signup input:focus{border-color:var(--accent)}
+  .signup .btn{white-space:nowrap}
+  .news .fine{margin-top:14px;font-size:12.5px;color:var(--stone)}
+
+  footer{border-top:1px solid var(--line);padding:40px 0}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center;color:var(--stone);font-size:13px}
+  .foot .legal a{color:var(--stone);text-decoration:none}
+  .foot .legal a:hover{color:var(--ink)}
+  .foot .brand{color:var(--ink);font-size:22px;gap:9px}
+  .foot .brand .bmark{width:28px;height:28px}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.19,1,.22,1),transform .9s cubic-bezier(.19,1,.22,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:900px){
+    .calc{grid-template-columns:1fr}
+    .out{position:static}
+    .grid,.arts{grid-template-columns:1fr!important}
+    .arts{border-radius:16px}
+  }
+  @media(max-width:720px){
+    .wrap{padding:0 20px}
+    .menu-btn{display:block}
+    .nav-links{
+      display:none;position:absolute;top:100%;right:20px;left:20px;margin-top:10px;
+      flex-direction:column;align-items:stretch;gap:0;
+      background:var(--paper);border:1px solid var(--line);border-radius:14px;
+      padding:8px;box-shadow:0 12px 30px rgba(36,28,19,.14);
+    }
+    .nav-links.open{display:flex}
+    .nav-links a{padding:13px 14px;border-radius:9px;font-size:16px}
+    .nav-links a:not(.btn):hover{background:var(--card)}
+    .nav-links .btn.ghost{margin-top:4px;justify-content:center}
+    .hero{padding:120px 0 50px}
+    .band{padding:66px 0}
+    .row{grid-template-columns:1fr 60px 70px 76px 26px;gap:6px}
+    .calc input,.calc select{padding:9px 8px;font-size:13px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true">
+        <rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/>
+        <path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/>
+        <path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/>
+        <text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text>
+      </svg>
+      <span class="wm">Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#rechner">Rechner</a>
+      <a href="rechner.html">Alle Rechner</a>
+      <a href="#wissen">Wissen</a>
+      <a href="#kontakt" class="btn ghost">Kontakt</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Menü öffnen" aria-expanded="false">Menü</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="tag reveal">Von Gastronomen — für Gastronomen</span>
+    <h1 class="reveal">Kostenlose Werkzeuge &amp; Tipps<br><span class="u">für die Gastronomie.</span></h1>
+    <p class="lead reveal">Preise kalkulieren, Zahlen verstehen, mehr aus deiner Karte holen — direkt im Browser, ohne Anmeldung. Egal, ob du neu startest oder seit Jahren dabei bist. <b class="warm-line">Aus der Praxis, für die Praxis.</b></p>
+    <div class="cta reveal">
+      <a href="#rechner" class="btn">Wareneinsatz-Rechner öffnen →</a>
+      <a href="#werkzeuge" class="btn ghost">Alle Werkzeuge ansehen</a>
+    </div>
+    <div class="trust reveal">
+      <div><b>0 €</b><small>Kostenlos starten</small></div>
+      <div><b>Live</b><small>Erstes Werkzeug sofort nutzbar</small></div>
+      <div><b>Praxis</b><small>Aus dem echten Restaurantalltag</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="band calc-sec" id="rechner">
+  <div class="wrap">
+    <div class="band-head reveal">
+      <span class="tag">Werkzeug 01 · Live</span>
+      <h2>Wareneinsatz-Rechner</h2>
+      <p>Trag die Zutaten eines Gerichts ein und sieh in Echtzeit deinen Wareneinsatz, den empfohlenen Verkaufspreis und deinen Deckungsbeitrag. Kein Excel, kein Ratespiel. <span style="color:var(--stone)">(Auch bekannt als Food-Cost- oder Deckungsbeitrag-Rechner.)</span></p>
+    </div>
+
+    <div class="calc reveal">
+      <!-- INPUT -->
+      <div class="panel">
+        <h3>Zutaten des Gerichts</h3>
+        <p class="hint">Menge × Einkaufspreis pro Einheit. Beispiel: 0,18 kg Rind × 14,50 €/kg.</p>
+        <div class="row head"><div>Zutat</div><div>Menge</div><div>Einheit</div><div>€ / Einheit</div><div></div></div>
+        <div id="rows"></div>
+        <button class="addrow" id="addRow">+ Zutat hinzufügen</button>
+
+        <div class="ctrl">
+          <label>Ziel-Wareneinsatzquote</label>
+          <div class="segs" id="fcSegs">
+            <div class="seg" data-fc="25">25 %</div>
+            <div class="seg on" data-fc="30">30 %</div>
+            <div class="seg" data-fc="33">33 %</div>
+            <div class="seg" data-fc="35">35 %</div>
+          </div>
+        </div>
+        <div class="ctrl">
+          <label>Mehrwertsteuer (seit 2026: Speise 7 %, Getränk 19 %)</label>
+          <div class="segs" id="mwstSegs">
+            <div class="seg on" data-mwst="7">Speise · 7 %</div>
+            <div class="seg" data-mwst="19">Getränk · 19 %</div>
+          </div>
+        </div>
+        <div class="ctrl">
+          <label>Eigener Verkaufspreis brutto (optional)</label>
+          <input type="number" id="ownPrice" placeholder="z. B. 18,90" step="0.1" min="0" style="max-width:220px">
+        </div>
+      </div>
+
+      <!-- OUTPUT -->
+      <div class="out">
+        <div class="kpi hero-kpi"><span>Empfohlener Preis (brutto)</span><span class="v big" id="oGross">–</span></div>
+        <div class="kpi"><span>Wareneinsatz gesamt</span><span class="v" id="oCost">0,00 €</span></div>
+        <div class="kpi"><span>Empf. Netto-Preis</span><span class="v" id="oNet">–</span></div>
+        <div class="kpi"><span>Deckungsbeitrag / Portion</span><span class="v" id="oDb">–</span></div>
+
+        <div class="gauge">
+          <div class="bar"><div class="fill" id="gFill"></div></div>
+          <div class="glabel"><span id="gText">Wareneinsatzquote</span><span id="gPct">–</span></div>
+        </div>
+        <p class="note" id="oNote">Gib Zutaten ein, um die Kalkulation zu sehen. Tipp: Vergiss nicht Beilagen, Garnitur und Schwund — die kleinen Positionen fressen oft die Marge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="band" id="werkzeuge">
+  <div class="wrap">
+    <div class="band-head reveal">
+      <span class="tag">Die Werkzeugkiste</span>
+      <h2>Alles, was der Betrieb wirklich braucht.</h2>
+      <p>Ein Werkzeug nach dem anderen — gebaut aus echten Fragen, die sich jeder Gastronom stellt. Neue kommen nach und nach dazu.</p>
+    </div>
+    <div class="grid">
+      <a class="tool reveal" href="#rechner">
+        <div class="ico">🧮</div>
+        <h3>Wareneinsatz-Rechner</h3>
+        <p>Kalkuliere Gerichte, finde den richtigen Preis und schütze deine Marge.</p>
+        <span class="pill live">Jetzt live</span>
+      </a>
+      <a class="tool reveal" href="menu-engineering.html">
+        <div class="ico">📊</div>
+        <h3>Menu-Engineering</h3>
+        <p>Welche Gerichte tragen deine Karte? Sortiere sie nach Beliebtheit und Marge.</p>
+        <span class="pill live">Jetzt live</span>
+      </a>
+      <a class="tool reveal" href="getraenke-rechner.html">
+        <div class="ico">🍹</div>
+        <h3>Getränke-Rechner</h3>
+        <p>Vom Flaschenpreis zum richtigen Glaspreis — inklusive Schankverlust.</p>
+        <span class="pill live">Jetzt live</span>
+      </a>
+      <a class="tool reveal" href="break-even-rechner.html">
+        <div class="ico">💶</div>
+        <h3>Break-Even-Rechner</h3>
+        <p>Wie viele Gäste pro Tag brauchst du, damit sich der Laden trägt?</p>
+        <span class="pill live">Jetzt live</span>
+      </a>
+      <a class="tool reveal" href="aufschlag-vs-deckungsbeitrag.html">
+        <div class="ico">⚖️</div>
+        <h3>Aufschlag oder Deckungsbeitrag?</h3>
+        <p>Warum „mal 4" dich Geld kostet — beide Methoden im direkten Vergleich.</p>
+        <span class="pill live">Jetzt live</span>
+      </a>
+    </div>
+    <p class="more-soon reveal">Weitere kostenlose Werkzeuge kommen nach und nach dazu — als Nächstes der Foodwaste-Check. · <a href="rechner.html" style="color:var(--accent)">Alle Rechner im Überblick →</a></p>
+  </div>
+</section>
+
+<!-- KNOWLEDGE -->
+<section class="band know" id="wissen">
+  <div class="wrap">
+    <div class="band-head reveal">
+      <span class="tag">Wissen aus der Küche</span>
+      <h2>Kurz, ehrlich, sofort anwendbar.</h2>
+      <p>Keine Theorie von der Uni — Erfahrungen aus dem Betrieb, in fünf Minuten gelesen.</p>
+    </div>
+    <div class="arts" style="grid-template-columns:repeat(3,1fr)">
+      <a class="art reveal" href="artikel-preis-kalkulieren.html">
+        <span class="k">Kalkulation · Grundlagen</span>
+        <h3>Einen Preis für dein Gericht festlegen</h3>
+        <p>Was du tun und was du vermeiden solltest, wenn du den Preis für ein Gericht festlegst — einfach erklärt, mit direktem Draht zum Rechner.</p>
+        <span class="more">Lesen →</span>
+      </a>
+      <a class="art reveal" href="artikel-mwst-7-19.html">
+        <span class="k">Steuer & Buchhaltung · aktuell</span>
+        <h3>7 % oder 19 %? Der Steuer-Kniff für 2026</h3>
+        <p>Seit 2026 gilt: Speisen 7 %, Getränke 19 %. Was du bei Kasse, Menüs und Speisekarte tun und vermeiden solltest.</p>
+        <span class="more">Lesen →</span>
+      </a>
+      <a class="art reveal" href="artikel-speisekarte.html">
+        <span class="k">Speisekarte · Verkauf</span>
+        <h3>Speisekarten-Tricks für mehr Umsatz</h3>
+        <p>Welche Kniffe wirklich wirken und welche Fehler dich Umsatz kosten — Preis, Reihenfolge, Beschreibung.</p>
+        <span class="more">Lesen →</span>
+      </a>
+      <a class="art reveal" href="artikel-aufschlag.html">
+        <span class="k">Kalkulation · Fortgeschritten</span>
+        <h3>Warum „Wareneinsatz × 4" dich arm rechnet</h3>
+        <p>Die alte Faktor-Regel stammt aus einer anderen Zeit. So rechnest du heute richtig — mit festem Deckungsbeitrag.</p>
+        <span class="more">Lesen →</span>
+      </a>
+      <a class="art reveal" href="kostenstruktur.html">
+        <span class="k">Finanzen · Übersicht</span>
+        <h3>Kostenstruktur: die Faustregeln als Ampel</h3>
+        <p>Wie viel % vom Umsatz dürfen Ware, Personal und Miete kosten? Zum Ausdrucken fürs Büro.</p>
+        <span class="more">Ansehen →</span>
+      </a>
+      <a class="art reveal" href="artikel-preiserhoehung.html">
+        <span class="k">Preise & Gäste · Praxis</span>
+        <h3>Preise erhöhen, ohne Gäste zu verlieren</h3>
+        <p>Nicht mit der Gießkanne: wie du gezielt und transparent erhöhst — und die Gäste mitnimmst.</p>
+        <span class="more">Lesen →</span>
+      </a>
+    </div>
+    <p class="more-soon reveal">Weitere Kniffe kommen nach und nach — als Nächstes „Goodie statt Rabatt".</p>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="band news" id="kontakt">
+  <div class="wrap">
+    <span class="tag reveal" style="justify-content:center">Schreib uns</span>
+    <h2 class="reveal">Ein Werkzeug, das dir fehlt?</h2>
+    <p class="reveal">Sag uns, woran du im Betrieb hängst. Die nützlichsten Ideen werden zum nächsten kostenlosen Werkzeug.</p>
+    <div class="signup reveal" style="justify-content:center">
+      <a class="btn" href="mailto:info@gastrokniff.de">Schreib uns eine E-Mail</a>
+    </div>
+    <p class="fine reveal">info@gastrokniff.de · Wir lesen jede Nachricht.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <a href="#top" class="brand">
+      <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true">
+        <rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/>
+        <path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/>
+        <path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/>
+        <text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text>
+      </svg>
+      <span class="wm">Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span>
+    </a>
+    <span>© 2026 Gastrokniff · Kniffe für die Gastronomie</span>
+    <span class="legal"><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
+  </div>
+</footer>
+
+<script>
+  // header + reveal
+  const hdr=document.getElementById('hdr');
+  const onScroll=()=>hdr.classList.toggle('scrolled',scrollY>30);
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // ---------- CALCULATOR ----------
+  const euro=n=>isFinite(n)?n.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €':'–';
+  const rowsEl=document.getElementById('rows');
+  let targetFC=30, mwst=7;
+
+  const units=['kg','g','l','ml','Stk','Portion'];
+  function makeRow(name='',menge='',unit='kg',price=''){
+    const div=document.createElement('div');
+    div.className='row';
+    div.innerHTML=`
+      <input class="c-name" placeholder="z. B. Rinderfilet" value="${name}">
+      <input class="c-qty" type="number" step="0.01" min="0" placeholder="0,18" value="${menge}">
+      <select class="c-unit">${units.map(u=>`<option${u===unit?' selected':''}>${u}</option>`).join('')}</select>
+      <input class="c-price" type="number" step="0.01" min="0" placeholder="14,50" value="${price}">
+      <button class="del" title="Entfernen">×</button>`;
+    div.querySelector('.del').onclick=()=>{div.remove();calc()};
+    div.querySelectorAll('input,select').forEach(i=>i.addEventListener('input',calc));
+    rowsEl.appendChild(div);
+  }
+
+  function calc(){
+    let total=0;
+    rowsEl.querySelectorAll('.row').forEach(r=>{
+      const q=parseFloat(r.querySelector('.c-qty').value)||0;
+      const p=parseFloat(r.querySelector('.c-price').value)||0;
+      total+=q*p;
+    });
+    document.getElementById('oCost').textContent=euro(total);
+
+    const own=parseFloat(document.getElementById('ownPrice').value)||0;
+    let netEmpf=total/(targetFC/100);
+    let grossEmpf=netEmpf*(1+mwst/100);
+
+    document.getElementById('oNet').textContent=total>0?euro(netEmpf):'–';
+    document.getElementById('oGross').textContent=total>0?euro(grossEmpf):'–';
+
+    let quote=targetFC, db=netEmpf-total, mode='Empfohlen';
+    if(own>0){
+      const ownNet=own/(1+mwst/100);
+      quote=total>0?(total/ownNet*100):0;
+      db=ownNet-total;
+      mode='Bei deinem Preis';
+      document.getElementById('oGross').textContent=euro(own);
+      document.getElementById('oNet').textContent=euro(ownNet);
+    }
+    document.getElementById('oDb').textContent=total>0?euro(db):'–';
+
+    // gauge
+    const fill=document.getElementById('gFill');
+    const pctShown=Math.min(quote,60)/60*100;
+    fill.style.width=(total>0?pctShown:0)+'%';
+    let col= quote<=targetFC ? 'var(--good)' : quote<=targetFC+6 ? 'var(--accent)' : '#C0685E';
+    fill.style.background=col;
+    document.getElementById('gText').textContent=mode+' · Wareneinsatzquote';
+    document.getElementById('gPct').textContent=total>0?quote.toLocaleString('de-DE',{maximumFractionDigits:1})+' %':'–';
+
+    const note=document.getElementById('oNote');
+    if(total<=0){note.textContent='Gib Zutaten ein, um die Kalkulation zu sehen. Tipp: Beilagen, Garnitur und Schwund nicht vergessen — die kleinen Positionen fressen oft die Marge.';}
+    else if(own>0 && quote>targetFC+3){note.textContent='Deine Quote liegt über dem Ziel: Der Preis ist knapp kalkuliert. Entweder Preis anheben oder Wareneinsatz senken.';}
+    else if(own>0){note.textContent='Sauber — deine Quote liegt im Zielbereich. Behalte den Deckungsbeitrag pro Portion im Blick, nicht nur die Prozente.';}
+    else{note.textContent='Das ist der rechnerische Zielpreis. In der Praxis rundest du psychologisch (z. B. 18,90 statt 19,05) und prüfst, was der Gast am Tisch akzeptiert.';}
+  }
+
+  document.getElementById('addRow').onclick=()=>makeRow();
+  document.getElementById('ownPrice').addEventListener('input',calc);
+  document.querySelectorAll('#fcSegs .seg').forEach(s=>s.onclick=()=>{
+    document.querySelectorAll('#fcSegs .seg').forEach(x=>x.classList.remove('on'));
+    s.classList.add('on');targetFC=+s.dataset.fc;calc();
+  });
+  document.querySelectorAll('#mwstSegs .seg').forEach(s=>s.onclick=()=>{
+    document.querySelectorAll('#mwstSegs .seg').forEach(x=>x.classList.remove('on'));
+    s.classList.add('on');mwst=+s.dataset.mwst;calc();
+  });
+
+  // seed with an example so the tool feels alive
+  makeRow('Rinderfilet','0.18','kg','42.00');
+  makeRow('Kartoffeln','0.25','kg','1.20');
+  makeRow('Butter & Gewürze','0.03','kg','9.00');
+  calc();
+
+  // Mobile-Menü
+  const menuBtn=document.getElementById('menuBtn'), navLinks=document.getElementById('navLinks');
+  menuBtn.addEventListener('click',e=>{
+    e.stopPropagation();
+    const open=navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded',open);
+    menuBtn.textContent=open?'Schließen':'Menü';
+  });
+  navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    navLinks.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='Menü';
+  }));
+  document.addEventListener('click',e=>{
+    if(navLinks.classList.contains('open') && !navLinks.contains(e.target) && e.target!==menuBtn){
+      navLinks.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='Menü';
+    }
+  });
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4874637d13da44b99b039a9db0a4fcec"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

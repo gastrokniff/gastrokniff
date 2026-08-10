@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Break-Even Gastronomie: Wie viele Gäste brauchst du?</title>
+<meta name="description" content="Berechne kostenlos, ab welchem Umsatz sich dein Laden trägt und wie viele Gäste du pro Tag brauchst – mit Fixkosten und Wareneinsatzquote. Ohne Anmeldung.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='2' y='2' width='96' height='96' rx='24' fill='%23211C16'/%3E%3Cpath d='M66 2 L98 2 L98 34 Z' fill='%23D9A34E'/%3E%3Cpath d='M66 2 L98 34 L66 34 Z' fill='%23B57611'/%3E%3Ctext x='20' y='74' font-family='sans-serif' font-weight='800' font-size='58' fill='%23F2F0EA'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..48,500;12..48,600;12..48,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5EFE3;--ink:#241C13;--stone:#6E6355;--line:#E4DBCB;
+    --card:#FCF7ED;--accent:#C07A12;--accent-soft:#F3E4C6;--herb:#425A3F;--good:#3E7C4F;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:radial-gradient(1000px 600px at 88% -8%,rgba(224,164,58,.20),transparent 60%),var(--paper);
+       color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:34px 24px 70px}
+  h1,h2,h3,.disp{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;letter-spacing:-.015em;line-height:1.05}
+  .mono{font-family:"JetBrains Mono",monospace}
+
+  .top{display:flex;align-items:center;gap:11px;margin-bottom:28px}
+  .bmark{width:34px;height:34px;flex:none;filter:drop-shadow(0 3px 8px rgba(36,28,19,.18))}
+  .brand{font-family:"Bricolage Grotesque";font-weight:700;font-size:26px;display:inline-flex}
+  .bi{position:relative;display:inline-block}.bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--accent);border-radius:.04em;transform:translateX(-50%)}
+  .back{font-size:14px;color:var(--stone);margin-left:auto;text-decoration:none}
+
+  .tag{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
+  .tag::before{content:"";width:22px;height:1px;background:var(--accent)}
+  h1.title{font-size:clamp(30px,5vw,46px);margin-bottom:14px}
+  .intro{color:var(--stone);max-width:64ch;font-size:16px;margin-bottom:34px}
+
+  .layout{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:start}
+  @media(max-width:900px){.layout{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+  .panel h3{font-size:17px;margin-bottom:4px}
+  .panel .hint{color:var(--stone);font-size:13px;margin-bottom:16px}
+  .sub{font-family:"JetBrains Mono";font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--stone);margin:18px 0 10px}
+
+  .field{margin-bottom:12px}
+  .field label{display:block;font-size:13px;color:var(--stone);margin-bottom:5px}
+  .field .u{color:#B3A990;font-size:11px}
+  .frow{display:grid;grid-template-columns:1fr 120px;gap:10px;align-items:center;margin-bottom:9px}
+  .frow label{font-size:14px;color:var(--ink)}
+  input{width:100%;background:#fff;border:1px solid var(--line);border-radius:9px;color:var(--ink);padding:10px 12px;font-family:"Inter";font-size:15px;outline:none;transition:border .2s;text-align:right}
+  input:focus{border-color:var(--accent)}
+  .sumline{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);margin-top:8px;padding-top:12px;font-size:14px}
+  .sumline b{font-family:"JetBrains Mono";font-size:16px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+  .out{background:linear-gradient(180deg,#3A2C1A,#2A2013);border:1px solid #4A3A22;border-radius:18px;padding:24px;position:sticky;top:20px;color:var(--paper)}
+  .big-kpi{text-align:center;padding:6px 0 16px;border-bottom:1px solid #4A3A22;margin-bottom:6px}
+  .big-kpi .lab{color:#B9AE9C;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em}
+  .big-kpi .val{font-family:"Bricolage Grotesque";font-weight:700;font-size:40px;color:#E7B65A;line-height:1.1;margin-top:4px}
+  .big-kpi .val small{font-size:16px;color:#B9AE9C;font-weight:400}
+  .kpi{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid #4A3A22}
+  .kpi:last-child{border-bottom:0}
+  .kpi span{color:#B9AE9C;font-size:13.5px}
+  .kpi .v{font-family:"JetBrains Mono";font-size:16px;color:var(--paper)}
+  .block-title{font-family:"JetBrains Mono";font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#9A8F7C;margin:18px 0 2px}
+  .profit .v{color:#8FD0A0}
+  .note{margin-top:16px;font-size:12px;color:#A99E8C;line-height:1.6}
+
+  .explain{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:720px){.explain{grid-template-columns:1fr}.two{grid-template-columns:1fr}.frow{grid-template-columns:1fr 100px}}
+  .ex{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:16px 18px}
+  .ex h4{font-family:"Bricolage Grotesque";font-size:15px;margin-bottom:5px}
+  .ex p{color:var(--stone);font-size:13.5px}
+  .foot{margin-top:34px;color:var(--stone);font-size:12px;border-top:1px solid var(--line);padding-top:18px;display:flex;gap:16px;flex-wrap:wrap}
+  .foot a{color:var(--stone);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true">
+      <rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/>
+      <path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/>
+      <text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text>
+    </svg>
+    <a href="index.html" style="text-decoration:none;color:inherit"><span class="brand">Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></a>
+    <a class="back" href="index.html">← zurück</a>
+  </div>
+
+  <div class="tag">Werkzeug · Break-Even</div>
+  <h1 class="title">Wie viele Gäste brauchst du pro Tag?</h1>
+  <p class="intro">Trag deine Kosten und deinen Durchschnittsbon ein. Der Rechner zeigt dir, ab welchem Umsatz dein Laden eine schwarze Null macht — und wie viele Gäste du dafür jeden Tag brauchst. Kein Blindflug mehr.</p>
+
+  <div class="layout">
+    <!-- INPUT -->
+    <div class="panel">
+      <h3>Deine Zahlen</h3>
+      <p class="hint">Fixe Kosten = das, was du jeden Monat zahlst, egal wie viele Gäste kommen.</p>
+
+      <div class="sub">Fixe Kosten pro Monat</div>
+      <div class="frow"><label>Miete &amp; Nebenkosten</label><input id="miete" type="number" min="0" step="50" value="3000"></div>
+      <div class="frow"><label>Personal</label><input id="personal" type="number" min="0" step="100" value="9000"></div>
+      <div class="frow"><label>Energie (Strom, Gas, Wasser)</label><input id="energie" type="number" min="0" step="50" value="1500"></div>
+      <div class="frow"><label>Sonstiges (Versicherung, Software …)</label><input id="sonstiges" type="number" min="0" step="50" value="1500"></div>
+      <div class="sumline"><span>Fixkosten gesamt</span><b id="fixsum">–</b></div>
+
+      <div class="sub">Umsatz &amp; Gäste</div>
+      <div class="field">
+        <label>Wareneinsatzquote <span class="u">% vom Umsatz — was Zutaten/Getränke kosten</span></label>
+        <input id="wequote" type="number" min="0" max="90" step="1" value="30">
+      </div>
+      <div class="two">
+        <div class="field"><label>Durchschnittsbon <span class="u">€/Gast</span></label><input id="bon" type="number" min="0" step="0.5" value="25"></div>
+        <div class="field"><label>Öffnungstage <span class="u">/Monat</span></label><input id="tage" type="number" min="1" max="31" step="1" value="26"></div>
+      </div>
+      <div class="field">
+        <label>Wunschgewinn <span class="u">€/Monat — optional</span></label>
+        <input id="gewinn" type="number" min="0" step="100" value="3000">
+      </div>
+    </div>
+
+    <!-- OUTPUT -->
+    <div class="out">
+      <div class="big-kpi">
+        <div class="lab">Break-Even · Gäste pro Tag</div>
+        <div class="val" id="oGuestsBE">–</div>
+      </div>
+      <div class="block-title">Schwarze Null (nur Kosten decken)</div>
+      <div class="kpi"><span>Umsatz / Monat</span><span class="v" id="oBEmonth">–</span></div>
+      <div class="kpi"><span>Umsatz / Tag</span><span class="v" id="oBEday">–</span></div>
+
+      <div class="block-title">Mit Wunschgewinn</div>
+      <div class="kpi profit"><span>Nötiger Umsatz / Tag</span><span class="v" id="oTGday">–</span></div>
+      <div class="kpi profit"><span>Nötige Gäste / Tag</span><span class="v" id="oGuestsTG">–</span></div>
+
+      <p class="note" id="oNote"></p>
+    </div>
+  </div>
+
+  <div class="explain">
+    <div class="ex"><h4>Was ist Break-Even?</h4><p>Der Punkt, an dem dein Umsatz genau deine Kosten deckt — nicht mehr, nicht weniger. Ab hier fängt der Gewinn an.</p></div>
+    <div class="ex"><h4>Warum die Wareneinsatzquote zählt</h4><p>Nicht jeder Euro Umsatz bleibt dir. Bei 30 % Wareneinsatz decken nur 70 Cent von jedem Euro deine Fixkosten. Deshalb brauchst du mehr Umsatz, als die Fixkosten allein vermuten lassen.</p></div>
+    <div class="ex"><h4>Der ehrliche Blick</h4><p>Vergleiche die nötige Gästezahl mit dem, was an deinem Standort realistisch ist. Passt es nicht, stimmt etwas an Kosten, Preis oder Lage nicht.</p></div>
+  </div>
+
+  <p class="foot">
+    <a href="index.html">Startseite</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a>
+    <span>Break-Even-Umsatz = Fixkosten ÷ (1 − Wareneinsatzquote). Ein Werkzeug von Gastrokniff — kostenlos.</span>
+  </p>
+</div>
+
+<script>
+  const euro=n=>isFinite(n)&&n>0?n.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0})+' €':'–';
+  const euro2=n=>isFinite(n)&&n>0?n.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €':'–';
+  const num=id=>parseFloat(document.getElementById(id).value)||0;
+
+  function calc(){
+    const fix=num('miete')+num('personal')+num('energie')+num('sonstiges');
+    document.getElementById('fixsum').textContent=euro(fix);
+
+    const weq=Math.min(num('wequote'),89)/100;
+    const dbQuote=1-weq;                       // Deckungsbeitragsquote
+    const bon=num('bon');
+    const tage=Math.max(num('tage'),1);
+    const gewinn=num('gewinn');
+
+    const beMonth = dbQuote>0 ? fix/dbQuote : 0;
+    const beDay   = beMonth/tage;
+    const guestsBE= bon>0 ? beDay/bon : 0;
+
+    const tgMonth = dbQuote>0 ? (fix+gewinn)/dbQuote : 0;
+    const tgDay   = tgMonth/tage;
+    const guestsTG= bon>0 ? tgDay/bon : 0;
+
+    document.getElementById('oGuestsBE').innerHTML = guestsBE>0 ? Math.ceil(guestsBE)+' <small>Gäste</small>' : '–';
+    document.getElementById('oBEmonth').textContent=euro(beMonth);
+    document.getElementById('oBEday').textContent=euro(beDay);
+    document.getElementById('oTGday').textContent= gewinn>0 ? euro(tgDay) : '–';
+    document.getElementById('oGuestsTG').textContent= (gewinn>0 && guestsTG>0) ? Math.ceil(guestsTG)+' Gäste' : '–';
+
+    const note=document.getElementById('oNote');
+    if(fix<=0||bon<=0){note.textContent='Trag deine Fixkosten und den Durchschnittsbon ein, um zu rechnen.';}
+    else if(dbQuote<=0){note.textContent='Deine Wareneinsatzquote ist zu hoch — so trägt sich kein Betrieb. Prüfe Einkauf und Preise.';}
+    else{note.textContent='Das sind '+Math.ceil(guestsBE)+' Gäste täglich nur für die schwarze Null'+(gewinn>0?', und '+Math.ceil(guestsTG)+' für deinen Wunschgewinn.':'.')+' Klingt das an deinem Standort machbar?';}
+  }
+  document.querySelectorAll('input').forEach(i=>i.addEventListener('input',calc));
+  calc();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4874637d13da44b99b039a9db0a4fcec"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

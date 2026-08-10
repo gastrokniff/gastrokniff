@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu-Engineering: Welche Gerichte tragen deine Karte?</title>
+<meta name="description" content="Kostenlos herausfinden, welche Gerichte Sterne, Renner, Rätsel oder Penner sind. Deine Speisekarte nach Marge und Beliebtheit sortieren – ohne Anmeldung.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='2' y='2' width='96' height='96' rx='24' fill='%23211C16'/%3E%3Cpath d='M66 2 L98 2 L98 34 Z' fill='%23D9A34E'/%3E%3Cpath d='M66 2 L98 34 L66 34 Z' fill='%23B57611'/%3E%3Ctext x='20' y='74' font-family='sans-serif' font-weight='800' font-size='58' fill='%23F2F0EA'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..48,500;12..48,600;12..48,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5EFE3;--paper-warm:#F9EEDA;--ink:#241C13;--stone:#6E6355;--line:#E4DBCB;
+    --card:#FCF7ED;--accent:#C07A12;--accent-soft:#F3E4C6;--herb:#425A3F;
+    --stern:#C08A1E;--renner:#3E7C4F;--raetsel:#2F6D8F;--penner:#B0592E;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:radial-gradient(1000px 600px at 88% -8%,rgba(224,164,58,.20),transparent 60%),var(--paper);
+    color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:34px 24px 70px}
+  h1,h2,h3,.disp{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;letter-spacing:-.015em;line-height:1.05}
+  .mono{font-family:"JetBrains Mono",monospace}
+
+  .top{display:flex;align-items:center;gap:11px;margin-bottom:30px}
+  .bmark{width:34px;height:34px;flex:none;filter:drop-shadow(0 3px 8px rgba(36,28,19,.18))}
+  .brand{font-family:"Bricolage Grotesque";font-weight:700;font-size:26px;display:inline-flex}
+  .bi{position:relative;display:inline-block}
+  .bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--accent);border-radius:.04em;transform:translateX(-50%)}
+
+  .tag{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
+  .tag::before{content:"";width:22px;height:1px;background:var(--accent)}
+  h1.title{font-size:clamp(30px,5vw,46px);margin-bottom:14px}
+  .intro{color:var(--stone);max-width:66ch;font-size:16px;margin-bottom:36px}
+
+  .layout{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;align-items:start}
+  @media(max-width:900px){.layout{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+  .panel h3{font-size:18px;margin-bottom:4px}
+  .panel .hint{color:var(--stone);font-size:13px;margin-bottom:18px}
+
+  .row{display:grid;grid-template-columns:1fr 62px 74px 74px 28px;gap:7px;margin-bottom:8px;align-items:center}
+  .row.head{color:var(--stone);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+  input,select{width:100%;background:#fff;border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:9px 10px;font-family:"Inter";font-size:14px;outline:none;transition:border .2s}
+  input:focus,select:focus{border-color:var(--accent)}
+  input::placeholder{color:#B3A990}
+  .del{background:none;border:0;color:#BBAF98;font-size:18px;cursor:pointer;line-height:1;transition:color .2s}
+  .del:hover{color:var(--penner)}
+  .addrow{margin-top:10px;background:none;border:1px dashed #CFC4AC;color:var(--stone);border-radius:8px;padding:9px;width:100%;cursor:pointer;font-size:13px;font-family:"Inter";transition:.2s}
+  .addrow:hover{border-color:var(--accent);color:var(--accent)}
+  .mwst{display:flex;gap:6px;margin-top:16px}
+  .seg{flex:1;text-align:center;background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px;cursor:pointer;font-size:13px;color:var(--stone);transition:.2s;user-select:none}
+  .seg.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+
+  /* MATRIX */
+  .matrixwrap{position:sticky;top:20px}
+  .plot{position:relative;width:100%;aspect-ratio:1/1;background:
+      linear-gradient(0deg,rgba(176,89,46,.05),rgba(176,89,46,.05)) ,var(--card);
+    border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .qlabel{position:absolute;font-family:"Bricolage Grotesque";font-weight:700;font-size:13px;opacity:.55;padding:10px 12px}
+  .q-tl{top:0;left:0;color:var(--raetsel)}
+  .q-tr{top:0;right:0;color:var(--stern);text-align:right}
+  .q-bl{bottom:0;left:0;color:var(--penner)}
+  .q-br{bottom:0;right:0;color:var(--renner);text-align:right}
+  .divx{position:absolute;top:0;bottom:0;width:1px;background:repeating-linear-gradient(var(--line),var(--line) 4px,transparent 4px,transparent 8px)}
+  .divy{position:absolute;left:0;right:0;height:1px;background:repeating-linear-gradient(90deg,var(--line),var(--line) 4px,transparent 4px,transparent 8px)}
+  .dot{position:absolute;width:13px;height:13px;border-radius:50%;transform:translate(-50%,50%);border:2px solid var(--card);box-shadow:0 2px 6px rgba(0,0,0,.15);transition:.3s ease}
+  .dotlab{position:absolute;font-size:10px;color:var(--ink);transform:translate(-50%,50%);white-space:nowrap;pointer-events:none;background:rgba(252,247,237,.7);padding:0 3px;border-radius:3px}
+  .axis{font-size:11px;color:var(--stone);display:flex;justify-content:space-between;margin-top:8px}
+  .axisY{position:absolute;left:-2px;top:50%;transform:rotate(-90deg) translateX(50%);transform-origin:left;font-size:11px;color:var(--stone)}
+
+  /* RESULTS */
+  .results{margin-top:24px}
+  .rtable{width:100%;border-collapse:collapse;font-size:14px}
+  .rtable th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--stone);padding:8px 10px;border-bottom:1px solid var(--line)}
+  .rtable td{padding:11px 10px;border-bottom:1px solid var(--line)}
+  .rtable .num{font-family:"JetBrains Mono";text-align:right}
+  .badge{font-family:"JetBrains Mono";font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;padding:3px 9px;border-radius:999px;color:#fff;white-space:nowrap}
+  .b-stern{background:var(--stern)}.b-renner{background:var(--renner)}.b-raetsel{background:var(--raetsel)}.b-penner{background:var(--penner)}
+
+  .cards{margin-top:34px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:640px){.cards{grid-template-columns:1fr}.row{grid-template-columns:1fr 52px 62px 62px 24px;gap:5px}input,select{padding:8px 7px;font-size:13px}}
+  .cat{background:var(--card);border:1px solid var(--line);border-left-width:4px;border-radius:12px;padding:16px 18px}
+  .cat h4{font-family:"Bricolage Grotesque";font-size:16px;margin-bottom:5px;display:flex;align-items:center;gap:8px}
+  .cat p{color:var(--stone);font-size:13.5px}
+  .cat.stern{border-left-color:var(--stern)}.cat.renner{border-left-color:var(--renner)}
+  .cat.raetsel{border-left-color:var(--raetsel)}.cat.penner{border-left-color:var(--penner)}
+  .foot{margin-top:40px;color:var(--stone);font-size:12px;border-top:1px solid var(--line);padding-top:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true">
+      <rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/>
+      <path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/>
+      <text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text>
+    </svg>
+    <span class="brand">Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span>
+  </div>
+
+  <div class="tag">Werkzeug · Menu-Engineering</div>
+  <h1 class="title">Welche Gerichte tragen deine Karte?</h1>
+  <p class="intro">Trag deine Gerichte mit Verkäufen, Wareneinsatz und Preis ein. Der Rechner sortiert jedes Gericht nach <b>Beliebtheit</b> und <b>Deckungsbeitrag</b> in vier Klassen — und sagt dir, was du damit tun solltest. Alles läuft in deinem Browser, nichts wird gespeichert.</p>
+
+  <div class="layout">
+    <!-- INPUT -->
+    <div class="panel">
+      <h3>Deine Gerichte</h3>
+      <p class="hint">Verkäufe = verkaufte Portionen im Zeitraum (z. B. letzter Monat). Preis = Verkaufspreis brutto.</p>
+      <div class="row head"><div>Gericht</div><div>Verk.</div><div>WE €</div><div>Preis €</div><div></div></div>
+      <div id="rows"></div>
+      <button class="addrow" id="addRow">+ Gericht hinzufügen</button>
+      <div style="margin-top:16px">
+        <div class="hint" style="margin-bottom:6px">Mehrwertsteuer für Netto-Deckungsbeitrag · seit 2026: Speise 7 %, Getränk 19 %</div>
+        <div class="mwst" id="mwstSegs">
+          <div class="seg on" data-mwst="7">Speise · 7 %</div>
+          <div class="seg" data-mwst="19">Getränk · 19 %</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MATRIX -->
+    <div class="matrixwrap">
+      <div class="plot" id="plot">
+        <div class="qlabel q-tl">Rätsel</div>
+        <div class="qlabel q-tr">Sterne</div>
+        <div class="qlabel q-bl">Penner</div>
+        <div class="qlabel q-br">Renner</div>
+        <div class="divx" id="divx" style="left:50%"></div>
+        <div class="divy" id="divy" style="bottom:50%"></div>
+        <div class="axisY">Deckungsbeitrag →</div>
+      </div>
+      <div class="axis"><span>← weniger beliebt</span><span>beliebter →</span></div>
+    </div>
+  </div>
+
+  <!-- RESULTS TABLE -->
+  <div class="results panel" style="margin-top:24px">
+    <h3>Auswertung</h3>
+    <p class="hint">Deckungsbeitrag = Netto-Preis − Wareneinsatz. Klasse nach Beliebtheit &amp; DB im Vergleich zum Durchschnitt.</p>
+    <div style="overflow-x:auto">
+      <table class="rtable">
+        <thead><tr><th>Gericht</th><th class="num">Verk.</th><th class="num">DB/Portion</th><th class="num">DB gesamt</th><th>Klasse</th></tr></thead>
+        <tbody id="rtbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CATEGORY GUIDE -->
+  <div class="cards">
+    <div class="cat stern"><h4>★ Sterne</h4><p>Beliebt <b>und</b> ertragreich. Deine Gewinnbringer: prominent platzieren, empfehlen, Preis halten. Nicht verstecken!</p></div>
+    <div class="cat renner"><h4>▲ Renner</h4><p>Verkaufen sich top, bringen aber wenig Marge. Wareneinsatz senken, Beilage/Portion optimieren, Preis behutsam anheben.</p></div>
+    <div class="cat raetsel"><h4>◆ Rätsel</h4><p>Gute Marge, aber werden zu selten bestellt. Besser platzieren, appetitlicher benennen, aktiv empfehlen, ggf. Preis leicht senken.</p></div>
+    <div class="cat penner"><h4>▼ Penner</h4><p>Wenig beliebt, wenig Marge. Überarbeiten — oder ehrlich von der Karte nehmen und Platz für Sterne schaffen.</p></div>
+  </div>
+
+  <p class="foot">Methode: Klassiker des Menu-Engineerings nach Kasavana &amp; Smith. Beliebtheits-Schwelle = 70 % des Durchschnittsanteils, Ertrags-Schwelle = durchschnittlicher Deckungsbeitrag pro verkaufter Portion. Ein Werkzeug von Gastrokniff — kostenlos.</p>
+</div>
+
+<script>
+  const euro=n=>isFinite(n)?n.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €':'–';
+  const rowsEl=document.getElementById('rows');
+  let mwst=7;
+  const CAT={stern:{n:'Sterne',c:'b-stern'},renner:{n:'Renner',c:'b-renner'},raetsel:{n:'Rätsel',c:'b-raetsel'},penner:{n:'Penner',c:'b-penner'}};
+  const COL={stern:'#C08A1E',renner:'#3E7C4F',raetsel:'#2F6D8F',penner:'#B0592E'};
+
+  function makeRow(name='',sold='',we='',price=''){
+    const d=document.createElement('div');d.className='row';
+    d.innerHTML=`
+      <input class="c-name" placeholder="z. B. Schnitzel" value="${name}">
+      <input class="c-sold" type="number" min="0" step="1" placeholder="120" value="${sold}">
+      <input class="c-we" type="number" min="0" step="0.01" placeholder="4,50" value="${we}">
+      <input class="c-price" type="number" min="0" step="0.01" placeholder="18,90" value="${price}">
+      <button class="del" title="Entfernen">×</button>`;
+    d.querySelector('.del').onclick=()=>{d.remove();calc()};
+    d.querySelectorAll('input').forEach(i=>i.addEventListener('input',calc));
+    rowsEl.appendChild(d);
+  }
+
+  function calc(){
+    const items=[];
+    rowsEl.querySelectorAll('.row').forEach(r=>{
+      const name=r.querySelector('.c-name').value.trim();
+      const sold=parseFloat(r.querySelector('.c-sold').value)||0;
+      const we=parseFloat(r.querySelector('.c-we').value)||0;
+      const price=parseFloat(r.querySelector('.c-price').value)||0;
+      const net=price/(1+mwst/100);
+      const db=net-we;
+      if(name||sold||price) items.push({name:name||'(ohne Name)',sold,we,price,db});
+    });
+
+    const totalUnits=items.reduce((s,i)=>s+i.sold,0);
+    const totalContribution=items.reduce((s,i)=>s+i.db*i.sold,0);
+    const n=items.length;
+    const popThresh = n>0 ? (1/n)*0.7 : 0;              // share threshold
+    const avgCM = totalUnits>0 ? totalContribution/totalUnits : 0;
+
+    // classify
+    items.forEach(i=>{
+      i.share = totalUnits>0 ? i.sold/totalUnits : 0;
+      i.hiPop = i.share >= popThresh;
+      i.hiProf = i.db >= avgCM;
+      i.cat = i.hiPop ? (i.hiProf?'stern':'renner') : (i.hiProf?'raetsel':'penner');
+    });
+
+    // ---- table ----
+    const tb=document.getElementById('rtbody');tb.innerHTML='';
+    if(items.length===0){tb.innerHTML='<tr><td colspan="5" style="color:var(--stone)">Trag Gerichte ein, um die Auswertung zu sehen.</td></tr>';}
+    items.slice().sort((a,b)=>b.db*b.sold-a.db*a.sold).forEach(i=>{
+      const tr=document.createElement('tr');
+      tr.innerHTML=`<td>${i.name}</td><td class="num">${i.sold}</td><td class="num">${euro(i.db)}</td><td class="num">${euro(i.db*i.sold)}</td><td><span class="badge ${CAT[i.cat].c}">${CAT[i.cat].n}</span></td>`;
+      tb.appendChild(tr);
+    });
+
+    // ---- matrix ----
+    const plot=document.getElementById('plot');
+    plot.querySelectorAll('.dot,.dotlab').forEach(e=>e.remove());
+    const xMax=Math.max(popThresh*2, ...items.map(i=>i.share), 0.001);
+    const yMax=Math.max(avgCM*2, ...items.map(i=>i.db), 0.001);
+    document.getElementById('divx').style.left=(popThresh/xMax*100)+'%';
+    document.getElementById('divy').style.bottom=(avgCM/yMax*100)+'%';
+    items.forEach(i=>{
+      const x=Math.min(i.share/xMax*100,98), y=Math.min(Math.max(i.db/yMax*100,1),98);
+      const dot=document.createElement('div');dot.className='dot';
+      dot.style.left=x+'%';dot.style.bottom=y+'%';dot.style.background=COL[i.cat];
+      dot.title=`${i.name} · ${CAT[i.cat].n}`;
+      const lab=document.createElement('div');lab.className='dotlab';
+      lab.style.left=x+'%';lab.style.bottom=(y+4)+'%';lab.textContent=i.name;
+      plot.appendChild(dot);plot.appendChild(lab);
+    });
+  }
+
+  document.getElementById('addRow').onclick=()=>makeRow();
+  document.querySelectorAll('#mwstSegs .seg').forEach(s=>s.onclick=()=>{
+    document.querySelectorAll('#mwstSegs .seg').forEach(x=>x.classList.remove('on'));
+    s.classList.add('on');mwst=+s.dataset.mwst;calc();
+  });
+
+  // seed – realistischer Mix, trifft alle vier Klassen
+  makeRow('Wiener Schnitzel','140','4.80','18.50');
+  makeRow('Pasta Napoli','130','1.90','11.00');
+  makeRow('Caesar Salad','85','2.80','12.50');
+  makeRow('Rinderfilet','32','11.00','34.00');
+  makeRow('Lammkarree','18','9.50','29.00');
+  makeRow('Rote-Bete-Carpaccio','14','3.20','9.50');
+  calc();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4874637d13da44b99b039a9db0a4fcec"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

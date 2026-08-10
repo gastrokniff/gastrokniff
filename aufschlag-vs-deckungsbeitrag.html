@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wareneinsatz mal 3 oder mal 4? Der teure Denkfehler</title>
+<meta name="description" content="Die alte Aufschlags-Regel kostet dich bei jedem günstigen Gericht Geld. Vergleiche beide Methoden kostenlos an deinen eigenen Gerichten – in 2 Minuten.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='2' y='2' width='96' height='96' rx='24' fill='%23211C16'/%3E%3Cpath d='M66 2 L98 2 L98 34 Z' fill='%23D9A34E'/%3E%3Cpath d='M66 2 L98 34 L66 34 Z' fill='%23B57611'/%3E%3Ctext x='20' y='74' font-family='sans-serif' font-weight='800' font-size='58' fill='%23F2F0EA'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..48,500;12..48,600;12..48,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5EFE3;--ink:#241C13;--stone:#6E6355;--line:#E4DBCB;
+    --card:#FCF7ED;--accent:#C07A12;--accent-soft:#F3E4C6;--good:#3E7C4F;--good-soft:#E7F0E4;--warn:#B0592E;--warn-soft:#F6E4DA;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:radial-gradient(1000px 600px at 88% -8%,rgba(224,164,58,.20),transparent 60%),var(--paper);
+       color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:34px 24px 70px}
+  h1,h2,h3,h4{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;letter-spacing:-.015em;line-height:1.05}
+  .top{display:flex;align-items:center;gap:11px;margin-bottom:28px}
+  .bmark{width:34px;height:34px;flex:none;filter:drop-shadow(0 3px 8px rgba(36,28,19,.18))}
+  .brand{font-family:"Bricolage Grotesque";font-weight:700;font-size:26px;display:inline-flex}
+  .bi{position:relative;display:inline-block}.bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--accent);border-radius:.04em;transform:translateX(-50%)}
+  .back{font-size:14px;color:var(--stone);margin-left:auto;text-decoration:none}
+  .tag{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
+  .tag::before{content:"";width:22px;height:1px;background:var(--accent)}
+  h1.title{font-size:clamp(28px,4.6vw,44px);margin-bottom:14px}
+  .intro{color:var(--stone);max-width:70ch;font-size:16px;margin-bottom:16px}
+  .kurz{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:16px 18px;margin-bottom:30px;font-size:15px}
+  .kurz b{font-family:"Bricolage Grotesque"}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;margin-bottom:22px}
+  .panel h3{font-size:17px;margin-bottom:4px}
+  .panel .hint{color:var(--stone);font-size:13px;margin-bottom:16px}
+
+  .setup{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:860px){.setup{grid-template-columns:1fr}}
+  .field{margin-bottom:12px}
+  .field label{display:block;font-size:13px;color:var(--stone);margin-bottom:5px}
+  .field .u{color:#B3A990;font-size:11px}
+  input{width:100%;background:#fff;border:1px solid var(--line);border-radius:9px;color:var(--ink);padding:10px 12px;font-family:"Inter";font-size:15px;outline:none;transition:border .2s}
+  input:focus{border-color:var(--accent)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .segs{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+  .seg{flex:1;min-width:52px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 6px;cursor:pointer;font-size:13px;color:var(--stone);transition:.2s;user-select:none}
+  .seg.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .helper{background:#fff;border:1px dashed var(--line);border-radius:10px;padding:14px;margin-top:6px}
+  .helper .res{font-family:"Bricolage Grotesque";font-size:22px;color:var(--accent);margin-top:8px}
+  .helper small{color:var(--stone);font-size:12.5px}
+
+  /* dishes */
+  .row{display:grid;grid-template-columns:1fr 100px 30px;gap:10px;margin-bottom:8px;align-items:center}
+  .row.head{color:var(--stone);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em}
+  .del{background:none;border:0;color:#BBAF98;font-size:18px;cursor:pointer;line-height:1}
+  .del:hover{color:var(--warn)}
+  .addrow{margin-top:10px;background:none;border:1px dashed #CFC4AC;color:var(--stone);border-radius:8px;padding:9px;width:100%;cursor:pointer;font-size:13px;font-family:"Inter"}
+  .addrow:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* results */
+  .cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  @media(max-width:860px){.cmp{grid-template-columns:1fr}}
+  .side{border-radius:16px;padding:20px;border:1px solid var(--line)}
+  .side.alt{background:var(--warn-soft);border-color:#E8CDBE}
+  .side.neu{background:var(--good-soft);border-color:#CBE0C4}
+  .side h4{font-size:16px;margin-bottom:4px}
+  .side.alt h4{color:var(--warn)}
+  .side.neu h4{color:var(--good)}
+  .side .sub{font-size:12.5px;color:var(--stone);margin-bottom:14px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  @media(max-width:560px){table{font-size:12.5px}th,td{padding:7px 4px!important}}
+  th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--stone);padding:6px 4px;border-bottom:1px solid rgba(0,0,0,.08)}
+  td{padding:9px 4px;border-bottom:1px solid rgba(0,0,0,.06)}
+  td.num,th.num{text-align:right;font-family:"JetBrains Mono"}
+  tr:last-child td{border-bottom:0}
+  .sum{margin-top:12px;padding-top:12px;border-top:1px solid rgba(0,0,0,.12);display:flex;justify-content:space-between;align-items:baseline}
+  .sum .v{font-family:"Bricolage Grotesque";font-size:26px}
+  .side.alt .sum .v{color:var(--warn)}
+  .side.neu .sum .v{color:var(--good)}
+  .spread{font-size:12.5px;color:var(--stone);margin-top:8px}
+
+  .verdict{background:var(--ink);color:var(--paper);border-radius:16px;padding:22px 24px;margin:26px 0;font-family:"Bricolage Grotesque";font-size:19px;line-height:1.35}
+  .verdict span{color:#E7B65A}
+
+  .explain{margin-top:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:760px){.explain{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+  .ex{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:16px 18px}
+  .ex h4{font-size:15px;margin-bottom:5px}
+  .ex p{color:var(--stone);font-size:13.5px}
+  .foot{margin-top:32px;color:var(--stone);font-size:12px;border-top:1px solid var(--line);padding-top:18px;display:flex;gap:16px;flex-wrap:wrap}
+  .foot a{color:var(--stone);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true">
+      <rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/>
+      <path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/>
+      <text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text>
+    </svg>
+    <a href="index.html" style="text-decoration:none;color:inherit"><span class="brand">Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></a>
+    <a class="back" href="index.html">← zurück</a>
+  </div>
+
+  <div class="tag">Werkzeug · Kalkulation</div>
+  <h1 class="title">Aufschlag oder Deckungsbeitrag?</h1>
+  <p class="intro">„Wareneinsatz mal 3" oder „mal 4" — so haben es die meisten gelernt. Doch diese Regel stammt aus einer Zeit, als der Wareneinsatz der größte Kostenblock war. Heute ist es das Personal. Dieser Rechner zeigt dir beide Methoden nebeneinander, an deinen eigenen Gerichten.</p>
+  <div class="kurz">
+    <b>Der Denkfehler in einem Satz:</b> Beim Faktor verdienst du am günstigen Gericht wenig und am teuren viel — aber bestellt wird meist das günstige. Beim festen Deckungsbeitrag verdienst du an <b>jedem</b> Gericht gleich viel.
+  </div>
+
+  <!-- SETUP -->
+  <div class="setup">
+    <div class="panel">
+      <h3>1 · Die alte Methode</h3>
+      <p class="hint">Womit rechnest du bisher?</p>
+      <div class="field">
+        <label>Aufschlagsfaktor</label>
+        <div class="segs" id="fSegs">
+          <div class="seg" data-f="3">× 3</div>
+          <div class="seg on" data-f="3.5">× 3,5</div>
+          <div class="seg" data-f="4">× 4</div>
+          <div class="seg" data-f="4.5">× 4,5</div>
+        </div>
+      </div>
+      <div class="field" style="margin-top:14px">
+        <label>Mehrwertsteuer <span class="u">seit 2026: Speise 7 %</span></label>
+        <div class="segs" id="mSegs">
+          <div class="seg on" data-m="7">Speise · 7 %</div>
+          <div class="seg" data-m="19">Getränk · 19 %</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>2 · Dein Ziel-Deckungsbeitrag</h3>
+      <p class="hint">So viel muss <b>jedes</b> Gericht zu Personal, Miete und Gewinn beitragen.</p>
+      <div class="field">
+        <label>Ziel-Deckungsbeitrag pro Portion <span class="u">€ netto</span></label>
+        <input id="zielDB" type="number" min="0" step="0.5" value="9.00">
+      </div>
+      <div class="helper">
+        <small><b>Du kennst die Zahl nicht?</b> Rechne sie aus:</small>
+        <div class="two" style="margin-top:8px">
+          <div class="field" style="margin:0"><label>Fixkosten + Wunschgewinn <span class="u">€/Monat</span></label><input id="fix" type="number" min="0" step="100" value="18000"></div>
+          <div class="field" style="margin:0"><label>Verkaufte Portionen <span class="u">/Monat</span></label><input id="port" type="number" min="1" step="50" value="2000"></div>
+        </div>
+        <div class="res" id="dbVorschlag">–</div>
+        <small>Klick den Wert an, um ihn oben zu übernehmen.</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISHES -->
+  <div class="panel">
+    <h3>3 · Deine Gerichte</h3>
+    <p class="hint">Trag ein günstiges und ein teures Gericht ein — der Unterschied wird sofort sichtbar.</p>
+    <div class="row head"><div>Gericht</div><div class="num">Wareneinsatz €</div><div></div></div>
+    <div id="rows"></div>
+    <button class="addrow" id="addRow">+ Gericht hinzufügen</button>
+  </div>
+
+  <!-- COMPARISON -->
+  <div class="cmp">
+    <div class="side alt">
+      <h4>✗ Aufschlags-Methode</h4>
+      <p class="sub">Wareneinsatz × Faktor <span id="fLabel">3,5</span></p>
+      <table>
+        <thead><tr><th>Gericht</th><th class="num">Preis brutto</th><th class="num">DB / Portion</th></tr></thead>
+        <tbody id="tbAlt"></tbody>
+      </table>
+      <div class="sum"><span>Spanne der Deckungsbeiträge</span><span class="v" id="sumAlt">–</span></div>
+      <p class="spread" id="spreadAlt"></p>
+    </div>
+
+    <div class="side neu">
+      <h4>✓ Deckungsbeitrags-Methode</h4>
+      <p class="sub">Wareneinsatz + fester Deckungsbeitrag</p>
+      <table>
+        <thead><tr><th>Gericht</th><th class="num">Preis brutto</th><th class="num">DB / Portion</th></tr></thead>
+        <tbody id="tbNeu"></tbody>
+      </table>
+      <div class="sum"><span>Spanne der Deckungsbeiträge</span><span class="v" id="sumNeu">–</span></div>
+      <p class="spread" id="spreadNeu"></p>
+    </div>
+  </div>
+
+  <div class="verdict" id="verdict">Trag Gerichte ein — dann siehst du den Unterschied.</div>
+
+  <div class="explain">
+    <div class="ex"><h4>Warum der Faktor täuscht</h4><p>Ein Gericht mit 2 € Wareneinsatz bringt bei × 3,5 nur 5 € Deckungsbeitrag. Eines mit 10 € bringt 25 €. Deine Gäste bestellen aber meist das günstige — und du arbeitest viel für wenig.</p></div>
+    <div class="ex"><h4>Der Renner ist kein Gewinner</h4><p>Das meistverkaufte Gericht ist selten das profitabelste. Prüfe beides zusammen — Beliebtheit <i>und</i> Deckungsbeitrag.</p></div>
+    <div class="ex"><h4>Nicht stur anwenden</h4><p>Die DB-Methode macht teure Gerichte attraktiver und günstige etwas teurer. Prüfe, ob dein Gast den Preis akzeptiert — und ob du im Markt bleibst.</p></div>
+  </div>
+
+  <p class="foot">
+    <a href="index.html">Startseite</a><a href="wareneinsatz-rechner.html">Wareneinsatz-Rechner</a><a href="menu-engineering.html">Menu-Engineering</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a>
+    <span>Deckungsbeitrag = Netto-Preis − Wareneinsatz. Ein Werkzeug von Gastrokniff — kostenlos.</span>
+  </p>
+</div>
+
+<script>
+  const euro=n=>isFinite(n)&&n>0?n.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €':'–';
+  const num=id=>parseFloat(document.getElementById(id).value)||0;
+  const rowsEl=document.getElementById('rows');
+  let faktor=3.5, mwst=7;
+
+  function makeRow(name='',we=''){
+    const d=document.createElement('div');d.className='row';
+    d.innerHTML=`<input class="c-name" placeholder="z. B. Pasta" value="${name}">
+      <input class="c-we" type="number" min="0" step="0.1" placeholder="2,00" value="${we}" style="text-align:right">
+      <button class="del" title="Entfernen">×</button>`;
+    d.querySelector('.del').onclick=()=>{d.remove();calc()};
+    d.querySelectorAll('input').forEach(i=>i.addEventListener('input',calc));
+    rowsEl.appendChild(d);
+  }
+
+  function calc(){
+    const zielDB=num('zielDB');
+    const items=[];
+    rowsEl.querySelectorAll('.row').forEach(r=>{
+      const name=r.querySelector('.c-name').value.trim();
+      const we=parseFloat(r.querySelector('.c-we').value)||0;
+      if(we>0) items.push({name:name||'(ohne Name)',we});
+    });
+
+    // helper suggestion
+    const fix=num('fix'), port=num('port');
+    const vorschlag = port>0 ? fix/port : 0;
+    const vEl=document.getElementById('dbVorschlag');
+    vEl.textContent = vorschlag>0 ? euro(vorschlag)+' pro Portion' : '–';
+    vEl.style.cursor = vorschlag>0 ? 'pointer' : 'default';
+    vEl.onclick = () => { if(vorschlag>0){ document.getElementById('zielDB').value=vorschlag.toFixed(2); calc(); } };
+
+    document.getElementById('fLabel').textContent = faktor.toLocaleString('de-DE');
+
+    const tbA=document.getElementById('tbAlt'), tbN=document.getElementById('tbNeu');
+    tbA.innerHTML=''; tbN.innerHTML='';
+
+    let dbA=[], dbN=[];
+    items.forEach(i=>{
+      // alte Methode: Netto = WE × Faktor
+      const netA=i.we*faktor, grossA=netA*(1+mwst/100), contribA=netA-i.we;
+      // neue Methode: Netto = WE + ZielDB
+      const netN=i.we+zielDB, grossN=netN*(1+mwst/100), contribN=zielDB;
+      dbA.push(contribA); dbN.push(contribN);
+
+      tbA.insertAdjacentHTML('beforeend',
+        `<tr><td>${i.name}</td><td class="num">${euro(grossA)}</td><td class="num">${euro(contribA)}</td></tr>`);
+      tbN.insertAdjacentHTML('beforeend',
+        `<tr><td>${i.name}</td><td class="num">${euro(grossN)}</td><td class="num">${euro(contribN)}</td></tr>`);
+    });
+
+    const vd=document.getElementById('verdict');
+    if(items.length===0){
+      document.getElementById('sumAlt').textContent='–';
+      document.getElementById('sumNeu').textContent='–';
+      document.getElementById('spreadAlt').textContent='';
+      document.getElementById('spreadNeu').textContent='';
+      vd.textContent='Trag Gerichte ein — dann siehst du den Unterschied.';
+      return;
+    }
+
+    const minA=Math.min(...dbA), maxA=Math.max(...dbA);
+    document.getElementById('sumAlt').textContent = euro(minA)+' – '+euro(maxA).replace(' €','')+' €';
+    document.getElementById('sumNeu').textContent = euro(zielDB);
+    document.getElementById('spreadAlt').textContent = items.length>1
+      ? 'Ungleich: Du verdienst je nach Gericht sehr unterschiedlich.'
+      : 'Trag ein zweites, teureres Gericht ein.';
+    document.getElementById('spreadNeu').textContent = 'Gleich: Jedes Gericht trägt denselben Betrag bei.';
+
+    if(items.length>1){
+      const faktorDiff = maxA-minA;
+      vd.innerHTML = `Beim Faktor liegen zwischen deinem schwächsten und stärksten Gericht <span>${euro(faktorDiff).replace(' €','')} €</span> Unterschied pro Portion. Mit festem Deckungsbeitrag: <span>0 €</span>. Der Renner ist eben <span>kein Gewinner</span>.`;
+    } else {
+      vd.textContent='Trag ein zweites, teureres Gericht ein — dann wird der Unterschied sichtbar.';
+    }
+  }
+
+  document.getElementById('addRow').onclick=()=>makeRow();
+  ['zielDB','fix','port'].forEach(id=>document.getElementById(id).addEventListener('input',calc));
+  document.querySelectorAll('#fSegs .seg').forEach(s=>s.onclick=()=>{
+    document.querySelectorAll('#fSegs .seg').forEach(x=>x.classList.remove('on'));
+    s.classList.add('on');faktor=parseFloat(s.dataset.f);calc();
+  });
+  document.querySelectorAll('#mSegs .seg').forEach(s=>s.onclick=()=>{
+    document.querySelectorAll('#mSegs .seg').forEach(x=>x.classList.remove('on'));
+    s.classList.add('on');mwst=+s.dataset.m;calc();
+  });
+
+  makeRow('Pasta Napoli','2.00');
+  makeRow('Rinderfilet','11.00');
+  calc();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4874637d13da44b99b039a9db0a4fcec"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

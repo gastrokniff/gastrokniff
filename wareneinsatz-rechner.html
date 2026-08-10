@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wareneinsatz berechnen: Was darf dein Gericht kosten?</title>
+<meta name="description" content="Kostenloser Wareneinsatz-Rechner: Zutaten eintragen, Verkaufspreis und Deckungsbeitrag sofort sehen. Auch als Food-Cost-Rechner. Ohne Excel, ohne Anmeldung.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='2' y='2' width='96' height='96' rx='24' fill='%23211C16'/%3E%3Cpath d='M66 2 L98 2 L98 34 Z' fill='%23D9A34E'/%3E%3Cpath d='M66 2 L98 34 L66 34 Z' fill='%23B57611'/%3E%3Ctext x='20' y='74' font-family='sans-serif' font-weight='800' font-size='58' fill='%23F2F0EA'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..48,500;12..48,600;12..48,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#F5EFE3;--ink:#241C13;--stone:#6E6355;--line:#E4DBCB;--card:#FCF7ED;--accent:#C07A12;--accent-soft:#F3E4C6;--herb:#425A3F;--good:#3E7C4F}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:radial-gradient(1000px 600px at 88% -8%,rgba(224,164,58,.20),transparent 60%),var(--paper);
+       color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:34px 24px 70px}
+  h1,h2,h3,.disp{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;letter-spacing:-.015em;line-height:1.05}
+  .top{display:flex;align-items:center;gap:11px;margin-bottom:28px}
+  .bmark{width:34px;height:34px;flex:none;filter:drop-shadow(0 3px 8px rgba(36,28,19,.18))}
+  .brand{font-family:"Bricolage Grotesque";font-weight:700;font-size:26px;display:inline-flex}
+  .bi{position:relative;display:inline-block}.bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--accent);border-radius:.04em;transform:translateX(-50%)}
+  .back{font-size:14px;color:var(--stone);margin-left:auto;text-decoration:none}
+  .tag{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
+  .tag::before{content:"";width:22px;height:1px;background:var(--accent)}
+  h1.title{font-size:clamp(30px,5vw,46px);margin-bottom:14px}
+  .intro{color:var(--stone);max-width:66ch;font-size:16px;margin-bottom:34px}
+
+  .layout{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;align-items:start}
+  @media(max-width:900px){.layout{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+  .panel h3{font-size:17px;margin-bottom:4px}
+  .panel .hint{color:var(--stone);font-size:13px;margin-bottom:16px}
+
+  .row{display:grid;grid-template-columns:1fr 60px 78px 82px 26px;gap:7px;margin-bottom:8px;align-items:center}
+  .row.head{color:var(--stone);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+  input,select{width:100%;background:#fff;border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:9px 10px;font-family:"Inter";font-size:14px;outline:none;transition:border .2s}
+  input:focus,select:focus{border-color:var(--accent)}
+  input::placeholder{color:#B3A990}
+  .del{background:none;border:0;color:#BBAF98;font-size:18px;cursor:pointer;line-height:1;transition:color .2s}
+  .del:hover{color:#B0592E}
+  .addrow{margin-top:10px;background:none;border:1px dashed #CFC4AC;color:var(--stone);border-radius:8px;padding:9px;width:100%;cursor:pointer;font-size:13px;font-family:"Inter";transition:.2s}
+  .addrow:hover{border-color:var(--accent);color:var(--accent)}
+  .ctrl{margin-top:16px}
+  .ctrl label{display:block;font-size:12px;color:var(--stone);text-transform:uppercase;letter-spacing:.04em;margin-bottom:7px}
+  .segs{display:flex;gap:6px;flex-wrap:wrap}
+  .seg{flex:1;min-width:56px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 6px;cursor:pointer;font-size:13px;color:var(--stone);transition:.2s;user-select:none}
+  .seg.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+
+  .out{background:linear-gradient(180deg,#3A2C1A,#2A2013);border:1px solid #4A3A22;border-radius:18px;padding:24px;position:sticky;top:20px;color:var(--paper)}
+  .big-kpi{text-align:center;padding:4px 0 16px;border-bottom:1px solid #4A3A22;margin-bottom:4px}
+  .big-kpi .lab{color:#B9AE9C;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em}
+  .big-kpi .val{font-family:"Bricolage Grotesque";font-weight:700;font-size:38px;color:#E7B65A;line-height:1.1;margin-top:4px}
+  .kpi{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid #4A3A22}
+  .kpi:last-of-type{border-bottom:0}
+  .kpi span{color:#B9AE9C;font-size:13.5px}
+  .kpi .v{font-family:"JetBrains Mono";font-size:16px;color:var(--paper)}
+  .gauge{margin:18px 0 4px}
+  .bar{height:9px;border-radius:999px;background:#4A3A22;overflow:hidden}
+  .fill{height:100%;width:30%;background:var(--good);border-radius:999px;transition:width .35s,background .35s}
+  .glabel{display:flex;justify-content:space-between;font-size:12px;color:#B9AE9C;margin-top:8px}
+  .note{margin-top:14px;font-size:12px;color:#A99E8C;line-height:1.6}
+
+  .explain{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:720px){.explain{grid-template-columns:1fr}.row{grid-template-columns:1fr 52px 66px 68px 24px;gap:5px}input,select{padding:8px 7px;font-size:13px}}
+  .ex{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:16px 18px}
+  .ex h4{font-family:"Bricolage Grotesque";font-size:15px;margin-bottom:5px}
+  .ex p{color:var(--stone);font-size:13.5px}
+  .foot{margin-top:34px;color:var(--stone);font-size:12px;border-top:1px solid var(--line);padding-top:18px;display:flex;gap:16px;flex-wrap:wrap}
+  .foot a{color:var(--stone);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true">
+      <rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/>
+      <path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/>
+      <text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text>
+    </svg>
+    <a href="index.html" style="text-decoration:none;color:inherit"><span class="brand">Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></a>
+    <a class="back" href="index.html">← zurück</a>
+  </div>
+
+  <div class="tag">Werkzeug · Kalkulation</div>
+  <h1 class="title">Wareneinsatz-Rechner</h1>
+  <p class="intro">Kalkuliere pro Gericht deinen <b>Wareneinsatz</b>, den empfohlenen Verkaufspreis und deinen <b>Deckungsbeitrag</b> — in Echtzeit, ohne Excel. Auch bekannt als Food-Cost-Rechner. Alles läuft in deinem Browser, nichts wird gespeichert.</p>
+
+  <div class="layout">
+    <!-- INPUT -->
+    <div class="panel">
+      <h3>Zutaten des Gerichts</h3>
+      <p class="hint">Menge × Einkaufspreis pro Einheit. Beispiel: 0,18 kg Rind × 14,50 €/kg.</p>
+      <div class="row head"><div>Zutat</div><div>Menge</div><div>Einheit</div><div>€ / Einheit</div><div></div></div>
+      <div id="rows"></div>
+      <button class="addrow" id="addRow">+ Zutat hinzufügen</button>
+
+      <div class="ctrl">
+        <label>Ziel-Wareneinsatzquote</label>
+        <div class="segs" id="fcSegs">
+          <div class="seg" data-fc="25">25 %</div>
+          <div class="seg on" data-fc="30">30 %</div>
+          <div class="seg" data-fc="33">33 %</div>
+          <div class="seg" data-fc="35">35 %</div>
+        </div>
+      </div>
+      <div class="ctrl">
+        <label>Mehrwertsteuer <span style="text-transform:none;color:#B3A990">(seit 2026: Speise 7 %, Getränk 19 %)</span></label>
+        <div class="segs" id="mwstSegs">
+          <div class="seg on" data-mwst="7">Speise · 7 %</div>
+          <div class="seg" data-mwst="19">Getränk · 19 %</div>
+        </div>
+      </div>
+      <div class="ctrl">
+        <label>Eigener Verkaufspreis brutto <span style="text-transform:none;color:#B3A990">(optional)</span></label>
+        <input type="number" id="ownPrice" placeholder="z. B. 18,90" step="0.1" min="0" style="max-width:220px">
+      </div>
+    </div>
+
+    <!-- OUTPUT -->
+    <div class="out">
+      <div class="big-kpi">
+        <div class="lab">Empfohlener Preis (brutto)</div>
+        <div class="val" id="oGross">–</div>
+      </div>
+      <div class="kpi"><span>Wareneinsatz gesamt</span><span class="v" id="oCost">0,00 €</span></div>
+      <div class="kpi"><span>Empf. Netto-Preis</span><span class="v" id="oNet">–</span></div>
+      <div class="kpi"><span>Deckungsbeitrag / Portion</span><span class="v" id="oDb">–</span></div>
+      <div class="gauge">
+        <div class="bar"><div class="fill" id="gFill"></div></div>
+        <div class="glabel"><span id="gText">Wareneinsatzquote</span><span id="gPct">–</span></div>
+      </div>
+      <p class="note" id="oNote">Gib Zutaten ein, um die Kalkulation zu sehen. Tipp: Beilagen, Garnitur und Schwund nicht vergessen — die kleinen Positionen fressen oft die Marge.</p>
+    </div>
+  </div>
+
+  <div class="explain">
+    <div class="ex"><h4>Was ist der Wareneinsatz?</h4><p>Der reine Einkaufswert aller Zutaten für eine Portion. Als Quote vom Netto-Preis liegt er bei Speisen oft zwischen 25 und 35 %.</p></div>
+    <div class="ex"><h4>Vergiss den Schwund nicht</h4><p>Reste, Bruch und Fehler gehören mit einkalkuliert. Wer nur die reinen Zutaten rechnet, kalkuliert jedes Gericht zu billig.</p></div>
+    <div class="ex"><h4>Deckungsbeitrag zählt</h4><p>Netto-Preis minus Wareneinsatz = was dir für Personal, Miete und Gewinn bleibt. Diese Zahl ist wichtiger als die Prozente allein.</p></div>
+  </div>
+
+  <p class="foot">
+    <a href="index.html">Startseite</a><a href="menu-engineering.html">Menu-Engineering</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a>
+    <span>Wareneinsatzquote = Wareneinsatz ÷ Netto-Verkaufspreis. Ein Werkzeug von Gastrokniff — kostenlos.</span>
+  </p>
+</div>
+
+<script>
+  const euro=n=>isFinite(n)?n.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €':'–';
+  const rowsEl=document.getElementById('rows');
+  let targetFC=30, mwst=7;
+  const units=['kg','g','l','ml','Stk','Portion'];
+
+  function makeRow(name='',menge='',unit='kg',price=''){
+    const div=document.createElement('div');div.className='row';
+    div.innerHTML=`
+      <input class="c-name" placeholder="z. B. Rinderfilet" value="${name}">
+      <input class="c-qty" type="number" step="0.01" min="0" placeholder="0,18" value="${menge}">
+      <select class="c-unit">${units.map(u=>`<option${u===unit?' selected':''}>${u}</option>`).join('')}</select>
+      <input class="c-price" type="number" step="0.01" min="0" placeholder="14,50" value="${price}">
+      <button class="del" title="Entfernen">×</button>`;
+    div.querySelector('.del').onclick=()=>{div.remove();calc()};
+    div.querySelectorAll('input,select').forEach(i=>i.addEventListener('input',calc));
+    rowsEl.appendChild(div);
+  }
+
+  function calc(){
+    let total=0;
+    rowsEl.querySelectorAll('.row').forEach(r=>{
+      const q=parseFloat(r.querySelector('.c-qty').value)||0;
+      const p=parseFloat(r.querySelector('.c-price').value)||0;
+      total+=q*p;
+    });
+    document.getElementById('oCost').textContent=euro(total);
+
+    const own=parseFloat(document.getElementById('ownPrice').value)||0;
+    let netEmpf=total/(targetFC/100);
+    let grossEmpf=netEmpf*(1+mwst/100);
+    document.getElementById('oNet').textContent=total>0?euro(netEmpf):'–';
+    document.getElementById('oGross').textContent=total>0?euro(grossEmpf):'–';
+
+    let quote=targetFC, db=netEmpf-total, mode='Empfohlen';
+    if(own>0){
+      const ownNet=own/(1+mwst/100);
+      quote=total>0?(total/ownNet*100):0;
+      db=ownNet-total;
+      mode='Bei deinem Preis';
+      document.getElementById('oGross').textContent=euro(own);
+      document.getElementById('oNet').textContent=euro(ownNet);
+    }
+    document.getElementById('oDb').textContent=total>0?euro(db):'–';
+
+    const fill=document.getElementById('gFill');
+    fill.style.width=(total>0?Math.min(quote,60)/60*100:0)+'%';
+    fill.style.background= quote<=targetFC ? 'var(--good)' : quote<=targetFC+6 ? 'var(--accent)' : '#D07A4E';
+    document.getElementById('gText').textContent=mode+' · Wareneinsatzquote';
+    document.getElementById('gPct').textContent=total>0?quote.toLocaleString('de-DE',{maximumFractionDigits:1})+' %':'–';
+
+    const note=document.getElementById('oNote');
+    if(total<=0){note.textContent='Gib Zutaten ein, um die Kalkulation zu sehen. Tipp: Beilagen, Garnitur und Schwund nicht vergessen — die kleinen Positionen fressen oft die Marge.';}
+    else if(own>0 && quote>targetFC+3){note.textContent='Deine Quote liegt über dem Ziel: Der Preis ist knapp kalkuliert. Entweder Preis anheben oder Wareneinsatz senken.';}
+    else if(own>0){note.textContent='Sauber — deine Quote liegt im Zielbereich. Behalte den Deckungsbeitrag pro Portion im Blick, nicht nur die Prozente.';}
+    else{note.textContent='Das ist der rechnerische Zielpreis. In der Praxis rundest du psychologisch (z. B. 18,90 statt 19,05) und prüfst, was der Gast am Tisch akzeptiert.';}
+  }
+
+  document.getElementById('addRow').onclick=()=>makeRow();
+  document.getElementById('ownPrice').addEventListener('input',calc);
+  document.querySelectorAll('#fcSegs .seg').forEach(s=>s.onclick=()=>{
+    document.querySelectorAll('#fcSegs .seg').forEach(x=>x.classList.remove('on'));
+    s.classList.add('on');targetFC=+s.dataset.fc;calc();
+  });
+  document.querySelectorAll('#mwstSegs .seg').forEach(s=>s.onclick=()=>{
+    document.querySelectorAll('#mwstSegs .seg').forEach(x=>x.classList.remove('on'));
+    s.classList.add('on');mwst=+s.dataset.mwst;calc();
+  });
+
+  makeRow('Rinderfilet','0.18','kg','42.00');
+  makeRow('Kartoffeln','0.25','kg','1.20');
+  makeRow('Butter & Gewürze','0.03','kg','9.00');
+  calc();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4874637d13da44b99b039a9db0a4fcec"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

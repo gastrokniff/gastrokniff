@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wann du ein Konzept beenden solltest: 14 Regeln</title>
+<meta name="description" content="Alle reden übers Eröffnen, keiner übers Aufhören. Woran du erkennst, dass ein Konzept nicht mehr trägt — und wie du sauber die Reißleine ziehst. Ehrlich erklärt.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='2' y='2' width='96' height='96' rx='24' fill='%23211C16'/%3E%3Cpath d='M66 2 L98 2 L98 34 Z' fill='%23D9A34E'/%3E%3Cpath d='M66 2 L98 34 L66 34 Z' fill='%23B57611'/%3E%3Ctext x='20' y='74' font-family='sans-serif' font-weight='800' font-size='58' fill='%23F2F0EA'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..48,600;12..48,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#F5EFE3;--ink:#241C13;--stone:#6E6355;--line:#E4DBCB;--card:#FCF7ED;--accent:#C07A12;--good:#3E7C4F;--good-soft:#E7F0E4;--warn:#B0592E;--warn-soft:#F6E4DA}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:34px 24px 80px}
+  h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:clamp(30px,5.5vw,46px);letter-spacing:-.02em;line-height:1.06;margin:14px 0 16px}
+  h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:22px;margin:36px 0 12px}
+  p{margin-bottom:14px}
+  a{color:var(--accent)}
+  .top{display:flex;align-items:center;gap:10px;margin-bottom:30px}
+  .bmark{width:32px;height:32px;flex:none}
+  .brand{font-family:"Bricolage Grotesque";font-weight:700;font-size:24px;display:inline-flex}
+  .bi{position:relative;display:inline-block}.bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--accent);border-radius:.04em;transform:translateX(-50%)}
+  .back{font-size:14px;color:var(--stone);margin-left:auto;text-decoration:none}
+  .kat{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  .lead{font-size:19px;color:var(--stone);margin-bottom:8px}
+  .kurz{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:24px 0}
+  .kurz b{font-family:"Bricolage Grotesque"}
+
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:8px 0}
+  @media(max-width:680px){.dd{grid-template-columns:1fr}}
+  .box{border-radius:16px;padding:22px;border:1px solid var(--line)}
+  .box.tun{background:var(--good-soft);border-color:#CBE0C4}
+  .box.weg{background:var(--warn-soft);border-color:#E8CDBE}
+  .box h3{font-family:"Bricolage Grotesque";font-size:18px;margin-bottom:14px}
+  .box.tun h3{color:var(--good)}
+  .box.weg h3{color:var(--warn)}
+  .box ul{list-style:none}
+  .box li{position:relative;padding-left:26px;margin-bottom:13px;font-size:15px}
+  .box.tun li::before{content:"✓";position:absolute;left:0;top:0;color:var(--good);font-weight:700}
+  .box.weg li::before{content:"✗";position:absolute;left:0;top:0;color:var(--warn);font-weight:700}
+
+  .check{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0}
+  .check h3{font-family:"Bricolage Grotesque";font-size:17px;margin-bottom:12px}
+  .check ol{margin-left:20px}
+  .check li{margin-bottom:9px;font-size:15px}
+
+  .merke{background:var(--ink);color:var(--paper);border-radius:16px;padding:22px 24px;margin:30px 0;font-family:"Bricolage Grotesque";font-size:20px;line-height:1.3}
+  .merke span{color:#E7B65A}
+  .cta{display:block;background:var(--accent);color:#fff;text-decoration:none;border-radius:14px;padding:20px 24px;margin:26px 0;transition:.2s}
+  .cta:hover{background:#A96A0E}
+  .cta .t{font-family:"Bricolage Grotesque";font-weight:700;font-size:18px;color:#fff}
+  .cta .s{font-size:14px;color:#F6E4C6}
+  .hinweis{font-size:14px;color:var(--stone);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:6px}
+  .hilfe{font-size:14px;color:var(--stone);border-left:4px solid var(--accent);padding:10px 0 10px 16px;margin-top:18px}
+  footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:13px;color:var(--stone);display:flex;gap:18px;flex-wrap:wrap}
+  footer a{color:var(--stone);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
+    <a href="index.html" style="text-decoration:none;color:inherit"><span class="brand">Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></a>
+    <a class="back" href="index.html">← zurück</a>
+  </div>
+
+  <span class="kat">Entscheidungen · Praxis</span>
+  <h1>Wann du ein Konzept beenden solltest</h1>
+  <p class="lead">Über das Eröffnen wird viel geredet. Über das Aufhören fast nie. Dabei ist es oft die Entscheidung, die den Betrieb rettet — und die am längsten aufgeschoben wird.</p>
+
+  <div class="kurz">
+    <p style="margin:0"><b>Kurz erklärt:</b> Die Frage ist nicht „habe ich versagt?", sondern <b>„trägt sich das noch?"</b>. Und das ist Rechnen, kein Gefühl. Wichtig dabei: Das Geld, das schon drin steckt, ist <b>weg — egal wie du entscheidest</b>. Es darf die Entscheidung nicht beeinflussen.</p>
+  </div>
+
+  <h2>Die drei Fragen, die alles entscheiden</h2>
+  <div class="check">
+    <h3>Ehrlich beantworten — schriftlich, nicht im Kopf</h3>
+    <ol>
+      <li><b>Trägt es sich?</b> Deckt der Deckungsbeitrag die Fixkosten — inklusive eines fairen Lohns für dich?</li>
+      <li><b>Wohin geht der Trend?</b> Nicht der einzelne Monat zählt, sondern die Richtung der letzten 6–12 Monate.</li>
+      <li><b>Würde ich es heute nochmal eröffnen?</b> Mit allem, was du inzwischen weißt. Wenn die Antwort Nein ist, hast du sie eigentlich schon.</li>
+    </ol>
+  </div>
+
+  <div class="dd">
+    <div class="box tun">
+      <h3>✓ Das solltest du tun</h3>
+      <ul>
+        <li>Leg <b>vorher</b> eine Frist fest: „Wir geben dem Konzept 12 Monate."</li>
+        <li>Definiere <b>konkrete Zahlen</b>, ab denen Schluss ist — Gäste pro Tag, Umsatz, Deckungsbeitrag.</li>
+        <li>Rechne <b>deine eigene Arbeitszeit mit ein</b>. Ein Laden, der nur läuft, weil du gratis arbeitest, läuft nicht.</li>
+        <li>Trenne die Ursachen: liegt es am <b>Konzept</b>, am <b>Standort</b> oder an der <b>Umsetzung</b>? Nur eins davon lässt sich reparieren, ohne umzuziehen.</li>
+        <li>Schau auf den <b>Trend</b>, nicht auf den besten oder schlechtesten Monat.</li>
+        <li>Hol dir <b>einen Blick von außen</b> — Steuerberater oder jemand aus der Branche, der dir ehrlich antwortet.</li>
+        <li>Wenn du beendest: <b>sauber und offen</b>. Mitarbeiter zuerst informieren, Gäste ehrlich verabschieden.</li>
+      </ul>
+    </div>
+    <div class="box weg">
+      <h3>✗ Das solltest du vermeiden</h3>
+      <ul>
+        <li><b>„Noch ein bisschen"</b> — der Satz, der aus drei Monaten drei Jahre macht.</li>
+        <li><b>„Ich habe schon so viel investiert."</b> Das Geld ist weg, ob du weitermachst oder nicht. Es ist kein Argument.</li>
+        <li>Verluste mit <b>anderen Betrieben oder privatem Geld</b> stopfen — so reißt ein Standort den gesunden mit.</li>
+        <li>Auf ein <b>Wunder warten</b>: die Saison, das Wetter, die nächste Aktion.</li>
+        <li>Nur auf den <b>Umsatz</b> schauen. Voll und trotzdem defizitär ist keine Seltenheit.</li>
+        <li><b>Aufmerksamkeit mit Ertrag verwechseln.</b> Ein Laden kann besprochen und beliebt sein und trotzdem jeden Monat Geld verlieren.</li>
+        <li>Das Ende als <b>persönliches Scheitern</b> sehen. Es ist eine unternehmerische Entscheidung, keine über deinen Wert.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Aufmerksamkeit ist kein Ertrag</h2>
+  <p>Ein bekanntes Beispiel aus Wien: Bernd Schlacher, seit vier Jahrzehnten in der Gastronomie, eröffnete ein Panoramalokal am Cobenzl. Trotz Aufmerksamkeit und guter Lage zog er nach <b>15 Monaten</b> den Stecker. Seine Regel: Was sich trotz Hype nicht rentiert, fliegt.</p>
+  <p>Bemerkenswert ist nicht das Scheitern — das passiert jedem. Bemerkenswert ist die <b>Geschwindigkeit</b>. Fünfzehn Monate, keine fünf Jahre. Wer früh entscheidet, verliert Geld. Wer spät entscheidet, verliert Geld <i>und</i> Jahre.</p>
+
+  <div class="merke">Ein Ende ist keine <span>Niederlage</span>. Es ist eine <span>Entscheidung</span> — und je früher sie fällt, desto weniger kostet sie.</div>
+
+  <a class="cta" href="break-even-rechner.html">
+    <span class="t">Trägt sich dein Laden überhaupt? →</span><br>
+    <span class="s">Der Break-Even-Rechner zeigt dir, wie viele Gäste du täglich brauchst. Kostenlos, ohne Anmeldung.</span>
+  </a>
+
+  <p class="hinweis"><b>Ehrlich gesagt:</b> Diese Entscheidung kann dir niemand abnehmen, und kein Artikel kennt deine Lage. Die Zahlen sagen dir, <i>ob</i> es sich trägt — ob du weitermachen willst, sagen sie nicht. Manchmal ist die richtige Antwort auch nicht „schließen", sondern das Konzept ändern, die Öffnungszeiten kürzen oder die Karte halbieren. Sprich vorher mit deinem Steuerberater: Kündigungsfristen, Pachtverträge und Verpflichtungen gegenüber Mitarbeitenden gehören in die Rechnung.</p>
+
+  <p class="hilfe"><b>Wenn es finanziell eng wird:</b> Warte nicht, bis es nicht mehr geht. Kostenlose oder geförderte Beratung gibt es bei der <b>IHK</b>, der <b>Handwerkskammer</b> und über die Unternehmensberatung des Bundes. Je früher du Hilfe holst, desto mehr Möglichkeiten hast du noch — und desto weniger allein bist du damit.</p>
+
+  <footer>
+    <a href="index.html">Startseite</a>
+    <a href="break-even-rechner.html">Break-Even-Rechner</a>
+    <a href="kostenstruktur.html">Kostenstruktur</a>
+    <a href="impressum.html">Impressum</a>
+    <span>© 2026 Gastrokniff</span>
+  </footer>
+</div>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4874637d13da44b99b039a9db0a4fcec"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

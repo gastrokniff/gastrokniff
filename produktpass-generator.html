@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Produktpass-Generator</title>
+<meta name="description" content="Kostenloses Werkzeug: Produktpass für dein Gericht erstellen, mit Kosten pro Portion, Wareneinsatz in Prozent und Allergenliste. Läuft komplett im Browser.">
+<style>
+:root{
+  --steel:#222A2E;
+  --steel-2:#2E383D;
+  --ink:#12181B;
+  --ink-soft:#5A6569;
+  --paper:#ECEEED;
+  --card:#FFFFFF;
+  --rule:#C7CDCA;
+  --rule-soft:#E1E5E3;
+  --lcd-bg:#AFBFA6;
+  --lcd-edge:#8D9C85;
+  --lcd-ink:#10160E;
+  --signal:#B3121F;
+  --ok:#2C6B3F;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:940px;margin:0 auto;padding:0 16px 64px}
+
+/* ---------- Kopf ---------- */
+.top{background:var(--steel);color:#fff;padding:22px 0 20px;margin-bottom:22px}
+.top .wrap{padding-bottom:0}
+.top h1{
+  margin:0;font-size:clamp(21px,4.4vw,30px);font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;line-height:1.15;
+}
+.top p{margin:8px 0 0;color:#AEBABF;font-size:14px;max-width:60ch}
+
+/* ---------- LCD ---------- */
+.lcd{
+  position:sticky;top:0;z-index:20;
+  background:var(--lcd-bg);
+  border:2px solid var(--lcd-edge);
+  border-radius:3px;
+  padding:12px 14px;
+  margin-bottom:24px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.35);
+}
+.lcd .cell{text-align:center;min-width:0}
+.lcd .lbl{
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(16,22,14,.62);font-weight:700;
+}
+.lcd .val{
+  font-family:var(--mono);font-size:clamp(19px,4.6vw,30px);
+  font-weight:700;color:var(--lcd-ink);letter-spacing:-.01em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.lcd .val.warn{color:var(--signal)}
+.lcd .val.good{color:var(--ok)}
+.lcd .sub{font-size:11px;color:rgba(16,22,14,.62);font-family:var(--mono)}
+
+/* ---------- Karten ---------- */
+.card{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:18px;margin-bottom:20px}
+.card > h2{
+  margin:0 0 4px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:800;color:var(--ink);
+}
+.card > .hint{margin:0 0 16px;font-size:13px;color:var(--ink-soft)}
+
+.grid{display:grid;gap:12px}
+.g3{grid-template-columns:2fr 1fr 1fr}
+.g2{grid-template-columns:1fr 1fr}
+@media(max-width:680px){.g3,.g2{grid-template-columns:1fr}}
+
+label.f{display:block}
+label.f span{
+  display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  font-weight:700;color:var(--ink-soft);margin-bottom:5px;
+}
+input[type=text],input[type=number],textarea,select{
+  width:100%;font-family:var(--sans);font-size:16px;color:var(--ink);
+  background:#fff;border:1px solid var(--rule);border-radius:2px;
+  padding:9px 10px;
+}
+input[type=number]{font-family:var(--mono)}
+textarea{resize:vertical;min-height:70px;line-height:1.45}
+input:focus,textarea:focus,select:focus,button:focus-visible{
+  outline:2px solid var(--steel);outline-offset:1px;
+}
+
+/* ---------- Zutatenzeilen ---------- */
+.zeile{border:1px solid var(--rule-soft);border-radius:2px;padding:12px;margin-bottom:10px;background:#FBFCFB}
+.zeile .oben{display:grid;grid-template-columns:2.4fr 1fr .9fr 1.1fr auto;gap:10px;align-items:end}
+@media(max-width:760px){
+  .zeile .oben{grid-template-columns:1fr 1fr;}
+  .zeile .oben .breit{grid-column:1/-1}
+}
+.zeile .unten{
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+  margin-top:10px;padding-top:10px;border-top:1px dashed var(--rule-soft);
+}
+.kosten{font-family:var(--mono);font-weight:700;font-size:15px;white-space:nowrap}
+.kosten small{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-family:var(--sans);font-weight:700}
+
+button{font-family:var(--sans);cursor:pointer;border-radius:2px}
+.btn{
+  background:var(--steel);color:#fff;border:1px solid var(--steel);
+  padding:10px 16px;font-size:14px;font-weight:600;
+}
+.btn:hover{background:var(--steel-2)}
+.btn.ghost{background:#fff;color:var(--ink);border-color:var(--rule)}
+.btn.ghost:hover{background:var(--paper)}
+.btn.klein{padding:7px 11px;font-size:13px}
+.weg{
+  background:#fff;border:1px solid var(--rule);color:var(--signal);
+  width:38px;height:38px;font-size:18px;line-height:1;font-weight:700;
+}
+.weg:hover{background:#FCF0F1}
+@media(max-width:760px){.weg{width:100%;height:auto;padding:9px}}
+
+.allBtn{background:#fff;border:1px solid var(--rule);color:var(--ink);padding:7px 11px;font-size:13px;font-weight:600}
+.allBtn[aria-expanded=true]{background:var(--steel);color:#fff;border-color:var(--steel)}
+.allPanel{display:none;width:100%;margin-top:10px;padding:12px;background:#fff;border:1px solid var(--rule)}
+.allPanel.auf{display:block}
+.allPanel .liste{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:6px 14px}
+.allPanel label{display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.35;cursor:pointer}
+.allPanel input{margin:2px 0 0;flex:none}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chip{
+  font-size:12px;font-weight:600;background:var(--paper);
+  border:1px solid var(--rule);border-radius:2px;padding:4px 8px;
+}
+.leer{font-size:13px;color:var(--ink-soft);font-style:italic}
+
+.aktionen{display:flex;flex-wrap:wrap;gap:10px}
+.fuss{font-size:12px;color:var(--ink-soft);line-height:1.6;margin-top:26px;border-top:1px solid var(--rule);padding-top:16px}
+.fuss strong{color:var(--ink)}
+
+/* ---------- Druckansicht ---------- */
+#druck{display:none}
+@media print{
+  @page{size:A4;margin:14mm}
+  body{background:#fff;font-size:11pt}
+  .top,.lcd,.card,.aktionen,.fuss,.wrap > h2{display:none !important}
+  #druck{display:block}
+  .d-kopf{border-bottom:2.5pt solid #000;padding-bottom:6pt;margin-bottom:12pt}
+  .d-kopf .d-eyebrow{font-size:8pt;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+  .d-kopf h1{font-size:21pt;margin:3pt 0 5pt;line-height:1.1}
+  .d-kopf .d-meta{font-size:9.5pt}
+  #druck h3{
+    font-size:8.5pt;letter-spacing:.16em;text-transform:uppercase;
+    margin:14pt 0 5pt;padding-bottom:3pt;border-bottom:.75pt solid #000;
+  }
+  #druck table{width:100%;border-collapse:collapse;font-size:10pt}
+  #druck th{text-align:left;font-size:8pt;letter-spacing:.08em;text-transform:uppercase;border-bottom:.75pt solid #000;padding:3pt 4pt}
+  #druck td{padding:3.5pt 4pt;border-bottom:.4pt solid #999;vertical-align:top}
+  #druck td.z{text-align:right;font-family:var(--mono);white-space:nowrap}
+  #druck tr.summe td{font-weight:700;border-top:1.5pt solid #000;border-bottom:none;padding-top:5pt}
+  .d-kennz{display:flex;gap:16pt;margin-top:8pt;flex-wrap:wrap}
+  .d-kennz div{border:1.25pt solid #000;padding:5pt 10pt;min-width:34mm}
+  .d-kennz .k{font-size:7.5pt;letter-spacing:.12em;text-transform:uppercase}
+  .d-kennz .w{font-size:16pt;font-weight:700;font-family:var(--mono)}
+  .d-all{border:1.25pt solid #000;padding:7pt 9pt;margin-top:5pt;font-size:10pt}
+  .d-frei{border:.75pt dashed #666;height:26mm;margin-top:5pt}
+  .d-frei span{font-size:8pt;color:#666;padding:3pt}
+  .d-fuss{margin-top:14pt;padding-top:5pt;border-top:.75pt solid #000;font-size:7.5pt;line-height:1.45}
+  .d-unterschrift{display:flex;gap:20pt;margin-top:14pt;font-size:8.5pt}
+  .d-unterschrift div{flex:1;border-top:.75pt solid #000;padding-top:3pt}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <h1>Produktpass</h1>
+    <p>Trag dein Gericht einmal sauber ein. Raus kommt ein ausdruckbares Blatt für die Küche, mit Kosten pro Portion, Wareneinsatz in Prozent und Allergenliste. Alles läuft in deinem Browser, es wird nichts hochgeladen.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="lcd" role="status" aria-live="polite">
+    <div class="cell">
+      <div class="lbl">Kosten / Portion</div>
+      <div class="val" id="lcdKosten">0,00</div>
+      <div class="sub">Euro</div>
+    </div>
+    <div class="cell">
+      <div class="lbl">Wareneinsatz</div>
+      <div class="val" id="lcdProzent">–</div>
+      <div class="sub" id="lcdZiel">Ziel 30 %</div>
+    </div>
+    <div class="cell">
+      <div class="lbl">Rohertrag / Portion</div>
+      <div class="val" id="lcdRoh">–</div>
+      <div class="sub">Euro</div>
+    </div>
+  </div>
+
+  <section class="card">
+    <h2>Das Gericht</h2>
+    <p class="hint">Der Verkaufspreis ohne Mehrwertsteuer. Nur so stimmt der Wareneinsatz in Prozent.</p>
+    <div class="grid g3">
+      <label class="f"><span>Name des Gerichts</span>
+        <input type="text" id="gName" placeholder="Wiener Schnitzel vom Kalb"></label>
+      <label class="f"><span>Portionen aus dieser Rezeptur</span>
+        <input type="number" id="gPortionen" value="1" min="0.1" step="0.1" inputmode="decimal"></label>
+      <label class="f"><span>Verkaufspreis netto je Portion</span>
+        <input type="number" id="gPreis" placeholder="0,00" min="0" step="0.01" inputmode="decimal"></label>
+    </div>
+    <div class="grid g2" style="margin-top:12px">
+      <label class="f"><span>Ziel-Wareneinsatz in Prozent</span>
+        <input type="number" id="gZiel" value="30" min="1" max="99" step="1" inputmode="decimal"></label>
+      <label class="f"><span>Station / Posten</span>
+        <input type="text" id="gStation" placeholder="Sauté"></label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Komponenten</h2>
+    <p class="hint">Jede Zutat einzeln, so wie sie gewogen wird. Der Einkaufspreis bezieht sich auf ein Kilo, einen Liter oder ein Stück.</p>
+    <div id="zeilen"></div>
+    <button class="btn ghost klein" id="plusZeile">+ Zutat hinzufügen</button>
+  </section>
+
+  <section class="card">
+    <h2>Zubereitung</h2>
+    <p class="hint">Die Werte, die nicht im Kopf stehen dürfen. Kerntemperatur und Zeit sind gleichzeitig dein HACCP-Nachweis.</p>
+    <div class="grid g3">
+      <label class="f"><span>Garmethode</span>
+        <input type="text" id="zMethode" placeholder="Braten in der Pfanne"></label>
+      <label class="f"><span>Kerntemperatur in Grad Celsius</span>
+        <input type="number" id="zKern" placeholder="72" step="0.5" inputmode="decimal"></label>
+      <label class="f"><span>Zeit in Minuten</span>
+        <input type="text" id="zZeit" placeholder="3 + 3"></label>
+    </div>
+    <label class="f" style="margin-top:12px"><span>Arbeitsschritte und Anrichten</span>
+      <textarea id="zSchritte" placeholder="1. Fleisch plattieren auf 4 Millimeter.&#10;2. Panieren: Mehl, Ei, Semmelbrösel, nicht andrücken.&#10;3. Schwimmend ausbacken, Pfanne schwenken.&#10;4. Anrichten: Schnitzel links, Zitrone auf 2 Uhr."></textarea></label>
+  </section>
+
+  <section class="card">
+    <h2>Allergene im fertigen Gericht</h2>
+    <p class="hint">Ergibt sich automatisch aus deinen Zutaten. Diese Aufzeichnung ist genau das, was § 4 LMIDV verlangt, wenn du die Auskunft mündlich geben willst.</p>
+    <div id="allSumme"><p class="leer">Noch keine Allergene markiert.</p></div>
+  </section>
+
+  <div class="aktionen">
+    <button class="btn" id="btnDruck">Produktpass drucken</button>
+    <button class="btn ghost" id="btnSpeichern">Als Datei speichern</button>
+    <button class="btn ghost" id="btnLadenAuf">Datei laden</button>
+    <button class="btn ghost" id="btnBeispiel">Beispiel laden</button>
+    <button class="btn ghost" id="btnLeeren">Alles leeren</button>
+    <input type="file" id="datei" accept="application/json,.json" hidden>
+  </div>
+
+  <p class="fuss">
+    <strong>Zur Allergenkennzeichnung:</strong> Bei loser Ware musst du über die 14 Hauptallergene nach Anhang II der LMIV informieren. In Deutschland regelt § 4 LMIDV die Form. Eine mündliche Auskunft ist zulässig, wenn eine schriftliche Aufzeichnung der verwendeten Zutaten vorliegt, auf Nachfrage zugänglich ist und an gut sichtbarer Stelle darauf hingewiesen wird.<br><br>
+    Dieses Werkzeug hilft dir beim Erstellen dieser Aufzeichnung. Es prüft nicht, ob deine Angaben vollständig und richtig sind. Die Verantwortung dafür bleibt bei dir als Lebensmittelunternehmer. Denk auch an Kreuzkontaminationen in deiner Küche, die stehen nicht in der Rezeptur. Im Zweifel klärst du die Umsetzung mit deinem Lebensmittelüberwachungsamt oder deiner IHK. Das hier ersetzt keine Rechtsberatung.
+  </p>
+</main>
+
+<div id="druck"></div>
+
+<script>
+"use strict";
+
+var ALLERGENE = [
+ "Glutenhaltiges Getreide","Krebstiere","Eier","Fische","Erdnüsse","Sojabohnen",
+ "Milch und Laktose","Schalenfrüchte (Nüsse)","Sellerie","Senf","Sesamsamen",
+ "Schwefeldioxid und Sulfite","Lupinen","Weichtiere"
+];
+
+var zeilen = [];
+var lfd = 0;
+
+function neueZeile(v){
+  v = v || {};
+  return {id:++lfd, name:v.name||"", menge:v.menge||"", einheit:v.einheit||"g",
+          preis:v.preis||"", allergene:(v.allergene||[]).slice(), offen:false};
+}
+
+function zahl(x){ var n = parseFloat(String(x).replace(",",".")); return isFinite(n)?n:0; }
+
+function kostenZeile(z){
+  var m = zahl(z.menge), p = zahl(z.preis);
+  return (z.einheit === "Stk") ? m*p : m*p/1000;
+}
+
+function eur(n){ return n.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+function preisLabel(e){
+  if(e === "Stk") return "Preis je Stück";
+  if(e === "ml") return "Preis je Liter";
+  return "Preis je Kilo";
+}
+
+/* ---------- Zeilen zeichnen ---------- */
+function zeichneZeilen(){
+  var box = document.getElementById("zeilen");
+  box.innerHTML = "";
+  zeilen.forEach(function(z){
+    var d = document.createElement("div");
+    d.className = "zeile";
+    var anz = z.allergene.length;
+    d.innerHTML =
+      '<div class="oben">'+
+        '<label class="f breit"><span>Zutat</span><input type="text" data-f="name" placeholder="Kalbsrücken"></label>'+
+        '<label class="f"><span>Menge</span><input type="number" data-f="menge" min="0" step="any" inputmode="decimal"></label>'+
+        '<label class="f"><span>Einheit</span><select data-f="einheit">'+
+          '<option value="g">Gramm</option><option value="ml">Milliliter</option><option value="Stk">Stück</option>'+
+        '</select></label>'+
+        '<label class="f"><span data-rolle="plabel"></span><input type="number" data-f="preis" min="0" step="any" inputmode="decimal"></label>'+
+        '<button class="weg" data-rolle="weg" aria-label="Zutat entfernen" title="Zutat entfernen">×</button>'+
+      '</div>'+
+      '<div class="unten">'+
+        '<button class="allBtn" data-rolle="alltoggle" aria-expanded="'+(z.offen?"true":"false")+'">Allergene'+(anz?" ("+anz+")":"")+'</button>'+
+        '<div class="kosten"><small>Kosten</small>'+eur(kostenZeile(z))+' €</div>'+
+        '<div class="allPanel'+(z.offen?" auf":"")+'" data-rolle="allpanel"><div class="liste"></div></div>'+
+      '</div>';
+
+    d.querySelector('[data-f=name]').value = z.name;
+    d.querySelector('[data-f=menge]').value = z.menge;
+    d.querySelector('[data-f=einheit]').value = z.einheit;
+    d.querySelector('[data-f=preis]').value = z.preis;
+    d.querySelector('[data-rolle=plabel]').textContent = preisLabel(z.einheit);
+
+    var liste = d.querySelector('[data-rolle=allpanel] .liste');
+    ALLERGENE.forEach(function(a,i){
+      var l = document.createElement("label");
+      var cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.checked = z.allergene.indexOf(i) > -1;
+      cb.addEventListener("change", function(){
+        var p = z.allergene.indexOf(i);
+        if(cb.checked){ if(p<0) z.allergene.push(i); }
+        else if(p>-1){ z.allergene.splice(p,1); }
+        var b = d.querySelector('[data-rolle=alltoggle]');
+        b.textContent = "Allergene" + (z.allergene.length ? " ("+z.allergene.length+")" : "");
+        rechne();
+      });
+      l.appendChild(cb);
+      l.appendChild(document.createTextNode(" "+(i+1)+" "+a));
+      liste.appendChild(l);
+    });
+
+    ["name","menge","einheit","preis"].forEach(function(f){
+      var el = d.querySelector('[data-f='+f+']');
+      el.addEventListener("input", function(){
+        z[f] = el.value;
+        if(f === "einheit" || f === "menge" || f === "preis"){
+          d.querySelector('[data-rolle=plabel]').textContent = preisLabel(z.einheit);
+          d.querySelector(".kosten").innerHTML = '<small>Kosten</small>'+eur(kostenZeile(z))+' €';
+        }
+        rechne();
+      });
+      if(f === "einheit") el.addEventListener("change", function(){ z.einheit = el.value; zeichneZeilen(); rechne(); });
+    });
+
+    d.querySelector('[data-rolle=alltoggle]').addEventListener("click", function(e){
+      z.offen = !z.offen;
+      var p = d.querySelector('[data-rolle=allpanel]');
+      p.classList.toggle("auf", z.offen);
+      e.currentTarget.setAttribute("aria-expanded", z.offen ? "true" : "false");
+    });
+
+    d.querySelector('[data-rolle=weg]').addEventListener("click", function(){
+      zeilen = zeilen.filter(function(x){ return x.id !== z.id; });
+      if(!zeilen.length) zeilen.push(neueZeile());
+      zeichneZeilen(); rechne();
+    });
+
+    box.appendChild(d);
+  });
+}
+
+/* ---------- Rechnen ---------- */
+function w(id){ return document.getElementById(id).value; }
+
+function stand(){
+  var gesamt = zeilen.reduce(function(s,z){ return s + kostenZeile(z); }, 0);
+  var port = zahl(w("gPortionen")) || 1;
+  var proPortion = gesamt / port;
+  var preis = zahl(w("gPreis"));
+  var ziel = zahl(w("gZiel")) || 30;
+  var proz = preis > 0 ? proPortion / preis * 100 : null;
+  var alle = [];
+  zeilen.forEach(function(z){ z.allergene.forEach(function(i){ if(alle.indexOf(i) < 0) alle.push(i); }); });
+  alle.sort(function(a,b){ return a-b; });
+  return {gesamt:gesamt, port:port, proPortion:proPortion, preis:preis, ziel:ziel,
+          proz:proz, roh:preis > 0 ? preis - proPortion : null, alle:alle};
+}
+
+function rechne(){
+  var s = stand();
+
+  document.getElementById("lcdKosten").textContent = eur(s.proPortion);
+
+  var pz = document.getElementById("lcdProzent");
+  if(s.proz === null){ pz.textContent = "–"; pz.className = "val"; }
+  else {
+    pz.textContent = s.proz.toLocaleString("de-DE",{minimumFractionDigits:1,maximumFractionDigits:1}) + " %";
+    pz.className = "val " + (s.proz > s.ziel ? "warn" : "good");
+  }
+  document.getElementById("lcdZiel").textContent = "Ziel " + s.ziel.toLocaleString("de-DE") + " %";
+
+  var rh = document.getElementById("lcdRoh");
+  rh.textContent = s.roh === null ? "–" : eur(s.roh);
+  rh.className = "val" + (s.roh !== null && s.roh < 0 ? " warn" : "");
+
+  var box = document.getElementById("allSumme");
+  if(!s.alle.length){ box.innerHTML = '<p class="leer">Noch keine Allergene markiert.</p>'; }
+  else {
+    box.innerHTML = '<div class="chips">' + s.alle.map(function(i){
+      return '<span class="chip">' + (i+1) + " " + ALLERGENE[i] + "</span>";
+    }).join("") + "</div>";
+  }
+
+  bauDruck(s);
+}
+
+/* ---------- Druckblatt ---------- */
+function esc(t){
+  return String(t == null ? "" : t).replace(/[&<>]/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];
+  });
+}
+
+function bauDruck(s){
+  var name = w("gName") || "Ohne Namen";
+  var heute = new Date().toLocaleDateString("de-DE");
+  var einheitText = {g:"g", ml:"ml", Stk:"Stk"};
+
+  var reihen = zeilen.filter(function(z){ return z.name || zahl(z.menge); }).map(function(z){
+    return "<tr><td>" + esc(z.name) + "</td>" +
+           '<td class="z">' + esc(z.menge) + " " + einheitText[z.einheit] + "</td>" +
+           '<td class="z">' + eur(kostenZeile(z)) + " €</td>" +
+           "<td>" + (z.allergene.length ? z.allergene.map(function(i){ return i+1; }).join(", ") : "–") + "</td></tr>";
+  }).join("");
+
+  document.getElementById("druck").innerHTML =
+    '<div class="d-kopf">' +
+      '<div class="d-eyebrow">Produktpass</div>' +
+      "<h1>" + esc(name) + "</h1>" +
+      '<div class="d-meta">' +
+        (w("gStation") ? "Station: " + esc(w("gStation")) + " &nbsp;·&nbsp; " : "") +
+        "Ergibt " + esc(w("gPortionen") || "1") + " Portion(en) &nbsp;·&nbsp; Stand: " + heute +
+      "</div>" +
+    "</div>" +
+
+    "<h3>Komponenten</h3>" +
+    "<table><thead><tr><th>Zutat</th><th>Menge</th><th>Kosten</th><th>Allergene</th></tr></thead><tbody>" +
+      (reihen || '<tr><td colspan="4">Keine Zutaten erfasst</td></tr>') +
+      '<tr class="summe"><td>Gesamt Rezeptur</td><td class="z"></td><td class="z">' + eur(s.gesamt) + " €</td><td></td></tr>" +
+    "</tbody></table>" +
+
+    '<div class="d-kennz">' +
+      '<div><div class="k">Kosten je Portion</div><div class="w">' + eur(s.proPortion) + " €</div></div>" +
+      '<div><div class="k">Verkauf netto</div><div class="w">' + (s.preis > 0 ? eur(s.preis) + " €" : "–") + "</div></div>" +
+      '<div><div class="k">Wareneinsatz</div><div class="w">' +
+        (s.proz === null ? "–" : s.proz.toLocaleString("de-DE",{minimumFractionDigits:1,maximumFractionDigits:1}) + " %") +
+      "</div></div>" +
+    "</div>" +
+
+    "<h3>Zubereitung</h3>" +
+    "<table><tbody>" +
+      "<tr><td style=\"width:34%\">Garmethode</td><td>" + (esc(w("zMethode")) || "–") + "</td></tr>" +
+      "<tr><td>Kerntemperatur</td><td>" + (w("zKern") ? esc(w("zKern")) + " °C" : "–") + "</td></tr>" +
+      "<tr><td>Zeit</td><td>" + (esc(w("zZeit")) || "–") + " Minuten</td></tr>" +
+    "</tbody></table>" +
+    (w("zSchritte") ? '<div style="margin-top:6pt;white-space:pre-wrap;font-size:10pt;line-height:1.5">' + esc(w("zSchritte")) + "</div>" : "") +
+
+    "<h3>Allergene im fertigen Gericht</h3>" +
+    '<div class="d-all">' +
+      (s.alle.length
+        ? s.alle.map(function(i){ return (i+1) + " " + ALLERGENE[i]; }).join(" &nbsp;·&nbsp; ")
+        : "Keine der 14 kennzeichnungspflichtigen Allergene erfasst. Vor Aushang prüfen.") +
+    "</div>" +
+
+    "<h3>Anrichten: So muss der Teller aussehen</h3>" +
+    '<div class="d-frei"><span>Foto hier aufkleben</span></div>' +
+
+    '<div class="d-unterschrift">' +
+      "<div>Erstellt von, Datum</div><div>Geprüft von, Datum</div>" +
+    "</div>" +
+
+    '<div class="d-fuss">' +
+      "Schriftliche Aufzeichnung der verwendeten Zutaten im Sinne des § 4 LMIDV. Kerntemperatur und Zeit dienen als Nachweis im Rahmen des Eigenkontrollsystems nach Verordnung (EG) Nr. 852/2004. " +
+      "Mögliche Kreuzkontaminationen im Betrieb sind hier nicht abgebildet und gesondert zu bewerten. Bei Rezeptur- oder Lieferantenwechsel neu erstellen." +
+    "</div>";
+}
+
+/* ---------- Speichern und Laden ---------- */
+function alsObjekt(){
+  return {
+    version:1,
+    gericht:{name:w("gName"), portionen:w("gPortionen"), preis:w("gPreis"), ziel:w("gZiel"), station:w("gStation")},
+    zubereitung:{methode:w("zMethode"), kern:w("zKern"), zeit:w("zZeit"), schritte:w("zSchritte")},
+    zutaten: zeilen.map(function(z){
+      return {name:z.name, menge:z.menge, einheit:z.einheit, preis:z.preis, allergene:z.allergene};
+    })
+  };
+}
+
+function ausObjekt(o){
+  var g = o.gericht || {}, z = o.zubereitung || {};
+  document.getElementById("gName").value = g.name || "";
+  document.getElementById("gPortionen").value = g.portionen || 1;
+  document.getElementById("gPreis").value = g.preis || "";
+  document.getElementById("gZiel").value = g.ziel || 30;
+  document.getElementById("gStation").value = g.station || "";
+  document.getElementById("zMethode").value = z.methode || "";
+  document.getElementById("zKern").value = z.kern || "";
+  document.getElementById("zZeit").value = z.zeit || "";
+  document.getElementById("zSchritte").value = z.schritte || "";
+  zeilen = (o.zutaten && o.zutaten.length ? o.zutaten : [{}]).map(neueZeile);
+  zeichneZeilen(); rechne();
+}
+
+function dateiName(){
+  var n = (w("gName") || "produktpass").toLowerCase()
+    .replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss")
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+  return (n || "produktpass") + ".json";
+}
+
+document.getElementById("btnSpeichern").addEventListener("click", function(){
+  var b = new Blob([JSON.stringify(alsObjekt(), null, 2)], {type:"application/json"});
+  var u = URL.createObjectURL(b);
+  var a = document.createElement("a");
+  a.href = u; a.download = dateiName(); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(u); }, 1000);
+});
+
+document.getElementById("btnLadenAuf").addEventListener("click", function(){
+  document.getElementById("datei").click();
+});
+
+document.getElementById("datei").addEventListener("change", function(e){
+  var f = e.target.files[0];
+  if(!f) return;
+  var r = new FileReader();
+  r.onload = function(){
+    try { ausObjekt(JSON.parse(r.result)); }
+    catch(err){ alert("Diese Datei lässt sich nicht lesen. Erwartet wird eine Produktpass-Datei, die hier gespeichert wurde."); }
+  };
+  r.readAsText(f);
+  e.target.value = "";
+});
+
+document.getElementById("btnDruck").addEventListener("click", function(){ window.print(); });
+
+document.getElementById("btnLeeren").addEventListener("click", function(){
+  if(!confirm("Alles leeren? Nicht gespeicherte Eingaben gehen verloren.")) return;
+  ausObjekt({});
+});
+
+document.getElementById("btnBeispiel").addEventListener("click", function(){
+  ausObjekt({
+    gericht:{name:"Wiener Schnitzel vom Kalb", portionen:"1", preis:"24.50", ziel:"30", station:"Sauté"},
+    zubereitung:{methode:"Schwimmend ausbacken in Butterschmalz", kern:"72", zeit:"3 + 3",
+      schritte:"1. Kalbsrücken auf 4 Millimeter plattieren.\n2. Panieren: Mehl, Ei, Semmelbrösel. Brösel nicht andrücken.\n3. In Butterschmalz bei 170 Grad schwimmend ausbacken, Pfanne dabei schwenken.\n4. Auf Küchenpapier abtropfen, sofort ausgeben.\n5. Anrichten: Schnitzel links, Zitronenspalte auf 2 Uhr, Petersilie."},
+    zutaten:[
+      {name:"Kalbsrücken", menge:"180", einheit:"g", preis:"38.00", allergene:[]},
+      {name:"Weizenmehl Type 405", menge:"25", einheit:"g", preis:"1.20", allergene:[0]},
+      {name:"Ei", menge:"1", einheit:"Stk", preis:"0.42", allergene:[2]},
+      {name:"Semmelbrösel", menge:"45", einheit:"g", preis:"2.10", allergene:[0]},
+      {name:"Butterschmalz", menge:"30", einheit:"g", preis:"9.80", allergene:[6]},
+      {name:"Zitrone", menge:"0.25", einheit:"Stk", preis:"0.65", allergene:[]},
+      {name:"Preiselbeeren", menge:"30", einheit:"g", preis:"7.40", allergene:[]}
+    ]
+  });
+});
+
+["gName","gPortionen","gPreis","gZiel","gStation","zMethode","zKern","zZeit","zSchritte"]
+  .forEach(function(id){ document.getElementById(id).addEventListener("input", rechne); });
+
+document.getElementById("plusZeile").addEventListener("click", function(){
+  zeilen.push(neueZeile());
+  zeichneZeilen(); rechne();
+  var alle = document.querySelectorAll(".zeile input[data-f=name]");
+  if(alle.length) alle[alle.length-1].focus();
+});
+
+zeilen = [neueZeile(),neueZeile(),neueZeile()];
+zeichneZeilen();
+rechne();
+</script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rezeptur-Kalkulation: 6 Schritte für weniger Wareneinsatz</title>
+<meta name="description" content="Warum standardisierte Rezepturen Wareneinsatz sparen und Allergene dokumentieren. Mit Rechenbeispiel und kostenlosem Produktpass-Generator, ohne Anmeldung.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='2' y='2' width='96' height='96' rx='24' fill='%23211C16'/%3E%3Cpath d='M66 2 L98 2 L98 34 Z' fill='%23D9A34E'/%3E%3Cpath d='M66 2 L98 34 L66 34 Z' fill='%23B57611'/%3E%3Ctext x='20' y='74' font-family='sans-serif' font-weight='800' font-size='58' fill='%23F2F0EA'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="fonts.css">
+<style>
+  :root{--paper:#F5EFE3;--ink:#241C13;--stone:#6E6355;--line:#E4DBCB;--card:#FCF7ED;--accent:#C07A12;--good:#3E7C4F;--good-soft:#E7F0E4;--warn:#B0592E;--warn-soft:#F6E4DA}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:34px 24px 80px}
+  h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:clamp(30px,5.5vw,46px);letter-spacing:-.02em;line-height:1.06;margin:14px 0 16px}
+  h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:22px;margin:36px 0 12px}
+  h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:18px;margin:22px 0 10px}
+  p{margin-bottom:14px}
+  a{color:var(--accent)}
+  .top{display:flex;align-items:center;gap:10px;margin-bottom:30px}
+  .bmark{width:32px;height:32px;flex:none}
+  .brand{font-family:"Bricolage Grotesque";font-weight:700;font-size:24px;display:inline-flex}
+  .bi{position:relative;display:inline-block}.bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--accent);border-radius:.04em;transform:translateX(-50%)}
+  .back{font-size:14px;color:var(--stone);margin-left:auto;text-decoration:none}
+  .kat{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  .lead{font-size:19px;color:var(--stone);margin-bottom:8px}
+  .kurz{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:24px 0}
+  .kurz b{font-family:"Bricolage Grotesque"}
+
+  .check{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0}
+  .check h3{font-family:"Bricolage Grotesque";font-size:17px;margin:0 0 12px}
+  .check ul,.check ol{margin-left:20px}
+  .check li{margin-bottom:9px;font-size:15px}
+  .check p{margin:0}
+
+  .tab{width:100%;border-collapse:collapse;font-size:15px;margin:16px 0;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .tab th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--stone);padding:10px 12px;border-bottom:1px solid var(--line)}
+  .tab td{padding:11px 12px;border-bottom:1px solid var(--line)}
+  .tab tr:last-child td{border-bottom:0}
+  .tab .num{text-align:right;font-variant-numeric:tabular-nums}
+  @media(max-width:560px){.tab{font-size:12.5px}.tab th,.tab td{padding:8px 7px}}
+  .schlecht{color:var(--warn);font-weight:600}
+  .gut{color:var(--good);font-weight:600}
+
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:8px 0}
+  @media(max-width:680px){.dd{grid-template-columns:1fr}}
+  .box{border-radius:16px;padding:22px;border:1px solid var(--line)}
+  .box.tun{background:var(--good-soft);border-color:#CBE0C4}
+  .box.weg{background:var(--warn-soft);border-color:#E8CDBE}
+  .box h3{font-family:"Bricolage Grotesque";font-size:18px;margin-bottom:14px}
+  .box.tun h3{color:var(--good)}
+  .box.weg h3{color:var(--warn)}
+  .box ul{list-style:none}
+  .box li{position:relative;padding-left:26px;margin-bottom:13px;font-size:15px}
+  .box.tun li::before{content:"✓";position:absolute;left:0;top:0;color:var(--good);font-weight:700}
+  .box.weg li::before{content:"✗";position:absolute;left:0;top:0;color:var(--warn);font-weight:700}
+
+  .merke{background:var(--ink);color:var(--paper);border-radius:16px;padding:22px 24px;margin:30px 0;font-family:"Bricolage Grotesque";font-size:20px;line-height:1.3}
+  .merke span{color:#E7B65A}
+  .cta{display:block;background:var(--accent);color:#fff;text-decoration:none;border-radius:14px;padding:20px 24px;margin:26px 0;transition:.2s}
+  .cta:hover{background:#A96A0E}
+  .cta .t{font-family:"Bricolage Grotesque";font-weight:700;font-size:18px;color:#fff}
+  .cta .s{font-size:14px;color:#F6E4C6}
+  .hinweis{font-size:14px;color:var(--stone);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:6px}
+  footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:13px;color:var(--stone);display:flex;gap:18px;flex-wrap:wrap}
+  footer a{color:var(--stone);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
+    <a href="index.html" style="text-decoration:none;color:inherit"><span class="brand">Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></a>
+    <a class="back" href="index.html">← zurück</a>
+  </div>
+
+  <span class="kat">Küche & Kalkulation · Praxis</span>
+  <h1>Rezepturen standardisieren: weniger Wareneinsatz, weniger Ärger bei der Kontrolle</h1>
+  <p class="lead">System schlägt Talent. Warum dein Gericht jedes Mal gleich sein muss.</p>
+
+  <div class="kurz">
+    <p style="margin:0"><b>Kurz erklärt:</b> Ein perfektes Schnitzel ist Handwerk. Doch das wirkliche Geheimnis großer Betriebe ist nicht das individuelle Talent an der Pfanne. Es ist die Fähigkeit, dieses Handwerk jeden Tag exakt zu wiederholen.</p>
+  </div>
+
+  <p>Ich sehe immer wieder Betriebe, die richtig Umsatz machen und am Ende trotzdem kaum Gewinn übrig haben. 1,2 Millionen Umsatz, nur 30.000 Euro Gewinn. Das sind 2,5 Prozent Marge, praktisch umsonst gearbeitet. Und einer der Gründe kann auch in der Küche liegen.</p>
+  <p>Frag zwei Köche, wie viel Salz eine Prise ist. Bei dem einen sind es 0,4 Gramm, bei dem anderen 0,8. Ein Unterschied von 100 Prozent. Und genauso schwankt es bei jeder Zutat: beim Fleisch, bei der Soße, bei der Beilage. Über alle Gerichte und ein ganzes Jahr summiert sich dieses Bauchgefühl zu Zehntausenden Euro.</p>
+  <p>Wie viel genau, rechnen wir gleich zusammen aus. Und zwar ehrlich, nicht mit dem Extremfall.</p>
+
+  <div class="dd">
+    <div class="box tun">
+      <h3>✓ Das solltest du tun</h3>
+      <ul>
+        <li>Brich jedes Gericht auf seine Komponenten runter und wieg jede Zutat einzeln (Rinderfilet 220 Gramm, Öl, Gewürze, und so weiter).</li>
+        <li>Halt Temperatur, Zeit und Kerntemperatur genau fest, nicht aus dem Kopf.</li>
+        <li>Stell eigene Gewürzmischungen her und wieg sie portionsweise ab.</li>
+        <li>Digitale Waage auf jedem Arbeitsplatz, Kernthermometer für Temperatur und Food Safety, Timer für Brat- und Sous-vide-Zeiten.</li>
+        <li>Mise-en-place-Liste: was wird wann und in welcher Menge vorbereitet.</li>
+        <li>Feste Checklisten für Öffnung, Schließung und Übergabe.</li>
+      </ul>
+    </div>
+    <div class="box weg">
+      <h3>✗ Das solltest du vermeiden</h3>
+      <ul>
+        <li>Nach Gefühl würzen ist der schnellste Weg zu schwankender Qualität.</li>
+        <li>Die Prise aus dem Handgelenk hat ab jetzt Pause.</li>
+        <li>Wer nach Gefühl kocht, hat sie nicht und kann sie auch nicht nachträglich erfinden.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>01 Gib jedem Gericht einen Produktpass</h2>
+  <p>Der Produktpass ist der Personalausweis deines Gerichts. So detailliert, dass ein 16-Jähriger es nachkochen kann.</p>
+  <div class="check">
+    <ul>
+      <li>Brich jedes Gericht auf seine Komponenten runter und wieg jede Zutat einzeln (Rinderfilet 220 Gramm, Öl, Gewürze, und so weiter).</li>
+      <li>Halt Temperatur, Zeit und Kerntemperatur genau fest, nicht aus dem Kopf.</li>
+      <li>Ein Foto pro Teller: genau so muss er aussehen.</li>
+    </ul>
+  </div>
+  <p><b>Ergebnis:</b> Jeder kocht dein Gericht gleich, auch ohne dich.</p>
+
+  <div class="check">
+    <p>Den Produktpass musst du nicht selbst bauen. Wir haben dafür ein kostenloses Werkzeug gemacht: Zutaten und Einkaufspreise rein, fertig kommt ein ausdruckbarer Produktpass raus, inklusive Kosten pro Portion, Wareneinsatz in Prozent und Allergenliste.<br><a href="produktpass.html"><b>→ Zum Produktpass-Generator</b></a></p>
+  </div>
+
+  <h2>02 Standardisiere deine Gewürze</h2>
+  <p>Nach Gefühl würzen ist der schnellste Weg zu schwankender Qualität. Und genau das schmeckt dein Gast.</p>
+  <div class="check">
+    <ul>
+      <li>Stell eigene Gewürzmischungen her und wieg sie portionsweise ab.</li>
+      <li>Vakuumier und beschrifte sie, dann gibt es kein Rätselraten mehr.</li>
+      <li>Die Prise aus dem Handgelenk hat ab jetzt Pause.</li>
+    </ul>
+  </div>
+  <p><b>Ergebnis:</b> Dein Geschmack ist jedes Mal identisch.</p>
+
+  <h2>03 Rüste deine Küche mit Messwerkzeug aus</h2>
+  <p>Standards brauchen Werkzeug. Die Waage ist dabei nicht verhandelbar.</p>
+  <div class="check">
+    <ul>
+      <li>Digitale Waage auf jedem Arbeitsplatz, Kernthermometer für Temperatur und Food Safety, Timer für Brat- und Sous-vide-Zeiten.</li>
+      <li>Portionierlöffel (60, 90, 120 Milliliter) und Messbecher für immer gleiche Mengen.</li>
+    </ul>
+  </div>
+
+  <h3>Rechnen wir es einmal ehrlich durch</h3>
+  <p>Nicht mit dem Extremfall, sondern mit dem ganz normalen Dienstagabend.</p>
+
+  <table class="tab">
+    <thead><tr><th></th><th class="num">Koch A</th><th class="num">Koch B</th></tr></thead>
+    <tbody>
+      <tr><td>Fleisch</td><td class="num">180 Gramm</td><td class="num">210 Gramm</td></tr>
+      <tr><td>Soße</td><td class="num">60 Milliliter</td><td class="num">75 Milliliter</td></tr>
+      <tr><td>Beilage</td><td class="num">100 Gramm</td><td class="num">120 Gramm</td></tr>
+      <tr><td><b>Wareneinsatz pro Teller</b></td><td class="num gut"><b>8,50 Euro</b></td><td class="num schlecht"><b>9,80 Euro</b></td></tr>
+    </tbody>
+  </table>
+
+  <p>Das sind 1,30 Euro Unterschied. Keine dramatische Zahl. Koch B ist auch kein schlechter Koch, er hat nur eine etwas großzügigere Hand.</p>
+  <p>Und jetzt kommt der Punkt: Nimm an, dass nur <b>jeder dritte Teller</b> so rausgeht. Nicht jeder. Nur jeder dritte.</p>
+  <p>Bei 50 Tellern am Tag und 300 Öffnungstagen sind das 15.000 Teller im Jahr, davon 5.000 mit der großzügigen Hand.</p>
+  <p><b>5.000 × 1,30 Euro = 6.500 Euro.</b></p>
+  <p>Bei einem einzigen Gericht.</p>
+
+  <h3>Die Gegenprobe von oben</h3>
+  <p>Rechne es einmal von der anderen Seite. Dein Wareneinsatz soll bei 30 Prozent liegen. Durch das Bauchgefühl über die ganze Karte landest du bei 34 Prozent. Vier Prozentpunkte.</p>
+  <p>Bei 1,2 Millionen Umsatz sind das <b>48.000 Euro</b>, die nie in der Kasse ankommen.</p>
+  <p>Erinnerst du dich an den Betrieb vom Anfang? 1,2 Millionen Umsatz, 30.000 Euro Gewinn. Diese vier Prozentpunkte sind größer als sein ganzer Jahresgewinn.</p>
+  <p>Rechne es mit deinen eigenen Zahlen nach. Deinem Umsatz, deinem Wareneinsatz, deiner meistverkauften Position. Die Zahl, die dabei rauskommt, ist die ehrlichste Zahl deines Jahres.</p>
+  <p><b>Ergebnis:</b> Präzision statt Pi mal Daumen.</p>
+
+  <h2>04 Arbeite mit Checklisten und Mise-en-place-Listen</h2>
+  <p>Damit nichts vergessen wird und keine Hektik entsteht.</p>
+  <div class="check">
+    <ul>
+      <li>Mise-en-place-Liste: was wird wann und in welcher Menge vorbereitet.</li>
+      <li>Feste Checklisten für Öffnung, Schließung und Übergabe.</li>
+      <li>Neue Mitarbeiter sind damit in drei Tagen produktiv statt in drei Monaten.</li>
+    </ul>
+  </div>
+  <p><b>Ergebnis:</b> Dein Laden läuft nach System, nicht nach Kopf.</p>
+
+  <h2>05 Dein Standard ist auch dein Schutz bei der Kontrolle</h2>
+  <p>Das ist der Teil, den fast alle übersehen. Standardisierung bringt dir nicht nur Marge. Sie erledigt gleichzeitig Pflichten, die du sowieso hast.</p>
+
+  <h3>Dein Produktpass ist deine Allergendokumentation</h3>
+  <p>Seit Dezember 2014 musst du auch bei loser Ware über die 14 Hauptallergene informieren. In Deutschland regelt das § 4 der LMIDV.</p>
+  <p>Du darfst die Auskunft mündlich geben. Aber nur unter zwei Bedingungen: Es muss eine <b>schriftliche Aufzeichnung über die verwendeten Zutaten</b> vorliegen, die auf Nachfrage zugänglich ist, und du brauchst an gut sichtbarer Stelle einen Hinweis darauf.</p>
+  <p>Lies dir diese Anforderung noch einmal durch und schau dann auf Punkt 01. Eine schriftliche Aufzeichnung aller Zutaten pro Gericht: Das <b>ist</b> der Produktpass. Wer ihn hat, hat die Dokumentation. Wer nach Gefühl kocht, hat sie nicht und kann sie auch nicht nachträglich erfinden.</p>
+
+  <h3>Deine Kerntemperatur ist dein HACCP-Nachweis</h3>
+  <p>Ein Eigenkontrollsystem nach HACCP-Grundsätzen ist für dich Pflicht (Verordnung (EG) Nr. 852/2004). Beim Garen und Kühlen sind Temperatur und Zeit die kritischen Punkte, und die willst du nicht aus dem Kopf belegen, sondern aus dem Ordner.</p>
+  <p>Genau die Werte stehen in Punkt 01 schon drin. Du dokumentierst sie ohnehin für die gleichbleibende Qualität. Sie zählen doppelt.</p>
+
+  <h3>Deine Checklisten sind dein Schulungsnachweis</h3>
+  <p>Feste Abläufe für Öffnung, Schließung und Übergabe sind das Rückgrat eines schriftlichen HACCP-Konzepts. Und sie zeigen im Zweifel, dass dein Personal nicht nur unterwiesen wurde, sondern wonach.</p>
+
+  <p><b>Ergebnis:</b> Ein Aufwand, drei erledigte Themen: Marge, Allergene, Hygienedokumentation.</p>
+
+  <h2>06 Mach heute den 60-Minuten-Check</h2>
+  <p>Bevor du standardisierst, musst du sehen, wie groß das Chaos wirklich ist.</p>
+  <div class="check">
+    <ul>
+      <li><b>Brutales Inventar (30 Minuten):</b> deine zehn meistverkauften Gerichte auflisten, die drei mit den meisten Beschwerden oder Rückläufern markieren.</li>
+      <li><b>Reality Check (20 Minuten):</b> lass drei Köche dasselbe Gericht machen, wieg die Portionen und fotografier die Teller. Du wirst über die Unterschiede staunen.</li>
+      <li><b>Tool Check (10 Minuten):</b> Waage da? Thermometer funktioniert? Drucker für die Checklisten? Und: Könntest du für deine zehn meistverkauften Gerichte heute eine vollständige Allergenauskunft schriftlich vorlegen?</li>
+    </ul>
+  </div>
+  <p><b>Ergebnis:</b> Du weißt in einer Stunde genau, wo dein Geld verloren geht und wo du bei einer Kontrolle stehst.</p>
+
+  <p>Wenn morgen drei verschiedene Köche dein Lieblingsgericht zubereiten, kommt dann dreimal exakt dasselbe raus?</p>
+
+  <div class="merke">Standardisierung ist <span>keine Kunst</span>. Es ist <span>reine Mathematik</span>.</div>
+
+  <p>Lieber Gastrokollege,</p>
+  <p>Spitzenqualität ist kein Zufall. Sie ist das Ergebnis von System und Sorgfalt, Tag für Tag.</p>
+  <p>Fang mit deinem meistverkauften Gericht an. Der Rest kann folgen.</p>
+
+  <a class="cta" href="produktpass.html">
+    <span class="t">Produktpass-Generator öffnen →</span><br>
+    <span class="s">Kostenlos, keine Anmeldung, läuft komplett in deinem Browser.</span>
+  </a>
+
+  <p class="hinweis"><b>Ehrlich gesagt:</b> Koch B ist auch kein schlechter Koch, er hat nur eine etwas großzügigere Hand. Die Auslegung ist regional unterschiedlich streng. Wie dein Konzept konkret aussehen muss, klärst du am besten direkt mit deinem Lebensmittelüberwachungsamt oder deiner IHK. Dieser Abschnitt ersetzt keine Rechtsberatung.</p>
+
+  <footer>
+    <a href="index.html">Startseite</a>
+    <a href="produktpass.html">Produktpass-Generator</a>
+    <a href="wareneinsatz-rechner.html">Wareneinsatz-Rechner</a>
+    <a href="artikel-preis-kalkulieren.html">Preis kalkulieren</a>
+    <a href="artikel-aufschlag.html">Aufschlag vs. Deckungsbeitrag</a>
+    <a href="kostenstruktur.html">Kostenstruktur</a>
+    <a href="impressum.html">Impressum</a>
+    <span>© 2026 Gastrokniff</span>
+  </footer>
+</div>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4874637d13da44b99b039a9db0a4fcec"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Gastrokniff · Instagram-Carousel · Wareneinsatz × 4</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..48,600;12..48,700;12..48,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#1B1611;--panel:#26201A;--line:#3A3128;--cream:#F3EEE3;--muted:#A99C88;
+    --amber:#E7B65A;--green:#5FB980;--red:#E27C54;--paper:#F5EFE3;--ink:#241C13;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0E0B08;font-family:"Inter",system-ui,sans-serif;padding:30px;color:#888}
+  .hint{max-width:1080px;margin:0 auto 26px;background:#1a1510;border:1px solid #3A3128;border-radius:12px;padding:16px 20px;color:#A99C88;font-size:14px;line-height:1.6}
+  .hint b{color:var(--amber)}
+  .label{max-width:1080px;margin:26px auto 8px;color:#6b6153;font-size:13px;font-family:"JetBrains Mono"}
+
+  /* SLIDE BASE 1080x1080 */
+  .slide{
+    width:1080px;height:1080px;margin:0 auto;position:relative;overflow:hidden;
+    display:flex;flex-direction:column;justify-content:center;padding:88px;
+    font-family:"Inter";
+  }
+  .dark{background:
+      radial-gradient(700px 420px at 100% -8%,rgba(231,182,90,.16),transparent 62%),
+      radial-gradient(560px 400px at -8% 108%,rgba(95,185,128,.09),transparent 62%),
+      var(--void);color:var(--cream)}
+  .light{background:radial-gradient(700px 420px at 92% -8%,rgba(224,164,58,.20),transparent 60%),var(--paper);color:var(--ink)}
+
+  h1,h2,.disp{font-family:"Bricolage Grotesque";font-weight:800;letter-spacing:-.02em;line-height:1.02}
+  .kicker{font-family:"JetBrains Mono";font-size:22px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:28px}
+  .light .kicker{color:#A9700F}
+  .big{font-size:104px}
+  .mid{font-size:74px}
+  .sub{font-size:31px;line-height:1.42;color:var(--muted);margin-top:30px;max-width:22ch}
+  .light .sub{color:#6E6355}
+  em{font-style:normal;color:var(--amber)}
+  .light em{color:#A9700F}
+
+  /* brand corner */
+  .brand{position:absolute;left:88px;bottom:74px;display:flex;align-items:center;gap:14px;font-family:"Bricolage Grotesque";font-weight:700;font-size:30px;color:var(--cream)}
+  .light .brand{color:var(--ink)}
+  .brand svg{width:44px;height:44px}
+  .bi{position:relative;display:inline-block}
+  .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--amber);border-radius:.04em;transform:translateX(-50%)}
+  .pageno{position:absolute;right:88px;bottom:78px;font-family:"JetBrains Mono";font-size:22px;color:#6b6153}
+
+  /* swipe hint */
+  .swipe{position:absolute;right:88px;top:50%;transform:translateY(-50%);font-family:"JetBrains Mono";font-size:20px;color:var(--amber);letter-spacing:.1em}
+
+  /* comparison rows */
+  .cmp{margin-top:40px;display:flex;flex-direction:column;gap:18px}
+  .rowc{display:flex;align-items:center;gap:22px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 30px}
+  .light .rowc{background:#FCF7ED;border-color:#E4DBCB}
+  .rowc .n{font-family:"Bricolage Grotesque";font-weight:800;font-size:44px;min-width:210px}
+  .rowc .t{font-size:26px;color:var(--muted)}
+  .light .rowc .t{color:#6E6355}
+  .neg .n{color:var(--red)}
+  .pos .n{color:var(--green)}
+
+  /* stat block */
+  .stat{font-family:"Bricolage Grotesque";font-weight:800;font-size:150px;color:var(--amber);line-height:.95}
+  .statlbl{font-size:29px;color:var(--muted);margin-top:16px}
+
+  /* CTA */
+  .url{margin-top:40px;display:inline-block;background:var(--amber);color:#1B1611;font-family:"Bricolage Grotesque";font-weight:700;font-size:36px;padding:22px 38px;border-radius:18px}
+  .free{font-family:"JetBrains Mono";font-size:23px;color:var(--muted);margin-top:26px;letter-spacing:.04em}
+
+  /* caption box */
+  .caption{max-width:1080px;margin:40px auto;background:#141009;border:1px solid #3A3128;border-radius:14px;padding:28px 32px;color:#C9BEAD;font-size:15px;line-height:1.75;white-space:pre-wrap}
+  .caption h3{font-family:"Bricolage Grotesque";color:var(--amber);margin-bottom:14px;font-size:19px}
+</style>
+</head>
+<body>
+
+<div class="hint">
+  <b>So exportierst du:</b> Jede Karte ist exakt 1080 × 1080 px. Mach von jeder einen Screenshot (Mac: ⌘+Shift+4, dann Leertaste → auf die Karte klicken) oder öffne diese Datei und drucke sie als PDF.
+  Die Reihenfolge ist die Slide-Reihenfolge im Carousel. <b>Ganz unten steht der fertige Caption-Text.</b>
+</div>
+
+<!-- ============ SLIDE 1 — HOOK ============ -->
+<div class="label">SLIDE 1 · Hook (der Stopper)</div>
+<div class="slide dark">
+  <div class="kicker">Kalkulation</div>
+  <h1 class="big">Du verlierst<br><em>22,50 €</em><br>pro Teller.</h1>
+  <p class="sub">Und du merkst es nicht — weil du so rechnest, wie du es gelernt hast.</p>
+  <div class="swipe">→</div>
+  <div class="brand">
+    <svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
+    <span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span>
+  </div>
+  <div class="pageno">1/6</div>
+</div>
+
+<!-- ============ SLIDE 2 — DAS PROBLEM ============ -->
+<div class="label">SLIDE 2 · Das Problem benennen</div>
+<div class="slide light">
+  <div class="kicker">Die alte Regel</div>
+  <h2 class="mid">„Wareneinsatz<br>mal 3. Oder<br>mal 4."</h2>
+  <p class="sub">So haben es fast alle gelernt. Die Regel stammt aus einer Zeit, in der die <b>Ware</b> der größte Kostenblock war.</p>
+  <p class="sub" style="margin-top:22px"><b>Heute ist es das Personal.</b></p>
+  <div class="swipe" style="color:#A9700F">→</div>
+  <div class="brand">
+    <svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
+    <span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span>
+  </div>
+  <div class="pageno" style="color:#B3A990">2/6</div>
+</div>
+
+<!-- ============ SLIDE 3 — DAS BEISPIEL ============ -->
+<div class="label">SLIDE 3 · Der Beweis (Zahlen)</div>
+<div class="slide dark">
+  <div class="kicker">Mit Faktor 3,5</div>
+  <h2 class="mid" style="font-size:58px">Was bleibt dir<br>pro Portion?</h2>
+  <div class="cmp">
+    <div class="rowc neg"><span class="n">5,00 €</span><span class="t">Pasta &nbsp;·&nbsp; 2 € Wareneinsatz</span></div>
+    <div class="rowc pos"><span class="n">27,50 €</span><span class="t">Rinderfilet &nbsp;·&nbsp; 11 € Wareneinsatz</span></div>
+  </div>
+  <p class="sub" style="margin-top:34px;max-width:26ch">Nur: Bestellt wird meistens <em>die Pasta</em>.</p>
+  <div class="swipe">→</div>
+  <div class="brand">
+    <svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
+    <span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span>
+  </div>
+  <div class="pageno">3/6</div>
+</div>
+
+<!-- ============ SLIDE 4 — DIE LÖSUNG ============ -->
+<div class="label">SLIDE 4 · Die Lösung</div>
+<div class="slide light">
+  <div class="kicker">Besser so</div>
+  <h2 class="mid" style="font-size:60px">Fester<br>Deckungsbeitrag<br>in Euro.</h2>
+  <div class="cmp">
+    <div class="rowc pos"><span class="n">9,00 €</span><span class="t">Pasta &nbsp;→&nbsp; 11,00 € netto</span></div>
+    <div class="rowc pos"><span class="n">9,00 €</span><span class="t">Rinderfilet &nbsp;→&nbsp; 20,00 € netto</span></div>
+  </div>
+  <p class="sub" style="margin-top:34px;max-width:28ch">Jedes Gericht trägt gleich viel — <b>egal was der Gast bestellt.</b></p>
+  <div class="swipe" style="color:#A9700F">→</div>
+  <div class="brand">
+    <svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
+    <span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span>
+  </div>
+  <div class="pageno" style="color:#B3A990">4/6</div>
+</div>
+
+<!-- ============ SLIDE 5 — MERKSATZ ============ -->
+<div class="label">SLIDE 5 · Der Merksatz (das Teilbare)</div>
+<div class="slide dark" style="justify-content:center;align-items:flex-start">
+  <div class="kicker">Merksatz</div>
+  <h2 class="big" style="font-size:88px">Der <em>Renner</em><br>ist nicht<br>der <em>Gewinner</em>.</h2>
+  <p class="sub" style="max-width:26ch">Das meistverkaufte Gericht bringt oft am wenigsten. Rechne den Beitrag — nicht den Faktor.</p>
+  <div class="swipe">→</div>
+  <div class="brand">
+    <svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
+    <span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span>
+  </div>
+  <div class="pageno">5/6</div>
+</div>
+
+<!-- ============ SLIDE 6 — CTA ============ -->
+<div class="label">SLIDE 6 · Call to Action</div>
+<div class="slide light">
+  <div class="kicker">Rechne selbst</div>
+  <h2 class="mid" style="font-size:62px">Beide Methoden.<br>Deine Gerichte.<br>2 Minuten.</h2>
+  <p class="sub" style="max-width:26ch">Der Rechner zeigt dir beide Preise nebeneinander — an deiner eigenen Karte.</p>
+  <span class="url">gastrokniff.de</span>
+  <p class="free">KOSTENLOS · OHNE ANMELDUNG · IM BROWSER</p>
+  <div class="brand">
+    <svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
+    <span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span>
+  </div>
+  <div class="pageno" style="color:#B3A990">6/6</div>
+</div>
+
+<!-- ============ CAPTION ============ -->
+<div class="caption"><h3>📋 Caption zum Kopieren</h3>Wareneinsatz mal 3. Oder mal 4. So haben es fast alle gelernt.
+
+Das Problem: Diese Regel ist alt. Sie stammt aus einer Zeit, in der die Ware der größte Kostenblock war. Heute ist es das Personal.
+
+Rechne mal nach:
+→ Pasta, 2 € Wareneinsatz, mal 3,5 = dir bleiben 5 €
+→ Rinderfilet, 11 € Wareneinsatz, mal 3,5 = dir bleiben 27,50 €
+
+Nur: Bestellt wird meistens die Pasta. Du kochst den ganzen Abend — und am Monatsende ist trotzdem nichts übrig.
+
+Die Alternative: ein fester Deckungsbeitrag in Euro statt einem Faktor. Dann trägt jedes Gericht gleich viel, egal was auf dem Bon steht. Und dein Filet wird sogar günstiger — deine Gäste trauen sich an die guten Sachen.
+
+Ehrlich gesagt: Das ist kein Zaubertrick. Günstige Gerichte werden etwas teurer, teure günstiger. Ob deine Gäste mitgehen, hängt von Konzept und Lage ab. Prüf die Preise, statt sie zu übernehmen.
+
+Auf gastrokniff.de kannst du beide Methoden kostenlos an deinen eigenen Gerichten vergleichen. Ohne Anmeldung, direkt im Browser. Link in der Bio.
+
+Wie kalkulierst du? Faktor oder Deckungsbeitrag? 👇
+
+#gastronomie #gastro #restaurant #gastronom #kalkulation #wareneinsatz #deckungsbeitrag #speisekarte #gastronomiedeutschland #restaurantbesitzer #gastrotipps #selbstständigkeit #küchenchef #gastroalltag #betriebswirtschaft</div>
+
+</body>
+</html>

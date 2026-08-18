@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Gastrokniff · Instagram-Carousel · Wie viele Gäste brauchst du heute?</title>
+<link rel="stylesheet" href="../fonts.css">
+<style>
+  :root{
+    --void:#1B1611;--panel:#26201A;--line:#3A3128;--cream:#F3EEE3;--muted:#A99C88;
+    --amber:#E7B65A;--green:#5FB980;--red:#E27C54;--paper:#F5EFE3;--ink:#241C13;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0E0B08;font-family:"Inter",system-ui,sans-serif;padding:30px;color:#888}
+  .hint{max-width:1080px;margin:0 auto 26px;background:#1a1510;border:1px solid #3A3128;border-radius:12px;padding:16px 20px;color:#A99C88;font-size:14px;line-height:1.6}
+  .hint b{color:var(--amber)}
+  .label{max-width:1080px;margin:26px auto 8px;color:#6b6153;font-size:13px;font-family:"JetBrains Mono"}
+
+  /* SLIDE BASE 1080x1080 */
+  .slide{
+    width:1080px;height:1080px;margin:0 auto;position:relative;overflow:hidden;
+    display:flex;flex-direction:column;justify-content:center;padding:88px;
+    font-family:"Inter";
+  }
+  .dark{background:
+      radial-gradient(700px 420px at 100% -8%,rgba(231,182,90,.16),transparent 62%),
+      radial-gradient(560px 400px at -8% 108%,rgba(95,185,128,.09),transparent 62%),
+      var(--void);color:var(--cream)}
+  .light{background:radial-gradient(700px 420px at 92% -8%,rgba(224,164,58,.20),transparent 60%),var(--paper);color:var(--ink)}
+
+  h1,h2,.disp{font-family:"Bricolage Grotesque";font-weight:800;letter-spacing:-.02em;line-height:1.02}
+  .kicker{font-family:"JetBrains Mono";font-size:22px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:28px}
+  .light .kicker{color:#A9700F}
+  .big{font-size:104px}
+  .mid{font-size:74px}
+  .sub{font-size:31px;line-height:1.42;color:var(--muted);margin-top:30px;max-width:22ch}
+  .light .sub{color:#6E6355}
+  em{font-style:normal;color:var(--amber)}
+  .light em{color:#A9700F}
+
+  /* brand corner */
+  .brand{position:absolute;left:88px;bottom:74px;display:flex;align-items:center;gap:14px;font-family:"Bricolage Grotesque";font-weight:700;font-size:30px;color:var(--cream)}
+  .light .brand{color:var(--ink)}
+  .brand svg{width:44px;height:44px}
+  .bi{position:relative;display:inline-block}
+  .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--amber);border-radius:.04em;transform:translateX(-50%)}
+  .pageno{position:absolute;right:88px;bottom:78px;font-family:"JetBrains Mono";font-size:22px;color:#6b6153}
+
+  /* swipe hint */
+  .swipe{position:absolute;right:88px;top:50%;transform:translateY(-50%);font-family:"JetBrains Mono";font-size:20px;color:var(--amber);letter-spacing:.1em}
+
+  /* comparison rows */
+  .cmp{margin-top:40px;display:flex;flex-direction:column;gap:18px}
+  .rowc{display:flex;align-items:center;gap:22px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 30px}
+  .light .rowc{background:#FCF7ED;border-color:#E4DBCB}
+  .rowc .n{font-family:"Bricolage Grotesque";font-weight:800;font-size:44px;min-width:210px}
+  .rowc .t{font-size:26px;color:var(--muted)}
+  .light .rowc .t{color:#6E6355}
+  .neg .n{color:var(--red)}
+  .pos .n{color:var(--green)}
+
+  /* stat block */
+  .stat{font-family:"Bricolage Grotesque";font-weight:800;font-size:150px;color:var(--amber);line-height:.95}
+  .statlbl{font-size:29px;color:var(--muted);margin-top:16px}
+
+  /* CTA */
+  .url{margin-top:40px;display:inline-block;background:var(--amber);color:#1B1611;font-family:"Bricolage Grotesque";font-weight:700;font-size:36px;padding:22px 38px;border-radius:18px}
+  .free{font-family:"JetBrains Mono";font-size:23px;color:var(--muted);margin-top:26px;letter-spacing:.04em}
+
+  /* caption box */
+  .caption{max-width:1080px;margin:40px auto;background:#141009;border:1px solid #3A3128;border-radius:14px;padding:28px 32px;color:#C9BEAD;font-size:15px;line-height:1.75;white-space:pre-wrap}
+  .caption h3{font-family:"Bricolage Grotesque";color:var(--amber);margin-bottom:14px;font-size:19px}
+</style>
+</head>
+<body>
+
+<div class="hint">
+  <b>So exportierst du:</b> Jede Karte ist exakt 1080 × 1080 px. Mach von jeder einen Screenshot (Mac: ⌘+Shift+4, dann Leertaste → auf die Karte klicken) oder öffne diese Datei und drucke sie als PDF.
+  Die Reihenfolge ist die Slide-Reihenfolge im Carousel. <b>Ganz unten steht der fertige Caption-Text.</b>
+</div>
+
+<!-- ============ SLIDE 1 — HOOK ============ -->
+<div class="label">SLIDE 1 · Hook (der Stopper)</div>
+<div class="slide dark">
+  <div class="kicker">Break-Even</div>
+  <h1 class="big">Weißt du,<br>wie viele<br><em>Gäste?</em></h1>
+  <p class="sub" style="max-width:28ch">Ohne diese Zahl kalkulierst du im Blindflug — jeden Tag.</p>
+  <div class="swipe">→</div>
+  <div class="brand">
+    <svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
+    <span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span>
+  </div>
+  <div class="pageno">1/6</div>
+</div>
+
+<!-- ============ SLIDE 2 — DIE FRAGE DAHINTER ============ -->
+<div class="label">SLIDE 2 · Das Problem benennen</div>
+<div class="slide light">
+  <div class="kicker">Die Frage dahinter</div>
+  <h2 class="mid" style="font-size:58px">Ab wann trägt<br>sich dein Laden?</h2>
+  <p class="sub" style="max-width:27ch">Break-Even = der Punkt, an dem dein Umsatz genau deine Kosten deckt. Nicht mehr, nicht weniger.</p>
+  <div class="swipe" style="color:#A9700F">→</div>
+  <div class="brand">
+    <svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
+    <span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span>
+  </div>
+  <div class="pageno" style="color:#B3A990">2/6</div>
+</div>
+
+<!-- ============ SLIDE 3 — EIN BEISPIEL ============ -->
+<div class="label">SLIDE 3 · Der Beweis (Zahlen)</div>
+<div class="slide dark">
+  <div class="kicker">Ein Beispiel</div>
+  <h2 class="mid" style="font-size:56px">Deine Fixkosten<br>pro Monat</h2>
+  <div class="cmp">
+    <div class="rowc neg"><span class="n">3.000 €</span><span class="t">Miete &amp; Nebenkosten</span></div>
+    <div class="rowc neg"><span class="n">9.000 €</span><span class="t">Personal</span></div>
+    <div class="rowc neg"><span class="n">1.500 €</span><span class="t">Energie</span></div>
+    <div class="rowc neg"><span class="n">1.500 €</span><span class="t">Sonstiges</span></div>
+  </div>
+  <p class="sub" style="margin-top:28px;max-width:30ch">15.000 € gesamt. Bei 30 % Wareneinsatz bleiben dir nur 70 Cent von jedem Euro dafür übrig.</p>
+  <div class="swipe">→</div>
+  <div class="brand">
+    <svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
+    <span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span>
+  </div>
+  <div class="pageno">3/6</div>
+</div>
+
+<!-- ============ SLIDE 4 — DEINE ANTWORT ============ -->
+<div class="label">SLIDE 4 · Die Lösung (Stat-Reveal)</div>
+<div class="slide light">
+  <div class="kicker">Deine Antwort</div>
+  <div class="stat">33</div>
+  <div class="statlbl" style="max-width:24ch">Gäste pro Tag für die schwarze Null — bei 25 € Bon und 26 Öffnungstagen.</div>
+  <div class="swipe" style="color:#A9700F">→</div>
+  <div class="brand">
+    <svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
+    <span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span>
+  </div>
+  <div class="pageno" style="color:#B3A990">4/6</div>
+</div>
+
+<!-- ============ SLIDE 5 — MERKSATZ ============ -->
+<div class="label">SLIDE 5 · Der Merksatz (das Teilbare)</div>
+<div class="slide dark" style="justify-content:center;align-items:flex-start">
+  <div class="kicker">Merksatz</div>
+  <h2 class="big" style="font-size:82px">Break-Even ist<br>kein Gefühl.<br>Es ist <em>Mathe.</em></h2>
+  <p class="sub" style="max-width:27ch">Vergleich die nötige Gästezahl mit dem, was an deinem Standort realistisch ist.</p>
+  <div class="swipe">→</div>
+  <div class="brand">
+    <svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
+    <span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span>
+  </div>
+  <div class="pageno">5/6</div>
+</div>
+
+<!-- ============ SLIDE 6 — CTA ============ -->
+<div class="label">SLIDE 6 · Call to Action</div>
+<div class="slide light">
+  <div class="kicker">Rechne für deinen Laden</div>
+  <h2 class="mid" style="font-size:56px">Deine Zahlen.<br>Deine Antwort.<br>2 Minuten.</h2>
+  <p class="sub" style="max-width:26ch">Trag deine Fixkosten ein und sieh sofort, wie viele Gäste du brauchst.</p>
+  <span class="url">gastrokniff.de</span>
+  <p class="free">KOSTENLOS · OHNE ANMELDUNG · IM BROWSER</p>
+  <div class="brand">
+    <svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
+    <span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span>
+  </div>
+  <div class="pageno" style="color:#B3A990">6/6</div>
+</div>
+
+<!-- ============ CAPTION ============ -->
+<div class="caption"><h3>📋 Caption zum Kopieren</h3>Weißt du, wie viele Gäste du heute brauchst, damit sich dein Laden trägt? Die meisten können diese Frage nicht auf Anhieb beantworten.
+
+Break-Even ist der Punkt, an dem dein Umsatz genau deine Kosten deckt — nicht mehr, nicht weniger. Ab hier fängt der Gewinn erst an.
+
+Ein Beispiel mit 15.000 € Fixkosten im Monat (3.000 € Miete, 9.000 € Personal, 1.500 € Energie, 1.500 € Sonstiges):
+
+Bei 30 % Wareneinsatz bleiben dir nur 70 Cent von jedem Euro Umsatz für diese Kosten übrig. Deshalb brauchst du mehr Umsatz, als die Fixkosten allein vermuten lassen.
+
+Bei 25 € Durchschnittsbon und 26 Öffnungstagen im Monat sind das 33 Gäste pro Tag — nur für die schwarze Null.
+
+Break-Even ist kein Gefühl. Es ist Mathe. Vergleich die Zahl mit dem, was an deinem Standort realistisch ist. Passt es nicht, stimmt etwas an Kosten, Preis oder Lage nicht.
+
+Auf gastrokniff.de rechnest du es kostenlos mit deinen eigenen Zahlen aus — ohne Anmeldung, direkt im Browser. Link in der Bio.
+
+Kennst du deine Zahl? 👇
+
+#gastronomie #gastro #restaurant #gastronom #breakeven #gewinnschwelle #wareneinsatz #gastronomiedeutschland #restaurantbesitzer #gastrotipps #selbstständigkeit #betriebswirtschaft #gastroalltag #kalkulation #unternehmertum</div>
+
+</body>
+</html>

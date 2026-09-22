@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zweiter Standort: Wann er sich lohnt — und wann nicht</title>
+<meta name="description" content="Wann ist der zweite Laden der richtige Schritt? Der Geld-Test, die vier Wachstumsmodelle und die Fehler, die Existenzen kosten. Ehrlich erklärt, mit kostenlosem Rechner.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='2' y='2' width='96' height='96' rx='24' fill='%23211C16'/%3E%3Cpath d='M66 2 L98 2 L98 34 Z' fill='%23D9A34E'/%3E%3Cpath d='M66 2 L98 34 L66 34 Z' fill='%23B57611'/%3E%3Ctext x='20' y='74' font-family='sans-serif' font-weight='800' font-size='58' fill='%23F2F0EA'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..48,600;12..48,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#F5EFE3;--ink:#241C13;--stone:#6E6355;--line:#E4DBCB;--card:#FCF7ED;--accent:#C07A12;--good:#3E7C4F;--good-soft:#E7F0E4;--warn:#B0592E;--warn-soft:#F6E4DA}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:34px 24px 80px}
+  h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:clamp(30px,5.5vw,46px);letter-spacing:-.02em;line-height:1.06;margin:14px 0 16px}
+  h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:22px;margin:36px 0 12px}
+  p{margin-bottom:14px}
+  a{color:var(--accent)}
+  .top{display:flex;align-items:center;gap:10px;margin-bottom:30px}
+  .bmark{width:32px;height:32px;flex:none}
+  .brand{font-family:"Bricolage Grotesque";font-weight:700;font-size:24px;display:inline-flex}
+  .bi{position:relative;display:inline-block}.bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--accent);border-radius:.04em;transform:translateX(-50%)}
+  .back{font-size:14px;color:var(--stone);margin-left:auto;text-decoration:none}
+  .kat{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  .lead{font-size:19px;color:var(--stone);margin-bottom:8px}
+  .kurz{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:24px 0}
+  .kurz b{font-family:"Bricolage Grotesque"}
+
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:8px 0}
+  @media(max-width:680px){.dd{grid-template-columns:1fr}}
+  .box{border-radius:16px;padding:22px;border:1px solid var(--line)}
+  .box.tun{background:var(--good-soft);border-color:#CBE0C4}
+  .box.weg{background:var(--warn-soft);border-color:#E8CDBE}
+  .box h3{font-family:"Bricolage Grotesque";font-size:18px;margin-bottom:14px}
+  .box.tun h3{color:var(--good)}
+  .box.weg h3{color:var(--warn)}
+  .box ul{list-style:none}
+  .box li{position:relative;padding-left:26px;margin-bottom:13px;font-size:15px}
+  .box.tun li::before{content:"✓";position:absolute;left:0;top:0;color:var(--good);font-weight:700}
+  .box.weg li::before{content:"✗";position:absolute;left:0;top:0;color:var(--warn);font-weight:700}
+
+  .tab{width:100%;border-collapse:collapse;font-size:15px;margin:16px 0;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .tab th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--stone);padding:10px 12px;border-bottom:1px solid var(--line)}
+  .tab td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .tab tr:last-child td{border-bottom:0}
+  .tab td:first-child{font-weight:600;white-space:nowrap}
+  @media(max-width:560px){.tab{font-size:13px}.tab th,.tab td{padding:9px 8px}}
+
+  .test{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:18px 20px;margin:20px 0}
+  .test h3{font-family:"Bricolage Grotesque";font-size:17px;margin-bottom:8px}
+
+  .merke{background:var(--ink);color:var(--paper);border-radius:16px;padding:22px 24px;margin:30px 0;font-family:"Bricolage Grotesque";font-size:20px;line-height:1.3}
+  .merke span{color:#E7B65A}
+  .cta{display:block;background:var(--accent);color:#fff;text-decoration:none;border-radius:14px;padding:20px 24px;margin:26px 0;transition:.2s}
+  .cta:hover{background:#A96A0E}
+  .cta .t{font-family:"Bricolage Grotesque";font-weight:700;font-size:18px;color:#fff}
+  .cta .s{font-size:14px;color:#F6E4C6}
+  .hinweis{font-size:14px;color:var(--stone);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:6px}
+  footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:13px;color:var(--stone);display:flex;gap:18px;flex-wrap:wrap}
+  footer a{color:var(--stone);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
+    <a href="index.html" style="text-decoration:none;color:inherit"><span class="brand">Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></a>
+    <a class="back" href="index.html">← zurück</a>
+  </div>
+
+  <span class="kat">Wachstum · Entscheidungen</span>
+  <h1>Zweiter Standort: Wann er sich lohnt</h1>
+  <p class="lead">Der Laden läuft, du hast Lust auf mehr. Aber ein zweiter Standort ist keine Verdopplung — er ist eine andere Liga. Und der häufigste Grund zu expandieren ist zugleich der schlechteste.</p>
+
+  <div class="kurz">
+    <p style="margin:0"><b>Kurz erklärt:</b> Expandiere <b>aus Stärke, nie aus Verzweiflung</b>. Wenn der erste Laden kein Geld verdient, verdienst du mit dem zweiten noch weniger — du hast dann nur doppelt so viel Arbeit für dasselbe Problem.</p>
+  </div>
+
+  <h2>Der Geld-Test</h2>
+  <div class="test">
+    <h3>Die einfachste Faustregel, die es gibt</h3>
+    <p style="margin:0">Erweitere erst, wenn dir mit dem ersten Laden <b>fast langweilig wird</b> — weil er so sauber läuft und du ihn so im Griff hast. Wenn du morgens noch Feuer löschst, ist es zu früh.</p>
+  </div>
+  <p>Diese Regel klingt banal und rettet trotzdem Existenzen. Denn der häufigste Grund für einen zweiten Standort ist nicht Stärke, sondern <b>Flucht</b>: Der erste läuft schlecht, also soll der zweite es rausreißen. Das geht fast nie gut aus.</p>
+
+  <h2>Rechne mit dem Wachstumsschmerz</h2>
+  <p>Zwei Läden sind nicht ein Laden mal zwei. Alles verdoppelt sich: Team, Küchenprozesse, Rohstoffmanagement, Kommunikation. Und <b>jeder Fehler kostet ab jetzt doppelt</b>.</p>
+  <p>Dein Kopf hängt noch am ersten Laden, während der zweite Zeit, Geld und Nerven frisst. Rechne mit Wochen bis Monaten, in denen Kosten laufen und Fehler passieren, bis dein Wissen mitgewachsen ist. Halt Reserven bereit — an Geld, an Zeit und an Nerven.</p>
+
+  <div class="dd">
+    <div class="box tun">
+      <h3>✓ Das solltest du tun</h3>
+      <ul>
+        <li>Erst expandieren, wenn der erste Laden <b>verlässlich Gewinn</b> bringt — nicht nur Umsatz.</li>
+        <li>Prüfen, ob der erste Betrieb <b>ohne dich</b> läuft. Wenn nicht, hast du keinen Betrieb, sondern einen Arbeitsplatz.</li>
+        <li>Ein <b>Handbuch aus der Praxis</b> schreiben: Abläufe, Rezepturen, Produktpässe — so präzise, dass ein neues Team sie eins zu eins leben kann.</li>
+        <li><b>Reserven einplanen</b> für die wacklige Phase. Sie kommt sicher.</li>
+        <li>Das <b>Modell wählen</b>, das zu deinem Kapital passt — nicht automatisch den zweiten eigenen Laden.</li>
+        <li>Vorher klein <b>testen</b>: Pop-up oder Foodtruck liefern echte Zahlen statt Vermutungen.</li>
+      </ul>
+    </div>
+    <div class="box weg">
+      <h3>✗ Das solltest du vermeiden</h3>
+      <ul>
+        <li><b>Expandieren, um einem Problem davonzulaufen.</b> Die härteste Regel von allen.</li>
+        <li>Glauben, der zweite Laden <b>rettet den ersten</b>. Er beschleunigt nur, was ohnehin passiert.</li>
+        <li><b>Luftschlösser rechnen</b>: Umsatz optimistisch, Kosten optimistisch, Zeitplan optimistisch.</li>
+        <li>Das <b>Handbuch vom Berater</b> schreiben lassen, der nie in deiner Küche stand.</li>
+        <li>Annehmen, dass deine <b>Qualität automatisch mitwächst</b>. Sie verwässert, wenn du sie nicht festhältst.</li>
+        <li><b>Franchise als Startpunkt</b> sehen statt als Ergebnis.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Vier Wege zu wachsen</h2>
+  <p>Der zweite eigene Laden ist nur eine Möglichkeit — und die kapitalintensivste.</p>
+
+  <table class="tab">
+    <thead><tr><th>Modell</th><th>Dafür</th><th>Dagegen</th></tr></thead>
+    <tbody>
+      <tr><td>Eigener Standort</td><td>Volle Kontrolle über Marke und Konzept, du bestimmst das Tempo</td><td>Viel Kapital, lange Aufbauphase</td></tr>
+      <tr><td>Pop-up / Foodtruck</td><td>Konzept testen mit kleinem Risiko, du bekommst belastbare Zahlen</td><td>Begrenzte Dauer, kein fester Stammgast-Aufbau</td></tr>
+      <tr><td>Delivery / Ghost Kitchen</td><td>Schneller Start, wenig Risiko</td><td>Rund <b>30 % Gebühr</b> — und den letzten Eindruck beim Gast übernehmen fremde Fahrer</td></tr>
+      <tr><td>Franchise</td><td>Schnelle Verbreitung ohne eigenes Kapital</td><td>Nur sinnvoll mit starker Marke und den richtigen Partnern</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Franchise: der Test in einem Satz</h2>
+  <div class="test">
+    <h3>Hast du eine Love-Brand?</h3>
+    <p style="margin:0">Stell dir vor, dein Partner nimmt deinen Namen von der Tür. <b>Kommen dann weniger Gäste?</b> Wenn ja, hast du eine Marke. Wenn nichts passiert, hast du nur ein Schild — und Franchise wäre der falsche Weg.</p>
+  </div>
+  <p>Und noch zwei Bedingungen: Starte Franchise erst mit <b>zwei bis drei eigenen, profitablen Betrieben</b> — sie sind der Beweis, dass dein Konzept Geld verdient. Und such dir Partner, die selbst im Laden stehen und für das Konzept brennen. Nicht Investoren, die nie hinter der Fritteuse standen.</p>
+
+  <div class="merke">Wachse, wenn dir <span>langweilig</span> wird. Nicht, wenn dir das <span>Wasser bis zum Hals</span> steht.</div>
+
+  <a class="cta" href="break-even-rechner.html">
+    <span class="t">Verdient dein erster Laden wirklich? →</span><br>
+    <span class="s">Der Break-Even-Rechner zeigt dir schwarz auf weiß, ob er trägt. Kostenlos, ohne Anmeldung.</span>
+  </a>
+
+  <p>Und wenn du anfängst, dein Handbuch zu schreiben: Rezepturen und Produktpässe sind der Teil, der am schnellsten verwässert. Mit dem <a href="produktpass.html">Produktpass-Generator</a> hältst du sie so fest, dass jedes Team sie gleich umsetzt.</p>
+
+  <p class="hinweis"><b>Ehrlich gesagt:</b> Wachstum ist kein Muss. Ein einziger Laden, der sauber läuft und dich gut bezahlt, ist kein kleineres Ziel als drei, die dich auffressen. Die Frage ist nicht „wie werde ich größer?", sondern <b>„wie will ich arbeiten?"</b> — und darauf gibt es keine allgemeingültige Antwort. Vor jedem zweiten Standort gehören Pachtvertrag, Finanzierung und Personalplanung auf den Tisch, am besten mit deinem Steuerberater.</p>
+
+  <footer>
+    <a href="index.html">Startseite</a>
+    <a href="artikel-konzept-beenden.html">Konzept beenden</a>
+    <a href="break-even-rechner.html">Break-Even-Rechner</a>
+    <a href="impressum.html">Impressum</a>
+    <span>© 2026 Gastrokniff</span>
+  </footer>
+</div>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4874637d13da44b99b039a9db0a4fcec"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

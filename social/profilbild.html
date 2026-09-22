@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Gastrokniff · Profilbild Export</title>
+<link rel="stylesheet" href="../fonts.css">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0E0B08;padding:40px;font-family:"Inter",sans-serif;color:#A99C88}
+  .note{max-width:1080px;margin:0 auto 30px;background:#1a1510;border:1px solid #3A3128;border-radius:12px;padding:18px 22px;font-size:14px;line-height:1.6}
+  .note b{color:#E7B65A}
+  .lbl{max-width:1080px;margin:34px auto 10px;font-size:13px;color:#6b6153;font-family:monospace}
+
+  /* 1080x1080 profilo */
+  .pic{width:1080px;height:1080px;margin:0 auto;background:#211C16;position:relative;overflow:hidden;
+       display:flex;align-items:center;justify-content:center}
+  .pic .fold-a{position:absolute;top:0;right:0;width:0;height:0;
+       border-left:340px solid transparent;border-top:340px solid #D9A34E}
+  .pic .fold-b{position:absolute;top:0;right:0;width:0;height:0;
+       border-right:340px solid #B57611;border-bottom:340px solid transparent}
+  .pic .k{font-family:"Bricolage Grotesque";font-weight:800;font-size:620px;color:#F2F0EA;line-height:1;
+       margin-top:-30px;margin-right:40px}
+
+  /* variante con wordmark */
+  .alt{width:1080px;height:1080px;margin:0 auto;background:#211C16;position:relative;overflow:hidden;
+       display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px}
+  .alt .fold-a{position:absolute;top:0;right:0;width:0;height:0;
+       border-left:300px solid transparent;border-top:300px solid #D9A34E}
+  .alt .fold-b{position:absolute;top:0;right:0;width:0;height:0;
+       border-right:300px solid #B57611;border-bottom:300px solid transparent}
+  .alt .k{font-family:"Bricolage Grotesque";font-weight:800;font-size:400px;color:#F2F0EA;line-height:.9}
+  .alt .wm{font-family:"Bricolage Grotesque";font-weight:700;font-size:86px;color:#F2F0EA;display:inline-flex}
+  .bi{position:relative;display:inline-block}
+  .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:#E7B65A;border-radius:.04em;transform:translateX(-50%)}
+  .alt .claim{font-family:"Inter";font-size:34px;color:#A99C88;letter-spacing:.02em}
+</style>
+</head>
+<body>
+
+<div class="note">
+  <b>So speicherst du das Profilbild:</b> Screenshot von einer der beiden Karten machen (Ubuntu: Taste <b>Druck</b>, dann Bereich auswählen — oder Programm „Bildschirmfoto"). Beide sind 1080 × 1080 px.<br>
+  <b>Empfehlung:</b> Die erste Variante (nur „K") — sie bleibt auch im kleinen Instagram-Kreis gut lesbar.
+</div>
+
+<div class="lbl">VARIANTE 1 · nur Zeichen (empfohlen fürs Profilbild)</div>
+<div class="pic">
+  <div class="fold-a"></div><div class="fold-b"></div>
+  <div class="k">K</div>
+</div>
+
+<div class="lbl">VARIANTE 2 · mit Wortmarke (gut für Facebook-Seite oder Header)</div>
+<div class="alt">
+  <div class="fold-a"></div><div class="fold-b"></div>
+  <div class="k">K</div>
+  <div class="wm">Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</div>
+  <div class="claim">Kniffe für die Gastronomie</div>
+</div>
+
+</body>
+</html>

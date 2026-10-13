@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Gastrokniff · Carousel · Kostenstruktur</title>
+<link rel="stylesheet" href="../fonts.css">
+<style>
+  :root{--void:#1B1611;--panel:#26201A;--line:#3A3128;--cream:#F3EEE3;--muted:#A99C88;
+        --amber:#E7B65A;--green:#5FB980;--red:#E27C54;--paper:#F5EFE3;--ink:#241C13}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0E0B08;font-family:"Inter",system-ui,sans-serif;padding:30px;color:#888}
+  .hint{max-width:1080px;margin:0 auto 26px;background:#1a1510;border:1px solid #3A3128;border-radius:12px;padding:16px 20px;color:#A99C88;font-size:14px;line-height:1.6}
+  .hint b{color:var(--amber)}
+  .label{max-width:1080px;margin:26px auto 8px;color:#6b6153;font-size:13px;font-family:"JetBrains Mono",monospace}
+
+  .slide{width:1080px;height:1080px;margin:0 auto;position:relative;overflow:hidden;
+         display:flex;flex-direction:column;justify-content:center;padding:88px}
+  .dark{background:radial-gradient(700px 420px at 100% -8%,rgba(231,182,90,.16),transparent 62%),
+        radial-gradient(560px 400px at -8% 108%,rgba(95,185,128,.09),transparent 62%),var(--void);color:var(--cream)}
+  .light{background:radial-gradient(700px 420px at 92% -8%,rgba(224,164,58,.20),transparent 60%),var(--paper);color:var(--ink)}
+
+  h1,h2{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.02}
+  .kicker{font-family:"JetBrains Mono",monospace;font-size:22px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:28px}
+  .light .kicker{color:#A9700F}
+  .big{font-size:92px}
+  .mid{font-size:68px}
+  .sub{font-size:31px;line-height:1.42;color:var(--muted);margin-top:30px;max-width:24ch}
+  .light .sub{color:#6E6355}
+  em{font-style:normal;color:var(--amber)}
+  .light em{color:#A9700F}
+
+  .brand{position:absolute;left:88px;bottom:74px;display:flex;align-items:center;gap:14px;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:30px;color:var(--cream)}
+  .light .brand{color:var(--ink)}
+  .brand svg{width:44px;height:44px}
+  .bi{position:relative;display:inline-block}
+  .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--amber);border-radius:.04em;transform:translateX(-50%)}
+  .pageno{position:absolute;right:88px;bottom:78px;font-family:"JetBrains Mono",monospace;font-size:22px;color:#6b6153}
+  .light .pageno{color:#B3A990}
+  .swipe{position:absolute;right:88px;top:50%;transform:translateY(-50%);font-family:"JetBrains Mono",monospace;font-size:20px;color:var(--amber);letter-spacing:.1em}
+  .light .swipe{color:#A9700F}
+
+  .list{margin-top:36px;display:flex;flex-direction:column;gap:18px}
+  .item{display:flex;gap:18px;align-items:baseline;font-size:30px;line-height:1.35}
+  .item b{font-family:"Bricolage Grotesque",system-ui,sans-serif;color:var(--amber);font-size:34px;min-width:34px}
+  .light .item b{color:#A9700F}
+  .item.no b{color:var(--red)}
+  .light .item.no b{color:#B0592E}
+
+  .check{margin-top:34px;background:#FCF7ED;border:1px solid #E4DBCB;border-radius:18px;padding:30px 34px}
+  .check .r{display:flex;align-items:center;gap:20px;font-size:27px;padding:13px 0;color:#241C13}
+  .check .r + .r{border-top:1px dashed #E4DBCB}
+  .check .bx{width:30px;height:30px;border-radius:7px;border:2px solid #C9BFAB;flex:none;position:relative}
+  .check .r.on .bx{background:#3E7C4F;border-color:#3E7C4F}
+  .check .r.on .bx::after{content:"";position:absolute;left:9px;top:3px;width:7px;height:15px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(43deg)}
+  .check .r.on span{color:#6E6355;text-decoration:line-through;text-decoration-color:#C9BFAB}
+  .check.plain .r.on span{color:#241C13;text-decoration:none}
+
+  .calc{margin-top:34px;background:#FCF7ED;border:1px solid #E4DBCB;border-radius:18px;padding:26px 32px}
+  .calc .r{display:flex;justify-content:space-between;gap:24px;font-size:27px;padding:10px 0;color:#6E6355}
+  .calc .r + .r{border-top:1px dashed #E4DBCB}
+  .calc .r span:last-child{font-family:"JetBrains Mono",monospace;color:#241C13;white-space:nowrap}
+  .calc .tot{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;font-size:38px;color:#241C13;border-top:2px solid #E4DBCB!important;padding-top:16px;margin-top:6px}
+  .calc .tot span:last-child{color:#3E7C4F;font-family:"Bricolage Grotesque",system-ui,sans-serif}
+  .calc.warn .tot span:last-child{color:#B0592E}
+
+  .url{margin-top:40px;display:inline-block;background:var(--amber);color:#1B1611;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:36px;padding:22px 38px;border-radius:18px}
+  .free{font-family:"JetBrains Mono",monospace;font-size:22px;color:#6E6355;margin-top:26px;letter-spacing:.04em}
+
+  .caption{max-width:1080px;margin:40px auto;background:#141009;border:1px solid #3A3128;border-radius:14px;padding:28px 32px;color:#C9BEAD;font-size:15px;line-height:1.75;white-space:pre-wrap}
+  .caption h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;color:var(--amber);margin-bottom:14px;font-size:19px}
+</style>
+</head>
+<body>
+
+<div class="hint"><b>Wichtig:</b> Öffne diese Datei aus dem Ordner <b>social/</b> im Projekt — nur dort findet sie die Schriften. Jede Karte ist 1080 × 1080 px: Screenshot machen (Taste <b>Druck</b>, Bereich wählen), als 01.png, 02.png … speichern. <b>Ganz unten steht der fertige Caption-Text.</b></div>
+
+<div class="label">SLIDE 1 · Hook</div>
+<div class="slide dark">
+  <div class="kicker">Kostenstruktur</div>
+  <h1 class="big">Von 100 €<br>Umsatz bleiben<br>dir <em>wie viel</em>?</h1>
+  <p class="sub">Die meisten schätzen. Und schätzen zu hoch.</p>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">1/6</div>
+</div>
+
+<div class="label">SLIDE 2 · Das Problem</div>
+<div class="slide light">
+  <div class="kicker">Das Problem</div>
+  <h2 class="mid">Umsatz ist<br>nicht <em>Gewinn</em>.</h2>
+  <p class="sub">Ein voller Laden kann jeden Monat Geld verlieren. Gemerkt wird es oft erst beim Jahresabschluss.</p>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">2/6</div>
+</div>
+
+<div class="label">SLIDE 3 · Die drei Bloecke</div>
+<div class="slide dark">
+  <div class="kicker">Die drei Blöcke</div>
+  <h2 class="mid">Drei Zahlen<br>fressen fast<br><em>alles</em>.</h2>
+  <div class="list">
+    <div class="item"><b>→</b><span>Wareneinsatz — rund ein Drittel</span></div>
+    <div class="item"><b>→</b><span>Personal — rund ein Drittel</span></div>
+    <div class="item"><b>→</b><span>Miete, Energie, Versicherung, Abgaben — der Rest</span></div>
+  </div>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">3/6</div>
+</div>
+
+<div class="label">SLIDE 4 · Die Rechnung</div>
+<div class="slide light">
+  <div class="kicker">Die Rechnung</div>
+  <h2 class="mid">Was am Ende<br>übrig bleibt.</h2>
+  <div class="calc">
+    <div class="r"><span>Netto-Umsatz</span><span>100 €</span></div>
+    <div class="r"><span>− Wareneinsatz</span><span>30 €</span></div>
+    <div class="r"><span>− Personal</span><span>33 €</span></div>
+    <div class="r"><span>− Miete und laufende Kosten</span><span>25 €</span></div>
+    <div class="r tot"><span>Bleibt</span><span>12 €</span></div>
+  </div>
+  <p class="sub" style="font-size:24px;margin-top:22px">Beispielzahlen. Deine sehen anders aus — und genau das ist der Punkt.</p>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">4/6</div>
+</div>
+
+<div class="label">SLIDE 5 · Der Hebel</div>
+<div class="slide dark">
+  <div class="kicker">Der Hebel</div>
+  <h2 class="mid" style="font-size:64px">Zwei Punkte<br>beim Einkauf sind<br><em>ein Sechstel</em>.</h2>
+  <p class="sub">Wenn am Ende 12 € bleiben, verändert jeder Punkt beim Wareneinsatz dein Ergebnis spürbar. Deshalb lohnt sich Rechnen.</p>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">5/6</div>
+</div>
+
+<div class="label">SLIDE 6 · Call to Action</div>
+<div class="slide light">
+  <div class="kicker">Deine eigene Struktur</div>
+  <h2 class="mid" style="font-size:58px">Sieh, wohin dein<br>Umsatz geht — in<br><em>zwei Minuten</em>.</h2>
+  <span class="url">gastrokniff.de</span>
+  <p class="free">KOSTENLOS · OHNE ANMELDUNG · LINK IN DER BIO</p>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">6/6</div>
+</div>
+
+<div class="caption"><h3>📋 Caption zum Kopieren</h3>Von 100 € Umsatz bleiben dir wie viel? Die meisten schätzen — und schätzen zu hoch. 📊
+
+Umsatz ist nicht Gewinn. Ein voller Laden kann jeden Monat Geld verlieren, und oft merkt man es erst beim Jahresabschluss.
+
+Drei Blöcke fressen fast alles:
+
+→ Wareneinsatz — grob ein Drittel vom Netto-Umsatz
+→ Personal — noch mal grob ein Drittel
+→ Miete, Energie, Versicherungen, Abgaben, Reparaturen — der Rest
+
+Was dann übrig bleibt, ist eine einstellige bis niedrig zweistellige Zahl. Und genau deshalb ist jeder Punkt beim Einkauf so viel wert: Wenn am Ende 12 € bleiben, verändern zwei Punkte weniger Wareneinsatz dein Ergebnis spürbar.
+
+Die Zahlen oben sind Beispielwerte. Deine sehen anders aus — und das ist der eigentliche Punkt. Wer seine eigene Struktur nicht kennt, optimiert im Dunkeln.
+
+Auf gastrokniff.de siehst du deine eigene Aufteilung in zwei Minuten. Kostenlos, ohne Anmeldung, alles bleibt in deinem Browser. Link in der Bio.
+
+Weißt du, wie viel bei dir am Ende übrig bleibt? 👇
+
+#kostenstruktur #wareneinsatz #kalkulation #gastronomie #gastro #restaurant #gastronom #betriebswirtschaft #gastronomiedeutschland #restaurantbesitzer #gastrotipps #zahlen #selbstständigkeit #gastroalltag #personalkosten</div>
+
+</body>
+</html>

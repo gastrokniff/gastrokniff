@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neue Mitarbeiter einarbeiten: was tun, was lassen</title>
+<meta name="description" content="Die ersten zwei Wochen entscheiden, ob jemand bleibt. Fünf Schritte für die Einarbeitung in der Gastronomie — und die Fehler, die neue Leute wieder vertreiben.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#241C13">
+<link rel="stylesheet" href="fonts.css">
+<style>
+  :root{--paper:#F5EFE3;--ink:#241C13;--stone:#6E6355;--line:#E4DBCB;--card:#FCF7ED;--accent:#C07A12;--good:#3E7C4F;--good-soft:#E7F0E4;--warn:#B0592E;--warn-soft:#F6E4DA}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:34px 24px 80px}
+  h1{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:clamp(30px,5.5vw,46px);letter-spacing:-.02em;line-height:1.06;margin:14px 0 16px}
+  h2{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:600;font-size:22px;margin:36px 0 12px}
+  h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:600;font-size:18px}
+  h4{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:600;font-size:14px}
+  p{margin-bottom:14px}
+  a{color:var(--accent)}
+  .top{display:flex;align-items:center;gap:10px;margin-bottom:30px}
+  .bmark{width:32px;height:32px;flex:none}
+  .brand{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:24px;display:inline-flex}
+  .bi{position:relative;display:inline-block}.bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--accent);border-radius:.04em;transform:translateX(-50%)}
+  .back{font-size:14px;color:var(--stone);margin-left:auto;text-decoration:none}
+  .kat{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  .lead{font-size:19px;color:var(--stone);margin-bottom:8px}
+  .kurz{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:24px 0}
+  .kurz b{font-family:"Bricolage Grotesque",system-ui,sans-serif}
+
+  .punkt{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:20px 22px;margin:22px 0}
+  .punkt .nr{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase}
+  .punkt h3{margin:6px 0 10px}
+  .szenario{background:var(--warn-soft);border:1px solid #E8CDBE;border-radius:10px;padding:14px 16px;font-size:14.5px;margin:4px 0 16px}
+  .szenario b{color:var(--warn)}
+
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+  @media(max-width:600px){.dd{grid-template-columns:1fr}}
+  .dd > div{border-radius:11px;padding:14px 16px}
+  .tun{background:var(--good-soft);border:1px solid #CFE0CA}
+  .lassen{background:#F4EFE6;border:1px solid #E0D6C4}
+  .dd h4{margin-bottom:9px;display:flex;align-items:center;gap:7px;letter-spacing:.03em;text-transform:uppercase;font-size:11.5px}
+  .tun h4{color:var(--good)}
+  .lassen h4{color:var(--warn)}
+  .dd ul{list-style:none}
+  .dd li{position:relative;padding-left:20px;margin-bottom:8px;font-size:14.5px;line-height:1.5}
+  .tun li::before{content:"✓";position:absolute;left:0;color:var(--good);font-weight:700}
+  .lassen li::before{content:"✕";position:absolute;left:0;color:var(--warn);font-weight:700}
+  .ergebnis{font-size:14px;color:var(--good);font-weight:600;margin-top:14px}
+
+  .merke{background:var(--ink);color:var(--paper);border-radius:16px;padding:22px 24px;margin:30px 0;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:20px;line-height:1.3}
+  .merke span{color:#E7B65A}
+  .cta{display:block;background:var(--accent);color:#fff;text-decoration:none;border-radius:14px;padding:20px 24px;margin:26px 0;transition:.2s}
+  .cta:hover{background:#A96A0E}
+  .cta .t{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:18px;color:#fff}
+  .cta .s{font-size:14px;color:#F6E4C6}
+  .hinweis{font-size:14px;color:var(--stone);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:6px}
+  footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:13px;color:var(--stone);display:flex;gap:18px;flex-wrap:wrap}
+  footer a{color:var(--stone);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg>
+    <a href="index.html" style="text-decoration:none;color:inherit"><span class="brand">Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></a>
+    <a class="back" href="index.html">← zurück</a>
+  </div>
+
+  <span class="kat">Team · Personal</span>
+  <h1>Neue Mitarbeiter einarbeiten: was tun, was lassen</h1>
+  <p class="lead">Die meisten Kündigungen in den ersten Wochen haben nichts mit dem Lohn zu tun. Sie passieren, weil jemand ins kalte Wasser geworfen wurde, niemand Zeit hatte und er sich schnell verloren fühlte.</p>
+
+  <div class="kurz">
+    <p style="margin:0"><b>Kurz erklärt:</b> Du brauchst keine drei Wochen Schulung und keine Personalabteilung. Du brauchst ein <b>festes System</b>, das jedes Mal gleich abläuft. Einmal gebaut, kostet es dich beim nächsten Neuen fast keine Zeit mehr — und du musst nicht alle paar Monate von vorn anfangen.</p>
+  </div>
+
+  <h2>Die fünf Schritte</h2>
+
+  <div class="punkt">
+    <div class="nr">Schritt 1</div>
+    <h3>Dreh ein Onboarding-Video</h3>
+    <div class="szenario">Stell dir vor: Der Neue kommt zum ersten Arbeitstag. Fremde Umgebung, unbekannte Abläufe, und alle sind im Stress. Er hat zwanzig Fragen und traut sich keine davon zu stellen. <b>Am Abend weiß er nicht mehr, als er morgens wusste.</b></div>
+    <div class="dd">
+      <div class="tun"><h4>Das tust du</h4><ul>
+        <li>Nimm dein Handy und erzähl in höchstens 30 Minuten, was man am ersten Tag wissen muss</li>
+        <li>Rein gehören: wofür ihr steht, die Regeln im Haus, die Abläufe</li>
+        <li>Lad es bei YouTube hoch, stell es auf <b>nicht gelistet</b> und schick nur den Link</li>
+        <li>Hast du schon ein Team: schreib das Skript zusammen mit einer Führungskraft</li>
+      </ul></div>
+      <div class="lassen"><h4>Das lässt du</h4><ul>
+        <li>Kein zweistündiges Video, das niemand zu Ende schaut</li>
+        <li>Nicht öffentlich hochladen — es ist für dein Team, nicht für das Internet</li>
+        <li>Verlass dich nicht aufs Gespräch: dabei vergisst du jedes Mal etwas anderes</li>
+        <li>Warte nicht auf die perfekte Kamera. Das Handy reicht</li>
+      </ul></div>
+    </div>
+    <p class="ergebnis">Ergebnis: Jeder Neue kennt am ersten Tag deine Regeln und deine Abläufe.</p>
+  </div>
+
+  <div class="punkt">
+    <div class="nr">Schritt 2</div>
+    <h3>Gib jedem Neuen einen Paten</h3>
+    <div class="szenario">Stell dir vor: Du sagst „melde dich, wenn du was brauchst". Aber jeder, den er fragen könnte, ist gerade mitten im Geschäft. Nach drei Tagen fragt er nichts mehr — <b>und macht die Fehler lieber still.</b></div>
+    <div class="dd">
+      <div class="tun"><h4>Das tust du</h4><ul>
+        <li>Benenne vorher namentlich, wer sich kümmert</li>
+        <li>Der Pate führt ihn am ersten Tag einmal durch den ganzen Betrieb</li>
+        <li>Frag beim nächsten Teammeeting, wer Lust auf die Rolle hat</li>
+        <li>Sag dem Neuen ausdrücklich: Fragen sind erwünscht</li>
+      </ul></div>
+      <div class="lassen"><h4>Das lässt du</h4><ul>
+        <li>Es muss keine Führungskraft sein — ein erfahrener Kollege reicht</li>
+        <li>Niemanden dazu verdonnern, der keine Lust hat</li>
+        <li>Nicht drei Leute gleichzeitig zuständig machen: dann ist es keiner</li>
+        <li>Den Paten nicht zusätzlich voll verplanen an diesem Tag</li>
+      </ul></div>
+    </div>
+    <p class="ergebnis">Ergebnis: Kein Neuer steht allein da und muss sich alles selbst zusammensuchen.</p>
+  </div>
+
+  <div class="punkt">
+    <div class="nr">Schritt 3</div>
+    <h3>Schreib einen Einarbeitungsplan</h3>
+    <div class="szenario">Stell dir vor: Nach zwei Wochen fragst du, ob alles sitzt. Er sagt ja. In der ersten vollen Schicht stellt sich heraus, dass er noch nie kassiert hat — <b>weil es nie jemand auf dem Zettel hatte.</b></div>
+    <div class="dd">
+      <div class="tun"><h4>Das tust du</h4><ul>
+        <li>Schreib auf, welche Aufgabe in welcher Woche sitzen muss</li>
+        <li>Mach für jeden Bereich einen eigenen Plan: Küche, Service, Bar</li>
+        <li>Setzt euch einmal zusammen: was habt ihr schon, was fehlt</li>
+        <li>Am Ende gehen Pate und Neuer den Plan gemeinsam durch und unterschreiben</li>
+      </ul></div>
+      <div class="lassen"><h4>Das lässt du</h4><ul>
+        <li>Warte nicht, bis der Plan perfekt ist — fang mit der ersten Fassung an</li>
+        <li>Kein Plan im Kopf. Was nicht aufgeschrieben ist, fällt irgendwann durch</li>
+        <li>Pack nicht alles in Woche 1. Zu viel auf einmal bleibt nicht hängen</li>
+        <li>Nicht für jeden neu erfinden — einmal bauen, danach nur anpassen</li>
+      </ul></div>
+    </div>
+    <p class="ergebnis">Ergebnis: Jeder weiß, was in welcher Woche gelernt sein muss.</p>
+  </div>
+
+  <div class="punkt">
+    <div class="nr">Schritt 4</div>
+    <h3>Starte jede Schicht mit zwei Minuten Briefing</h3>
+    <div class="szenario">Stell dir vor: Der Laden läuft, die Zahlen stimmen, du ziehst dich aus dem Tagesgeschäft zurück. Im Team wird mehr über Probleme geredet als über Erfolge. Du merkst nichts davon — <b>bis mehrere gleichzeitig kündigen.</b></div>
+    <div class="dd">
+      <div class="tun"><h4>Das tust du</h4><ul>
+        <li>Zwei Minuten vor Schichtbeginn: Was wollen wir heute erreichen?</li>
+        <li>Küche, Service und Bar sagen sich, was heute empfohlen wird und was aus ist</li>
+        <li>Frag kurz in die Runde, wie die Stimmung ist</li>
+        <li>Ab und zu eine kleine Challenge einbauen</li>
+      </ul></div>
+      <div class="lassen"><h4>Das lässt du</h4><ul>
+        <li>Keine Viertelstunde — dann fällt es beim ersten Stress aus</li>
+        <li>Nicht nur reden, wenn etwas schiefgelaufen ist</li>
+        <li>Kein Monolog vom Chef: die Runde soll auch zu Wort kommen</li>
+        <li>Nicht ausfallen lassen, weil „heute wenig los ist"</li>
+      </ul></div>
+    </div>
+    <p class="ergebnis">Ergebnis: Probleme im Team fallen dir auf, bevor sie groß werden.</p>
+  </div>
+
+  <div class="punkt">
+    <div class="nr">Schritt 5</div>
+    <h3>Gib deinem Team Feedback</h3>
+    <div class="szenario">Stell dir vor, du bist Trainer einer Mannschaft. Deine Leute geben alles. Am Ende fragen sie, wie es ausgegangen ist — und du sagst, dass niemand die Punkte mitgezählt hat. <b>Genau so fühlt sich jemand, der nie eine Rückmeldung bekommt.</b></div>
+    <div class="dd">
+      <div class="tun"><h4>Das tust du</h4><ul>
+        <li>Ein Gespräch von höchstens 30 Minuten mit jedem Einzelnen</li>
+        <li>Drei Fragen: Was läuft gut? Wo geht mehr? Was wünschst du dir?</li>
+        <li>Einmal im Monat eine offene Runde mit dem ganzen Team</li>
+        <li>Sag auch, was gut war — nicht nur, was fehlt</li>
+      </ul></div>
+      <div class="lassen"><h4>Das lässt du</h4><ul>
+        <li>Kein Feedback zwischen Tür und Angel mitten im Geschäft</li>
+        <li>Nichts schönreden: wer nicht weiß, woran er ist, kann sich nicht verbessern</li>
+        <li>Nicht nur beim Jahresgespräch — dann ist es ein Jahr zu spät</li>
+        <li>Nicht vor dem ganzen Team kritisieren</li>
+      </ul></div>
+    </div>
+    <p class="ergebnis">Ergebnis: Jeder im Team weiß, woran er bei dir ist.</p>
+  </div>
+
+  <div class="merke">Wer regelmäßig mit seinem Team spricht, löst Probleme, <span>bevor sie entstehen</span>. Wer es sein lässt, merkt es erst, <span>wenn gekündigt wird</span>.</div>
+
+  <h2>Fang mit einem Schritt an</h2>
+  <p>Du musst das nicht alles diese Woche erledigen. Nimm dir einen einzigen Punkt vor — zum Beispiel das Skript für dein Video oder das Briefing vor der nächsten Schicht. Plan und Pate kannst du danach nachziehen.</p>
+  <p>Und das gilt auch, wenn dein Team seit Jahren steht: Irgendwann kommt der Nächste. Besser, der Plan liegt dann schon in der Schublade.</p>
+
+  <a class="cta" href="einarbeitungsplan.html">
+    <span class="t">Hol dir den fertigen Plan →</span><br>
+    <span class="s">Zwei Wochen für Service, Küche oder Bar — zum Abhaken, Ergänzen und Ausdrucken. Kostenlos, ohne Anmeldung.</span>
+  </a>
+
+  <p class="hinweis"><b>Ehrlich gesagt:</b> Kein System hält jemanden, der ohnehin gehen will — und ein guter Plan ersetzt keinen fairen Lohn und keinen anständigen Dienstplan. Was er leistet: Er nimmt den Grund weg, aus dem Leute gehen, <b>ohne dass du je erfährst, warum</b>. Und er kostet dich beim zweiten Mal nur noch halb so viel Zeit.</p>
+
+  <footer>
+    <a href="index.html">Startseite</a>
+    <a href="einarbeitungsplan.html">Einarbeitungsplan</a>
+    <a href="kostenstruktur.html">Kostenstruktur</a>
+    <a href="rechner.html">Alle Rechner</a>
+    <a href="impressum.html">Impressum</a>
+    <span>© 2026 Gastrokniff</span>
+  </footer>
+</div>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4874637d13da44b99b039a9db0a4fcec"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

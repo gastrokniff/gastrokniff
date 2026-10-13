@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Gastrokniff · Carousel · Weihnachtsgeschäft</title>
+<link rel="stylesheet" href="../fonts.css">
+<style>
+  :root{--void:#1B1611;--panel:#26201A;--line:#3A3128;--cream:#F3EEE3;--muted:#A99C88;
+        --amber:#E7B65A;--green:#5FB980;--red:#E27C54;--paper:#F5EFE3;--ink:#241C13}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0E0B08;font-family:"Inter",system-ui,sans-serif;padding:30px;color:#888}
+  .hint{max-width:1080px;margin:0 auto 26px;background:#1a1510;border:1px solid #3A3128;border-radius:12px;padding:16px 20px;color:#A99C88;font-size:14px;line-height:1.6}
+  .hint b{color:var(--amber)}
+  .label{max-width:1080px;margin:26px auto 8px;color:#6b6153;font-size:13px;font-family:"JetBrains Mono",monospace}
+
+  .slide{width:1080px;height:1080px;margin:0 auto;position:relative;overflow:hidden;
+         display:flex;flex-direction:column;justify-content:center;padding:88px}
+  .dark{background:radial-gradient(700px 420px at 100% -8%,rgba(231,182,90,.16),transparent 62%),
+        radial-gradient(560px 400px at -8% 108%,rgba(95,185,128,.09),transparent 62%),var(--void);color:var(--cream)}
+  .light{background:radial-gradient(700px 420px at 92% -8%,rgba(224,164,58,.20),transparent 60%),var(--paper);color:var(--ink)}
+
+  h1,h2{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.02}
+  .kicker{font-family:"JetBrains Mono",monospace;font-size:22px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:28px}
+  .light .kicker{color:#A9700F}
+  .big{font-size:104px}
+  .mid{font-size:72px}
+  .sub{font-size:31px;line-height:1.42;color:var(--muted);margin-top:30px;max-width:24ch}
+  .light .sub{color:#6E6355}
+  em{font-style:normal;color:var(--amber)}
+  .light em{color:#A9700F}
+
+  .brand{position:absolute;left:88px;bottom:74px;display:flex;align-items:center;gap:14px;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:30px;color:var(--cream)}
+  .light .brand{color:var(--ink)}
+  .brand svg{width:44px;height:44px}
+  .bi{position:relative;display:inline-block}
+  .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--amber);border-radius:.04em;transform:translateX(-50%)}
+  .pageno{position:absolute;right:88px;bottom:78px;font-family:"JetBrains Mono",monospace;font-size:22px;color:#6b6153}
+  .light .pageno{color:#B3A990}
+  .swipe{position:absolute;right:88px;top:50%;transform:translateY(-50%);font-family:"JetBrains Mono",monospace;font-size:20px;color:var(--amber);letter-spacing:.1em}
+  .light .swipe{color:#A9700F}
+
+  .list{margin-top:36px;display:flex;flex-direction:column;gap:16px}
+  .item{display:flex;gap:18px;align-items:baseline;font-size:31px;line-height:1.35}
+  .item b{font-family:"Bricolage Grotesque",system-ui,sans-serif;color:var(--amber);font-size:34px;min-width:34px}
+  .light .item b{color:#A9700F}
+
+  .calc{margin-top:34px;background:#FCF7ED;border:1px solid #E4DBCB;border-radius:18px;padding:26px 32px}
+  .calc .r{display:flex;justify-content:space-between;font-size:28px;padding:9px 0;color:#6E6355}
+  .calc .r + .r{border-top:1px dashed #E4DBCB}
+  .calc .tot{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;font-size:40px;color:#241C13;border-top:2px solid #E4DBCB!important;padding-top:16px;margin-top:6px}
+  .calc .tot span:last-child{color:#3E7C4F}
+
+  .url{margin-top:40px;display:inline-block;background:var(--amber);color:#1B1611;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:36px;padding:22px 38px;border-radius:18px}
+  .free{font-family:"JetBrains Mono",monospace;font-size:23px;color:#6E6355;margin-top:26px;letter-spacing:.04em}
+
+  .caption{max-width:1080px;margin:40px auto;background:#141009;border:1px solid #3A3128;border-radius:14px;padding:28px 32px;color:#C9BEAD;font-size:15px;line-height:1.75;white-space:pre-wrap}
+  .caption h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;color:var(--amber);margin-bottom:14px;font-size:19px}
+</style>
+</head>
+<body>
+
+<div class="hint">
+  <b>Wichtig:</b> Öffne diese Datei aus dem Ordner <b>social/</b> im Projekt — nur dort findet sie die Schriften. Jede Karte ist 1080 × 1080 px: Screenshot machen (Taste <b>Druck</b>, Bereich wählen), als 01.png, 02.png … speichern. <b>Ganz unten steht der fertige Caption-Text.</b>
+</div>
+
+<!-- 1 HOOK -->
+<div class="label">SLIDE 1 · Hook</div>
+<div class="slide dark">
+  <div class="kicker">Weihnachtsgeschäft</div>
+  <h1 class="big">Dein Dezember<br>wird <em>jetzt</em><br>gebucht.</h1>
+  <p class="sub">Nicht im Dezember. Firmen und Gruppen planen ihre Feiern im Herbst.</p>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">1/6</div>
+</div>
+
+<!-- 2 PROBLEM -->
+<div class="label">SLIDE 2 · Das Problem</div>
+<div class="slide light">
+  <div class="kicker">Das Problem</div>
+  <h2 class="mid">Wer im Dezember<br>sucht, findet nur<br>noch <em>Reste</em>.</h2>
+  <p class="sub">Die guten Abende sind dann längst vergeben — an die, die schon im Herbst ein klares Angebot hatten.</p>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">2/6</div>
+</div>
+
+<!-- 3 HEBEL 1 -->
+<div class="label">SLIDE 3 · Hebel 1</div>
+<div class="slide dark">
+  <div class="kicker">Hebel 1</div>
+  <h2 class="mid">Festmenü<br>statt Karte.</h2>
+  <div class="list">
+    <div class="item"><b>→</b><span>Zwei bis drei Varianten reichen</span></div>
+    <div class="item"><b>→</b><span>Immer vegetarisch und vegan dabei</span></div>
+    <div class="item"><b>→</b><span>Wareneinsatz planbar, Küche schnell</span></div>
+  </div>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">3/6</div>
+</div>
+
+<!-- 4 HEBEL 2 -->
+<div class="label">SLIDE 4 · Hebel 2 (Rechnung)</div>
+<div class="slide light">
+  <div class="kicker">Hebel 2</div>
+  <h2 class="mid" style="font-size:64px">Die Marge<br>liegt im <em>Glas</em>.</h2>
+  <div class="calc">
+    <div class="r"><span>Getränkepauschale, 2 Std.</span><span>pro Person</span></div>
+    <div class="r"><span>Wareneinsatz (Wein, Wasser, Soft)</span><span>3,70 €</span></div>
+    <div class="r tot"><span>Festpreis</span><span>~22 €</span></div>
+  </div>
+  <p class="sub" style="font-size:25px;margin-top:22px">Beispielzahlen. Rechne mit deinen eigenen Einkaufspreisen.</p>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">4/6</div>
+</div>
+
+<!-- 5 HEBEL 3 -->
+<div class="label">SLIDE 5 · Hebel 3</div>
+<div class="slide dark">
+  <div class="kicker">Hebel 3</div>
+  <h2 class="mid" style="font-size:66px">Anzahlung ist<br>kein <em>Misstrauen</em>.</h2>
+  <div class="list">
+    <div class="item"><b>→</b><span>Zum Beispiel 30 % bei der Buchung</span></div>
+    <div class="item"><b>→</b><span>Schützt dich vor Ausfällen</span></div>
+    <div class="item"><b>→</b><span>Wirkt bei Firmen professionell</span></div>
+  </div>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">5/6</div>
+</div>
+
+<!-- 6 CTA -->
+<div class="label">SLIDE 6 · Call to Action</div>
+<div class="slide light">
+  <div class="kicker">Der ganze Plan</div>
+  <h2 class="mid" style="font-size:62px">Wer im Herbst<br>vorbereitet, geht<br><em>entspannt</em> in<br>den Dezember.</h2>
+  <span class="url">gastrokniff.de</span>
+  <p class="free">KOSTENLOS · MIT RECHENBEISPIEL · LINK IN DER BIO</p>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">6/6</div>
+</div>
+
+<div class="caption"><h3>📋 Caption zum Kopieren</h3>Dein Dezember wird nicht im Dezember gebucht. Sondern jetzt. 🎄
+
+Firmen, Vereine und große Gruppen planen ihre Weihnachtsfeiern im Herbst. Wer im Dezember noch Termine sucht, findet nur noch die Reste.
+
+Drei Hebel, die du diese Woche umsetzen kannst:
+
+→ Ein festes Weihnachtsmenü statt deiner normalen Karte. Zwei, drei Varianten — und immer eine vegetarische und eine vegane Option. Eine Gruppe kommt nur, wenn alle etwas finden.
+
+→ Eine Getränkepauschale zum Festpreis pro Person. Auf dem Teller ist die Marge dünn, im Glas hoch.
+
+→ Eine Anzahlung bei Gruppen, zum Beispiel 30 %. Schützt vor Ausfällen und wirkt bei Firmen professionell.
+
+Ehrlich gesagt: Ein gutes Weihnachtsangebot macht aus einem schwachen Betrieb keinen starken. Aber es sorgt dafür, dass dein stärkster Monat auch wirklich stark wird — statt dass du im Dezember leere Tische hast, während andere ausgebucht sind.
+
+Den ganzen Plan mit Rechenbeispiel findest du kostenlos auf gastrokniff.de — Link in der Bio.
+
+Hast du dein Weihnachtsmenü schon fertig? 👇
+
+#weihnachtsfeier #weihnachtsgeschäft #firmenfeier #weihnachtsmenü #gastronomie #gastro #restaurant #gastronom #gastronomiedeutschland #restaurantbesitzer #gastrotipps #kalkulation #selbstständigkeit #gastroalltag #weihnachten</div>
+
+</body>
+</html>

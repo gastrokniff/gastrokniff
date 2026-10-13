@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Gastrokniff · Carousel · Miete und Vertrag</title>
+<link rel="stylesheet" href="../fonts.css">
+<style>
+  :root{--void:#1B1611;--panel:#26201A;--line:#3A3128;--cream:#F3EEE3;--muted:#A99C88;
+        --amber:#E7B65A;--green:#5FB980;--red:#E27C54;--paper:#F5EFE3;--ink:#241C13}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0E0B08;font-family:"Inter",system-ui,sans-serif;padding:30px;color:#888}
+  .hint{max-width:1080px;margin:0 auto 26px;background:#1a1510;border:1px solid #3A3128;border-radius:12px;padding:16px 20px;color:#A99C88;font-size:14px;line-height:1.6}
+  .hint b{color:var(--amber)}
+  .label{max-width:1080px;margin:26px auto 8px;color:#6b6153;font-size:13px;font-family:"JetBrains Mono",monospace}
+
+  .slide{width:1080px;height:1080px;margin:0 auto;position:relative;overflow:hidden;
+         display:flex;flex-direction:column;justify-content:center;padding:88px}
+  .dark{background:radial-gradient(700px 420px at 100% -8%,rgba(231,182,90,.16),transparent 62%),
+        radial-gradient(560px 400px at -8% 108%,rgba(95,185,128,.09),transparent 62%),var(--void);color:var(--cream)}
+  .light{background:radial-gradient(700px 420px at 92% -8%,rgba(224,164,58,.20),transparent 60%),var(--paper);color:var(--ink)}
+
+  h1,h2{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.02}
+  .kicker{font-family:"JetBrains Mono",monospace;font-size:22px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:28px}
+  .light .kicker{color:#A9700F}
+  .big{font-size:92px}
+  .mid{font-size:68px}
+  .sub{font-size:31px;line-height:1.42;color:var(--muted);margin-top:30px;max-width:24ch}
+  .light .sub{color:#6E6355}
+  em{font-style:normal;color:var(--amber)}
+  .light em{color:#A9700F}
+
+  .brand{position:absolute;left:88px;bottom:74px;display:flex;align-items:center;gap:14px;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:30px;color:var(--cream)}
+  .light .brand{color:var(--ink)}
+  .brand svg{width:44px;height:44px}
+  .bi{position:relative;display:inline-block}
+  .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--amber);border-radius:.04em;transform:translateX(-50%)}
+  .pageno{position:absolute;right:88px;bottom:78px;font-family:"JetBrains Mono",monospace;font-size:22px;color:#6b6153}
+  .light .pageno{color:#B3A990}
+  .swipe{position:absolute;right:88px;top:50%;transform:translateY(-50%);font-family:"JetBrains Mono",monospace;font-size:20px;color:var(--amber);letter-spacing:.1em}
+  .light .swipe{color:#A9700F}
+
+  .list{margin-top:36px;display:flex;flex-direction:column;gap:18px}
+  .item{display:flex;gap:18px;align-items:baseline;font-size:30px;line-height:1.35}
+  .item b{font-family:"Bricolage Grotesque",system-ui,sans-serif;color:var(--amber);font-size:34px;min-width:34px}
+  .light .item b{color:#A9700F}
+  .item.no b{color:var(--red)}
+  .light .item.no b{color:#B0592E}
+
+  .check{margin-top:34px;background:#FCF7ED;border:1px solid #E4DBCB;border-radius:18px;padding:30px 34px}
+  .check .r{display:flex;align-items:center;gap:20px;font-size:27px;padding:13px 0;color:#241C13}
+  .check .r + .r{border-top:1px dashed #E4DBCB}
+  .check .bx{width:30px;height:30px;border-radius:7px;border:2px solid #C9BFAB;flex:none;position:relative}
+  .check .r.on .bx{background:#3E7C4F;border-color:#3E7C4F}
+  .check .r.on .bx::after{content:"";position:absolute;left:9px;top:3px;width:7px;height:15px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(43deg)}
+  .check .r.on span{color:#6E6355;text-decoration:line-through;text-decoration-color:#C9BFAB}
+  .check.plain .r.on span{color:#241C13;text-decoration:none}
+
+  .calc{margin-top:34px;background:#FCF7ED;border:1px solid #E4DBCB;border-radius:18px;padding:26px 32px}
+  .calc .r{display:flex;justify-content:space-between;gap:24px;font-size:27px;padding:10px 0;color:#6E6355}
+  .calc .r + .r{border-top:1px dashed #E4DBCB}
+  .calc .r span:last-child{font-family:"JetBrains Mono",monospace;color:#241C13;white-space:nowrap}
+  .calc .tot{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;font-size:38px;color:#241C13;border-top:2px solid #E4DBCB!important;padding-top:16px;margin-top:6px}
+  .calc .tot span:last-child{color:#3E7C4F;font-family:"Bricolage Grotesque",system-ui,sans-serif}
+  .calc.warn .tot span:last-child{color:#B0592E}
+
+  .url{margin-top:40px;display:inline-block;background:var(--amber);color:#1B1611;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:36px;padding:22px 38px;border-radius:18px}
+  .free{font-family:"JetBrains Mono",monospace;font-size:22px;color:#6E6355;margin-top:26px;letter-spacing:.04em}
+
+  .caption{max-width:1080px;margin:40px auto;background:#141009;border:1px solid #3A3128;border-radius:14px;padding:28px 32px;color:#C9BEAD;font-size:15px;line-height:1.75;white-space:pre-wrap}
+  .caption h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;color:var(--amber);margin-bottom:14px;font-size:19px}
+</style>
+</head>
+<body>
+
+<div class="hint"><b>Wichtig:</b> Öffne diese Datei aus dem Ordner <b>social/</b> im Projekt — nur dort findet sie die Schriften. Jede Karte ist 1080 × 1080 px: Screenshot machen (Taste <b>Druck</b>, Bereich wählen), als 01.png, 02.png … speichern. <b>Ganz unten steht der fertige Caption-Text.</b></div>
+
+<div class="label">SLIDE 1 · Hook</div>
+<div class="slide dark">
+  <div class="kicker">Vertrag</div>
+  <h1 class="big" style="font-size:78px">Dein Mietvertrag<br>ist dein größtes<br><em>Risiko</em>.</h1>
+  <p class="sub">Preise, Karte und Team kannst du ändern. Den Vertrag nicht.</p>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">1/6</div>
+</div>
+
+<div class="label">SLIDE 2 · Die Faustregel</div>
+<div class="slide light">
+  <div class="kicker">Die Faustregel</div>
+  <h2 class="mid">Über <em>10 %</em> vom<br>Umsatz wird<br>es eng.</h2>
+  <p class="sub">Darüber bleibt nach Ware und Personal kaum noch etwas übrig. Es ist eine Orientierung, kein Gesetz.</p>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">2/6</div>
+</div>
+
+<div class="label">SLIDE 3 · Punkt 1</div>
+<div class="slide dark">
+  <div class="kicker">Punkt 1</div>
+  <h2 class="mid">Laufzeit ist<br>eine <em>Schuld</em>.</h2>
+  <div class="list">
+    <div class="item"><b>→</b><span>Restmonate × Monatsmiete — das ist deine Zahl</span></div>
+    <div class="item"><b>→</b><span>Fünf Jahre fest ohne Ausstieg zahlst du bis zum Schluss</span></div>
+    <div class="item"><b>→</b><span>Neuer Vertrag: kurz anfangen, Verlängerung vereinbaren</span></div>
+  </div>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">3/6</div>
+</div>
+
+<div class="label">SLIDE 4 · Punkt 2</div>
+<div class="slide light">
+  <div class="kicker">Punkt 2</div>
+  <h2 class="mid" style="font-size:62px">Der Zuschuss ist<br>oft ein <em>Kredit</em>.</h2>
+  <div class="calc warn">
+    <div class="r"><span>Zuschuss für den Umbau</span><span>50.000 €</span></div>
+    <div class="r"><span>Bindung laut Vertrag</span><span>10 Jahre</span></div>
+    <div class="r"><span>Du gehst nach</span><span>3 Jahren</span></div>
+    <div class="r tot"><span>Rückzahlung</span><span>35.000 €</span></div>
+  </div>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">4/6</div>
+</div>
+
+<div class="label">SLIDE 5 · Punkt 3</div>
+<div class="slide dark">
+  <div class="kicker">Punkt 3</div>
+  <h2 class="mid" style="font-size:62px">Was fest verbaut<br>ist, bleibt oft <em>da</em>.</h2>
+  <p class="sub">Küche, Theke, Licht: Halte schriftlich fest, was am Ende dir gehört — bevor du investierst, nicht danach.</p>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">5/6</div>
+</div>
+
+<div class="label">SLIDE 6 · Call to Action</div>
+<div class="slide light">
+  <div class="kicker">Dein Risiko in Zahlen</div>
+  <h2 class="mid" style="font-size:60px">Rechne aus, was<br>dich die Bindung<br><em>kostet</em>.</h2>
+  <span class="url">gastrokniff.de</span>
+  <p class="free">MIETCHECK · KOSTENLOS · LINK IN DER BIO</p>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">6/6</div>
+</div>
+
+<div class="caption"><h3>📋 Caption zum Kopieren</h3>Über Wareneinsatz redet jeder. Über den Vertrag, der dich über Jahre bindet, fast niemand. 🔑
+
+Dabei ist er die Entscheidung, die du am schwersten rückgängig machst. Preise, Karte, Öffnungszeiten, Team — alles kannst du nachjustieren. Den Vertrag nicht.
+
+Drei Punkte, die du prüfen solltest — vor der Unterschrift und auch bei dem Vertrag, der schon läuft:
+
+→ Laufzeit. Rechne Restmonate × Monatsmiete. Das ist keine Theorie, das ist eine Verpflichtung, die auch dann läuft, wenn der Laden nicht mehr läuft. Bei einem neuen Vertrag lieber kurz anfangen und eine Verlängerungsoption vereinbaren.
+
+→ Zuschüsse. Geld vom Vermieter für den Umbau ist oft ein Darlehen, kein Geschenk. Bei zehn Jahren Bindung und Ausstieg nach drei Jahren können schnell Zehntausende zurückzuzahlen sein. Schriftlich klären, was gilt.
+
+→ Umbauten. Was fest mit dem Gebäude verbunden ist, kann am Ende dem Vermieter gehören — und bei einer Rückbaupflicht zahlst du sogar noch für den Ausbau. Klär das, bevor du investierst.
+
+Als Orientierung gilt: Mehr als rund 10 % vom Netto-Umsatz für die Miete wird eng. Eine Faustregel, kein Gesetz — in teuren Lagen liegt sie höher.
+
+Ehrlich gesagt: Das ist eine Prüfliste, keine Rechtsberatung. Wenn du bei einem der Punkte nicht klar sagen kannst „ja, so will ich es haben&quot;, sprich mit einem Anwalt, bevor du unterschreibst. Ein paar hundert Euro Beratung sind nichts gegen eine Bindung über Jahre.
+
+Rechne dein Risiko aus — kostenlos auf gastrokniff.de, Link in der Bio.
+
+Weißt du, was dich deine Restlaufzeit im Ernstfall kostet? 👇
+
+#mietvertrag #pacht #gastronomie #gastro #restaurant #gastronom #existenzgründung #gastronomiedeutschland #restaurantbesitzer #gastrotipps #miete #selbstständigkeit #gastroalltag #kalkulation #vertrag</div>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Gastrokniff · Carousel · Preiserhöhung</title>
+<link rel="stylesheet" href="../fonts.css">
+<style>
+  :root{--void:#1B1611;--panel:#26201A;--line:#3A3128;--cream:#F3EEE3;--muted:#A99C88;
+        --amber:#E7B65A;--green:#5FB980;--red:#E27C54;--paper:#F5EFE3;--ink:#241C13}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0E0B08;font-family:"Inter",system-ui,sans-serif;padding:30px;color:#888}
+  .hint{max-width:1080px;margin:0 auto 26px;background:#1a1510;border:1px solid #3A3128;border-radius:12px;padding:16px 20px;color:#A99C88;font-size:14px;line-height:1.6}
+  .hint b{color:var(--amber)}
+  .label{max-width:1080px;margin:26px auto 8px;color:#6b6153;font-size:13px;font-family:"JetBrains Mono",monospace}
+
+  .slide{width:1080px;height:1080px;margin:0 auto;position:relative;overflow:hidden;
+         display:flex;flex-direction:column;justify-content:center;padding:88px}
+  .dark{background:radial-gradient(700px 420px at 100% -8%,rgba(231,182,90,.16),transparent 62%),
+        radial-gradient(560px 400px at -8% 108%,rgba(95,185,128,.09),transparent 62%),var(--void);color:var(--cream)}
+  .light{background:radial-gradient(700px 420px at 92% -8%,rgba(224,164,58,.20),transparent 60%),var(--paper);color:var(--ink)}
+
+  h1,h2{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.02}
+  .kicker{font-family:"JetBrains Mono",monospace;font-size:22px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:28px}
+  .light .kicker{color:#A9700F}
+  .big{font-size:92px}
+  .mid{font-size:68px}
+  .sub{font-size:31px;line-height:1.42;color:var(--muted);margin-top:30px;max-width:24ch}
+  .light .sub{color:#6E6355}
+  em{font-style:normal;color:var(--amber)}
+  .light em{color:#A9700F}
+
+  .brand{position:absolute;left:88px;bottom:74px;display:flex;align-items:center;gap:14px;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:30px;color:var(--cream)}
+  .light .brand{color:var(--ink)}
+  .brand svg{width:44px;height:44px}
+  .bi{position:relative;display:inline-block}
+  .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--amber);border-radius:.04em;transform:translateX(-50%)}
+  .pageno{position:absolute;right:88px;bottom:78px;font-family:"JetBrains Mono",monospace;font-size:22px;color:#6b6153}
+  .light .pageno{color:#B3A990}
+  .swipe{position:absolute;right:88px;top:50%;transform:translateY(-50%);font-family:"JetBrains Mono",monospace;font-size:20px;color:var(--amber);letter-spacing:.1em}
+  .light .swipe{color:#A9700F}
+
+  .list{margin-top:36px;display:flex;flex-direction:column;gap:18px}
+  .item{display:flex;gap:18px;align-items:baseline;font-size:30px;line-height:1.35}
+  .item b{font-family:"Bricolage Grotesque",system-ui,sans-serif;color:var(--amber);font-size:34px;min-width:34px}
+  .light .item b{color:#A9700F}
+  .item.no b{color:var(--red)}
+  .light .item.no b{color:#B0592E}
+
+  .check{margin-top:34px;background:#FCF7ED;border:1px solid #E4DBCB;border-radius:18px;padding:30px 34px}
+  .check .r{display:flex;align-items:center;gap:20px;font-size:27px;padding:13px 0;color:#241C13}
+  .check .r + .r{border-top:1px dashed #E4DBCB}
+  .check .bx{width:30px;height:30px;border-radius:7px;border:2px solid #C9BFAB;flex:none;position:relative}
+  .check .r.on .bx{background:#3E7C4F;border-color:#3E7C4F}
+  .check .r.on .bx::after{content:"";position:absolute;left:9px;top:3px;width:7px;height:15px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(43deg)}
+  .check .r.on span{color:#6E6355;text-decoration:line-through;text-decoration-color:#C9BFAB}
+  .check.plain .r.on span{color:#241C13;text-decoration:none}
+
+  .calc{margin-top:34px;background:#FCF7ED;border:1px solid #E4DBCB;border-radius:18px;padding:26px 32px}
+  .calc .r{display:flex;justify-content:space-between;gap:24px;font-size:27px;padding:10px 0;color:#6E6355}
+  .calc .r + .r{border-top:1px dashed #E4DBCB}
+  .calc .r span:last-child{font-family:"JetBrains Mono",monospace;color:#241C13;white-space:nowrap}
+  .calc .tot{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;font-size:38px;color:#241C13;border-top:2px solid #E4DBCB!important;padding-top:16px;margin-top:6px}
+  .calc .tot span:last-child{color:#3E7C4F;font-family:"Bricolage Grotesque",system-ui,sans-serif}
+  .calc.warn .tot span:last-child{color:#B0592E}
+
+  .url{margin-top:40px;display:inline-block;background:var(--amber);color:#1B1611;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:36px;padding:22px 38px;border-radius:18px}
+  .free{font-family:"JetBrains Mono",monospace;font-size:22px;color:#6E6355;margin-top:26px;letter-spacing:.04em}
+
+  .caption{max-width:1080px;margin:40px auto;background:#141009;border:1px solid #3A3128;border-radius:14px;padding:28px 32px;color:#C9BEAD;font-size:15px;line-height:1.75;white-space:pre-wrap}
+  .caption h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;color:var(--amber);margin-bottom:14px;font-size:19px}
+</style>
+</head>
+<body>
+
+<div class="hint"><b>Wichtig:</b> Öffne diese Datei aus dem Ordner <b>social/</b> im Projekt — nur dort findet sie die Schriften. Jede Karte ist 1080 × 1080 px: Screenshot machen (Taste <b>Druck</b>, Bereich wählen), als 01.png, 02.png … speichern. <b>Ganz unten steht der fertige Caption-Text.</b></div>
+
+<div class="label">SLIDE 1 · Hook</div>
+<div class="slide dark">
+  <div class="kicker">Preise</div>
+  <h1 class="big">Du hast zu<br>lange <em>gewartet</em>.</h1>
+  <p class="sub">Der Einkauf steigt jedes Jahr. Deine Karte steht seit drei.</p>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">1/6</div>
+</div>
+
+<div class="label">SLIDE 2 · Die Angst</div>
+<div class="slide light">
+  <div class="kicker">Die Angst</div>
+  <h2 class="mid">„Dann kommt<br>keiner <em>mehr</em>.“</h2>
+  <p class="sub">Gäste merken den Preis weniger, als du denkst. Sie merken, wenn die Portion kleiner wird.</p>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">2/6</div>
+</div>
+
+<div class="label">SLIDE 3 · Was tun</div>
+<div class="slide dark">
+  <div class="kicker">Was du tust</div>
+  <h2 class="mid" style="font-size:64px">Nicht alles.<br>Nicht <em>gleichzeitig</em>.</h2>
+  <div class="list">
+    <div class="item"><b>→</b><span>Erhöh dort, wo der Deckungsbeitrag am dünnsten ist</span></div>
+    <div class="item"><b>→</b><span>Krumme Preise statt runder Sprünge</span></div>
+    <div class="item"><b>→</b><span>Beim Neudruck der Karte, nicht mitten in der Woche</span></div>
+  </div>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">3/6</div>
+</div>
+
+<div class="label">SLIDE 4 · Was lassen</div>
+<div class="slide light">
+  <div class="kicker">Was du lässt</div>
+  <h2 class="mid">Drei Dinge, die<br>du <em>nicht</em> tust.</h2>
+  <div class="list">
+    <div class="item no"><b>✕</b><span>Portionen heimlich verkleinern</span></div>
+    <div class="item no"><b>✕</b><span>Bei der Qualität sparen</span></div>
+    <div class="item no"><b>✕</b><span>Dich für deinen Preis entschuldigen</span></div>
+  </div>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">4/6</div>
+</div>
+
+<div class="label">SLIDE 5 · Dritte Option</div>
+<div class="slide dark">
+  <div class="kicker">Die dritte Option</div>
+  <h2 class="mid" style="font-size:64px">Manchmal ist<br><em>streichen</em> besser<br>als erhöhen.</h2>
+  <p class="sub">Ein Gericht, das kaum Marge bringt und kaum bestellt wird, muss nicht teurer werden. Es muss von der Karte.</p>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">5/6</div>
+</div>
+
+<div class="label">SLIDE 6 · Call to Action</div>
+<div class="slide light">
+  <div class="kicker">Wann, wie viel, wo</div>
+  <h2 class="mid" style="font-size:60px">Erst rechnen,<br>dann die Karte<br><em>neu drucken</em>.</h2>
+  <span class="url">gastrokniff.de</span>
+  <p class="free">KOSTENLOS · IN 3 MINUTEN GELESEN · LINK IN DER BIO</p>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">6/6</div>
+</div>
+
+<div class="caption"><h3>📋 Caption zum Kopieren</h3>Dein Einkauf steigt jedes Jahr. Deine Karte steht seit drei. 💶
+
+Die Angst dahinter ist immer dieselbe: „Dann kommt keiner mehr.&quot; Nur merken Gäste den Preis meistens weniger, als man denkt. Was sie sofort merken, ist eine kleinere Portion.
+
+Was du tust:
+
+→ Erhöh dort, wo der Deckungsbeitrag am dünnsten ist. Nicht über die ganze Karte, nicht auf einmal.
+→ Krumme Preise statt runder Sprünge. Der Weg von 14,50 auf 15,90 fällt weniger auf als der von 14 auf 17.
+→ Mach es beim Neudruck der Karte. Eine neue Karte ist ein normaler Anlass, eine überklebte Zeile nicht.
+
+Was du lässt:
+
+✕ Portionen heimlich verkleinern. Das fällt auf, und es kostet dich Vertrauen statt Geld.
+✕ Bei der Qualität sparen. Derselbe Effekt, nur langsamer.
+✕ Dich entschuldigen. Wer seinen Preis erklärt, als wäre er peinlich, macht ihn zum Thema.
+
+Und die Option, an die kaum jemand denkt: streichen. Ein Gericht, das kaum Marge bringt und kaum bestellt wird, muss nicht teurer werden — es muss von der Karte. Das spart dir Einkauf, Lagerplatz und Arbeit in der Vorbereitung.
+
+Ehrlich gesagt: Eine Preiserhöhung rettet keinen Betrieb, bei dem die Struktur nicht stimmt. Sie verhindert nur, dass du für jeden verkauften Teller draufzahlst.
+
+Wann, wie viel und bei welchem Gericht — kostenlos nachzulesen auf gastrokniff.de, Link in der Bio.
+
+Wann hast du zuletzt deine Preise angefasst? 👇
+
+#preiserhöhung #preise #kalkulation #deckungsbeitrag #gastronomie #gastro #restaurant #gastronom #speisekarte #gastronomiedeutschland #restaurantbesitzer #gastrotipps #wareneinsatz #selbstständigkeit #gastroalltag</div>
+
+</body>
+</html>

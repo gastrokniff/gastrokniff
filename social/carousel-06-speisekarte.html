@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Gastrokniff · Carousel · Speisekarte</title>
+<link rel="stylesheet" href="../fonts.css">
+<style>
+  :root{--void:#1B1611;--panel:#26201A;--line:#3A3128;--cream:#F3EEE3;--muted:#A99C88;
+        --amber:#E7B65A;--green:#5FB980;--red:#E27C54;--paper:#F5EFE3;--ink:#241C13}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0E0B08;font-family:"Inter",system-ui,sans-serif;padding:30px;color:#888}
+  .hint{max-width:1080px;margin:0 auto 26px;background:#1a1510;border:1px solid #3A3128;border-radius:12px;padding:16px 20px;color:#A99C88;font-size:14px;line-height:1.6}
+  .hint b{color:var(--amber)}
+  .label{max-width:1080px;margin:26px auto 8px;color:#6b6153;font-size:13px;font-family:"JetBrains Mono",monospace}
+
+  .slide{width:1080px;height:1080px;margin:0 auto;position:relative;overflow:hidden;
+         display:flex;flex-direction:column;justify-content:center;padding:88px}
+  .dark{background:radial-gradient(700px 420px at 100% -8%,rgba(231,182,90,.16),transparent 62%),
+        radial-gradient(560px 400px at -8% 108%,rgba(95,185,128,.09),transparent 62%),var(--void);color:var(--cream)}
+  .light{background:radial-gradient(700px 420px at 92% -8%,rgba(224,164,58,.20),transparent 60%),var(--paper);color:var(--ink)}
+
+  h1,h2{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.02}
+  .kicker{font-family:"JetBrains Mono",monospace;font-size:22px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:28px}
+  .light .kicker{color:#A9700F}
+  .big{font-size:92px}
+  .mid{font-size:68px}
+  .sub{font-size:31px;line-height:1.42;color:var(--muted);margin-top:30px;max-width:24ch}
+  .light .sub{color:#6E6355}
+  em{font-style:normal;color:var(--amber)}
+  .light em{color:#A9700F}
+
+  .brand{position:absolute;left:88px;bottom:74px;display:flex;align-items:center;gap:14px;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:30px;color:var(--cream)}
+  .light .brand{color:var(--ink)}
+  .brand svg{width:44px;height:44px}
+  .bi{position:relative;display:inline-block}
+  .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--amber);border-radius:.04em;transform:translateX(-50%)}
+  .pageno{position:absolute;right:88px;bottom:78px;font-family:"JetBrains Mono",monospace;font-size:22px;color:#6b6153}
+  .light .pageno{color:#B3A990}
+  .swipe{position:absolute;right:88px;top:50%;transform:translateY(-50%);font-family:"JetBrains Mono",monospace;font-size:20px;color:var(--amber);letter-spacing:.1em}
+  .light .swipe{color:#A9700F}
+
+  .list{margin-top:36px;display:flex;flex-direction:column;gap:18px}
+  .item{display:flex;gap:18px;align-items:baseline;font-size:30px;line-height:1.35}
+  .item b{font-family:"Bricolage Grotesque",system-ui,sans-serif;color:var(--amber);font-size:34px;min-width:34px}
+  .light .item b{color:#A9700F}
+  .item.no b{color:var(--red)}
+  .light .item.no b{color:#B0592E}
+
+  .check{margin-top:34px;background:#FCF7ED;border:1px solid #E4DBCB;border-radius:18px;padding:30px 34px}
+  .check .r{display:flex;align-items:center;gap:20px;font-size:27px;padding:13px 0;color:#241C13}
+  .check .r + .r{border-top:1px dashed #E4DBCB}
+  .check .bx{width:30px;height:30px;border-radius:7px;border:2px solid #C9BFAB;flex:none;position:relative}
+  .check .r.on .bx{background:#3E7C4F;border-color:#3E7C4F}
+  .check .r.on .bx::after{content:"";position:absolute;left:9px;top:3px;width:7px;height:15px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(43deg)}
+  .check .r.on span{color:#6E6355;text-decoration:line-through;text-decoration-color:#C9BFAB}
+  .check.plain .r.on span{color:#241C13;text-decoration:none}
+
+  .calc{margin-top:34px;background:#FCF7ED;border:1px solid #E4DBCB;border-radius:18px;padding:26px 32px}
+  .calc .r{display:flex;justify-content:space-between;gap:24px;font-size:27px;padding:10px 0;color:#6E6355}
+  .calc .r + .r{border-top:1px dashed #E4DBCB}
+  .calc .r span:last-child{font-family:"JetBrains Mono",monospace;color:#241C13;white-space:nowrap}
+  .calc .tot{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;font-size:38px;color:#241C13;border-top:2px solid #E4DBCB!important;padding-top:16px;margin-top:6px}
+  .calc .tot span:last-child{color:#3E7C4F;font-family:"Bricolage Grotesque",system-ui,sans-serif}
+  .calc.warn .tot span:last-child{color:#B0592E}
+
+  .url{margin-top:40px;display:inline-block;background:var(--amber);color:#1B1611;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:36px;padding:22px 38px;border-radius:18px}
+  .free{font-family:"JetBrains Mono",monospace;font-size:22px;color:#6E6355;margin-top:26px;letter-spacing:.04em}
+
+  .caption{max-width:1080px;margin:40px auto;background:#141009;border:1px solid #3A3128;border-radius:14px;padding:28px 32px;color:#C9BEAD;font-size:15px;line-height:1.75;white-space:pre-wrap}
+  .caption h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;color:var(--amber);margin-bottom:14px;font-size:19px}
+</style>
+</head>
+<body>
+
+<div class="hint"><b>Wichtig:</b> Öffne diese Datei aus dem Ordner <b>social/</b> im Projekt — nur dort findet sie die Schriften. Jede Karte ist 1080 × 1080 px: Screenshot machen (Taste <b>Druck</b>, Bereich wählen), als 01.png, 02.png … speichern. <b>Ganz unten steht der fertige Caption-Text.</b></div>
+
+<div class="label">SLIDE 1 · Hook</div>
+<div class="slide dark">
+  <div class="kicker">Speisekarte</div>
+  <h1 class="big" style="font-size:80px">Deine Karte<br>verkauft. Oder sie<br><em>verhindert</em>.</h1>
+  <p class="sub">Was oben steht, wird häufiger bestellt. Das ist kein Zufall.</p>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">1/6</div>
+</div>
+
+<div class="label">SLIDE 2 · Das Problem</div>
+<div class="slide light">
+  <div class="kicker">Das Problem</div>
+  <h2 class="mid" style="font-size:62px">Zu viel Auswahl<br>heißt: das<br><em>Bekannte</em>.</h2>
+  <p class="sub">Wer sich nicht entscheiden kann, nimmt das Vertraute. Für den Rest hast du eingekauft.</p>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">2/6</div>
+</div>
+
+<div class="label">SLIDE 3 · Kniff 1 und 2</div>
+<div class="slide dark">
+  <div class="kicker">Kniff 1 und 2</div>
+  <h2 class="mid">Kürzen. Und<br><em>platzieren</em>.</h2>
+  <div class="list">
+    <div class="item"><b>→</b><span>Fünf bis sieben Gerichte pro Kategorie reichen</span></div>
+    <div class="item"><b>→</b><span>Anfang und Ende einer Liste werden am meisten gelesen</span></div>
+    <div class="item"><b>→</b><span>Dein bester Deckungsbeitrag gehört dorthin</span></div>
+  </div>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">3/6</div>
+</div>
+
+<div class="label">SLIDE 4 · Kniff 3</div>
+<div class="slide light">
+  <div class="kicker">Kniff 3</div>
+  <h2 class="mid">Das <em>€</em>-Zeichen<br>darf weg.</h2>
+  <div class="check plain">
+    <div class="r on"><span class="bx"></span><span>Preis ohne Währungszeichen</span></div>
+    <div class="r on"><span class="bx"></span><span>Keine Preisspalte am rechten Rand</span></div>
+    <div class="r on"><span class="bx"></span><span>Keine Punktelinie zum Preis</span></div>
+    <div class="r on"><span class="bx"></span><span>Beschreibung zuerst, Preis danach</span></div>
+  </div>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">4/6</div>
+</div>
+
+<div class="label">SLIDE 5 · Kniff 4</div>
+<div class="slide dark">
+  <div class="kicker">Kniff 4</div>
+  <h2 class="mid">Beschreib, was<br>im <em>Teller</em> ist.</h2>
+  <p class="sub">Herkunft, Zubereitung, ein Detail. Ein Gericht mit Geschichte verkauft sich besser als eines mit nur einem Namen.</p>
+  <div class="swipe">→</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">5/6</div>
+</div>
+
+<div class="label">SLIDE 6 · Call to Action</div>
+<div class="slide light">
+  <div class="kicker">Welche Gerichte tragen dich?</div>
+  <h2 class="mid" style="font-size:60px">Finde deine<br>Stars — und deine<br><em>Mitläufer</em>.</h2>
+  <span class="url">gastrokniff.de</span>
+  <p class="free">MENÜ-ENGINEERING · KOSTENLOS · LINK IN DER BIO</p>
+  <div class="brand"><svg viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g></svg><span>Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></div>
+  <div class="pageno">6/6</div>
+</div>
+
+<div class="caption"><h3>📋 Caption zum Kopieren</h3>Deine Speisekarte ist kein Verzeichnis. Sie ist dein bestbezahlter Verkäufer. 📋
+
+Vier Kniffe, die nichts kosten:
+
+→ Kürzen. Fünf bis sieben Gerichte pro Kategorie reichen. Wer sich nicht entscheiden kann, nimmt das Vertraute — und für den Rest hast du eingekauft und wirfst am Ende weg.
+
+→ Platzieren. Anfang und Ende einer Liste werden am meisten gelesen, die Mitte überflogen. Dein Gericht mit dem besten Deckungsbeitrag gehört also nicht in die Mitte.
+
+→ Den Preis entschärfen. Kein €-Zeichen, keine Preisspalte am rechten Rand, keine Punktelinie, die das Auge direkt zur Zahl führt. Erst die Beschreibung, dann der Preis.
+
+→ Beschreiben. Herkunft, Zubereitung, ein Detail. Ein Gericht mit Geschichte verkauft sich besser als eines, das nur einen Namen hat.
+
+Ehrlich gesagt: Keiner dieser Kniffe macht ein mittelmäßiges Gericht gut. Sie sorgen nur dafür, dass das, was du am besten kannst, auch bestellt wird.
+
+Welche Gerichte dich tragen und welche nur mitlaufen, siehst du mit dem Menü-Engineering auf gastrokniff.de — kostenlos, ohne Anmeldung. Link in der Bio.
+
+Wie viele Gerichte stehen auf deiner Karte? 👇
+
+#speisekarte #menuengineering #gastronomie #gastro #restaurant #gastronom #kalkulation #deckungsbeitrag #gastronomiedeutschland #restaurantbesitzer #gastrotipps #verkauf #selbstständigkeit #gastroalltag #küche</div>
+
+</body>
+</html>

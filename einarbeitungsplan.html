@@ -24,9 +24,9 @@
   h1,h2,h3,h4{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;letter-spacing:-.015em;line-height:1.05}
 
   .top{display:flex;align-items:center;gap:11px;margin-bottom:28px}
-  .bmark{width:34px;height:34px;flex:none;filter:drop-shadow(0 3px 8px rgba(36,28,19,.18))}
-  .brand{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:26px;display:inline-flex}
-  .bi{position:relative;display:inline-block}.bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--accent);border-radius:.04em;transform:translateX(-50%)}
+  .bmark{width:42px;height:42px;flex:none;filter:drop-shadow(0 3px 8px rgba(36,28,19,.18))}
+  .brand{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:32px;display:inline-flex}
+  .bi{position:relative;display:inline-block}.bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--ink);border-radius:.04em;transform:translateX(-50%)}.bk{color:#A9700F}
   .back{font-size:14px;color:var(--stone);margin-left:auto;text-decoration:none}
 
   .tag{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
@@ -105,6 +105,7 @@
   /* ---- Druck ---- */
   .printhead{display:none}
   @media print{
+  @media(max-width:600px){.brand{font-size:24px}.bmark{width:32px;height:32px}}
     body{background:#fff}
     .wrap{max-width:none;padding:0}
     .top,.tag,.intro,.panel,.tools,.explain,.cta,.foot,.add,.del,.prog{display:none !important}
@@ -130,7 +131,7 @@
       <path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/>
       <g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g>
     </svg>
-    <a href="index.html" style="text-decoration:none;color:inherit"><span class="brand">Gastrokn<span class="bi">ı<span class="bdot"></span></span>ff</span></a>
+    <a href="index.html" style="text-decoration:none;color:inherit"><span class="brand">Gastro<span class="bk">kn<span class="bi">ı<span class="bdot"></span></span>ff</span></span></a>
     <a class="back" href="index.html">← zurück</a>
   </div>
 

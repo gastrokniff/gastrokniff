@@ -10,109 +10,93 @@
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#241C13">
+<meta name="theme-color" content="#0B1028">
 <link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="theme.css">
 <style>
-  :root{
-    --paper:#F5EFE3;--ink:#241C13;--stone:#6E6355;--line:#E4DBCB;
-    --card:#FCF7ED;--accent:#C07A12;--accent-soft:#F3E4C6;--good:#3E7C4F;--warn:#B0592E;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:radial-gradient(1000px 600px at 88% -8%,rgba(224,164,58,.20),transparent 60%),var(--paper);
-       color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1040px;margin:0 auto;padding:34px 24px 70px}
-  h1,h2,h3,h4{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;letter-spacing:-.015em;line-height:1.05}
-  .mono{font-family:"JetBrains Mono",monospace}
-
-  .top{display:flex;align-items:center;gap:11px;margin-bottom:28px}
-  .bmark{width:42px;height:42px;flex:none;filter:drop-shadow(0 3px 8px rgba(36,28,19,.18))}
-  .brand{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:32px;display:inline-flex}
-  .bi{position:relative;display:inline-block}.bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--ink);border-radius:.04em;transform:translateX(-50%)}.bk{color:#A9700F}
-  .back{font-size:14px;color:var(--stone);margin-left:auto;text-decoration:none}
-
-  .tag{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
+  .tag{font-family:var(--font-body);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+       color:var(--accent);display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
   .tag::before{content:"";width:22px;height:1px;background:var(--accent)}
-  h1.title{font-size:clamp(30px,5vw,46px);margin-bottom:14px}
-  .intro{color:var(--stone);max-width:66ch;font-size:16px;margin-bottom:34px}
+  h1.title{margin-bottom:0}
+  .intro{color:var(--text-body);max-width:66ch;font-size:19px;margin:14px 0 var(--space-7)}
 
-  .layout{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:start}
+  .layout{display:grid;grid-template-columns:1.1fr 1fr;gap:var(--space-4);align-items:start}
   @media(max-width:900px){.layout{grid-template-columns:1fr}}
-  .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+
   .panel h3{font-size:17px;margin-bottom:4px}
-  .panel .hint{color:var(--stone);font-size:13px;margin-bottom:16px}
-  .sub{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--stone);margin:20px 0 10px;padding-top:16px;border-top:1px solid var(--line)}
+  .hint{color:var(--text-muted);font-size:13px;margin-bottom:var(--space-4)}
+  .sub{font-family:var(--font-body);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+       color:var(--text-muted);margin:var(--space-5) 0 10px;padding-top:var(--space-4);border-top:1px solid var(--hairline)}
   .sub:first-of-type{border-top:0;padding-top:0;margin-top:14px}
-
   .frow{display:grid;grid-template-columns:1fr 130px;gap:10px;align-items:center;margin-bottom:10px}
-  .frow label{font-size:14.5px;color:var(--ink)}
-  .frow .u{display:block;font-size:11.5px;color:#B3A990}
-  input{width:100%;background:#fff;border:1px solid var(--line);border-radius:9px;color:var(--ink);padding:10px 12px;font-family:"Inter",system-ui,sans-serif;font-size:15px;outline:none;transition:border .2s;text-align:right}
-  input:focus{border-color:var(--accent)}
+  @media(max-width:760px){.frow{grid-template-columns:1fr 110px}}
+  input[type=number]{text-align:right}
 
-  .out{background:linear-gradient(180deg,#3A2C1A,#2A2013);border:1px solid #4A3A22;border-radius:18px;padding:24px;position:sticky;top:20px;color:var(--paper)}
-  .big-kpi{text-align:center;padding:6px 0 16px;border-bottom:1px solid #4A3A22;margin-bottom:6px}
-  .big-kpi .lab{color:#B9AE9C;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em}
-  .big-kpi .val{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:46px;line-height:1.1;margin-top:4px}
+  .out{position:sticky;top:20px}
+  .big-kpi{text-align:center;padding:6px 0 var(--space-4);border-bottom:1px solid var(--hairline);margin-bottom:6px}
+  .big-kpi .lab{color:var(--text-muted);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em}
+  .big-kpi .val{font-family:var(--font-heading);font-weight:700;font-size:52px;line-height:1.1;margin-top:4px}
   .big-kpi .state{font-size:13.5px;margin-top:6px}
-  .kpi{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid #4A3A22;gap:12px}
-  .kpi:last-child{border-bottom:0}
-  .kpi span{color:#B9AE9C;font-size:13.5px}
-  .kpi .v{font-family:"JetBrains Mono",monospace;font-size:16px;color:var(--paper);text-align:right;white-space:nowrap}
-  .block-title{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#9A8F7C;margin:20px 0 2px}
-  .risk .v{color:#E59A72}
-  .note{margin-top:16px;font-size:12px;color:#A99E8C;line-height:1.6}
-
-  .bar{height:10px;border-radius:999px;background:#4A3A22;overflow:hidden;margin-top:14px}
+  .bar{height:10px;border-radius:999px;background:rgba(255,255,255,.10);overflow:hidden;margin-top:14px}
   .fill{height:100%;width:0;border-radius:999px;transition:width .35s,background .35s}
-  .scale{display:flex;justify-content:space-between;font-size:11px;color:#9A8F7C;margin-top:6px;font-family:"JetBrains Mono",monospace}
+  .scale{display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-top:6px}
+  .block-title{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin:var(--space-5) 0 2px}
+  .kpi{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;
+       border-bottom:1px solid var(--hairline);gap:12px}
+  .kpi:last-child{border-bottom:0}
+  .kpi span{color:var(--text-body);font-size:13.5px}
+  .kpi .v{font-family:var(--font-heading);font-weight:600;font-size:17px;color:var(--text-strong);white-space:nowrap}
+  .risk .v{color:var(--accent-tint)}
+  .note{margin-top:var(--space-4);font-size:12px;color:var(--text-muted);line-height:1.6}
 
-  .explain{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  @media(max-width:760px){.explain{grid-template-columns:1fr}.frow{grid-template-columns:1fr 110px}}
-  @media(max-width:600px){.brand{font-size:24px}.bmark{width:32px;height:32px}}
-  .ex{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:16px 18px}
-  .ex h4{font-size:15px;margin-bottom:5px}
-  .ex p{color:var(--stone);font-size:13.5px}
-  .foot{margin-top:32px;color:var(--stone);font-size:12px;border-top:1px solid var(--line);padding-top:18px;display:flex;gap:16px;flex-wrap:wrap}
-  .foot a{color:var(--stone);text-decoration:none}
+  .explain{margin-top:var(--space-7);display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4)}
+  @media(max-width:760px){.explain{grid-template-columns:1fr}}
+  .ex h4{font-family:var(--font-heading);font-size:16px;margin-bottom:6px;color:var(--text-strong)}
+  .ex p{color:var(--text-body);font-size:14px}
+
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
-    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true">
-      <rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/>
-      <path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/>
-      <text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text>
-    </svg>
-    <a href="index.html" style="text-decoration:none;color:inherit"><span class="brand">Gastro<span class="bk">kn<span class="bi">ı<span class="bdot"></span></span>ff</span></span></a>
-    <a class="back" href="index.html">← zurück</a>
-  </div>
+<header class="gk-top">
+  <svg class="gk-mark" viewBox="0 0 100 100" aria-hidden="true">
+    <defs><linearGradient id="gkT" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" style="stop-color:var(--logo-tile-top)"></stop><stop offset="1" style="stop-color:var(--logo-tile-bottom)"></stop></linearGradient></defs>
+    <path d="M20 0 H67 V33 H100 V80 A20 20 0 0 1 80 100 H20 A20 20 0 0 1 0 80 V20 A20 20 0 0 1 20 0 Z" fill="url(#gkT)" style="stroke:var(--sheen)" stroke-width="1.2"></path>
+    <path d="M67 0 L67 33 L100 33 Z" style="fill:var(--accent-strong)"></path>
+    <path d="M67 0 L100 0 L100 33 Z" style="fill:var(--accent)"></path>
+    <rect x="22" y="30" width="10" height="46" style="fill:var(--cream)"></rect>
+    <path d="M30 54 L56 33 M30 54 L58 74" style="stroke:var(--cream)" stroke-width="10"></path>
+  </svg>
+  <a href="index.html" style="color:inherit"><span class="gk-word">Gastro<span class="kn">kniff</span></span></a>
+  <a class="gk-back" href="index.html">← zurück</a>
+</header>
 
+<div class="wrap">
   <div class="tag">Werkzeug · Miete &amp; Vertrag</div>
   <h1 class="title">Ist deine Miete tragbar?</h1>
   <p class="intro">Die Miete ist der Kostenblock, den du nach der Unterschrift kaum noch änderst — und oft bindet sie dich über Jahre. Hier siehst du, wie hoch deine Mietquote wirklich ist, welchen Umsatz du dafür brauchst und was dich die Restlaufzeit im Ernstfall kostet. Alles im Browser, nichts wird gespeichert.</p>
 
   <div class="layout">
     <!-- INPUT -->
-    <div class="panel">
+    <div class="card panel">
       <h3>Deine Zahlen</h3>
       <p class="hint">Netto rechnen — ohne Mehrwertsteuer.</p>
 
       <div class="sub">Miete &amp; Umsatz</div>
-      <div class="frow"><label>Miete pro Monat <span class="u">kalt + Nebenkosten</span></label><input id="miete" type="number" min="0" step="50" value="3500"></div>
-      <div class="frow"><label>Netto-Umsatz pro Monat <span class="u">aktuell oder geplant</span></label><input id="umsatz" type="number" min="0" step="500" value="32000"></div>
+      <div class="frow"><label>Miete pro Monat <span class="unit">kalt + Nebenkosten</span></label><input id="miete" type="number" min="0" step="50" value="3500"></div>
+      <div class="frow"><label>Netto-Umsatz pro Monat <span class="unit">aktuell oder geplant</span></label><input id="umsatz" type="number" min="0" step="500" value="32000"></div>
 
       <div class="sub">Vertragsbindung</div>
-      <div class="frow"><label>Restlaufzeit <span class="u">Monate bis Vertragsende</span></label><input id="rest" type="number" min="0" step="1" value="48"></div>
+      <div class="frow"><label>Restlaufzeit <span class="unit">Monate bis Vertragsende</span></label><input id="rest" type="number" min="0" step="1" value="48"></div>
 
       <div class="sub">Baukostenzuschuss <span style="text-transform:none;letter-spacing:0">(falls erhalten)</span></div>
-      <div class="frow"><label>Erhaltener Zuschuss <span class="u">€</span></label><input id="zuschuss" type="number" min="0" step="1000" value="0"></div>
-      <div class="frow"><label>Bindungsdauer <span class="u">Jahre laut Vertrag</span></label><input id="bindung" type="number" min="0" step="1" value="10"></div>
-      <div class="frow"><label>Davon schon vergangen <span class="u">Jahre</span></label><input id="vergangen" type="number" min="0" step="1" value="0"></div>
+      <div class="frow"><label>Erhaltener Zuschuss <span class="unit">€</span></label><input id="zuschuss" type="number" min="0" step="1000" value="0"></div>
+      <div class="frow"><label>Bindungsdauer <span class="unit">Jahre laut Vertrag</span></label><input id="bindung" type="number" min="0" step="1" value="10"></div>
+      <div class="frow"><label>Davon schon vergangen <span class="unit">Jahre</span></label><input id="vergangen" type="number" min="0" step="1" value="0"></div>
     </div>
 
     <!-- OUTPUT -->
-    <div class="out">
+    <div class="card-raised out">
       <div class="big-kpi">
         <div class="lab">Deine Mietquote</div>
         <div class="val" id="oQuote">–</div>
@@ -136,16 +120,17 @@
   </div>
 
   <div class="explain">
-    <div class="ex"><h4>Warum 10 bis 12 %?</h4><p>Als Orientierung gilt: Die Miete sollte rund ein Zehntel des Netto-Umsatzes nicht überschreiten. Darüber wird es eng, weil Wareneinsatz und Personal den Rest bereits aufbrauchen. Es ist eine Faustregel, kein Gesetz — in teuren Lagen liegt sie höher.</p></div>
-    <div class="ex"><h4>Die Restlaufzeit ist eine echte Schuld</h4><p>Ein Vertrag ohne Ausstiegsmöglichkeit bedeutet: Du zahlst bis zum Ende, auch wenn der Laden nicht mehr läuft. Diese Summe solltest du kennen, bevor du investierst.</p></div>
-    <div class="ex"><h4>Zuschuss ist oft ein Kredit</h4><p>Geld vom Vermieter für den Umbau wird bei vorzeitigem Auszug meist anteilig zurückgefordert. Klär schriftlich, ob es Geschenk oder Darlehen ist.</p></div>
+    <div class="card ex"><h4>Warum 10 bis 12 %?</h4><p>Als Orientierung gilt: Die Miete sollte rund ein Zehntel des Netto-Umsatzes nicht überschreiten. Darüber wird es eng, weil Wareneinsatz und Personal den Rest bereits aufbrauchen. Es ist eine Faustregel, kein Gesetz — in teuren Lagen liegt sie höher.</p></div>
+    <div class="card ex"><h4>Die Restlaufzeit ist eine echte Schuld</h4><p>Ein Vertrag ohne Ausstiegsmöglichkeit bedeutet: Du zahlst bis zum Ende, auch wenn der Laden nicht mehr läuft. Diese Summe solltest du kennen, bevor du investierst.</p></div>
+    <div class="card ex"><h4>Zuschuss ist oft ein Kredit</h4><p>Geld vom Vermieter für den Umbau wird bei vorzeitigem Auszug meist anteilig zurückgefordert. Klär schriftlich, ob es Geschenk oder Darlehen ist.</p></div>
   </div>
 
-  <p class="foot">
-    <a href="index.html">Startseite</a><a href="break-even-rechner.html">Break-Even-Rechner</a><a href="kostenstruktur.html">Kostenstruktur</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a>
-    <span>Mietquote = Miete ÷ Netto-Umsatz. Orientierungswerte, keine Rechtsberatung. Ein Werkzeug von Gastrokniff — kostenlos.</span>
-  </p>
 </div>
+
+<footer class="gk-foot"><div class="gk-foot-in">
+  <a href="index.html">Startseite</a><a href="break-even-rechner.html">Break-Even-Rechner</a><a href="kostenstruktur.html">Kostenstruktur</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a>
+    <span>Mietquote = Miete ÷ Netto-Umsatz. Orientierungswerte, keine Rechtsberatung. Ein Werkzeug von Gastrokniff — kostenlos.</span>
+</div></footer>
 
 <script>
   const euro=n=>isFinite(n)&&n>0?n.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0})+' €':'–';
@@ -161,13 +146,13 @@
     if(umsatz>0 && miete>0){
       qEl.textContent=quote.toLocaleString('de-DE',{maximumFractionDigits:1})+' %';
       let col,txt;
-      if(quote<=10){col='#8FD0A0'; txt='Gesund — im Zielbereich';}
-      else if(quote<=12){col='#E7B65A'; txt='Grenzwertig — aufpassen';}
-      else {col='#E59A72'; txt='Kritisch — auf Dauer schwer tragbar';}
+      if(quote<=10){col='var(--state-good)'; txt='Gesund — im Zielbereich';}
+      else if(quote<=12){col='var(--state-warn)'; txt='Grenzwertig — aufpassen';}
+      else {col='var(--state-bad)'; txt='Kritisch — auf Dauer schwer tragbar';}
       qEl.style.color=col; sEl.textContent=txt; sEl.style.color=col;
       fill.style.width=Math.min(quote,20)/20*100+'%'; fill.style.background=col;
     } else {
-      qEl.textContent='–'; qEl.style.color='#E7B65A'; sEl.textContent=''; fill.style.width='0';
+      qEl.textContent='–'; qEl.style.color='var(--state-warn)'; sEl.textContent=''; fill.style.width='0';
     }
 
     // Nötiger Umsatz

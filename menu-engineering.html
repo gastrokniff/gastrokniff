@@ -10,108 +10,98 @@
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#241C13">
+<meta name="theme-color" content="#0B1028">
 <link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="theme.css">
 <style>
-  :root{
-    --paper:#F5EFE3;--paper-warm:#F9EEDA;--ink:#241C13;--stone:#6E6355;--line:#E4DBCB;
-    --card:#FCF7ED;--accent:#C07A12;--accent-soft:#F3E4C6;--herb:#425A3F;
-    --stern:#C08A1E;--renner:#3E7C4F;--raetsel:#2F6D8F;--penner:#B0592E;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{
-    background:radial-gradient(1000px 600px at 88% -8%,rgba(224,164,58,.20),transparent 60%),var(--paper);
-    color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:1120px;margin:0 auto;padding:34px 24px 70px}
-  h1,h2,h3,.disp{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;letter-spacing:-.015em;line-height:1.05}
-  .mono{font-family:"JetBrains Mono",monospace}
-
-  .top{display:flex;align-items:center;gap:11px;margin-bottom:30px}
-  .bmark{width:42px;height:42px;flex:none;filter:drop-shadow(0 3px 8px rgba(36,28,19,.18))}
-  .brand{font-family:"Bricolage Grotesque";font-weight:700;font-size:32px;display:inline-flex}
-  .bi{position:relative;display:inline-block}
-  .bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--ink);border-radius:.04em;transform:translateX(-50%)}.bk{color:#A9700F}
-
-  .tag{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
+  .tag{font-family:var(--font-body);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+       color:var(--accent);display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
   .tag::before{content:"";width:22px;height:1px;background:var(--accent)}
   h1.title{font-size:clamp(30px,5vw,46px);margin-bottom:14px}
-  .intro{color:var(--stone);max-width:66ch;font-size:16px;margin-bottom:36px}
-
-  .layout{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;align-items:start}
+  .intro{color:var(--text-body);max-width:66ch;font-size:17px;margin:0 0 var(--space-7)}
+  .intro b{color:var(--text-strong)}
+  .layout{display:grid;grid-template-columns:1.1fr 1fr;gap:var(--space-4);align-items:start}
   @media(max-width:900px){.layout{grid-template-columns:1fr}}
-  .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
-  .panel h3{font-size:18px;margin-bottom:4px}
-  .panel .hint{color:var(--stone);font-size:13px;margin-bottom:18px}
-
+  .panel h3{font-size:17px;margin-bottom:4px}
+  .hint{color:var(--text-muted);font-size:13px;margin-bottom:var(--space-4)}
   .row{display:grid;grid-template-columns:1fr 62px 74px 74px 28px;gap:7px;margin-bottom:8px;align-items:center}
-  .row.head{color:var(--stone);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
-  input,select{width:100%;background:#fff;border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:9px 10px;font-family:"Inter";font-size:14px;outline:none;transition:border .2s}
-  input:focus,select:focus{border-color:var(--accent)}
-  input::placeholder{color:#B3A990}
-  .del{background:none;border:0;color:#BBAF98;font-size:18px;cursor:pointer;line-height:1;transition:color .2s}
-  .del:hover{color:var(--penner)}
-  .addrow{margin-top:10px;background:none;border:1px dashed #CFC4AC;color:var(--stone);border-radius:8px;padding:9px;width:100%;cursor:pointer;font-size:13px;font-family:"Inter";transition:.2s}
+  .row.head{color:var(--text-muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+  .row input,.row select{padding:9px 10px;font-size:14px}
+  .del{background:none;border:0;color:var(--text-muted);font-size:18px;cursor:pointer;line-height:1;transition:color .2s}
+  .del:hover{color:var(--state-bad)}
+  .addrow{margin-top:10px;background:none;border:1px dashed var(--hairline);color:var(--text-body);border-radius:10px;padding:9px;width:100%;
+          cursor:pointer;font-size:13px;font-family:var(--font-body);transition:.2s}
   .addrow:hover{border-color:var(--accent);color:var(--accent)}
   .mwst{display:flex;gap:6px;margin-top:16px}
-  .seg{flex:1;text-align:center;background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px;cursor:pointer;font-size:13px;color:var(--stone);transition:.2s;user-select:none}
-  .seg.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .segs{display:flex;gap:6px;flex-wrap:wrap}
+  .seg{flex:1;min-width:56px;text-align:center;background:rgba(11,16,40,.55);border:1px solid var(--hairline);border-radius:10px;
+       padding:9px 6px;cursor:pointer;font-size:13px;color:var(--text-body);transition:.2s;user-select:none}
+  .seg:hover{border-color:var(--accent)}
+  .seg.on{background:var(--accent);border-color:var(--accent);color:var(--text-on-accent);font-weight:600}
+  input:not([type]){width:100%;padding:10px 12px;font-family:var(--font-body);font-size:15px;
+    color:var(--text-strong);background:rgba(11,16,40,.55);border:1px solid var(--hairline);border-radius:10px;outline:none;
+    transition:border-color .2s,box-shadow .2s}
+  input::placeholder,textarea::placeholder{color:var(--text-muted)}
 
-  /* MATRIX */
+  /* Klassen: Sterne, Renner, Rätsel, Penner */
   .matrixwrap{position:sticky;top:20px}
-  .plot{position:relative;width:100%;aspect-ratio:1/1;background:
-      linear-gradient(0deg,rgba(176,89,46,.05),rgba(176,89,46,.05)) ,var(--card);
-    border:1px solid var(--line);border-radius:16px;overflow:hidden}
-  .qlabel{position:absolute;font-family:"Bricolage Grotesque";font-weight:700;font-size:13px;opacity:.55;padding:10px 12px}
-  .q-tl{top:0;left:0;color:var(--raetsel)}
-  .q-tr{top:0;right:0;color:var(--stern);text-align:right}
-  .q-bl{bottom:0;left:0;color:var(--penner)}
-  .q-br{bottom:0;right:0;color:var(--renner);text-align:right}
-  .divx{position:absolute;top:0;bottom:0;width:1px;background:repeating-linear-gradient(var(--line),var(--line) 4px,transparent 4px,transparent 8px)}
-  .divy{position:absolute;left:0;right:0;height:1px;background:repeating-linear-gradient(90deg,var(--line),var(--line) 4px,transparent 4px,transparent 8px)}
-  .dot{position:absolute;width:13px;height:13px;border-radius:50%;transform:translate(-50%,50%);border:2px solid var(--card);box-shadow:0 2px 6px rgba(0,0,0,.15);transition:.3s ease}
-  .dotlab{position:absolute;font-size:10px;color:var(--ink);transform:translate(-50%,50%);white-space:nowrap;pointer-events:none;background:rgba(252,247,237,.7);padding:0 3px;border-radius:3px}
-  .axis{font-size:11px;color:var(--stone);display:flex;justify-content:space-between;margin-top:8px}
-  .axisY{position:absolute;left:-2px;top:50%;transform:rotate(-90deg) translateX(50%);transform-origin:left;font-size:11px;color:var(--stone)}
+  @media(max-width:900px){.matrixwrap{position:static}}
+  .plot{position:relative;width:100%;aspect-ratio:1/1;background:var(--surface-inset);
+    border:1px solid var(--hairline);border-radius:var(--radius-md);overflow:hidden}
+  .qlabel{position:absolute;font-family:var(--font-heading);font-weight:700;font-size:13px;opacity:.8;padding:10px 12px}
+  .q-tl{top:0;left:0;color:var(--text-muted)}
+  .q-tr{top:0;right:0;color:var(--state-good);text-align:right}
+  .q-bl{bottom:0;left:0;color:var(--state-bad)}
+  .q-br{bottom:0;right:0;color:var(--state-warn);text-align:right}
+  .divx{position:absolute;top:0;bottom:0;width:1px;background:repeating-linear-gradient(var(--hairline),var(--hairline) 4px,transparent 4px,transparent 8px)}
+  .divy{position:absolute;left:0;right:0;height:1px;background:repeating-linear-gradient(90deg,var(--hairline),var(--hairline) 4px,transparent 4px,transparent 8px)}
+  .dot{position:absolute;width:13px;height:13px;border-radius:50%;transform:translate(-50%,50%);border:2px solid var(--surface-inset);box-shadow:0 2px 6px rgba(0,0,0,.4);transition:.3s ease}
+  .dotlab{position:absolute;font-size:10px;color:var(--text-strong);transform:translate(-50%,50%);white-space:nowrap;pointer-events:none;background:rgba(11,16,40,.7);padding:0 3px;border-radius:3px}
+  .axis{font-size:11px;color:var(--text-muted);display:flex;justify-content:space-between;margin-top:8px}
+  .axisY{position:absolute;left:-2px;top:50%;transform:rotate(-90deg) translateX(50%);transform-origin:left;font-size:11px;color:var(--text-muted)}
 
-  /* RESULTS */
-  .results{margin-top:24px}
-  .rtable{width:100%;border-collapse:collapse;font-size:14px}
-  .rtable th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--stone);padding:8px 10px;border-bottom:1px solid var(--line)}
-  .rtable td{padding:11px 10px;border-bottom:1px solid var(--line)}
-  .rtable .num{font-family:"JetBrains Mono";text-align:right}
-  .badge{font-family:"JetBrains Mono";font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;padding:3px 9px;border-radius:999px;color:#fff;white-space:nowrap}
-  .b-stern{background:var(--stern)}.b-renner{background:var(--renner)}.b-raetsel{background:var(--raetsel)}.b-penner{background:var(--penner)}
+  .results{margin-top:var(--space-4)}
+  .rtable{width:100%;border-collapse:collapse;font-size:14px;color:var(--text-body)}
+  .rtable th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);padding:8px 10px;border-bottom:1px solid var(--hairline)}
+  .rtable td{padding:11px 10px;border-bottom:1px solid var(--hairline)}
+  .rtable .num{font-family:var(--font-heading);text-align:right;color:var(--text-strong)}
+  .badge{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:3px 9px;border-radius:var(--radius-pill);color:var(--text-on-accent);white-space:nowrap}
+  .b-stern{background:var(--state-good)}.b-renner{background:var(--state-warn)}.b-raetsel{background:var(--text-muted)}.b-penner{background:var(--state-bad)}
 
-  .cards{margin-top:34px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-  @media(max-width:640px){.cards{grid-template-columns:1fr}.row{grid-template-columns:1fr 52px 62px 62px 24px;gap:5px}input,select{padding:8px 7px;font-size:13px}}
-  @media(max-width:600px){.brand{font-size:24px}.bmark{width:32px;height:32px}}
-  .cat{background:var(--card);border:1px solid var(--line);border-left-width:4px;border-radius:12px;padding:16px 18px}
-  .cat h4{font-family:"Bricolage Grotesque";font-size:16px;margin-bottom:5px;display:flex;align-items:center;gap:8px}
-  .cat p{color:var(--stone);font-size:13.5px}
-  .cat.stern{border-left-color:var(--stern)}.cat.renner{border-left-color:var(--renner)}
-  .cat.raetsel{border-left-color:var(--raetsel)}.cat.penner{border-left-color:var(--penner)}
-  .foot{margin-top:40px;color:var(--stone);font-size:12px;border-top:1px solid var(--line);padding-top:18px}
+  .cards{margin-top:var(--space-7);display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-4)}
+  @media(max-width:640px){.cards{grid-template-columns:1fr}.row{grid-template-columns:1fr 52px 62px 62px 24px;gap:5px}.row input{padding:8px 7px;font-size:13px}}
+  .cat{border-left-width:4px}
+  .cat h4{font-family:var(--font-heading);font-size:16px;margin-bottom:5px;display:flex;align-items:center;gap:8px}
+  .cat p{color:var(--text-body);font-size:14px}
+  .cat p b{color:var(--text-strong)}
+  .cat.stern{border-left-color:var(--state-good)}.cat.stern h4{color:var(--state-good)}
+  .cat.renner{border-left-color:var(--state-warn)}.cat.renner h4{color:var(--state-warn)}
+  .cat.raetsel{border-left-color:var(--text-muted)}.cat.raetsel h4{color:var(--text-muted)}
+  .cat.penner{border-left-color:var(--state-bad)}.cat.penner h4{color:var(--state-bad)}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
-    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true">
-      <rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/>
-      <path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/>
-      <text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text>
-    </svg>
-    <span class="brand">Gastro<span class="bk">kn<span class="bi">ı<span class="bdot"></span></span>ff</span></span>
-  </div>
+<header class="gk-top">
+  <svg class="gk-mark" viewBox="0 0 100 100" aria-hidden="true">
+    <defs><linearGradient id="gkT" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" style="stop-color:var(--logo-tile-top)"></stop><stop offset="1" style="stop-color:var(--logo-tile-bottom)"></stop></linearGradient></defs>
+    <path d="M20 0 H67 V33 H100 V80 A20 20 0 0 1 80 100 H20 A20 20 0 0 1 0 80 V20 A20 20 0 0 1 20 0 Z" fill="url(#gkT)" style="stroke:var(--sheen)" stroke-width="1.2"></path>
+    <path d="M67 0 L67 33 L100 33 Z" style="fill:var(--accent-strong)"></path>
+    <path d="M67 0 L100 0 L100 33 Z" style="fill:var(--accent)"></path>
+    <rect x="22" y="30" width="10" height="46" style="fill:var(--cream)"></rect>
+    <path d="M30 54 L56 33 M30 54 L58 74" style="stroke:var(--cream)" stroke-width="10"></path>
+  </svg>
+  <span class="gk-word">Gastro<span class="kn">kniff</span></span>
+</header>
 
+<div class="wrap">
   <div class="tag">Werkzeug · Menu-Engineering</div>
   <h1 class="title">Welche Gerichte tragen deine Karte?</h1>
   <p class="intro">Trag deine Gerichte mit Verkäufen, Wareneinsatz und Preis ein. Der Rechner sortiert jedes Gericht nach <b>Beliebtheit</b> und <b>Deckungsbeitrag</b> in vier Klassen — und sagt dir, was du damit tun solltest. Alles läuft in deinem Browser, nichts wird gespeichert.</p>
 
   <div class="layout">
     <!-- INPUT -->
-    <div class="panel">
+    <div class="card panel">
       <h3>Deine Gerichte</h3>
       <p class="hint">Verkäufe = verkaufte Portionen im Zeitraum (z. B. letzter Monat). Preis = Verkaufspreis brutto.</p>
       <div class="row head"><div>Gericht</div><div>Verk.</div><div>WE €</div><div>Preis €</div><div></div></div>
@@ -127,7 +117,7 @@
     </div>
 
     <!-- MATRIX -->
-    <div class="matrixwrap">
+    <div class="card-raised matrixwrap">
       <div class="plot" id="plot">
         <div class="qlabel q-tl">Rätsel</div>
         <div class="qlabel q-tr">Sterne</div>
@@ -142,7 +132,7 @@
   </div>
 
   <!-- RESULTS TABLE -->
-  <div class="results panel" style="margin-top:24px">
+  <div class="card-raised results panel">
     <h3>Auswertung</h3>
     <p class="hint">Deckungsbeitrag = Netto-Preis − Wareneinsatz. Klasse nach Beliebtheit &amp; DB im Vergleich zum Durchschnitt.</p>
     <div style="overflow-x:auto">
@@ -155,21 +145,24 @@
 
   <!-- CATEGORY GUIDE -->
   <div class="cards">
-    <div class="cat stern"><h4>★ Sterne</h4><p>Beliebt <b>und</b> ertragreich. Deine Gewinnbringer: prominent platzieren, empfehlen, Preis halten. Nicht verstecken!</p></div>
-    <div class="cat renner"><h4>▲ Renner</h4><p>Verkaufen sich top, bringen aber wenig Marge. Wareneinsatz senken, Beilage/Portion optimieren, Preis behutsam anheben.</p></div>
-    <div class="cat raetsel"><h4>◆ Rätsel</h4><p>Gute Marge, aber werden zu selten bestellt. Besser platzieren, appetitlicher benennen, aktiv empfehlen, ggf. Preis leicht senken.</p></div>
-    <div class="cat penner"><h4>▼ Penner</h4><p>Wenig beliebt, wenig Marge. Überarbeiten — oder ehrlich von der Karte nehmen und Platz für Sterne schaffen.</p></div>
+    <div class="card cat stern"><h4>★ Sterne</h4><p>Beliebt <b>und</b> ertragreich. Deine Gewinnbringer: prominent platzieren, empfehlen, Preis halten. Nicht verstecken!</p></div>
+    <div class="card cat renner"><h4>▲ Renner</h4><p>Verkaufen sich top, bringen aber wenig Marge. Wareneinsatz senken, Beilage/Portion optimieren, Preis behutsam anheben.</p></div>
+    <div class="card cat raetsel"><h4>◆ Rätsel</h4><p>Gute Marge, aber werden zu selten bestellt. Besser platzieren, appetitlicher benennen, aktiv empfehlen, ggf. Preis leicht senken.</p></div>
+    <div class="card cat penner"><h4>▼ Penner</h4><p>Wenig beliebt, wenig Marge. Überarbeiten — oder ehrlich von der Karte nehmen und Platz für Sterne schaffen.</p></div>
   </div>
 
-  <p class="foot">Methode: Klassiker des Menu-Engineerings nach Kasavana &amp; Smith. Beliebtheits-Schwelle = 70 % des Durchschnittsanteils, Ertrags-Schwelle = durchschnittlicher Deckungsbeitrag pro verkaufter Portion. Ein Werkzeug von Gastrokniff — kostenlos.</p>
 </div>
+
+<footer class="gk-foot"><div class="gk-foot-in">
+  Methode: Klassiker des Menu-Engineerings nach Kasavana &amp; Smith. Beliebtheits-Schwelle = 70 % des Durchschnittsanteils, Ertrags-Schwelle = durchschnittlicher Deckungsbeitrag pro verkaufter Portion. Ein Werkzeug von Gastrokniff — kostenlos.
+</div></footer>
 
 <script>
   const euro=n=>isFinite(n)?n.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €':'–';
   const rowsEl=document.getElementById('rows');
   let mwst=7;
   const CAT={stern:{n:'Sterne',c:'b-stern'},renner:{n:'Renner',c:'b-renner'},raetsel:{n:'Rätsel',c:'b-raetsel'},penner:{n:'Penner',c:'b-penner'}};
-  const COL={stern:'#C08A1E',renner:'#3E7C4F',raetsel:'#2F6D8F',penner:'#B0592E'};
+  const COL={stern:'var(--state-good)',renner:'var(--state-warn)',raetsel:'var(--text-muted)',penner:'var(--state-bad)'};
 
   function makeRow(name='',sold='',we='',price=''){
     const d=document.createElement('div');d.className='row';

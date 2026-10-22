@@ -10,123 +10,106 @@
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#241C13">
+<meta name="theme-color" content="#0B1028">
 <link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="theme.css">
 <style>
-  :root{
-    --paper:#F5EFE3;--ink:#241C13;--stone:#6E6355;--line:#E4DBCB;
-    --card:#FCF7ED;--accent:#C07A12;--accent-soft:#F3E4C6;--herb:#425A3F;--good:#3E7C4F;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:radial-gradient(1000px 600px at 88% -8%,rgba(224,164,58,.20),transparent 60%),var(--paper);
-       color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1040px;margin:0 auto;padding:34px 24px 70px}
-  h1,h2,h3,.disp{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;letter-spacing:-.015em;line-height:1.05}
-  .mono{font-family:"JetBrains Mono",monospace}
-
-  .top{display:flex;align-items:center;gap:11px;margin-bottom:28px}
-  .bmark{width:42px;height:42px;flex:none;filter:drop-shadow(0 3px 8px rgba(36,28,19,.18))}
-  .brand{font-family:"Bricolage Grotesque";font-weight:700;font-size:32px;display:inline-flex}
-  .bi{position:relative;display:inline-block}.bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--ink);border-radius:.04em;transform:translateX(-50%)}.bk{color:#A9700F}
-  .back{font-size:14px;color:var(--stone);margin-left:auto;text-decoration:none}
-
-  .tag{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
+  .tag{font-family:var(--font-body);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+       color:var(--accent);display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
   .tag::before{content:"";width:22px;height:1px;background:var(--accent)}
   h1.title{font-size:clamp(30px,5vw,46px);margin-bottom:14px}
-  .intro{color:var(--stone);max-width:64ch;font-size:16px;margin-bottom:34px}
-
-  .layout{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:start}
+  .intro{color:var(--text-body);max-width:66ch;font-size:17px;margin:0 0 var(--space-7)}
+  .intro b{color:var(--text-strong)}
+  .layout{display:grid;grid-template-columns:1.1fr 1fr;gap:var(--space-4);align-items:start}
   @media(max-width:900px){.layout{grid-template-columns:1fr}}
-  .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
   .panel h3{font-size:17px;margin-bottom:4px}
-  .panel .hint{color:var(--stone);font-size:13px;margin-bottom:16px}
-  .sub{font-family:"JetBrains Mono";font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--stone);margin:18px 0 10px}
-
+  .hint{color:var(--text-muted);font-size:13px;margin-bottom:var(--space-4)}
+  .sub{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);
+       margin:var(--space-5) 0 10px;padding-top:var(--space-4);border-top:1px solid var(--hairline)}
+  .sub:first-of-type{border-top:0;padding-top:0;margin-top:14px}
   .field{margin-bottom:12px}
-  .field label{display:block;font-size:13px;color:var(--stone);margin-bottom:5px}
-  .field .u{color:#B3A990;font-size:11px}
-  .frow{display:grid;grid-template-columns:1fr 120px;gap:10px;align-items:center;margin-bottom:9px}
-  .frow label{font-size:14px;color:var(--ink)}
-  input,select,textarea{width:100%;background:#fff;border:1px solid var(--line);border-radius:9px;color:var(--ink);padding:10px 12px;font-family:"Inter";font-size:15px;outline:none;transition:border .2s;text-align:right}
-  input:focus,select:focus,textarea:focus{border-color:var(--accent)}
-  input[type="text"],select,textarea{text-align:left}
-  input[type="checkbox"]{width:auto;accent-color:var(--accent)}
-  textarea{resize:vertical;min-height:78px;line-height:1.5;font-size:14px}
-  .sumline{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);margin-top:8px;padding-top:12px;font-size:14px}
-  .sumline b{font-family:"JetBrains Mono";font-size:16px}
+  .field label{display:block;font-size:13.5px;margin-bottom:5px}
+  .u{color:var(--text-muted);font-size:11.5px}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:720px){.two{grid-template-columns:1fr}}
+  .out{position:sticky;top:20px}
+  @media(max-width:900px){.out{position:static}}
+  .big-kpi{text-align:center;padding:6px 0 var(--space-4);border-bottom:1px solid var(--hairline);margin-bottom:6px}
+  .big-kpi .lab{color:var(--text-muted);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em}
+  .big-kpi .val{font-family:var(--font-heading);font-weight:700;font-size:44px;line-height:1.1;margin-top:4px;color:var(--accent)}
+  .big-kpi .val small{font-size:16px;color:var(--text-muted);font-weight:400}
+  .block-title{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin:var(--space-5) 0 2px}
+  .kpi{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--hairline);gap:12px}
+  .kpi:last-of-type{border-bottom:0}
+  .kpi span{color:var(--text-body);font-size:13.5px}
+  .kpi .v{font-family:var(--font-heading);font-weight:600;font-size:17px;color:var(--text-strong);white-space:nowrap}
+  .note{margin-top:var(--space-4);font-size:12px;color:var(--text-muted);line-height:1.6}
+  .explain{margin-top:var(--space-7);display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4)}
+  @media(max-width:760px){.explain{grid-template-columns:1fr}}
+  .ex h4{font-family:var(--font-heading);font-size:16px;margin-bottom:6px;color:var(--text-strong)}
+  .ex p{color:var(--text-body);font-size:14px}
+  button.btn{border:0;cursor:pointer;font-family:var(--font-body)}
+  button.btn-ghost{cursor:pointer;font-family:var(--font-body)}
+  textarea{width:100%;padding:10px 12px;font-family:var(--font-body);font-size:14px;line-height:1.5;color:var(--text-strong);
+    background:rgba(11,16,40,.55);border:1px solid var(--hairline);border-radius:10px;outline:none;resize:vertical;min-height:78px;
+    transition:border-color .2s,box-shadow .2s}
+  textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,138,61,.22)}
+  input::placeholder,textarea::placeholder{color:var(--text-muted)}
+  input[type=checkbox]{width:auto;accent-color:var(--accent)}
 
-  .out{background:linear-gradient(180deg,#3A2C1A,#2A2013);border:1px solid #4A3A22;border-radius:18px;padding:24px;position:sticky;top:20px;color:var(--paper)}
-  .big-kpi{text-align:center;padding:6px 0 16px;border-bottom:1px solid #4A3A22;margin-bottom:6px}
-  .big-kpi .lab{color:#B9AE9C;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em}
-  .big-kpi .val{font-family:"Bricolage Grotesque";font-weight:700;font-size:40px;color:#E7B65A;line-height:1.1;margin-top:4px}
-  .big-kpi .val.warn{color:#E2895F}
-  .big-kpi .val.good{color:#8FD0A0}
-  .big-kpi small{display:block;font-family:"JetBrains Mono";font-size:11.5px;color:#B9AE9C;margin-top:6px;font-weight:400}
-  .kpi{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid #4A3A22}
-  .kpi:last-child{border-bottom:0}
-  .kpi span{color:#B9AE9C;font-size:13.5px}
-  .kpi .v{font-family:"JetBrains Mono";font-size:16px;color:var(--paper)}
-  .kpi .val{font-family:"JetBrains Mono";font-weight:400;font-size:16px;color:var(--paper)}
-  .kpi .val.warn{color:#E2895F}
-  .kpi .val.good{color:#8FD0A0}
-  .block-title{font-family:"JetBrains Mono";font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#9A8F7C;margin:18px 0 2px}
-  .note{margin-top:16px;font-size:12px;color:#A99E8C;line-height:1.6}
+  /* Ampel Wareneinsatz: Farbe + Wort */
+  .big-kpi .val{color:var(--text-strong)}
+  .big-kpi .val.warn{color:var(--state-warn)}
+  .big-kpi .val.good{color:var(--state-good)}
+  .big-kpi .val.good::after,.big-kpi .val.warn::after{display:block;font-family:var(--font-body);font-size:13.5px;font-weight:600;margin-top:4px}
+  .big-kpi .val.good::after{content:"Im Zielbereich"}
+  .big-kpi .val.warn::after{content:"Über dem Ziel"}
+  .big-kpi small{display:block;font-size:12px;color:var(--text-muted);margin-top:6px}
+  .kpi .val{font-family:var(--font-heading);font-weight:600;font-size:17px;color:var(--text-strong);white-space:nowrap}
+  .kpi .val.warn{color:var(--state-bad)}
+  .kpi .val.warn::after{content:" · Verlust";font-family:var(--font-body);font-size:13px}
 
-  /* Allergen-Übersicht im Ausgabefeld */
   .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-  .chip{font-size:11.5px;font-weight:600;background:rgba(255,255,255,.08);border:1px solid #4A3A22;color:var(--paper);border-radius:999px;padding:4px 10px}
-  .leer{font-size:12.5px;color:#A99E8C;font-style:italic;margin-top:8px}
+  .chip{font-size:11.5px;font-weight:600;background:rgba(255,255,255,.08);border:1px solid var(--hairline);color:var(--text-strong);border-radius:var(--radius-pill);padding:4px 10px}
+  .leer{font-size:12.5px;color:var(--text-muted);font-style:italic;margin-top:8px}
 
-  /* Zutatenzeilen */
+  /* Zutatenzeilen (kommen aus dem JS) */
   #zeilen{margin-top:2px}
-  .zeile{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px}
+  .zeile{background:rgba(11,16,40,.35);border:1px solid var(--hairline);border-radius:var(--radius-sm);padding:12px;margin-bottom:10px}
   .zeile .oben{display:grid;grid-template-columns:2.2fr 1fr .9fr 1.1fr auto;gap:8px;align-items:end}
   @media(max-width:720px){.zeile .oben{grid-template-columns:1fr 1fr}.zeile .oben .breit{grid-column:1/-1}}
   .zeile .f{display:block}
-  .zeile .f span{display:block;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--stone);margin-bottom:4px}
+  .zeile .f span{display:block;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
   .zeile input,.zeile select{padding:9px 10px;font-size:14px}
-  .zeile .unten{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
-  .kosten{font-family:"JetBrains Mono";font-weight:700;font-size:14px;white-space:nowrap;color:var(--ink)}
-  .kosten small{display:block;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--stone);font-family:"Inter";font-weight:600}
-  .weg{background:#fff;border:1px solid var(--line);color:var(--stone);width:38px;height:38px;font-size:18px;line-height:1;font-weight:700;border-radius:9px;cursor:pointer;transition:.2s}
-  .weg:hover{border-color:#B0592E;color:#B0592E;background:#FCF0ED}
+  .zeile .unten{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px;padding-top:10px;border-top:1px dashed var(--hairline)}
+  .kosten{font-family:var(--font-heading);font-weight:700;font-size:14px;white-space:nowrap;color:var(--text-strong)}
+  .kosten small{display:block;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);font-family:var(--font-body);font-weight:600}
+  .weg{background:none;border:1px solid var(--hairline);color:var(--text-muted);width:38px;height:38px;font-size:18px;line-height:1;font-weight:700;border-radius:9px;cursor:pointer;transition:.2s}
+  .weg:hover{border-color:var(--state-bad);color:var(--state-bad)}
   @media(max-width:720px){.weg{width:100%;height:auto;padding:9px}}
-  .allBtn{background:#fff;border:1px solid var(--line);color:var(--stone);padding:7px 11px;font-size:12.5px;font-weight:600;border-radius:9px;cursor:pointer;font-family:"Inter"}
-  .allBtn[aria-expanded="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .allPanel{display:none;width:100%;margin-top:10px;padding:12px;background:var(--paper);border:1px solid var(--line);border-radius:9px}
+  .allBtn{background:none;border:1px solid var(--hairline);color:var(--text-body);padding:7px 11px;font-size:12.5px;font-weight:600;border-radius:9px;cursor:pointer;font-family:var(--font-body)}
+  .allBtn[aria-expanded="true"]{background:var(--accent);color:var(--text-on-accent);border-color:var(--accent)}
+  .allPanel{display:none;width:100%;margin-top:10px;padding:12px;background:rgba(11,16,40,.55);border:1px solid var(--hairline);border-radius:9px}
   .allPanel.auf{display:block}
   .allPanel .liste{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:6px 14px}
-  .allPanel label{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.35;cursor:pointer;color:var(--ink)}
+  .allPanel label{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.35;cursor:pointer}
   .allPanel input{margin:2px 0 0;flex:none}
-  .addrow{margin-top:2px;background:none;border:1px dashed #CFC4AC;color:var(--stone);border-radius:9px;padding:10px;width:100%;cursor:pointer;font-size:13.5px;font-family:"Inter";transition:.2s}
+  .addrow{margin-top:2px;background:none;border:1px dashed var(--hairline);color:var(--text-body);border-radius:10px;padding:10px;width:100%;cursor:pointer;font-size:13.5px;font-family:var(--font-body);transition:.2s}
   .addrow:hover{border-color:var(--accent);color:var(--accent)}
 
-  /* Aktionen */
-  .actrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
-  .abtn{font-family:"Inter";font-size:14px;font-weight:600;border-radius:10px;padding:11px 18px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);transition:.2s}
-  .abtn:hover{border-color:var(--accent);color:var(--accent)}
-  .abtn.solid{background:var(--accent);border-color:var(--accent);color:#fff}
-  .abtn.solid:hover{background:#A8690E;color:#fff}
+  .actrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:var(--space-5)}
+  .actrow .btn,.actrow .btn-ghost{padding:12px 20px;font-size:15px}
+  .legal{margin-top:var(--space-5);color:var(--text-muted);font-size:12.5px;line-height:1.7}
+  .legal b{color:var(--text-body)}
 
-  .explain{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  @media(max-width:720px){.explain{grid-template-columns:1fr}.two{grid-template-columns:1fr}.frow{grid-template-columns:1fr 100px}}
-  .ex{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:16px 18px}
-  .ex h4{font-family:"Bricolage Grotesque";font-size:15px;margin-bottom:5px}
-  .ex p{color:var(--stone);font-size:13.5px}
-  .legal{margin-top:22px;color:var(--stone);font-size:12.5px;line-height:1.7}
-  .foot{margin-top:34px;color:var(--stone);font-size:12px;border-top:1px solid var(--line);padding-top:18px;display:flex;gap:16px;flex-wrap:wrap}
-  .foot a{color:var(--stone);text-decoration:none}
-
-  /* ---------- Druckansicht ---------- */
+  /* ---------- Druckansicht: weißes Blatt ---------- */
   #druck{display:none}
   @media print{
-  @media(max-width:600px){.brand{font-size:24px}.bmark{width:32px;height:32px}}
     @page{size:A4;margin:14mm}
-    body{background:#fff;font-size:11pt}
+    body{background:#fff;color:#111;font-size:11pt}
     .wrap{display:none!important}
-    #druck{display:block;position:relative}
-    #druck::before{content:"Gastrokniff";position:absolute;top:0;right:0;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:9pt;color:#000;letter-spacing:.02em}
+    #druck{display:block;position:relative;color:#111}
+    #druck::before{content:"Gastrokniff";position:absolute;top:0;right:0;font-family:var(--font-display);font-weight:700;font-size:9pt;color:#000;letter-spacing:.02em}
     .d-kopf{border-bottom:2.5pt solid #000;padding-bottom:6pt;margin-bottom:12pt}
     .d-kopf .d-eyebrow{font-size:8pt;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
     .d-kopf h1{font-size:21pt;margin:3pt 0 5pt;line-height:1.1}
@@ -138,15 +121,15 @@
     #druck table{width:100%;border-collapse:collapse;font-size:10pt}
     #druck th{text-align:left;font-size:8pt;letter-spacing:.08em;text-transform:uppercase;border-bottom:.75pt solid #000;padding:3pt 4pt}
     #druck td{padding:3.5pt 4pt;border-bottom:.4pt solid #999;vertical-align:top}
-    #druck td.z{text-align:right;font-family:"JetBrains Mono",monospace;white-space:nowrap}
+    #druck td.z{text-align:right;white-space:nowrap}
     #druck tr.summe td{font-weight:700;border-top:1.5pt solid #000;border-bottom:none;padding-top:5pt}
     .d-kennz{display:flex;gap:16pt;margin-top:8pt;flex-wrap:wrap}
     .d-kennz div{border:1.25pt solid #000;padding:5pt 10pt;min-width:34mm}
     .d-kennz .k{font-size:7.5pt;letter-spacing:.12em;text-transform:uppercase}
-    .d-kennz .w{font-size:16pt;font-weight:700;font-family:"JetBrains Mono",monospace}
+    .d-kennz .w{font-size:16pt;font-weight:700;font-family:var(--font-heading)}
     .d-all{border:1.25pt solid #000;padding:7pt 9pt;margin-top:5pt;font-size:10pt}
-    .d-frei{border:.75pt dashed #666;height:26mm;margin-top:5pt}
-    .d-frei span{font-size:8pt;color:#666;padding:3pt}
+    .d-frei{border:.75pt dashed #999;height:26mm;margin-top:5pt}
+    .d-frei span{font-size:8pt;color:#111;padding:3pt}
     .d-fuss{margin-top:14pt;padding-top:5pt;border-top:.75pt solid #000;font-size:7.5pt;line-height:1.45}
     .d-unterschrift{display:flex;gap:20pt;margin-top:14pt;font-size:8.5pt}
     .d-unterschrift div{flex:1;border-top:.75pt solid #000;padding-top:3pt}
@@ -154,24 +137,28 @@
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
-    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true">
-      <rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/>
-      <path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/>
-      <text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text>
-    </svg>
-    <a href="index.html" style="text-decoration:none;color:inherit"><span class="brand">Gastro<span class="bk">kn<span class="bi">ı<span class="bdot"></span></span>ff</span></span></a>
-    <a class="back" href="index.html">← zurück</a>
-  </div>
+<header class="gk-top">
+  <svg class="gk-mark" viewBox="0 0 100 100" aria-hidden="true">
+    <defs><linearGradient id="gkT" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" style="stop-color:var(--logo-tile-top)"></stop><stop offset="1" style="stop-color:var(--logo-tile-bottom)"></stop></linearGradient></defs>
+    <path d="M20 0 H67 V33 H100 V80 A20 20 0 0 1 80 100 H20 A20 20 0 0 1 0 80 V20 A20 20 0 0 1 20 0 Z" fill="url(#gkT)" style="stroke:var(--sheen)" stroke-width="1.2"></path>
+    <path d="M67 0 L67 33 L100 33 Z" style="fill:var(--accent-strong)"></path>
+    <path d="M67 0 L100 0 L100 33 Z" style="fill:var(--accent)"></path>
+    <rect x="22" y="30" width="10" height="46" style="fill:var(--cream)"></rect>
+    <path d="M30 54 L56 33 M30 54 L58 74" style="stroke:var(--cream)" stroke-width="10"></path>
+  </svg>
+  <a href="index.html" style="color:inherit"><span class="gk-word">Gastro<span class="kn">kniff</span></span></a>
+  <a class="gk-back" href="index.html">← zurück</a>
+</header>
 
+<div class="wrap">
   <div class="tag">Werkzeug · Produktpass</div>
   <h1 class="title">Ein Produktpass pro Gericht — sauber und griffbereit.</h1>
   <p class="intro">Trag Zutaten, Preise und Zubereitung einmal ein. Du bekommst die Kosten pro Portion, deinen Wareneinsatz in Prozent — was der Wareneinkauf vom Verkaufspreis auffrisst — und automatisch die Allergene deines Gerichts. Dazu ein Blatt zum Ausdrucken für die Küche. Alles läuft in deinem Browser, es wird nichts hochgeladen.</p>
 
   <div class="layout">
     <!-- INPUT -->
-    <div class="panel">
+    <div class="card panel">
       <h3>Dein Gericht</h3>
       <p class="hint">Der Verkaufspreis zählt netto, ohne Mehrwertsteuer. Nur so stimmt der Wareneinsatz in Prozent.</p>
 
@@ -206,7 +193,7 @@
     </div>
 
     <!-- OUTPUT -->
-    <div class="out">
+    <div class="card-raised out">
       <div class="big-kpi">
         <div class="lab">Wareneinsatz vom Verkaufspreis</div>
         <div class="val" id="lcdProzent">–</div>
@@ -225,18 +212,18 @@
   </div>
 
   <div class="actrow">
-    <button class="abtn solid" id="btnDruck">Produktpass drucken</button>
-    <button class="abtn" id="btnSpeichern">Als Datei speichern</button>
-    <button class="abtn" id="btnLadenAuf">Datei laden</button>
-    <button class="abtn" id="btnBeispiel">Beispiel laden</button>
-    <button class="abtn" id="btnLeeren">Alles leeren</button>
+    <button class="btn" id="btnDruck">Produktpass drucken</button>
+    <button class="btn-ghost" id="btnSpeichern">Als Datei speichern</button>
+    <button class="btn-ghost" id="btnLadenAuf">Datei laden</button>
+    <button class="btn-ghost" id="btnBeispiel">Beispiel laden</button>
+    <button class="btn-ghost" id="btnLeeren">Alles leeren</button>
     <input type="file" id="datei" accept="application/json,.json" hidden>
   </div>
 
   <div class="explain">
-    <div class="ex"><h4>Was ist ein Produktpass?</h4><p>Eine schriftliche Aufzeichnung pro Gericht: Zutaten, Kosten, Zubereitung und Allergene an einem Ort. Küche, Kalkulation und Kontrolle greifen auf dasselbe Blatt zurück.</p></div>
-    <div class="ex"><h4>Warum die Wareneinsatzquote zählt</h4><p>Sie zeigt, wie viel vom Verkaufspreis für Zutaten draufgeht. Über dem Zielwert bleibt zu wenig für Personal, Miete und Gewinn — dann stimmt der Preis oder die Rezeptur nicht.</p></div>
-    <div class="ex"><h4>Allergene nach § 4 LMIDV</h4><p>Bei loser Ware reicht eine mündliche Auskunft, wenn eine schriftliche Aufzeichnung vorliegt, griffbereit ist und gut sichtbar darauf hingewiesen wird. Kreuzkontaminationen stehen hier nicht automatisch drin.</p></div>
+    <div class="card ex"><h4>Was ist ein Produktpass?</h4><p>Eine schriftliche Aufzeichnung pro Gericht: Zutaten, Kosten, Zubereitung und Allergene an einem Ort. Küche, Kalkulation und Kontrolle greifen auf dasselbe Blatt zurück.</p></div>
+    <div class="card ex"><h4>Warum die Wareneinsatzquote zählt</h4><p>Sie zeigt, wie viel vom Verkaufspreis für Zutaten draufgeht. Über dem Zielwert bleibt zu wenig für Personal, Miete und Gewinn — dann stimmt der Preis oder die Rezeptur nicht.</p></div>
+    <div class="card ex"><h4>Allergene nach § 4 LMIDV</h4><p>Bei loser Ware reicht eine mündliche Auskunft, wenn eine schriftliche Aufzeichnung vorliegt, griffbereit ist und gut sichtbar darauf hingewiesen wird. Kreuzkontaminationen stehen hier nicht automatisch drin.</p></div>
   </div>
 
   <p class="legal">
@@ -244,11 +231,12 @@
     Dieses Werkzeug hilft dir beim Erstellen dieser Aufzeichnung. Es prüft nicht, ob deine Angaben vollständig und richtig sind. Die Verantwortung dafür bleibt bei dir als Lebensmittelunternehmer. Denk auch an Kreuzkontaminationen in deiner Küche, die stehen nicht in der Rezeptur. Im Zweifel klärst du die Umsetzung mit deinem Lebensmittelüberwachungsamt oder deiner IHK. Das hier ersetzt keine Rechtsberatung.
   </p>
 
-  <p class="foot">
-    <a href="index.html">Startseite</a><a href="wareneinsatz-rechner.html">Wareneinsatz</a><a href="artikel-preis-kalkulieren.html">Preis kalkulieren</a><a href="artikel-aufschlag.html">Aufschlag vs. Deckungsbeitrag</a><a href="artikel-standardisierung.html">Rezepturen standardisieren</a><a href="kostenstruktur.html">Kostenstruktur</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a>
-    <span>Wareneinsatz in % = Kosten je Portion ÷ Verkaufspreis netto × 100. Ein Werkzeug von Gastrokniff — kostenlos.</span>
-  </p>
 </div>
+
+<footer class="gk-foot"><div class="gk-foot-in">
+  <a href="index.html">Startseite</a><a href="wareneinsatz-rechner.html">Wareneinsatz</a><a href="artikel-preis-kalkulieren.html">Preis kalkulieren</a><a href="artikel-aufschlag.html">Aufschlag vs. Deckungsbeitrag</a><a href="artikel-standardisierung.html">Rezepturen standardisieren</a><a href="kostenstruktur.html">Kostenstruktur</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a>
+    <span>Wareneinsatz in % = Kosten je Portion ÷ Verkaufspreis netto × 100. Ein Werkzeug von Gastrokniff — kostenlos.</span>
+</div></footer>
 
 <div id="druck"></div>
 

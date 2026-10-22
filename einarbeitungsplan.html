@@ -10,131 +10,116 @@
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#241C13">
+<meta name="theme-color" content="#0B1028">
 <link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="theme.css">
 <style>
-  :root{
-    --paper:#F5EFE3;--ink:#241C13;--stone:#6E6355;--line:#E4DBCB;
-    --card:#FCF7ED;--accent:#C07A12;--accent-soft:#F3E4C6;--good:#3E7C4F;--warn:#B0592E;--herb:#425A3F;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:radial-gradient(1000px 600px at 88% -8%,rgba(224,164,58,.20),transparent 60%),var(--paper);
-       color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1040px;margin:0 auto;padding:34px 24px 70px}
-  h1,h2,h3,h4{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;letter-spacing:-.015em;line-height:1.05}
-
-  .top{display:flex;align-items:center;gap:11px;margin-bottom:28px}
-  .bmark{width:42px;height:42px;flex:none;filter:drop-shadow(0 3px 8px rgba(36,28,19,.18))}
-  .brand{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:32px;display:inline-flex}
-  .bi{position:relative;display:inline-block}.bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--ink);border-radius:.04em;transform:translateX(-50%)}.bk{color:#A9700F}
-  .back{font-size:14px;color:var(--stone);margin-left:auto;text-decoration:none}
-
-  .tag{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
+  .tag{font-family:var(--font-body);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+       color:var(--accent);display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
   .tag::before{content:"";width:22px;height:1px;background:var(--accent)}
   h1.title{font-size:clamp(30px,5vw,46px);margin-bottom:14px}
-  .intro{color:var(--stone);max-width:66ch;font-size:16px;margin-bottom:30px}
+  .intro{color:var(--text-body);max-width:66ch;font-size:17px;margin:0 0 var(--space-6)}
+  .intro b{color:var(--text-strong)}
+  .explain{margin-top:var(--space-7);display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4)}
+  @media(max-width:760px){.explain{grid-template-columns:1fr}}
+  .ex h4{font-family:var(--font-heading);font-size:16px;margin-bottom:6px;color:var(--text-strong)}
+  .ex p{color:var(--text-body);font-size:14px}
+  button.btn{border:0;cursor:pointer;font-family:var(--font-body)}
+  button.btn-ghost{cursor:pointer;font-family:var(--font-body)}
 
-  /* ---- Steuerung ---- */
-  .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:24px}
+  /* Steuerung */
+  .panel{margin-bottom:var(--space-5)}
   .panel h3{font-size:17px;margin-bottom:14px}
   .ctrl{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   @media(max-width:820px){.ctrl{grid-template-columns:1fr 1fr}}
   @media(max-width:520px){.ctrl{grid-template-columns:1fr}}
-  .ctrl label{display:block;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--stone);margin-bottom:6px}
-  input[type=text],input[type=date],select{width:100%;background:#fff;border:1px solid var(--line);border-radius:9px;color:var(--ink);
-    padding:10px 12px;font-family:"Inter",system-ui,sans-serif;font-size:15px;outline:none;transition:border .2s}
-  input:focus,select:focus{border-color:var(--accent)}
-
+  .ctrl label{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px}
   .abt{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
-  .abt button{font-family:"Inter",system-ui,sans-serif;font-size:14.5px;background:#fff;border:1px solid var(--line);
-    border-radius:999px;padding:9px 17px;cursor:pointer;color:var(--stone);transition:.18s}
-  .abt button:hover{border-color:var(--accent);color:var(--ink)}
-  .abt button.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .abt button{font-family:var(--font-body);font-size:14.5px;background:rgba(11,16,40,.55);border:1px solid var(--hairline);
+    border-radius:var(--radius-pill);padding:9px 17px;cursor:pointer;color:var(--text-body);transition:.18s}
+  .abt button:hover{border-color:var(--accent);color:var(--text-strong)}
+  .abt button.on{background:var(--accent);border-color:var(--accent);color:var(--text-on-accent);font-weight:600}
 
-  /* ---- Fortschritt ---- */
-  .prog{display:flex;align-items:center;gap:14px;margin:26px 0 18px}
-  .prog .bar{flex:1;height:10px;border-radius:999px;background:var(--line);overflow:hidden}
-  .prog .fill{height:100%;width:0;background:var(--good);border-radius:999px;transition:width .3s}
-  .prog .cnt{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--stone);white-space:nowrap}
-  .tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
-  .tools button{font-family:"Inter",system-ui,sans-serif;font-size:14px;border-radius:10px;padding:10px 16px;cursor:pointer;transition:.18s;border:1px solid var(--line);background:#fff;color:var(--ink)}
-  .tools button:hover{border-color:var(--accent)}
-  .tools button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-  .tools button.primary:hover{background:#A96A0E}
+  /* Fortschritt */
+  .prog{display:flex;align-items:center;gap:14px;margin:var(--space-6) 0 18px}
+  .prog .bar{flex:1;height:10px;border-radius:var(--radius-pill);background:var(--hairline);overflow:hidden}
+  .prog .fill{height:100%;width:0;background:var(--state-good);border-radius:var(--radius-pill);transition:width .3s}
+  .prog .cnt{font-size:13px;color:var(--text-muted);white-space:nowrap}
+  .tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:var(--space-6)}
+  .tools .btn,.tools .btn-ghost{padding:12px 20px;font-size:15px}
 
-  /* ---- Plan ---- */
-  .block{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:18px;break-inside:avoid}
-  .block > .bh{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:14px;flex-wrap:wrap}
-  .block .bnr{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+  /* Plan-Blöcke kommen aus dem JS: gleiche Optik wie .card aus theme.css */
+  .block{background:linear-gradient(160deg,var(--surface-card) 0%,var(--surface-card-low) 100%);border:1px solid var(--hairline);
+    border-radius:var(--radius-lg);box-shadow:var(--shadow-card);padding:var(--space-5);margin-bottom:18px;break-inside:avoid;color:var(--text-body)}
+  .block > .bh{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--hairline);padding-bottom:12px;margin-bottom:14px;flex-wrap:wrap}
+  .block .bnr{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
   .block h3{font-size:19px}
-  .block .bsub{font-size:13px;color:var(--stone);margin-left:auto}
+  .block .bsub{font-size:13px;color:var(--text-muted);margin-left:auto}
 
   ul.list{list-style:none}
-  ul.list li{display:flex;align-items:flex-start;gap:11px;padding:8px 0;border-bottom:1px solid rgba(228,219,203,.6)}
+  ul.list li{display:flex;align-items:flex-start;gap:11px;padding:8px 0;border-bottom:1px solid var(--hairline)}
   ul.list li:last-child{border-bottom:0}
   ul.list input[type=checkbox]{appearance:none;-webkit-appearance:none;flex:none;width:19px;height:19px;margin-top:2px;
-    border:1.6px solid #C9BFAB;border-radius:5px;background:#fff;cursor:pointer;position:relative;transition:.15s}
-  ul.list input[type=checkbox]:checked{background:var(--good);border-color:var(--good)}
+    border:1.6px solid var(--text-muted);border-radius:5px;background:rgba(11,16,40,.55);cursor:pointer;position:relative;transition:.15s}
+  ul.list input[type=checkbox]:checked{background:var(--state-good);border-color:var(--state-good)}
   ul.list input[type=checkbox]:checked::after{content:"";position:absolute;left:5.5px;top:1.5px;width:5px;height:10px;
-    border:solid #fff;border-width:0 2.2px 2.2px 0;transform:rotate(43deg)}
-  ul.list label{font-size:15px;cursor:pointer;flex:1}
-  ul.list input:checked + label{color:var(--stone);text-decoration:line-through;text-decoration-color:#C9BFAB}
+    border:solid var(--text-on-accent);border-width:0 2.2px 2.2px 0;transform:rotate(43deg)}
+  ul.list label{font-size:15px;cursor:pointer;flex:1;color:var(--text-body)}
+  ul.list input:checked + label{color:var(--text-muted);text-decoration:line-through;text-decoration-color:var(--text-muted)}
 
   .add{display:flex;gap:9px;margin-top:14px}
   .add input{flex:1;font-size:14px;padding:9px 12px}
-  .add button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:0 15px;cursor:pointer;font-size:19px;color:var(--accent);line-height:1}
+  .add button{border:1px solid var(--hairline);background:rgba(11,16,40,.55);border-radius:9px;padding:0 15px;cursor:pointer;font-size:19px;color:var(--accent);line-height:1}
   .add button:hover{border-color:var(--accent)}
-  .del{background:none;border:0;color:#C9BFAB;cursor:pointer;font-size:17px;line-height:1;padding:0 2px}
-  .del:hover{color:var(--warn)}
+  .del{background:none;border:0;color:var(--text-muted);cursor:pointer;font-size:17px;line-height:1;padding:0 2px}
+  .del:hover{color:var(--state-bad)}
 
   .sig{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:22px;padding-top:6px}
   @media(max-width:520px){.sig{grid-template-columns:1fr;gap:26px}}
-  .sig div{border-top:1px solid #C9BFAB;padding-top:7px;font-size:12.5px;color:var(--stone);margin-top:40px}
+  .sig div{border-top:1px solid var(--text-muted);padding-top:7px;font-size:12.5px;color:var(--text-muted);margin-top:40px}
 
-  .explain{margin-top:30px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  @media(max-width:760px){.explain{grid-template-columns:1fr}}
-  .ex{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:16px 18px}
-  .ex h4{font-size:15px;margin-bottom:5px}
-  .ex p{color:var(--stone);font-size:13.5px}
-  .cta{display:block;background:var(--ink);color:var(--paper);text-decoration:none;border-radius:16px;padding:20px 24px;margin:26px 0 0}
-  .cta .t{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:18px}
-  .cta .s{font-size:14px;color:#B9AE9C}
-  .foot{margin-top:32px;color:var(--stone);font-size:12px;border-top:1px solid var(--line);padding-top:18px;display:flex;gap:16px;flex-wrap:wrap}
-  .foot a{color:var(--stone);text-decoration:none}
+  .cta{display:block;margin:var(--space-6) 0 0}
+  .cta .t{font-family:var(--font-heading);font-weight:700;font-size:18px;color:var(--text-on-accent)}
+  .cta .s{font-size:14px;color:var(--text-on-accent-muted)}
 
-  /* ---- Druck ---- */
+  /* ---------- Druck: weißes Blatt ---------- */
   .printhead{display:none}
   @media print{
-  @media(max-width:600px){.brand{font-size:24px}.bmark{width:32px;height:32px}}
-    body{background:#fff}
+    body{background:#fff;color:#111}
     .wrap{max-width:none;padding:0}
-    .top,.tag,.intro,.panel,.tools,.explain,.cta,.foot,.add,.del,.prog{display:none !important}
-    .printhead{display:block;margin-bottom:18px;border-bottom:2px solid #241C13;padding-bottom:10px}
-    .printhead .pt{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:22px}
-    .printhead .pm{font-size:13px;color:#555;margin-top:4px}
+    .tag,.intro,.panel,.tools,.explain,.cta,.add,.del,.prog{display:none !important}
+    .printhead{display:block;margin-bottom:18px;border-bottom:2px solid #111;padding-bottom:10px;color:#111}
+    .printhead .pt{font-family:var(--font-display);font-weight:700;font-size:22px}
+    .printhead .pm{font-size:13px;color:#111;margin-top:4px}
     h1.title{font-size:0;margin:0}
-    .block{border:1px solid #999;border-radius:8px;background:#fff;padding:14px 16px;margin-bottom:12px;page-break-inside:avoid}
-    ul.list li{padding:5px 0}
-    ul.list label{font-size:12.5px}
-    ul.list input[type=checkbox]{width:13px;height:13px;border:1.2px solid #444;background:#fff !important}
-    ul.list input[type=checkbox]:checked::after{left:3.6px;top:0.6px;width:3.5px;height:7px;border-color:#000;border-width:0 1.8px 1.8px 0}
-    ul.list input:checked + label{color:#000;text-decoration:none}
-    .sig div{margin-top:34px}
+    .block{border:1px solid #999;border-radius:8px;background:#fff;box-shadow:none;color:#111;padding:14px 16px;margin-bottom:12px;page-break-inside:avoid}
+    .block > .bh{border-bottom-color:#999}
+    .block .bnr,.block .bsub,.block p{color:#111 !important}
+    ul.list li{padding:5px 0;border-bottom-color:#999}
+    ul.list label{font-size:12.5px;color:#111}
+    ul.list input[type=checkbox]{width:13px;height:13px;border:1.2px solid #111;background:#fff !important}
+    ul.list input[type=checkbox]:checked::after{left:3.6px;top:0.6px;width:3.5px;height:7px;border-color:#111;border-width:0 1.8px 1.8px 0}
+    ul.list input:checked + label{color:#111;text-decoration:none}
+    .sig div{margin-top:34px;border-top-color:#111;color:#111}
   }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
-    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true">
-      <rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/>
-      <path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/>
-      <g transform="translate(3,-2)" stroke="#F2F0EA" stroke-width="11" fill="none"><path d="M26 34 L26 76"/><path d="M27 55.5 L54 34"/><path d="M27 55.5 L56 76"/></g>
-    </svg>
-    <a href="index.html" style="text-decoration:none;color:inherit"><span class="brand">Gastro<span class="bk">kn<span class="bi">ı<span class="bdot"></span></span>ff</span></span></a>
-    <a class="back" href="index.html">← zurück</a>
-  </div>
+<header class="gk-top">
+  <svg class="gk-mark" viewBox="0 0 100 100" aria-hidden="true">
+    <defs><linearGradient id="gkT" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" style="stop-color:var(--logo-tile-top)"></stop><stop offset="1" style="stop-color:var(--logo-tile-bottom)"></stop></linearGradient></defs>
+    <path d="M20 0 H67 V33 H100 V80 A20 20 0 0 1 80 100 H20 A20 20 0 0 1 0 80 V20 A20 20 0 0 1 20 0 Z" fill="url(#gkT)" style="stroke:var(--sheen)" stroke-width="1.2"></path>
+    <path d="M67 0 L67 33 L100 33 Z" style="fill:var(--accent-strong)"></path>
+    <path d="M67 0 L100 0 L100 33 Z" style="fill:var(--accent)"></path>
+    <rect x="22" y="30" width="10" height="46" style="fill:var(--cream)"></rect>
+    <path d="M30 54 L56 33 M30 54 L58 74" style="stroke:var(--cream)" stroke-width="10"></path>
+  </svg>
+  <a href="index.html" style="color:inherit"><span class="gk-word">Gastro<span class="kn">kniff</span></span></a>
+  <a class="gk-back" href="index.html">← zurück</a>
+</header>
 
+<div class="wrap">
   <div class="tag">Werkzeug · Team &amp; Personal</div>
   <h1 class="title">Einarbeitungsplan</h1>
   <p class="intro">Ein neuer Mitarbeiter kommt — und niemand hat Zeit für ihn. Das ist der häufigste Grund, warum jemand nach drei Wochen wieder weg ist. Hier baust du in zwei Minuten einen Plan für die ersten zwei Wochen: abhaken, ergänzen, ausdrucken, dem Neuen in die Hand geben. Alles im Browser, nichts wird gespeichert.</p>
@@ -145,7 +130,7 @@
     <div class="pm">Mitarbeiter: <span id="pName">__________________</span> · Pate: <span id="pPate">__________________</span> · Start: <span id="pDatum">__________</span></div>
   </div>
 
-  <div class="panel">
+  <div class="card panel">
     <h3>Wer wird eingearbeitet?</h3>
     <div class="ctrl">
       <div><label>Name</label><input type="text" id="fName" placeholder="z. B. Luca"></div>
@@ -167,28 +152,29 @@
   </div>
 
   <div class="tools">
-    <button class="primary" onclick="window.print()">Plan ausdrucken</button>
-    <button onclick="resetChecks()">Haken zurücksetzen</button>
+    <button class="btn" onclick="window.print()">Plan ausdrucken</button>
+    <button class="btn-ghost" onclick="resetChecks()">Haken zurücksetzen</button>
   </div>
 
   <div id="plan"></div>
 
   <div class="explain">
-    <div class="ex"><h4>Warum zwei Wochen?</h4><p>Wer in den ersten Tagen das Gefühl hat, nur im Weg zu stehen, kündigt oft innerlich, bevor er überhaupt richtig angefangen hat. Zwei Wochen mit klaren Zielen reichen, damit jemand ankommt — danach läuft es von allein.</p></div>
-    <div class="ex"><h4>Der Pate ist kein Chef</h4><p>Der Pate ist ein erfahrener Kollege, der die ersten Tage danebensteht und Fragen beantwortet. Viele empfinden die Rolle als Wertschätzung — frag beim nächsten Teammeeting, wer Lust darauf hat.</p></div>
-    <div class="ex"><h4>Der erste Plan ist nie perfekt</h4><p>Fang mit diesem hier an, streich was nicht passt, ergänz was bei dir dazugehört. Nach dem dritten Neuen hast du deinen eigenen Plan — und er kostet dich jedes Mal weniger Zeit.</p></div>
+    <div class="card ex"><h4>Warum zwei Wochen?</h4><p>Wer in den ersten Tagen das Gefühl hat, nur im Weg zu stehen, kündigt oft innerlich, bevor er überhaupt richtig angefangen hat. Zwei Wochen mit klaren Zielen reichen, damit jemand ankommt — danach läuft es von allein.</p></div>
+    <div class="card ex"><h4>Der Pate ist kein Chef</h4><p>Der Pate ist ein erfahrener Kollege, der die ersten Tage danebensteht und Fragen beantwortet. Viele empfinden die Rolle als Wertschätzung — frag beim nächsten Teammeeting, wer Lust darauf hat.</p></div>
+    <div class="card ex"><h4>Der erste Plan ist nie perfekt</h4><p>Fang mit diesem hier an, streich was nicht passt, ergänz was bei dir dazugehört. Nach dem dritten Neuen hast du deinen eigenen Plan — und er kostet dich jedes Mal weniger Zeit.</p></div>
   </div>
 
-  <a class="cta" href="artikel-einarbeitung.html">
+  <a class="card-accent cta" href="artikel-einarbeitung.html">
     <span class="t">Was tun, was lassen in den ersten zwei Wochen →</span><br>
     <span class="s">Die fünf Schritte, mit denen neue Leute bleiben — und die Fehler, die sie vertreiben.</span>
   </a>
 
-  <p class="foot">
-    <a href="index.html">Startseite</a><a href="rechner.html">Alle Rechner</a><a href="artikel-einarbeitung.html">Artikel Einarbeitung</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a>
-    <span>Eine Vorlage, kein Arbeitsvertrag und keine Rechtsberatung. Ein Werkzeug von Gastrokniff — kostenlos.</span>
-  </p>
 </div>
+
+<footer class="gk-foot"><div class="gk-foot-in">
+  <a href="index.html">Startseite</a><a href="rechner.html">Alle Rechner</a><a href="artikel-einarbeitung.html">Artikel Einarbeitung</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a>
+    <span>Eine Vorlage, kein Arbeitsvertrag und keine Rechtsberatung. Ein Werkzeug von Gastrokniff — kostenlos.</span>
+</div></footer>
 
 <script>
 const TAG1 = [

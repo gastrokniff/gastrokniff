@@ -10,89 +10,81 @@
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#241C13">
+<meta name="theme-color" content="#0B1028">
 <link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="theme.css">
 <style>
-  :root{
-    --paper:#F5EFE3;--ink:#241C13;--stone:#6E6355;--line:#E4DBCB;
-    --card:#FCF7ED;--accent:#C07A12;--accent-soft:#F3E4C6;--herb:#425A3F;--good:#3E7C4F;--warn:#B0592E;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:radial-gradient(1000px 600px at 88% -8%,rgba(224,164,58,.20),transparent 60%),var(--paper);
-       color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1060px;margin:0 auto;padding:34px 24px 70px}
-  h1,h2,h3,.disp{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;letter-spacing:-.015em;line-height:1.05}
-  .mono{font-family:"JetBrains Mono",monospace}
-
-  .top{display:flex;align-items:center;gap:11px;margin-bottom:28px}
-  .bmark{width:42px;height:42px;flex:none;filter:drop-shadow(0 3px 8px rgba(36,28,19,.18))}
-  .brand{font-family:"Bricolage Grotesque";font-weight:700;font-size:32px;display:inline-flex}
-  .bi{position:relative;display:inline-block}
-  .bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--ink);border-radius:.04em;transform:translateX(-50%)}.bk{color:#A9700F}
-
-  .tag{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
+  .tag{font-family:var(--font-body);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+       color:var(--accent);display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
   .tag::before{content:"";width:22px;height:1px;background:var(--accent)}
   h1.title{font-size:clamp(30px,5vw,46px);margin-bottom:14px}
-  .intro{color:var(--stone);max-width:64ch;font-size:16px;margin-bottom:34px}
-
-  .layout{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:start}
+  .intro{color:var(--text-body);max-width:66ch;font-size:17px;margin:0 0 var(--space-7)}
+  .intro b{color:var(--text-strong)}
+  .layout{display:grid;grid-template-columns:1.1fr 1fr;gap:var(--space-4);align-items:start}
   @media(max-width:900px){.layout{grid-template-columns:1fr}}
-  .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
-  .panel h3{font-size:18px;margin-bottom:4px}
-  .panel .hint{color:var(--stone);font-size:13px;margin-bottom:18px}
-
-  .field{margin-bottom:14px}
-  .field label{display:block;font-size:12.5px;color:var(--stone);margin-bottom:5px}
-  .field .u{color:#B3A990;font-size:11px}
-  input{width:100%;background:#fff;border:1px solid var(--line);border-radius:9px;color:var(--ink);padding:11px 12px;font-family:"Inter";font-size:15px;outline:none;transition:border .2s}
-  input:focus{border-color:var(--accent)}
-  input::placeholder{color:#B3A990}
-  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-
+  .panel h3{font-size:17px;margin-bottom:4px}
+  .hint{color:var(--text-muted);font-size:13px;margin-bottom:var(--space-4)}
+  .field{margin-bottom:12px}
+  .field label{display:block;font-size:13.5px;margin-bottom:5px}
+  .u{color:var(--text-muted);font-size:11.5px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:720px){.two{grid-template-columns:1fr}}
   .segs{display:flex;gap:6px;flex-wrap:wrap}
-  .seg{flex:1;min-width:56px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 6px;cursor:pointer;font-size:13px;color:var(--stone);transition:.2s;user-select:none}
-  .seg.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
-  .lbl{font-size:12.5px;color:var(--stone);margin:16px 0 6px}
-
-  .out{background:linear-gradient(180deg,#3A2C1A,#2A2013);border:1px solid #4A3A22;border-radius:18px;padding:24px;position:sticky;top:20px;color:var(--paper)}
-  .kpi{display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;border-bottom:1px solid #4A3A22}
+  .seg{flex:1;min-width:56px;text-align:center;background:rgba(11,16,40,.55);border:1px solid var(--hairline);border-radius:10px;
+       padding:9px 6px;cursor:pointer;font-size:13px;color:var(--text-body);transition:.2s;user-select:none}
+  .seg:hover{border-color:var(--accent)}
+  .seg.on{background:var(--accent);border-color:var(--accent);color:var(--text-on-accent);font-weight:600}
+  .lbl{font-size:13.5px;color:var(--text-body);margin:16px 0 6px}
+  input:not([type]){width:100%;padding:10px 12px;font-family:var(--font-body);font-size:15px;
+    color:var(--text-strong);background:rgba(11,16,40,.55);border:1px solid var(--hairline);border-radius:10px;outline:none;
+    transition:border-color .2s,box-shadow .2s}
+  input::placeholder,textarea::placeholder{color:var(--text-muted)}
+  .out{position:sticky;top:20px}
+  @media(max-width:900px){.out{position:static}}
+  .big-kpi{text-align:center;padding:6px 0 var(--space-4);border-bottom:1px solid var(--hairline);margin-bottom:6px}
+  .big-kpi .lab{color:var(--text-muted);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em}
+  .big-kpi .val{font-family:var(--font-heading);font-weight:700;font-size:44px;line-height:1.1;margin-top:4px;color:var(--accent)}
+  .big-kpi .val small{font-size:16px;color:var(--text-muted);font-weight:400}
+  .block-title{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin:var(--space-5) 0 2px}
+  .kpi{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--hairline);gap:12px}
   .kpi:last-of-type{border-bottom:0}
-  .kpi span{color:#B9AE9C;font-size:13.5px}
-  .kpi .v{font-family:"JetBrains Mono";font-size:16px;color:var(--paper)}
-  .kpi.hero .v{font-family:"Bricolage Grotesque";font-size:30px;color:#E7B65A}
+  .kpi span{color:var(--text-body);font-size:13.5px}
+  .kpi .v{font-family:var(--font-heading);font-weight:600;font-size:17px;color:var(--text-strong);white-space:nowrap}
+  .note{margin-top:var(--space-4);font-size:12px;color:var(--text-muted);line-height:1.6}
+  .kpi.hero .v{font-size:30px;font-weight:700;color:var(--accent)}
   .gauge{margin:18px 0 4px}
-  .bar{height:9px;border-radius:999px;background:#4A3A22;overflow:hidden}
-  .fill{height:100%;width:20%;background:var(--good);border-radius:999px;transition:width .35s,background .35s}
-  .glabel{display:flex;justify-content:space-between;font-size:12px;color:#B9AE9C;margin-top:8px}
-  .note{margin-top:14px;font-size:12px;color:#A99E8C;line-height:1.6}
-
-  .explain{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  @media(max-width:720px){.explain{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
-  @media(max-width:600px){.brand{font-size:24px}.bmark{width:32px;height:32px}}
-  .ex{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:16px 18px}
-  .ex h4{font-family:"Bricolage Grotesque";font-size:15px;margin-bottom:5px}
-  .ex p{color:var(--stone);font-size:13.5px}
-  .foot{margin-top:34px;color:var(--stone);font-size:12px;border-top:1px solid var(--line);padding-top:18px}
+  .bar{height:10px;border-radius:var(--radius-pill);background:var(--hairline);overflow:hidden}
+  .fill{height:100%;width:30%;background:var(--state-good);border-radius:var(--radius-pill);transition:width .35s,background .35s}
+  .glabel{display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-top:8px}
+  .gstate{font-size:13.5px;font-weight:600;margin-top:6px}
+  .explain{margin-top:var(--space-7);display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4)}
+  @media(max-width:760px){.explain{grid-template-columns:1fr}}
+  .ex h4{font-family:var(--font-heading);font-size:16px;margin-bottom:6px;color:var(--text-strong)}
+  .ex p{color:var(--text-body);font-size:14px}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
-    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true">
-      <rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/>
-      <path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/>
-      <text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text>
-    </svg>
-    <span class="brand">Gastro<span class="bk">kn<span class="bi">ı<span class="bdot"></span></span>ff</span></span>
-  </div>
+<header class="gk-top">
+  <svg class="gk-mark" viewBox="0 0 100 100" aria-hidden="true">
+    <defs><linearGradient id="gkT" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" style="stop-color:var(--logo-tile-top)"></stop><stop offset="1" style="stop-color:var(--logo-tile-bottom)"></stop></linearGradient></defs>
+    <path d="M20 0 H67 V33 H100 V80 A20 20 0 0 1 80 100 H20 A20 20 0 0 1 0 80 V20 A20 20 0 0 1 20 0 Z" fill="url(#gkT)" style="stroke:var(--sheen)" stroke-width="1.2"></path>
+    <path d="M67 0 L67 33 L100 33 Z" style="fill:var(--accent-strong)"></path>
+    <path d="M67 0 L100 0 L100 33 Z" style="fill:var(--accent)"></path>
+    <rect x="22" y="30" width="10" height="46" style="fill:var(--cream)"></rect>
+    <path d="M30 54 L56 33 M30 54 L58 74" style="stroke:var(--cream)" stroke-width="10"></path>
+  </svg>
+  <span class="gk-word">Gastro<span class="kn">kniff</span></span>
+</header>
 
+<div class="wrap">
   <div class="tag">Werkzeug · Getränke & Bar</div>
   <h1 class="title">Die Bar ist dein stiller Gewinnbringer.</h1>
   <p class="intro">Rechne pro Getränk vom Flaschenpreis zum richtigen Verkaufspreis — inklusive <b>Schankverlust</b>, den die meisten vergessen. Du siehst sofort Wareneinsatz pro Glas, empfohlenen Preis und Deckungsbeitrag. Alles im Browser, nichts wird gespeichert.</p>
 
   <div class="layout">
     <!-- INPUT -->
-    <div class="panel">
+    <div class="card panel">
       <h3>Getränk kalkulieren</h3>
       <p class="hint">Beispiel Gin Tonic: 0,7-l-Flasche, 4 cl pro Glas.</p>
 
@@ -121,7 +113,7 @@
         <div class="seg" data-q="25">25 %</div>
       </div>
 
-      <div class="lbl">Mehrwertsteuer <span class="u" style="color:#B3A990">(seit 2026: Getränke i. d. R. 19 %)</span></div>
+      <div class="lbl">Mehrwertsteuer <span class="u">(seit 2026: Getränke i. d. R. 19 %)</span></div>
       <div class="segs" id="mwstSegs">
         <div class="seg on" data-mwst="19">Getränk · 19 %</div>
         <div class="seg" data-mwst="7">Milchgetränk außer Haus · 7 %</div>
@@ -134,7 +126,7 @@
     </div>
 
     <!-- OUTPUT -->
-    <div class="out">
+    <div class="card-raised out">
       <div class="kpi hero"><span>Empfohlener Preis (brutto)</span><span class="v" id="oGross">–</span></div>
       <div class="kpi"><span>Portionen / Flasche (nach Verlust)</span><span class="v" id="oPort">–</span></div>
       <div class="kpi"><span>Wareneinsatz / Glas</span><span class="v" id="oCost">–</span></div>
@@ -143,19 +135,23 @@
       <div class="gauge">
         <div class="bar"><div class="fill" id="gFill"></div></div>
         <div class="glabel"><span id="gText">Ausschankquote</span><span id="gPct">–</span></div>
+        <div class="gstate" id="gState"></div>
       </div>
       <p class="note" id="oNote"></p>
     </div>
   </div>
 
   <div class="explain">
-    <div class="ex"><h4>Was ist Schankverlust?</h4><p>Überschank, verschüttete Reste, Probierschlucke, Bruch. 3–5 % sind normal, an einer hektischen Bar auch mehr. Wer ihn ignoriert, kalkuliert jedes Glas zu billig.</p></div>
-    <div class="ex"><h4>Getränke = Marge</h4><p>Die Ausschankquote liegt oft bei nur 18–22 %. Heißt: aus 1 € Wareneinsatz werden 4–5 € Umsatz. Kaum ein Gericht schafft das.</p></div>
-    <div class="ex"><h4>Denk an die Basics</h4><p>Standard-Rezepturen, feste cl-Mengen und Portionierer sorgen dafür, dass jedes Glas gleich kalkuliert ist — sonst rechnet die Kasse anders als die Realität.</p></div>
+    <div class="card ex"><h4>Was ist Schankverlust?</h4><p>Überschank, verschüttete Reste, Probierschlucke, Bruch. 3–5 % sind normal, an einer hektischen Bar auch mehr. Wer ihn ignoriert, kalkuliert jedes Glas zu billig.</p></div>
+    <div class="card ex"><h4>Getränke = Marge</h4><p>Die Ausschankquote liegt oft bei nur 18–22 %. Heißt: aus 1 € Wareneinsatz werden 4–5 € Umsatz. Kaum ein Gericht schafft das.</p></div>
+    <div class="card ex"><h4>Denk an die Basics</h4><p>Standard-Rezepturen, feste cl-Mengen und Portionierer sorgen dafür, dass jedes Glas gleich kalkuliert ist — sonst rechnet die Kasse anders als die Realität.</p></div>
   </div>
 
-  <p class="foot">Ausschankquote = Wareneinsatz ÷ Netto-Verkaufspreis. Ein Werkzeug von Gastrokniff — kostenlos, aus der Praxis für die Praxis.</p>
 </div>
+
+<footer class="gk-foot"><div class="gk-foot-in">
+  Ausschankquote = Wareneinsatz ÷ Netto-Verkaufspreis. Ein Werkzeug von Gastrokniff — kostenlos, aus der Praxis für die Praxis.
+</div></footer>
 
 <script>
   const euro=n=>isFinite(n)&&n>0?n.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €':'–';
@@ -192,7 +188,10 @@
 
     const fill=document.getElementById('gFill');
     fill.style.width=(we>0?Math.min(quote,50)/50*100:0)+'%';
-    fill.style.background = quote<=q ? 'var(--good)' : quote<=q+5 ? '#E7B65A' : '#D07A4E';
+    fill.style.background = quote<=q ? 'var(--state-good)' : quote<=q+5 ? 'var(--state-warn)' : 'var(--state-bad)';
+    const gState=document.getElementById('gState');
+    gState.textContent = we>0 ? (quote<=q ? 'Im Zielbereich' : quote<=q+5 ? 'Grenzwertig' : 'Zu hoch') : '';
+    gState.style.color=fill.style.background;
     document.getElementById('gText').textContent=mode+' · Ausschankquote';
     document.getElementById('gPct').textContent = we>0 ? quote.toLocaleString('de-DE',{maximumFractionDigits:1})+' %' : '–';
 

@@ -151,6 +151,10 @@ input[type=number],input[type=text],input[type=date],select{
   border:1px solid var(--hairline);border-radius:10px;outline:none;
   transition:border-color .2s,box-shadow .2s}
 input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,138,61,.22)}
+/* Keine Pfeile in Zahlenfeldern: sie nehmen Platz für die Ziffern weg */
+input[type=number]{appearance:textfield;-moz-appearance:textfield}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 
 /* ---------- Fußzeile ---------- */
 .gk-foot{border-top:1px solid var(--hairline);margin-top:var(--space-9)}

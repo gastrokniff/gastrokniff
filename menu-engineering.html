@@ -59,7 +59,7 @@
   .dot{position:absolute;width:13px;height:13px;border-radius:50%;transform:translate(-50%,50%);border:2px solid var(--surface-inset);box-shadow:0 2px 6px rgba(0,0,0,.4);transition:.3s ease}
   .dotlab{position:absolute;font-size:10px;color:var(--text-strong);transform:translate(-50%,50%);white-space:nowrap;pointer-events:none;background:rgba(11,16,40,.7);padding:0 3px;border-radius:3px}
   .axis{font-size:11px;color:var(--text-muted);display:flex;justify-content:space-between;margin-top:8px}
-  .axisY{position:absolute;left:-2px;top:50%;transform:rotate(-90deg) translateX(50%);transform-origin:left;font-size:11px;color:var(--text-muted)}
+  .axisY{position:absolute;left:8px;top:50%;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;font-size:11px;color:var(--text-muted);pointer-events:none}
 
   .results{margin-top:var(--space-4)}
   .rtable{width:100%;border-collapse:collapse;font-size:14px;color:var(--text-body)}

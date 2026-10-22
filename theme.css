@@ -1,0 +1,168 @@
+/* Gastrokniff — Design-Token, erzeugt aus dem Design System (Stand 21.10.2026).
+   Einzige Quelle für Farben, Schrift, Abstände, Radien und Schatten. */
+
+:root{
+  /* Flächen */
+  --surface:#0B1028;
+  --surface-band:#101A3A;
+  --surface-card:#1C2554;
+  --surface-card-low:#121938;
+  --surface-tool:#222C63;
+  --surface-inset:#18204A;
+
+  /* Text */
+  --text-strong:#FFFFFF;
+  --text-body:#B9C1DB;
+  --text-muted:#9AA3C2;
+  --text-on-accent:#0B1028;
+  --text-on-accent-muted:#1E2547;
+
+  /* Akzent */
+  --accent:#FF8A3D;
+  --accent-strong:#C4561A;
+  --accent-tint:#FFB27A;
+  --accent-text:#FF8A3D;
+  --accent-pale:#FFC08F;
+  --cream:#F4F1EC;
+
+  /* Logo */
+  --logo-tile-top:#2A3473;
+  --logo-tile-bottom:#0E1434;
+
+  /* Signal und Linien */
+  --signal-live:#7EE2A8;
+  --state-good:#7EE2A8;
+  --state-warn:#FFC06A;
+  --state-bad:#FF8A6B;
+  --hairline:rgba(255,255,255,.12);
+  --sheen:rgba(255,255,255,.14);
+
+  /* Schrift */
+  --font-display:"Bricolage Grotesque","Space Grotesk",system-ui,sans-serif;
+  --font-heading:"Space Grotesk",system-ui,sans-serif;
+  --font-body:Inter,system-ui,sans-serif;
+
+  /* Abstand */
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px;
+  --space-6:28px; --space-7:36px; --space-8:48px; --space-9:80px;
+
+  /* Radius */
+  --radius-sm:12px; --radius-md:16px; --radius-lg:22px; --radius-xl:32px;
+  --radius-btn:14px; --radius-pill:999px;
+
+  /* Schatten */
+  --shadow-card:inset 0 1px 0 rgba(255,255,255,.12), 0 22px 44px -14px rgba(0,0,0,.65);
+  --shadow-card-raised:inset 0 1px 0 rgba(255,255,255,.14), inset 0 -1px 0 rgba(0,0,0,.35), 0 26px 50px -16px rgba(0,0,0,.7);
+  --shadow-accent:inset 0 1px 0 rgba(255,255,255,.55), 0 40px 90px -24px rgba(255,110,30,.65), 0 18px 36px -12px rgba(0,0,0,.55);
+  --shadow-button:inset 0 1px 0 rgba(255,255,255,.6), 0 12px 30px -8px rgba(255,110,30,.6);
+  --shadow-ghost:inset 0 1px 0 rgba(255,255,255,.16), 0 12px 26px -10px rgba(0,0,0,.6);
+  --glow-icon:0 0 28px rgba(255,122,40,.35), inset 0 1px 0 rgba(255,255,255,.14);
+
+  /* Hintergrund-Aura der Seite */
+  --aura:
+    radial-gradient(900px 620px at 85% 6%, rgba(255,122,40,.22), rgba(255,122,40,0) 62%),
+    radial-gradient(760px 560px at 0% 42%, rgba(80,100,220,.16), rgba(80,100,220,0) 60%),
+    radial-gradient(800px 520px at 60% 92%, rgba(255,122,40,.12), rgba(255,122,40,0) 60%);
+}
+
+/* ---------- Grundlagen ---------- */
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--aura),var(--surface);
+  background-attachment:fixed;
+  color:var(--text-body);
+  font-family:var(--font-body);
+  font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--font-heading);color:var(--text-strong);line-height:1.1}
+h1{font-size:clamp(32px,5vw,60px);letter-spacing:-.02em;font-weight:700}
+h2{font-size:clamp(26px,3.4vw,42px);font-weight:700}
+h3{font-size:22px;font-weight:600}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-tint)}
+.wrap{max-width:1240px;margin:0 auto;padding:var(--space-5)}
+.wrap-text{max-width:760px;margin:0 auto;padding:var(--space-5)}
+
+/* ---------- Kopfzeile ---------- */
+.gk-top{display:flex;align-items:center;gap:var(--space-3);
+  max-width:1240px;margin:0 auto;padding:var(--space-5) var(--space-5) var(--space-4)}
+.gk-mark{width:42px;height:42px;flex:none;
+  filter:drop-shadow(0 6px 12px rgba(0,0,0,.55)) drop-shadow(0 0 14px rgba(255,122,40,.22))}
+.gk-word{font-family:var(--font-display);font-weight:800;font-size:23px;
+  letter-spacing:-.02em;color:var(--text-strong)}
+.gk-word .kn{color:var(--accent)}
+.gk-back{margin-left:auto;color:var(--text-muted);font-size:14px}
+.gk-back:hover{color:var(--text-body)}
+
+/* ---------- Karten ---------- */
+.card{
+  background:linear-gradient(160deg,var(--surface-card) 0%,var(--surface-card-low) 100%);
+  border:1px solid var(--hairline);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);
+  padding:var(--space-5);
+}
+.card-raised{
+  background:linear-gradient(155deg,var(--surface-tool) 0%,#161D47 55%,var(--surface-card-low) 100%);
+  border:1px solid var(--hairline);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card-raised);
+  padding:var(--space-5);
+}
+.card-accent{
+  background:linear-gradient(145deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,.06) 38%,
+    rgba(0,0,0,0) 60%,rgba(120,30,0,.28) 100%),var(--accent);
+  color:var(--text-on-accent);
+  border-radius:var(--radius-xl);
+  box-shadow:var(--shadow-accent);
+  padding:var(--space-6);
+}
+.inset{
+  background:linear-gradient(160deg,var(--surface-inset) 0%,var(--surface) 70%);
+  color:var(--text-body);
+  border-radius:var(--radius-md);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10), 0 16px 32px -10px rgba(0,0,0,.55);
+  padding:var(--space-5);
+}
+
+/* ---------- Marken und Schaltflächen ---------- */
+.eyebrow{font-family:var(--font-body);font-size:14px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.pill{display:inline-block;padding:4px 12px;border-radius:var(--radius-pill);
+  background:rgba(255,138,61,.14);color:var(--accent-tint);font-size:13px;font-weight:600}
+.btn{display:inline-block;padding:16px 26px;border-radius:var(--radius-btn);
+  font-weight:600;font-size:17px;
+  background:linear-gradient(180deg,rgba(255,255,255,.32) 0%,rgba(255,255,255,0) 55%,rgba(120,30,0,.18) 100%),var(--accent);
+  box-shadow:var(--shadow-button);color:var(--text-on-accent)}
+.btn:hover{color:var(--text-on-accent);filter:brightness(1.05)}
+.btn-ghost{display:inline-block;padding:16px 26px;border-radius:var(--radius-btn);
+  font-weight:600;font-size:17px;color:var(--text-strong);
+  background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.16);box-shadow:var(--shadow-ghost)}
+.btn-ghost:hover{color:var(--text-strong)}
+
+/* ---------- Eingaben ---------- */
+label{font-size:14.5px;color:var(--text-body)}
+.unit{display:block;font-size:11.5px;color:var(--text-muted)}
+input[type=number],input[type=text],input[type=date],select{
+  width:100%;padding:10px 12px;font-family:var(--font-body);font-size:15px;
+  color:var(--text-strong);background:rgba(11,16,40,.55);
+  border:1px solid var(--hairline);border-radius:10px;outline:none;
+  transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,138,61,.22)}
+
+/* ---------- Fußzeile ---------- */
+.gk-foot{border-top:1px solid var(--hairline);margin-top:var(--space-9)}
+.gk-foot-in{max-width:1240px;margin:0 auto;padding:var(--space-6) var(--space-5);
+  display:flex;flex-wrap:wrap;gap:var(--space-4);color:var(--text-muted);font-size:14px}
+.gk-foot-in a{color:var(--text-body)}
+
+/* ---------- Druck: immer hell ---------- */
+@media print{
+  body{background:#fff;color:#111}
+  .card,.card-raised,.inset{background:#fff;border:1px solid #999;box-shadow:none;color:#111}
+  .card-accent{background:#fff;color:#111;box-shadow:none;border:1px solid #999}
+  h1,h2,h3,h4{color:#000}
+  .gk-top,.gk-foot,.btn,.btn-ghost{display:none !important}
+}

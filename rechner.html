@@ -10,127 +10,122 @@
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#241C13">
+<link rel="canonical" href="https://gastrokniff.de/rechner.html">
+<meta name="theme-color" content="#0B1028">
 <link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="theme.css">
 <style>
-  :root{--paper:#F5EFE3;--ink:#241C13;--stone:#6E6355;--line:#E4DBCB;--card:#FCF7ED;--accent:#C07A12;--accent-soft:#F3E4C6}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:radial-gradient(900px 500px at 90% -10%,rgba(224,164,58,.18),transparent 60%),var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:840px;margin:0 auto;padding:34px 24px 70px}
-  h1,h2,h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;letter-spacing:-.015em;line-height:1.08}
-  a{color:var(--accent)}
-  .top{display:flex;align-items:center;gap:10px;margin-bottom:28px}
-  .bmark{width:41px;height:41px;flex:none}
-  .brand{font-family:"Bricolage Grotesque";font-weight:700;font-size:31px;display:inline-flex}
-  .bi{position:relative;display:inline-block}.bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--ink);border-radius:.04em;transform:translateX(-50%)}.bk{color:#A9700F}
-  .back{font-size:14px;color:var(--stone);margin-left:auto;text-decoration:none}
-  .kat{font-family:"Inter";font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  .kat{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
   h1.title{font-size:clamp(30px,5.2vw,44px);margin:10px 0 14px}
-  .intro{color:var(--stone);font-size:16px;max-width:64ch;margin-bottom:30px}
+  .intro{color:var(--text-body);font-size:17px;max-width:66ch;margin-bottom:var(--space-6)}
 
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  @media(max-width:680px){.grid{grid-template-columns:1fr}}
-  @media(max-width:600px){.brand{font-size:24px}.bmark{width:32px;height:32px}}
-  .rech{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;transition:.2s}
-  .rech:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--space-4)}
+  .rech{display:block;color:inherit;transition:transform .2s,border-color .2s}
+  .rech:hover{color:inherit;border-color:var(--accent);transform:translateY(-2px)}
   .rech .ic{font-size:24px;margin-bottom:10px}
   .rech h3{font-size:18px;margin-bottom:6px}
-  .rech p{color:var(--stone);font-size:14px;margin-bottom:10px}
+  .rech p{color:var(--text-body);font-size:14px;margin-bottom:10px}
   .rech .go{font-size:13.5px;color:var(--accent);font-weight:600}
-  .rech .kw{display:block;margin-top:8px;font-size:11.5px;color:#B3A990}
+  .rech .kw{display:block;margin-top:8px;font-size:11.5px;color:var(--text-muted)}
 
-  h2{font-size:22px;margin:38px 0 12px}
-  p.txt{color:var(--stone);margin-bottom:14px}
-  .faq{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 20px;margin-top:10px}
-  .faq details{border-bottom:1px solid var(--line);padding:14px 0}
+  h2{font-size:24px;margin:var(--space-8) 0 var(--space-3)}
+  p.txt{color:var(--text-body);margin-bottom:14px;max-width:72ch}
+  p.txt b{color:var(--text-strong)}
+  .faq{padding:6px var(--space-5);margin-top:10px;max-width:840px}
+  .faq details{border-bottom:1px solid var(--hairline);padding:14px 0}
   .faq details:last-child{border-bottom:0}
-  .faq summary{font-family:"Bricolage Grotesque";font-weight:600;font-size:16px;cursor:pointer;list-style:none}
+  .faq summary{font-family:var(--font-heading);font-weight:600;font-size:16px;color:var(--text-strong);cursor:pointer;list-style:none}
   .faq summary::-webkit-details-marker{display:none}
   .faq summary::before{content:"+ ";color:var(--accent)}
   .faq details[open] summary::before{content:"– "}
-  .faq p{color:var(--stone);font-size:14.5px;margin-top:8px}
-
-  footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:13px;color:var(--stone);display:flex;gap:16px;flex-wrap:wrap}
-  footer a{color:var(--stone);text-decoration:none}
+  .faq p{color:var(--text-body);font-size:14.5px;margin-top:8px}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
-    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
-    <a href="index.html" style="text-decoration:none;color:inherit"><span class="brand">Gastro<span class="bk">kn<span class="bi">ı<span class="bdot"></span></span>ff</span></span></a>
-    <a class="back" href="index.html">← zurück</a>
-  </div>
+<header class="gk-top">
+  <svg class="gk-mark" viewBox="0 0 100 100" aria-hidden="true">
+    <defs><linearGradient id="gkT" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" style="stop-color:var(--logo-tile-top)"></stop><stop offset="1" style="stop-color:var(--logo-tile-bottom)"></stop></linearGradient></defs>
+    <path d="M20 0 H67 V33 H100 V80 A20 20 0 0 1 80 100 H20 A20 20 0 0 1 0 80 V20 A20 20 0 0 1 20 0 Z" fill="url(#gkT)" style="stroke:var(--sheen)" stroke-width="1.2"></path>
+    <path d="M67 0 L67 33 L100 33 Z" style="fill:var(--accent-strong)"></path>
+    <path d="M67 0 L100 0 L100 33 Z" style="fill:var(--accent)"></path>
+    <rect x="22" y="30" width="10" height="46" style="fill:var(--cream)"></rect>
+    <path d="M30 54 L56 33 M30 54 L58 74" style="stroke:var(--cream)" stroke-width="10"></path>
+  </svg>
+  <a href="index.html" style="color:inherit"><span class="gk-word">Gastro<span class="kn">kniff</span></span></a>
+  <a class="gk-back" href="index.html">← zurück</a>
+</header>
 
+<div class="wrap">
   <span class="kat">Übersicht · Rechner</span>
   <h1 class="title">Gastro-Rechner: alle Rechner für die Gastronomie</h1>
   <p class="intro">Hier findest du alle kostenlosen Rechner für Gastronomen an einem Ort — vom Wareneinsatz über die Speisekarte bis zum Break-Even. Jeder läuft direkt im Browser, ohne Anmeldung und ohne Kosten. Such dir den passenden aus:</p>
 
   <div class="grid">
-    <a class="rech" href="wareneinsatz-rechner.html">
+    <a class="card rech" href="wareneinsatz-rechner.html">
       <div class="ic">🧮</div>
       <h3>Wareneinsatz-Rechner</h3>
       <p>Kalkuliere pro Gericht deinen Wareneinsatz, den Verkaufspreis und den Deckungsbeitrag.</p>
       <span class="go">Zum Rechner →</span>
       <span class="kw">auch: Deckungsbeitrag-Rechner · Food-Cost-Rechner</span>
     </a>
-    <a class="rech" href="aufschlag-vs-deckungsbeitrag.html">
+    <a class="card rech" href="aufschlag-vs-deckungsbeitrag.html">
       <div class="ic">⚖️</div>
       <h3>Aufschlag vs. Deckungsbeitrag</h3>
       <p>Vergleicht „Wareneinsatz × Faktor" mit dem festen Deckungsbeitrag — an deinen Gerichten.</p>
       <span class="go">Zum Rechner →</span>
       <span class="kw">auch: Aufschlagsrechner Gastronomie</span>
     </a>
-    <a class="rech" href="menu-engineering.html">
+    <a class="card rech" href="menu-engineering.html">
       <div class="ic">📊</div>
       <h3>Menu-Engineering-Rechner</h3>
       <p>Sortiere deine Gerichte nach Beliebtheit und Marge in Sterne, Renner, Rätsel und Penner.</p>
       <span class="go">Zum Rechner →</span>
       <span class="kw">auch: Speisekarten-Analyse</span>
     </a>
-    <a class="rech" href="getraenke-rechner.html">
+    <a class="card rech" href="getraenke-rechner.html">
       <div class="ic">🍹</div>
       <h3>Getränke- &amp; Schankkalkulator</h3>
       <p>Vom Flaschenpreis zum richtigen Glaspreis — inklusive Schankverlust.</p>
       <span class="go">Zum Rechner →</span>
       <span class="kw">auch: Getränkekalkulation · Ausschankrechner</span>
     </a>
-    <a class="rech" href="break-even-rechner.html">
+    <a class="card rech" href="break-even-rechner.html">
       <div class="ic">💶</div>
       <h3>Break-Even-Rechner</h3>
       <p>Wie viele Gäste pro Tag brauchst du, damit sich der Laden trägt?</p>
       <span class="go">Zum Rechner →</span>
       <span class="kw">auch: Gewinnschwelle Gastronomie</span>
     </a>
-    <a class="rech" href="kostenstruktur.html">
+    <a class="card rech" href="kostenstruktur.html">
       <div class="ic">📈</div>
       <h3>Kostenstruktur (Ampel)</h3>
       <p>Wie viel % vom Umsatz dürfen Ware, Personal und Miete kosten? Die Faustregeln auf einen Blick.</p>
       <span class="go">Zur Übersicht →</span>
       <span class="kw">auch: Richtwerte Gastronomie 2026</span>
     </a>
-    <a class="rech" href="foodwaste-check.html">
+    <a class="card rech" href="foodwaste-check.html">
       <div class="ic">♻️</div>
       <h3>Foodwaste-Check</h3>
       <p>Was dich Lager, Verschnitt, Überproduktion und Tellerrückläufer pro Monat und Jahr kosten.</p>
       <span class="go">Zum Rechner →</span>
       <span class="kw">auch: Lebensmittelverschwendung berechnen</span>
     </a>
-    <a class="rech" href="produktpass.html">
+    <a class="card rech" href="produktpass.html">
       <div class="ic">📋</div>
       <h3>Produktpass-Generator</h3>
       <p>Zutaten, Kosten pro Portion, Wareneinsatz in Prozent und Allergene automatisch — zum Ausdrucken für die Küche.</p>
       <span class="go">Zum Rechner →</span>
       <span class="kw">auch: Rezeptur-Dokumentation · Allergenliste</span>
     </a>
-    <a class="rech" href="mietcheck.html">
+    <a class="card rech" href="mietcheck.html">
       <div class="ic">🔑</div>
       <h3>Mietcheck</h3>
       <p>Ist deine Miete tragbar? Mietquote, nötiger Umsatz und das Risiko der Restlaufzeit auf einen Blick.</p>
       <span class="go">Zum Rechner →</span>
       <span class="kw">auch: Mietquote Gastronomie · Mietbelastung</span>
     </a>
-    <a class="rech" href="einarbeitungsplan.html">
+    <a class="card rech" href="einarbeitungsplan.html">
       <div class="ic">📋</div>
       <h3>Einarbeitungsplan</h3>
       <p>Die ersten zwei Wochen zum Ausdrucken — Tag für Tag, zum Abhaken für Service, Küche und Bar.</p>
@@ -143,18 +138,19 @@
   <p class="txt">Wenn du wissen willst, <b>was ein Gericht kosten darf</b>, nimm den Wareneinsatz-Rechner. Wenn du dich fragst, <b>ob du richtig kalkulierst</b>, vergleich mit dem Aufschlag-vs-Deckungsbeitrag-Rechner. Willst du deine <b>Karte optimieren</b>, hilft Menu-Engineering. Für die <b>Bar</b> gibt es den Getränke-Rechner, und ob sich dein <b>Betrieb überhaupt trägt</b>, zeigt der Break-Even-Rechner. Alles kostenlos, alles im Browser.</p>
 
   <h2>Häufige Fragen</h2>
-  <div class="faq">
+  <div class="card faq">
     <details><summary>Sind die Gastro-Rechner wirklich kostenlos?</summary><p>Ja. Alle Rechner sind ohne Anmeldung und ohne Kosten nutzbar. Deine Eingaben bleiben in deinem Browser und werden nicht gespeichert.</p></details>
     <details><summary>Wie berechne ich den Wareneinsatz in der Gastronomie?</summary><p>Du addierst die Einkaufskosten aller Zutaten einer Portion. Als Quote vom Netto-Verkaufspreis liegt der Wareneinsatz bei Speisen meist zwischen 25 und 35 %. Der Wareneinsatz-Rechner macht das automatisch.</p></details>
     <details><summary>Was ist der Deckungsbeitrag?</summary><p>Netto-Verkaufspreis minus Wareneinsatz. Dieser Betrag bleibt dir für Personal, Miete und Gewinn — er ist wichtiger als die reine Prozentzahl.</p></details>
     <details><summary>Brauche ich dafür Excel oder ein Programm?</summary><p>Nein. Die Rechner laufen direkt im Browser, auf Handy und Computer. Nichts installieren, nichts speichern.</p></details>
   </div>
 
-  <footer>
+</div>
+
+<footer class="gk-foot"><div class="gk-foot-in">
     <a href="index.html">Startseite</a><a href="wareneinsatz-rechner.html">Wareneinsatz</a><a href="menu-engineering.html">Menu-Engineering</a><a href="break-even-rechner.html">Break-Even</a><a href="foodwaste-check.html">Foodwaste-Check</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a>
     <span>Alle Gastro-Rechner von Gastrokniff — kostenlos, aus der Praxis.</span>
-  </footer>
-</div>
+</div></footer>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4874637d13da44b99b039a9db0a4fcec"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

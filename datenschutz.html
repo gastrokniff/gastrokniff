@@ -8,45 +8,40 @@
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#241C13">
+<link rel="canonical" href="https://gastrokniff.de/datenschutz.html">
+<meta name="theme-color" content="#0B1028">
 <link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="theme.css">
 <style>
-  :root{--paper:#F5EFE3;--ink:#241C13;--stone:#6E6355;--line:#E4DBCB;--card:#FCF7ED;--accent:#C07A12;--accent-soft:#F3E4C6}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:760px;margin:0 auto;padding:34px 24px 80px}
-  h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:clamp(28px,5vw,42px);letter-spacing:-.02em;margin:6px 0 26px}
-  h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:19px;margin:32px 0 8px}
-  p{margin-bottom:10px}
+  h1{margin:6px 0 var(--space-6)}
+  h2{font-size:22px;margin:var(--space-7) 0 8px}
+  p{margin-bottom:10px;line-height:1.65}
   ul{margin:0 0 10px 20px}
   li{margin-bottom:5px}
-  a{color:var(--accent)}
-  .top{display:flex;align-items:center;gap:10px;margin-bottom:26px}
-  .bmark{width:40px;height:40px;flex:none}
-  .brand{font-family:"Bricolage Grotesque";font-weight:700;font-size:30px;display:inline-flex}
-  .bi{position:relative;display:inline-block}.bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--ink);border-radius:.04em;transform:translateX(-50%)}.bk{color:#A9700F}
-  .back{font-size:14px;color:var(--stone);margin-left:auto}
-  .fill{color:#9A6B14;background:var(--accent-soft);border-radius:4px;padding:0 5px;font-weight:600}
-  .todo{display:block;background:#FBEFD6;border:1px dashed var(--accent);border-radius:8px;padding:10px 12px;font-size:13px;color:#8A5E10;margin:8px 0 4px}
-  .todo b{text-transform:uppercase;letter-spacing:.05em;font-size:11px}
+  .wrap-text b{color:var(--text-strong)}
   .opt{border-left:3px solid var(--accent);padding-left:14px}
-  .banner{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:13.5px;color:var(--stone);margin-bottom:24px}
-  footer{border-top:1px solid var(--line);margin-top:50px;padding-top:20px;font-size:13px;color:var(--stone);display:flex;gap:18px;flex-wrap:wrap}
-  footer a{color:var(--stone)}
-  @media(max-width:600px){.brand{font-size:24px}.bmark{width:32px;height:32px}}
+  .banner{font-size:14.5px;color:var(--text-body);margin-bottom:var(--space-5)}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
-    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
-    <a href="index.html" style="text-decoration:none;color:inherit"><span class="brand">Gastro<span class="bk">kn<span class="bi">ı<span class="bdot"></span></span>ff</span></span></a>
-    <a class="back" href="index.html">← zurück</a>
-  </div>
+<header class="gk-top">
+  <svg class="gk-mark" viewBox="0 0 100 100" aria-hidden="true">
+    <defs><linearGradient id="gkT" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" style="stop-color:var(--logo-tile-top)"></stop><stop offset="1" style="stop-color:var(--logo-tile-bottom)"></stop></linearGradient></defs>
+    <path d="M20 0 H67 V33 H100 V80 A20 20 0 0 1 80 100 H20 A20 20 0 0 1 0 80 V20 A20 20 0 0 1 20 0 Z" fill="url(#gkT)" style="stroke:var(--sheen)" stroke-width="1.2"></path>
+    <path d="M67 0 L67 33 L100 33 Z" style="fill:var(--accent-strong)"></path>
+    <path d="M67 0 L100 0 L100 33 Z" style="fill:var(--accent)"></path>
+    <rect x="22" y="30" width="10" height="46" style="fill:var(--cream)"></rect>
+    <path d="M30 54 L56 33 M30 54 L58 74" style="stroke:var(--cream)" stroke-width="10"></path>
+  </svg>
+  <a href="index.html" style="color:inherit"><span class="gk-word">Gastro<span class="kn">kniff</span></span></a>
+  <a class="gk-back" href="index.html">← zurück</a>
+</header>
 
+<div class="wrap-text">
   <h1>Datenschutzerklärung</h1>
 
-  <div class="banner">Gastrokniff ist bewusst datensparsam: eine statische Website ohne Nutzerkonten, ohne Tracking-Cookies und ohne Weitergabe deiner Daten. Diese Erklärung beschreibt, welche wenigen Daten dennoch anfallen.</div>
+  <div class="card banner">Gastrokniff ist bewusst datensparsam: eine statische Website ohne Nutzerkonten, ohne Tracking-Cookies und ohne Weitergabe deiner Daten. Diese Erklärung beschreibt, welche wenigen Daten dennoch anfallen.</div>
 
   <h2>1. Verantwortlicher</h2>
   <p>Verantwortlich für die Datenverarbeitung auf dieser Website:<br>
@@ -91,12 +86,13 @@
   <h2>9. Aktualität und Änderungen</h2>
   <p>Diese Datenschutzerklärung hat den Stand Juli 2026. Durch Weiterentwicklung der Website oder geänderte gesetzliche Vorgaben kann es nötig werden, sie anzupassen.</p>
 
-  <footer>
+</div>
+
+<footer class="gk-foot"><div class="gk-foot-in">
     <a href="index.html">Startseite</a>
     <a href="impressum.html">Impressum</a>
     <span>© 2026 Gastrokniff</span>
-  </footer>
-</div>
+</div></footer>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4874637d13da44b99b039a9db0a4fcec"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

@@ -10,171 +10,120 @@
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#241C13">
+<link rel="canonical" href="https://gastrokniff.de/">
+<meta name="theme-color" content="#0B1028">
 <link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="theme.css">
 <style>
-  :root{
-    --paper:#F5EFE3;
-    --paper-warm:#F9EEDA;
-    --ink:#241C13;
-    --stone:#6E6355;
-    --line:#E4DBCB;
-    --card:#FCF7ED;
-    --accent:#C07A12;
-    --accent-soft:#F3E4C6;
-    --herb:#425A3F;
-    --good:#3E7C4F;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{
-    background:
-      radial-gradient(1100px 640px at 88% -8%, rgba(224,164,58,.20), transparent 60%),
-      radial-gradient(900px 520px at -10% 8%, rgba(216,150,60,.10), transparent 55%),
-      var(--paper);
-    color:var(--ink);
-    font-family:"Inter",system-ui,sans-serif;line-height:1.55;
-    -webkit-font-smoothing:antialiased;overflow-x:hidden;
-  }
-  ::selection{background:var(--accent);color:#fff}
-  h1,h2,h3,h4,.disp{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:600;letter-spacing:-.015em;line-height:1.05}
-  .mono{font-family:"JetBrains Mono",monospace}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
-  .tag{
-    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
-    color:var(--accent);display:inline-flex;align-items:center;gap:9px;
-  }
+  body{overflow-x:hidden}
+  ::selection{background:var(--accent);color:var(--text-on-accent)}
+  .tag{font-family:var(--font-body);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+       color:var(--accent);display:inline-flex;align-items:center;gap:9px}
   .tag::before{content:"";width:22px;height:1px;background:var(--accent)}
 
   /* NAV */
-  header{position:fixed;inset:0 0 auto 0;z-index:100;padding:20px 0;transition:.35s;border-bottom:1px solid transparent}
-  header.scrolled{background:rgba(245,239,227,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px 0}
-  .nav{display:flex;align-items:center;justify-content:space-between}
-  .brand{display:inline-flex;align-items:center;gap:11px;font-family:"Bricolage Grotesque";font-weight:700;font-size:34px;letter-spacing:-.02em;color:var(--ink)}
-  .brand .bmark{width:44px;height:44px;display:block;flex:none;filter:drop-shadow(0 3px 8px rgba(36,28,19,.18))}
-  .brand .wm{display:inline-flex;line-height:1}
-  .bi{position:relative;display:inline-block}
-  .bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--ink);border-radius:.04em;transform:translateX(-50%)}.bk{color:#A9700F}
-  .nav-links{display:flex;gap:30px;align-items:center}
-  .nav-links a{font-size:14px;color:var(--stone);transition:color .2s}
-  .nav-links a:hover{color:var(--ink)}
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;font-weight:500;font-size:14px;
-    border-radius:999px;padding:11px 22px;cursor:pointer;border:1px solid var(--ink);
-    background:var(--ink);color:var(--paper);transition:.25s;
-  }
-  .btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
-  .btn.ghost{background:transparent;color:var(--ink)}
-  .btn.ghost:hover{background:var(--ink);color:var(--paper)}
-  .menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px;color:var(--ink);cursor:pointer;font-family:"Inter"}
+  header{position:fixed;inset:0 0 auto 0;z-index:100;transition:.35s;border-bottom:1px solid transparent}
+  header .gk-top{transition:padding .35s}
+  header.scrolled{background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--hairline)}
+  header.scrolled .gk-top{padding-top:var(--space-3);padding-bottom:var(--space-3)}
+  .brand{display:inline-flex;align-items:center;gap:var(--space-3);color:inherit}
+  .nav-links{display:flex;gap:30px;align-items:center;margin-left:auto}
+  .nav-links a{font-size:14px;color:var(--text-muted);transition:color .2s}
+  .nav-links a:hover{color:var(--text-strong)}
+  .nav-links .btn-ghost{padding:10px 20px;font-size:14px;color:var(--text-strong)}
+  .menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--hairline);border-radius:10px;padding:8px 12px;
+    font-size:14px;color:var(--text-strong);cursor:pointer;font-family:var(--font-body)}
 
   /* HERO */
   .hero{padding:150px 0 70px;position:relative}
   .hero .tag{margin-bottom:26px}
   .hero h1{font-size:clamp(40px,6.4vw,82px);max-width:15ch}
   .hero h1 .u{color:var(--accent)}
-  .hero .lead{margin-top:26px;max-width:52ch;font-size:clamp(16px,2vw,19px);color:var(--stone)}
-  .warm-line{display:inline-block;margin-top:6px;color:var(--herb);font-family:"Bricolage Grotesque";font-weight:600;font-size:1.02em}
+  .hero .lead{margin-top:26px;max-width:52ch;font-size:clamp(16px,2vw,19px);color:var(--text-body)}
+  .warm-line{display:inline-block;margin-top:6px;color:var(--accent-pale);font-family:var(--font-display);font-weight:600;font-size:1.02em}
   .herkunft{max-width:62ch;margin:22px 0 0;padding-left:16px;border-left:3px solid var(--accent);
-            color:var(--stone);font-size:16px;line-height:1.65}
-  @media(max-width:600px){.herkunft{font-size:15px;padding-left:13px}.brand{font-size:24px}.brand .bmark{width:32px;height:32px}}
+            color:var(--text-body);font-size:16px;line-height:1.65}
+  @media(max-width:600px){.herkunft{font-size:15px;padding-left:13px}}
   .hero .cta{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap}
-  .hero .trust{margin-top:40px;display:flex;gap:34px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:26px}
+  .hero .trust{margin-top:40px;display:flex;gap:34px;flex-wrap:wrap;border-top:1px solid var(--hairline);padding-top:26px}
   .hero .trust div{display:flex;flex-direction:column}
-  .hero .trust b{font-family:"Bricolage Grotesque";font-size:30px;color:var(--ink)}
-  .hero .trust small{color:var(--stone);font-size:13px}
+  .hero .trust b{font-family:var(--font-display);font-size:30px;color:var(--text-strong)}
+  .hero .trust small{color:var(--text-muted);font-size:13px}
 
   .band{padding:96px 0}
   .band-head{max-width:60ch}
   .band-head h2{font-size:clamp(28px,4vw,46px);margin:20px 0 14px}
-  .band-head p{color:var(--stone);font-size:17px}
+  .band-head p{color:var(--text-body);font-size:17px}
 
   /* CALCULATOR */
-  .calc-sec{
-    background:
-      radial-gradient(720px 420px at 14% -5%, rgba(214,150,54,.26), transparent 62%),
-      linear-gradient(165deg,#31261A 0%,#241C13 100%);
-    color:var(--paper);position:relative;overflow:hidden;
-  }
-  .calc-sec .tag{color:var(--accent)}
-  .calc-sec .tag::before{background:var(--accent)}
-  .calc-sec h2{color:var(--paper)}
-  .calc-sec .band-head p{color:#B9B2A6}
-  .calc{
-    margin-top:44px;display:grid;grid-template-columns:1.35fr 1fr;gap:26px;align-items:start;
-  }
-  .panel{background:#352817;border:1px solid #4A3A22;border-radius:16px;padding:26px}
-  .panel h3{font-size:18px;color:var(--paper);margin-bottom:6px}
-  .panel .hint{color:#9A9184;font-size:13px;margin-bottom:20px}
+  .calc-sec{background:var(--surface-band);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
+  .calc{margin-top:44px;display:grid;grid-template-columns:1.35fr 1fr;gap:26px;align-items:start}
+  .panel h3{font-size:18px;margin-bottom:6px}
+  .panel .hint{color:var(--text-muted);font-size:13px;margin-bottom:20px}
   .row{display:grid;grid-template-columns:1fr 76px 84px 92px 30px;gap:8px;margin-bottom:9px;align-items:center}
-  .row.head{color:#8A8175;font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+  .row.head{color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
   .calc input,.calc select{
-    width:100%;background:#2A2013;border:1px solid #4A3A22;border-radius:8px;
-    color:var(--paper);padding:10px 11px;font-family:"Inter";font-size:14px;outline:none;transition:border .2s;
+    width:100%;background:var(--surface-inset);border:1px solid var(--hairline);border-radius:8px;
+    color:var(--text-strong);padding:10px 11px;font-family:var(--font-body);font-size:14px;outline:none;transition:border .2s;
   }
   .calc input:focus,.calc select:focus{border-color:var(--accent)}
-  .calc input::placeholder{color:#6E655A}
-  .del{background:none;border:0;color:#6E655A;font-size:18px;cursor:pointer;line-height:1;transition:color .2s}
-  .del:hover{color:#C0685E}
-  .addrow{margin-top:10px;background:none;border:1px dashed #4A4237;color:#C6BDAF;border-radius:8px;padding:9px;width:100%;cursor:pointer;font-size:13px;font-family:"Inter";transition:.2s}
+  .calc input::placeholder{color:var(--text-muted)}
+  .del{background:none;border:0;color:var(--text-muted);font-size:18px;cursor:pointer;line-height:1;transition:color .2s}
+  .del:hover{color:var(--accent-tint)}
+  .addrow{margin-top:10px;background:none;border:1px dashed var(--hairline);color:var(--text-body);border-radius:8px;padding:9px;width:100%;cursor:pointer;font-size:13px;font-family:var(--font-body);transition:.2s}
   .addrow:hover{border-color:var(--accent);color:var(--accent)}
   .ctrl{display:flex;flex-direction:column;gap:5px;margin-top:16px}
-  .ctrl label{font-size:12px;color:#9A9184;text-transform:uppercase;letter-spacing:.05em}
+  .ctrl label{font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em}
   .segs{display:flex;gap:6px}
-  .seg{flex:1;text-align:center;background:#2A2013;border:1px solid #4A3A22;border-radius:8px;padding:9px;cursor:pointer;font-size:13px;color:#C6BDAF;transition:.2s;user-select:none}
-  .seg.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
-  .out{background:linear-gradient(180deg,#3A2C1A,#2A2013);border:1px solid #4A3A22;border-radius:16px;padding:26px;position:sticky;top:90px}
-  .out .big{font-family:"Bricolage Grotesque";font-weight:700}
-  .kpi{display:flex;justify-content:space-between;align-items:baseline;padding:15px 0;border-bottom:1px solid #4A3A22}
+  .seg{flex:1;text-align:center;background:var(--surface-inset);border:1px solid var(--hairline);border-radius:8px;padding:9px;cursor:pointer;font-size:13px;color:var(--text-body);transition:.2s;user-select:none}
+  .seg.on{background:var(--accent);border-color:var(--accent);color:var(--text-on-accent);font-weight:600}
+  .out{position:sticky;top:90px}
+  .kpi{display:flex;justify-content:space-between;align-items:baseline;padding:15px 0;border-bottom:1px solid var(--hairline)}
   .kpi:last-of-type{border-bottom:0}
-  .kpi span{color:#9A9184;font-size:13.5px}
-  .kpi .v{font-family:"JetBrains Mono";font-size:16px;color:var(--paper)}
-  .kpi.hero-kpi .v{font-family:"Bricolage Grotesque";font-size:30px;color:var(--accent)}
+  .kpi span{color:var(--text-body);font-size:13.5px}
+  .kpi .v{font-family:var(--font-heading);font-weight:600;font-size:16px;color:var(--text-strong)}
+  .kpi.hero-kpi .v{font-size:30px;font-weight:700;color:var(--accent)}
   .gauge{margin:20px 0 6px}
-  .gauge .bar{height:9px;border-radius:999px;background:#4A3A22;overflow:hidden}
-  .gauge .fill{height:100%;width:30%;background:var(--good);border-radius:999px;transition:width .35s ease,background .35s}
-  .gauge .glabel{display:flex;justify-content:space-between;font-size:12px;color:#9A9184;margin-top:8px}
-  .note{margin-top:16px;font-size:12px;color:#8A8175;line-height:1.5}
+  .gauge .bar{height:9px;border-radius:var(--radius-pill);background:var(--hairline);overflow:hidden}
+  .gauge .fill{height:100%;width:30%;background:var(--signal-live);border-radius:var(--radius-pill);transition:width .35s ease,background .35s}
+  .gauge .glabel{display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-top:8px}
+  .gauge .gstate{font-size:13.5px;font-weight:600;margin-top:6px}
+  .note{margin-top:16px;font-size:12px;color:var(--text-muted);line-height:1.5}
 
   /* TOOLS GRID */
   .grid{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .tool{display:block;color:inherit;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;transition:.3s;position:relative;overflow:hidden}
-  .more-soon{text-align:center;color:var(--stone);font-size:14px;margin-top:26px}
-  .tool:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(33,28,22,.4)}
-  .tool .ico{width:44px;height:44px;border-radius:11px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:22px}
+  .tool{display:block;color:inherit;transition:transform .3s,border-color .3s}
+  .tool:hover{color:inherit;transform:translateY(-4px);border-color:var(--accent)}
+  .more-soon{text-align:center;color:var(--text-muted);font-size:14px;margin-top:26px}
+  .tool .ico{width:44px;height:44px;border-radius:var(--radius-md);margin-bottom:18px;font-size:22px;
+    background:radial-gradient(circle at 50% 35%,rgba(255,138,61,.32),rgba(255,138,61,.08) 70%);
+    box-shadow:var(--glow-icon);display:flex;align-items:center;justify-content:center}
   .tool h3{font-size:20px;margin-bottom:8px}
-  .tool p{color:var(--stone);font-size:14.5px;margin-bottom:16px}
-  .pill{font-family:"JetBrains Mono";font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
-  .pill.live{background:var(--good);color:#fff}
-  .pill.soon{background:#EAE4D8;color:var(--stone)}
+  .tool p{color:var(--text-body);font-size:14.5px;margin-bottom:16px}
+  .pill.live{background:rgba(126,226,168,.14);color:var(--signal-live)}
 
   /* KNOWLEDGE */
-  .know{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .arts{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-  .art{background:var(--card);padding:30px;transition:background .3s}
-  .art:hover{background:var(--paper)}
-  .art .k{font-family:"JetBrains Mono";font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+  .know{background:var(--surface-band);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
+  .arts{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .art{display:block;color:inherit;transition:transform .3s,border-color .3s}
+  .art:hover{color:inherit;transform:translateY(-4px);border-color:var(--accent)}
+  .art .k{font-size:11px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
   .art h3{font-size:21px;margin:14px 0 10px;line-height:1.15}
-  .art p{color:var(--stone);font-size:14.5px}
-  .art .more{margin-top:16px;font-size:13px;color:var(--ink);font-weight:500;display:inline-flex;gap:6px}
+  .art p{color:var(--text-body);font-size:14.5px}
+  .art .more{margin-top:16px;font-size:13px;color:var(--text-strong);font-weight:500;display:inline-flex;gap:6px}
 
   /* KONTAKT */
   .news{text-align:center}
   .news h2{font-size:clamp(30px,4.6vw,52px);max-width:20ch;margin:20px auto 16px}
-  .news p{color:var(--stone);max-width:48ch;margin:0 auto 30px;font-size:17px}
+  .news p{color:var(--text-body);max-width:48ch;margin:0 auto 30px;font-size:17px}
   .signup{display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center}
-  .signup input{flex:1;min-width:220px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:14px 20px;font-size:15px;font-family:"Inter";outline:none}
-  .signup input:focus{border-color:var(--accent)}
   .signup .btn{white-space:nowrap}
-  .news .fine{margin-top:14px;font-size:12.5px;color:var(--stone)}
+  .news .fine{margin-top:14px;font-size:12.5px;color:var(--text-muted)}
 
-  footer{border-top:1px solid var(--line);padding:40px 0}
-  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center;color:var(--stone);font-size:13px}
-  .foot .legal a{color:var(--stone);text-decoration:none}
-  .foot .legal a:hover{color:var(--ink)}
-  .foot .brand{color:var(--ink);font-size:22px;gap:9px}
-  .foot .brand .bmark{width:28px;height:28px}
+  .gk-foot-in{align-items:center;justify-content:space-between}
+  .gk-foot .brand .gk-mark{width:28px;height:28px}
+  .gk-foot .brand .gk-word{font-size:20px}
 
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.19,1,.22,1),transform .9s cubic-bezier(.19,1,.22,1)}
   .reveal.in{opacity:1;transform:none}
@@ -183,21 +132,20 @@
     .calc{grid-template-columns:1fr}
     .out{position:static}
     .grid,.arts{grid-template-columns:1fr!important}
-    .arts{border-radius:16px}
   }
   @media(max-width:720px){
-    .wrap{padding:0 20px}
     .menu-btn{display:block}
+    .gk-top{position:relative}
     .nav-links{
       display:none;position:absolute;top:100%;right:20px;left:20px;margin-top:10px;
       flex-direction:column;align-items:stretch;gap:0;
-      background:var(--paper);border:1px solid var(--line);border-radius:14px;
-      padding:8px;box-shadow:0 12px 30px rgba(36,28,19,.14);
+      background:var(--surface-card);border:1px solid var(--hairline);border-radius:var(--radius-md);
+      padding:8px;box-shadow:var(--shadow-card);
     }
     .nav-links.open{display:flex}
     .nav-links a{padding:13px 14px;border-radius:9px;font-size:16px}
-    .nav-links a:not(.btn):hover{background:var(--card)}
-    .nav-links .btn.ghost{margin-top:4px;justify-content:center}
+    .nav-links a:not(.btn-ghost):hover{background:var(--surface-inset)}
+    .nav-links .btn-ghost{margin-top:4px;text-align:center}
     .hero{padding:120px 0 50px}
     .band{padding:66px 0}
     .row{grid-template-columns:1fr 60px 70px 76px 26px;gap:6px}
@@ -209,21 +157,24 @@
 <body>
 
 <header id="hdr">
-  <div class="wrap nav">
+  <div class="gk-top">
     <a href="#top" class="brand">
-      <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true">
-        <rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/>
-        <path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/>
-        <path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/>
-        <text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text>
-      </svg>
-      <span class="wm">Gastro<span class="bk">kn<span class="bi">ı<span class="bdot"></span></span>ff</span></span>
+      <svg class="gk-mark" viewBox="0 0 100 100" aria-hidden="true">
+    <defs><linearGradient id="gkT" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" style="stop-color:var(--logo-tile-top)"></stop><stop offset="1" style="stop-color:var(--logo-tile-bottom)"></stop></linearGradient></defs>
+    <path d="M20 0 H67 V33 H100 V80 A20 20 0 0 1 80 100 H20 A20 20 0 0 1 0 80 V20 A20 20 0 0 1 20 0 Z" fill="url(#gkT)" style="stroke:var(--sheen)" stroke-width="1.2"></path>
+    <path d="M67 0 L67 33 L100 33 Z" style="fill:var(--accent-strong)"></path>
+    <path d="M67 0 L100 0 L100 33 Z" style="fill:var(--accent)"></path>
+    <rect x="22" y="30" width="10" height="46" style="fill:var(--cream)"></rect>
+    <path d="M30 54 L56 33 M30 54 L58 74" style="stroke:var(--cream)" stroke-width="10"></path>
+  </svg>
+      <span class="gk-word">Gastro<span class="kn">kniff</span></span>
     </a>
     <nav class="nav-links" id="navLinks">
       <a href="#rechner">Rechner</a>
       <a href="rechner.html">Alle Rechner</a>
       <a href="#wissen">Wissen</a>
-      <a href="#kontakt" class="btn ghost">Kontakt</a>
+      <a href="#kontakt" class="btn-ghost">Kontakt</a>
     </nav>
     <button class="menu-btn" id="menuBtn" aria-label="Menü öffnen" aria-expanded="false">Menü</button>
   </div>
@@ -238,7 +189,7 @@
     <p class="herkunft">Diese Seite gibt es, weil ich sie vor zehn Jahren selbst gebraucht hätte. Alles hier kommt aus dem eigenen Betrieb und aus Fehlern, die mich Geld und schlaflose Nächte gekostet haben. Damit du sie nicht auch erst selbst machen musst. Kostenlos, ohne Anmeldung, ohne Kurs am Ende.</p>
     <div class="cta reveal">
       <a href="#rechner" class="btn">Wareneinsatz-Rechner öffnen →</a>
-      <a href="#werkzeuge" class="btn ghost">Alle Werkzeuge ansehen</a>
+      <a href="#werkzeuge" class="btn-ghost">Alle Werkzeuge ansehen</a>
     </div>
     <div class="trust reveal">
       <div><b>0 €</b><small>Kostenlos starten</small></div>
@@ -254,12 +205,12 @@
     <div class="band-head reveal">
       <span class="tag">Werkzeug 01 · Live</span>
       <h2>Wareneinsatz-Rechner</h2>
-      <p>Trag die Zutaten eines Gerichts ein und sieh in Echtzeit deinen Wareneinsatz, den empfohlenen Verkaufspreis und deinen Deckungsbeitrag. Kein Excel, kein Ratespiel. <span style="color:var(--stone)">(Auch bekannt als Food-Cost- oder Deckungsbeitrag-Rechner.)</span></p>
+      <p>Trag die Zutaten eines Gerichts ein und sieh in Echtzeit deinen Wareneinsatz, den empfohlenen Verkaufspreis und deinen Deckungsbeitrag. Kein Excel, kein Ratespiel. <span style="color:var(--text-muted)">(Auch bekannt als Food-Cost- oder Deckungsbeitrag-Rechner.)</span></p>
     </div>
 
     <div class="calc reveal">
       <!-- INPUT -->
-      <div class="panel">
+      <div class="card panel">
         <h3>Zutaten des Gerichts</h3>
         <p class="hint">Menge × Einkaufspreis pro Einheit. Beispiel: 0,18 kg Rind × 14,50 €/kg.</p>
         <div class="row head"><div>Zutat</div><div>Menge</div><div>Einheit</div><div>€ / Einheit</div><div></div></div>
@@ -289,7 +240,7 @@
       </div>
 
       <!-- OUTPUT -->
-      <div class="out">
+      <div class="card-raised out">
         <div class="kpi hero-kpi"><span>Empfohlener Preis (brutto)</span><span class="v big" id="oGross">–</span></div>
         <div class="kpi"><span>Wareneinsatz gesamt</span><span class="v" id="oCost">0,00 €</span></div>
         <div class="kpi"><span>Empf. Netto-Preis</span><span class="v" id="oNet">–</span></div>
@@ -298,6 +249,7 @@
         <div class="gauge">
           <div class="bar"><div class="fill" id="gFill"></div></div>
           <div class="glabel"><span id="gText">Wareneinsatzquote</span><span id="gPct">–</span></div>
+          <div class="gstate" id="gState"></div>
         </div>
         <p class="note" id="oNote">Gib Zutaten ein, um die Kalkulation zu sehen. Tipp: Vergiss nicht Beilagen, Garnitur und Schwund — die kleinen Positionen fressen oft die Marge.</p>
       </div>
@@ -314,55 +266,55 @@
       <p>Ein Werkzeug nach dem anderen — gebaut aus echten Fragen, die sich jeder Gastronom stellt. Neue kommen nach und nach dazu.</p>
     </div>
     <div class="grid">
-      <a class="tool reveal" href="#rechner">
+      <a class="card tool reveal" href="#rechner">
         <div class="ico">🧮</div>
         <h3>Wareneinsatz-Rechner</h3>
         <p>Kalkuliere Gerichte, finde den richtigen Preis und schütze deine Marge.</p>
         <span class="pill live">Jetzt live</span>
       </a>
-      <a class="tool reveal" href="menu-engineering.html">
+      <a class="card tool reveal" href="menu-engineering.html">
         <div class="ico">📊</div>
         <h3>Menu-Engineering</h3>
         <p>Welche Gerichte tragen deine Karte? Sortiere sie nach Beliebtheit und Marge.</p>
         <span class="pill live">Jetzt live</span>
       </a>
-      <a class="tool reveal" href="getraenke-rechner.html">
+      <a class="card tool reveal" href="getraenke-rechner.html">
         <div class="ico">🍹</div>
         <h3>Getränke-Rechner</h3>
         <p>Vom Flaschenpreis zum richtigen Glaspreis — inklusive Schankverlust.</p>
         <span class="pill live">Jetzt live</span>
       </a>
-      <a class="tool reveal" href="break-even-rechner.html">
+      <a class="card tool reveal" href="break-even-rechner.html">
         <div class="ico">💶</div>
         <h3>Break-Even-Rechner</h3>
         <p>Wie viele Gäste pro Tag brauchst du, damit sich der Laden trägt?</p>
         <span class="pill live">Jetzt live</span>
       </a>
-      <a class="tool reveal" href="aufschlag-vs-deckungsbeitrag.html">
+      <a class="card tool reveal" href="aufschlag-vs-deckungsbeitrag.html">
         <div class="ico">⚖️</div>
         <h3>Aufschlag oder Deckungsbeitrag?</h3>
         <p>Warum „mal 4" dich Geld kostet — beide Methoden im direkten Vergleich.</p>
         <span class="pill live">Jetzt live</span>
       </a>
-      <a class="tool reveal" href="foodwaste-check.html">
+      <a class="card tool reveal" href="foodwaste-check.html">
         <div class="ico">♻️</div>
         <h3>Foodwaste-Check</h3>
         <p>Was Lager, Verschnitt, Überproduktion und Tellerrückläufer dich wirklich kosten.</p>
         <span class="pill live">Jetzt live</span>
       </a>
-      <a class="tool reveal" href="produktpass.html">
+      <a class="card tool reveal" href="produktpass.html">
         <div class="ico">📋</div>
         <h3>Produktpass-Generator</h3>
         <p>Kosten pro Portion, Wareneinsatz in Prozent und Allergene automatisch — plus Druckblatt für die Küche.</p>
         <span class="pill live">Jetzt live</span>
       </a>
-      <a class="tool reveal" href="mietcheck.html">
+      <a class="card tool reveal" href="mietcheck.html">
         <div class="ico">🔑</div>
         <h3>Mietcheck</h3>
         <p>Ist deine Miete tragbar? Mietquote, nötiger Umsatz und das Risiko der Restlaufzeit auf einen Blick.</p>
         <span class="pill live">Jetzt live</span>
       </a>
-      <a class="tool reveal" href="einarbeitungsplan.html">
+      <a class="card tool reveal" href="einarbeitungsplan.html">
         <div class="ico">📋</div>
         <h3>Einarbeitungsplan</h3>
         <p>Die ersten zwei Wochen zum Ausdrucken — Tag für Tag, zum Abhaken für Service, Küche und Bar.</p>
@@ -382,73 +334,73 @@
       <p>Keine Theorie von der Uni — Erfahrungen aus dem Betrieb, in fünf Minuten gelesen.</p>
     </div>
     <div class="arts" style="grid-template-columns:repeat(3,1fr)">
-      <a class="art reveal" href="artikel-weihnachtsgeschaeft.html">
+      <a class="card art reveal" href="artikel-weihnachtsgeschaeft.html">
         <span class="k">Saison · Planung</span>
         <h3>Weihnachtsgeschäft: Dein Dezember entscheidet sich jetzt</h3>
         <p>Firmen buchen ihre Weihnachtsfeiern im Herbst. Festmenü, Getränkepauschale, Anzahlung — so sicherst du dir deinen stärksten Monat.</p>
         <span class="more">Lesen →</span>
       </a>
-      <a class="art reveal" href="artikel-zweiter-standort.html">
+      <a class="card art reveal" href="artikel-zweiter-standort.html">
         <span class="k">Wachstum · Entscheidungen</span>
         <h3>Zweiter Standort: Wann er sich lohnt</h3>
         <p>Der Geld-Test, vier Wege zu wachsen und der häufigste Fehler, der Existenzen kostet — ehrlich erklärt.</p>
         <span class="more">Lesen →</span>
       </a>
-      <a class="art reveal" href="artikel-preis-kalkulieren.html">
+      <a class="card art reveal" href="artikel-preis-kalkulieren.html">
         <span class="k">Kalkulation · Grundlagen</span>
         <h3>Einen Preis für dein Gericht festlegen</h3>
         <p>Was du tun und was du vermeiden solltest, wenn du den Preis für ein Gericht festlegst — einfach erklärt, mit direktem Draht zum Rechner.</p>
         <span class="more">Lesen →</span>
       </a>
-      <a class="art reveal" href="artikel-mwst-7-19.html">
+      <a class="card art reveal" href="artikel-mwst-7-19.html">
         <span class="k">Steuer & Buchhaltung · aktuell</span>
         <h3>7 % oder 19 %? Der Steuer-Kniff für 2026</h3>
         <p>Seit 2026 gilt: Speisen 7 %, Getränke 19 %. Was du bei Kasse, Menüs und Speisekarte tun und vermeiden solltest.</p>
         <span class="more">Lesen →</span>
       </a>
-      <a class="art reveal" href="artikel-speisekarte.html">
+      <a class="card art reveal" href="artikel-speisekarte.html">
         <span class="k">Speisekarte · Verkauf</span>
         <h3>Speisekarten-Tricks für mehr Umsatz</h3>
         <p>Welche Kniffe wirklich wirken und welche Fehler dich Umsatz kosten — Preis, Reihenfolge, Beschreibung.</p>
         <span class="more">Lesen →</span>
       </a>
-      <a class="art reveal" href="artikel-aufschlag.html">
+      <a class="card art reveal" href="artikel-aufschlag.html">
         <span class="k">Kalkulation · Fortgeschritten</span>
         <h3>Warum „Wareneinsatz × 4" dich arm rechnet</h3>
         <p>Die alte Faktor-Regel stammt aus einer anderen Zeit. So rechnest du heute richtig — mit festem Deckungsbeitrag.</p>
         <span class="more">Lesen →</span>
       </a>
-      <a class="art reveal" href="kostenstruktur.html">
+      <a class="card art reveal" href="kostenstruktur.html">
         <span class="k">Finanzen · Übersicht</span>
         <h3>Kostenstruktur: die Faustregeln als Ampel</h3>
         <p>Wie viel % vom Umsatz dürfen Ware, Personal und Miete kosten? Zum Ausdrucken fürs Büro.</p>
         <span class="more">Ansehen →</span>
       </a>
-      <a class="art reveal" href="artikel-preiserhoehung.html">
+      <a class="card art reveal" href="artikel-preiserhoehung.html">
         <span class="k">Preise & Gäste · Praxis</span>
         <h3>Preise erhöhen, ohne Gäste zu verlieren</h3>
         <p>Nicht mit der Gießkanne: wie du gezielt und transparent erhöhst — und die Gäste mitnimmst.</p>
         <span class="more">Lesen →</span>
       </a>
-      <a class="art reveal" href="artikel-konzept-beenden.html">
+      <a class="card art reveal" href="artikel-konzept-beenden.html">
         <span class="k">Entscheidungen · Praxis</span>
         <h3>Wann du ein Konzept beenden solltest</h3>
         <p>Woran du erkennst, dass ein Konzept nicht mehr trägt — und wie du sauber die Reißleine ziehst, statt weiter draufzuzahlen.</p>
         <span class="more">Lesen →</span>
       </a>
-      <a class="art reveal" href="artikel-standardisierung.html">
+      <a class="card art reveal" href="artikel-standardisierung.html">
         <span class="k">Küche & Kalkulation · Praxis</span>
         <h3>Rezepturen standardisieren</h3>
         <p>Warum gleichbleibende Rezepturen Wareneinsatz sparen — und gleichzeitig deine Allergen- und HACCP-Dokumentation erledigen.</p>
         <span class="more">Lesen →</span>
       </a>
-      <a class="art reveal" href="artikel-mietvertrag.html">
+      <a class="card art reveal" href="artikel-mietvertrag.html">
         <span class="k">Vertrag · Risiko</span>
         <h3>Dein Mietvertrag ist dein größtes Risiko</h3>
         <p>Miete oder Pacht, Laufzeit, Baukostenzuschuss, Umbauten: die drei Punkte, die du vor jeder Unterschrift prüfen solltest.</p>
         <span class="more">Lesen →</span>
       </a>
-      <a class="art reveal" href="artikel-einarbeitung.html">
+      <a class="card art reveal" href="artikel-einarbeitung.html">
         <span class="k">Team · Personal</span>
         <h3>Neue Mitarbeiter einarbeiten: was tun, was lassen</h3>
         <p>Die ersten zwei Wochen entscheiden, ob jemand bleibt. Fünf Schritte für die Einarbeitung — und die Fehler, die neue Leute vertreiben.</p>
@@ -472,16 +424,19 @@
   </div>
 </section>
 
-<footer>
-  <div class="wrap foot">
+<footer class="gk-foot">
+  <div class="gk-foot-in">
     <a href="#top" class="brand">
-      <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true">
-        <rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/>
-        <path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/>
-        <path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/>
-        <text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text>
-      </svg>
-      <span class="wm">Gastro<span class="bk">kn<span class="bi">ı<span class="bdot"></span></span>ff</span></span>
+      <svg class="gk-mark" viewBox="0 0 100 100" aria-hidden="true">
+    <defs><linearGradient id="gkF" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" style="stop-color:var(--logo-tile-top)"></stop><stop offset="1" style="stop-color:var(--logo-tile-bottom)"></stop></linearGradient></defs>
+    <path d="M20 0 H67 V33 H100 V80 A20 20 0 0 1 80 100 H20 A20 20 0 0 1 0 80 V20 A20 20 0 0 1 20 0 Z" fill="url(#gkF)" style="stroke:var(--sheen)" stroke-width="1.2"></path>
+    <path d="M67 0 L67 33 L100 33 Z" style="fill:var(--accent-strong)"></path>
+    <path d="M67 0 L100 0 L100 33 Z" style="fill:var(--accent)"></path>
+    <rect x="22" y="30" width="10" height="46" style="fill:var(--cream)"></rect>
+    <path d="M30 54 L56 33 M30 54 L58 74" style="stroke:var(--cream)" stroke-width="10"></path>
+  </svg>
+      <span class="gk-word">Gastro<span class="kn">kniff</span></span>
     </a>
     <span>© 2026 Gastrokniff · Kniffe für die Gastronomie</span>
     <span class="legal"><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
@@ -547,8 +502,11 @@
     const fill=document.getElementById('gFill');
     const pctShown=Math.min(quote,60)/60*100;
     fill.style.width=(total>0?pctShown:0)+'%';
-    let col= quote<=targetFC ? 'var(--good)' : quote<=targetFC+6 ? 'var(--accent)' : '#C0685E';
+    let col= quote<=targetFC ? 'var(--state-good)' : quote<=targetFC+6 ? 'var(--state-warn)' : 'var(--state-bad)';
     fill.style.background=col;
+    const gState=document.getElementById('gState');
+    gState.textContent=total>0?(quote<=targetFC?'Im Zielbereich':quote<=targetFC+6?'Grenzwertig':'Zu hoch'):'';
+    gState.style.color=col;
     document.getElementById('gText').textContent=mode+' · Wareneinsatzquote';
     document.getElementById('gPct').textContent=total>0?quote.toLocaleString('de-DE',{maximumFractionDigits:1})+' %':'–';
 

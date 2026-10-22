@@ -4,8 +4,8 @@
   "description": "Kostenlose Rechner und Kniffe für die Gastronomie.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F5EFE3",
-  "theme_color": "#241C13",
+  "background_color": "#0B1028",
+  "theme_color": "#0B1028",
   "icons": [
     { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" },
     { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" },

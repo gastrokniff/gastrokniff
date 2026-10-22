@@ -10,76 +10,90 @@
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#241C13">
+<meta name="theme-color" content="#0B1028">
 <link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="theme.css">
 <style>
-  :root{--paper:#F5EFE3;--ink:#241C13;--stone:#6E6355;--line:#E4DBCB;--card:#FCF7ED;--accent:#C07A12;--good:#3E7C4F;--good-soft:#E7F0E4;--warn:#B0592E;--warn-soft:#F6E4DA}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:720px;margin:0 auto;padding:34px 24px 80px}
-  h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:clamp(30px,5.5vw,46px);letter-spacing:-.02em;line-height:1.06;margin:14px 0 16px}
-  h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:22px;margin:36px 0 12px}
-  p{margin-bottom:14px}
-  a{color:var(--accent)}
-  .top{display:flex;align-items:center;gap:10px;margin-bottom:30px}
-  .bmark{width:40px;height:40px;flex:none}
-  .brand{font-family:"Bricolage Grotesque";font-weight:700;font-size:30px;display:inline-flex}
-  .bi{position:relative;display:inline-block}.bi .bdot{position:absolute;left:50%;top:.01em;width:.17em;height:.17em;background:var(--ink);border-radius:.04em;transform:translateX(-50%)}.bk{color:#A9700F}
-  .back{font-size:14px;color:var(--stone);margin-left:auto;text-decoration:none}
+  .wrap-text b{color:var(--text-strong)}
   .kat{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
-  .lead{font-size:19px;color:var(--stone);margin-bottom:8px}
-  .kurz{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:24px 0}
-  .kurz b{font-family:"Bricolage Grotesque"}
+  h1{margin:14px 0 var(--space-4)}
+  .lead{font-size:20px;color:var(--text-body);margin-bottom:var(--space-5)}
+  p{margin-bottom:var(--space-4);font-size:17px;line-height:1.7}
+  h2{margin:var(--space-9) 0 var(--space-4);font-size:32px}
+  .kurz{margin:var(--space-5) 0}
+  .kurz p{margin:0;font-size:16.5px}
 
-  .dd{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:8px 0}
+  /* Schritt-Karten */
+  .punkt{margin:var(--space-5) 0;border-left:3px solid var(--accent)}
+  .punkt .nr{font-size:12px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;font-weight:600}
+  .punkt h3{margin:8px 0 var(--space-3);font-size:21px}
+  .szenario{background:rgba(255,138,61,.09);border:1px solid rgba(255,138,61,.22);
+    border-radius:var(--radius-md);padding:var(--space-4) var(--space-5);font-size:15.5px;margin:4px 0 var(--space-4)}
+  .szenario b{color:var(--accent-tint)}
+  .ergebnis{font-size:14px;color:var(--state-good);font-weight:600;margin-top:var(--space-4)}
+
+  /* Das solltest du tun / vermeiden */
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);margin-top:var(--space-4)}
   @media(max-width:680px){.dd{grid-template-columns:1fr}}
-  @media(max-width:600px){.brand{font-size:24px}.bmark{width:32px;height:32px}}
-  .box{border-radius:16px;padding:22px;border:1px solid var(--line)}
-  .box.tun{background:var(--good-soft);border-color:#CBE0C4}
-  .box.weg{background:var(--warn-soft);border-color:#E8CDBE}
-  .box h3{font-family:"Bricolage Grotesque";font-size:18px;margin-bottom:14px}
-  .box.tun h3{color:var(--good)}
-  .box.weg h3{color:var(--warn)}
-  .box ul{list-style:none}
-  .box li{position:relative;padding-left:26px;margin-bottom:13px;font-size:15px}
-  .box.tun li::before{content:"✓";position:absolute;left:0;top:0;color:var(--good);font-weight:700}
-  .box.weg li::before{content:"✗";position:absolute;left:0;top:0;color:var(--warn);font-weight:700}
+  .dd > div{border-radius:var(--radius-md);padding:var(--space-4) var(--space-5)}
+  .tun{background:rgba(126,226,168,.09);border:1px solid rgba(126,226,168,.24)}
+  .lassen,.weg{background:rgba(255,138,107,.08);border:1px solid rgba(255,138,107,.22)}
+  .dd h4{font-family:var(--font-body);margin-bottom:10px;letter-spacing:.04em;text-transform:uppercase;font-size:11.5px;font-weight:700}
+  .box h3{font-size:18px;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+  .tun h3,.tun h4{color:var(--state-good)}
+  .lassen h4,.weg h3{color:var(--state-bad)}
+  .dd ul{list-style:none}
+  .dd li{position:relative;padding-left:22px;margin-bottom:9px;font-size:15px;line-height:1.5;color:var(--text-body)}
+  .box li{padding-left:26px;margin-bottom:13px}
+  .tun li::before{content:"✓";position:absolute;left:0;top:0;color:var(--state-good);font-weight:700}
+  .lassen li::before{content:"✕";position:absolute;left:0;top:0;color:var(--state-bad);font-weight:700}
+  .weg li::before{content:"✗";position:absolute;left:0;top:0;color:var(--state-bad);font-weight:700}
 
-  .check{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0}
-  .check h3{font-family:"Bricolage Grotesque";font-size:17px;margin-bottom:12px}
-  .check ol{margin-left:20px}
+  .merke{border-radius:var(--radius-xl);padding:var(--space-6) var(--space-5);margin:var(--space-7) 0;
+    font-family:var(--font-heading);font-weight:600;font-size:24px;line-height:1.35;
+    color:var(--text-strong);
+    background:linear-gradient(160deg,var(--surface-tool) 0%,var(--surface-card-low) 100%);
+    border:1px solid var(--hairline);box-shadow:var(--shadow-card-raised)}
+  .merke span{color:var(--accent)}
+
+  .cta{display:block;margin:var(--space-7) 0;text-decoration:none}
+  .cta .t{font-family:var(--font-heading);font-weight:700;font-size:20px;color:var(--text-on-accent)}
+  .cta .s{font-size:15px;color:var(--text-on-accent-muted);display:block;margin-top:6px}
+  .hinweis{font-size:15px;color:var(--text-body)}
+  .check{margin:var(--space-4) 0}
+  .check h3{font-size:17px;margin:0 0 12px}
+  .check ul,.check ol{margin-left:20px}
   .check li{margin-bottom:9px;font-size:15px}
-
-  .merke{background:var(--ink);color:var(--paper);border-radius:16px;padding:22px 24px;margin:30px 0;font-family:"Bricolage Grotesque";font-size:20px;line-height:1.3}
-  .merke span{color:#E7B65A}
-  .cta{display:block;background:var(--accent);color:#fff;text-decoration:none;border-radius:14px;padding:20px 24px;margin:26px 0;transition:.2s}
-  .cta:hover{background:#A96A0E}
-  .cta .t{font-family:"Bricolage Grotesque";font-weight:700;font-size:18px;color:#fff}
-  .cta .s{font-size:14px;color:#F6E4C6}
-  .hinweis{font-size:14px;color:var(--stone);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:6px}
-  .hilfe{font-size:14px;color:var(--stone);border-left:4px solid var(--accent);padding:10px 0 10px 16px;margin-top:18px}
-  footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:13px;color:var(--stone);display:flex;gap:18px;flex-wrap:wrap}
-  footer a{color:var(--stone);text-decoration:none}
+  .check p{margin:0}
+  .hilfe{font-size:15px;color:var(--text-body);border-left:3px solid var(--accent);padding:10px 0 10px 16px;margin-top:18px}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
-    <svg class="bmark" viewBox="0 0 100 100" aria-hidden="true"><rect x="2" y="2" width="96" height="96" rx="24" fill="#211C16"/><path d="M66 2 L98 2 L98 34 Z" fill="#D9A34E"/><path d="M66 2 L98 34 L66 34 Z" fill="#B57611"/><text x="20" y="74" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="58" fill="#F2F0EA">K</text></svg>
-    <a href="index.html" style="text-decoration:none;color:inherit"><span class="brand">Gastro<span class="bk">kn<span class="bi">ı<span class="bdot"></span></span>ff</span></span></a>
-    <a class="back" href="index.html">← zurück</a>
-  </div>
+<header class="gk-top">
+  <svg class="gk-mark" viewBox="0 0 100 100" aria-hidden="true">
+    <defs><linearGradient id="gkT" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" style="stop-color:var(--logo-tile-top)"></stop><stop offset="1" style="stop-color:var(--logo-tile-bottom)"></stop></linearGradient></defs>
+    <path d="M20 0 H67 V33 H100 V80 A20 20 0 0 1 80 100 H20 A20 20 0 0 1 0 80 V20 A20 20 0 0 1 20 0 Z" fill="url(#gkT)" style="stroke:var(--sheen)" stroke-width="1.2"></path>
+    <path d="M67 0 L67 33 L100 33 Z" style="fill:var(--accent-strong)"></path>
+    <path d="M67 0 L100 0 L100 33 Z" style="fill:var(--accent)"></path>
+    <rect x="22" y="30" width="10" height="46" style="fill:var(--cream)"></rect>
+    <path d="M30 54 L56 33 M30 54 L58 74" style="stroke:var(--cream)" stroke-width="10"></path>
+  </svg>
+  <a href="index.html" style="color:inherit"><span class="gk-word">Gastro<span class="kn">kniff</span></span></a>
+  <a class="gk-back" href="index.html">← zurück</a>
+</header>
 
+<div class="wrap-text">
   <span class="kat">Entscheidungen · Praxis</span>
   <h1>Wann du ein Konzept beenden solltest</h1>
   <p class="lead">Über das Eröffnen wird viel geredet. Über das Aufhören fast nie. Dabei ist es oft die Entscheidung, die den Betrieb rettet — und die am längsten aufgeschoben wird.</p>
 
-  <div class="kurz">
+  <div class="card kurz">
     <p style="margin:0"><b>Kurz erklärt:</b> Die Frage ist nicht „habe ich versagt?", sondern <b>„trägt sich das noch?"</b>. Und das ist Rechnen, kein Gefühl. Wichtig dabei: Das Geld, das schon drin steckt, ist <b>weg — egal wie du entscheidest</b>. Es darf die Entscheidung nicht beeinflussen.</p>
   </div>
 
   <h2>Die drei Fragen, die alles entscheiden</h2>
-  <div class="check">
+  <div class="card check">
     <h3>Ehrlich beantworten — schriftlich, nicht im Kopf</h3>
     <ol>
       <li><b>Trägt es sich?</b> Deckt der Deckungsbeitrag die Fixkosten — inklusive eines fairen Lohns für dich?</li>
@@ -121,16 +135,18 @@
 
   <div class="merke">Ein Ende ist keine <span>Niederlage</span>. Es ist eine <span>Entscheidung</span> — und je früher sie fällt, desto weniger kostet sie.</div>
 
-  <a class="cta" href="break-even-rechner.html">
+  <a class="card-accent cta" href="break-even-rechner.html">
     <span class="t">Trägt sich dein Laden überhaupt? →</span><br>
     <span class="s">Der Break-Even-Rechner zeigt dir, wie viele Gäste du täglich brauchst. Kostenlos, ohne Anmeldung.</span>
   </a>
 
-  <p class="hinweis"><b>Ehrlich gesagt:</b> Diese Entscheidung kann dir niemand abnehmen, und kein Artikel kennt deine Lage. Die Zahlen sagen dir, <i>ob</i> es sich trägt — ob du weitermachen willst, sagen sie nicht. Manchmal ist die richtige Antwort auch nicht „schließen", sondern das Konzept ändern, die Öffnungszeiten kürzen oder die Karte halbieren. Sprich vorher mit deinem Steuerberater: Kündigungsfristen, Pachtverträge und Verpflichtungen gegenüber Mitarbeitenden gehören in die Rechnung.</p>
+  <p class="card hinweis"><b>Ehrlich gesagt:</b> Diese Entscheidung kann dir niemand abnehmen, und kein Artikel kennt deine Lage. Die Zahlen sagen dir, <i>ob</i> es sich trägt — ob du weitermachen willst, sagen sie nicht. Manchmal ist die richtige Antwort auch nicht „schließen", sondern das Konzept ändern, die Öffnungszeiten kürzen oder die Karte halbieren. Sprich vorher mit deinem Steuerberater: Kündigungsfristen, Pachtverträge und Verpflichtungen gegenüber Mitarbeitenden gehören in die Rechnung.</p>
 
   <p class="hilfe"><b>Wenn es finanziell eng wird:</b> Warte nicht, bis es nicht mehr geht. Kostenlose oder geförderte Beratung gibt es bei der <b>IHK</b>, der <b>Handwerkskammer</b> und über die Unternehmensberatung des Bundes. Je früher du Hilfe holst, desto mehr Möglichkeiten hast du noch — und desto weniger allein bist du damit.</p>
 
-  <footer>
+</div>
+
+<footer class="gk-foot"><div class="gk-foot-in">
     <a href="index.html">Startseite</a>
     <a href="break-even-rechner.html">Break-Even-Rechner</a>
     <a href="artikel-zweiter-standort.html">Zweiter Standort</a>
@@ -138,8 +154,7 @@
     <a href="kostenstruktur.html">Kostenstruktur</a>
     <a href="impressum.html">Impressum</a>
     <span>© 2026 Gastrokniff</span>
-  </footer>
-</div>
+</div></footer>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4874637d13da44b99b039a9db0a4fcec"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

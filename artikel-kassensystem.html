@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kassensystem f&uuml;r die Gastronomie: worauf du wirklich achten musst | Gastrokniff</title>
+<meta name="description" content="Monatspreis, Kartengeb&uuml;hr, Bindung, Datenexport: die vier Zahlen, die &uuml;ber die Kosten deiner Kasse entscheiden — und warum kleine Bons alles umdrehen.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://gastrokniff.de/artikel-kassensystem.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0B1028">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="theme.css">
+<style>
+  .kat{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  h1{margin:14px 0 var(--space-4)}
+  .lead{font-size:20px;color:var(--text-body);margin-bottom:var(--space-5)}
+  p{margin-bottom:var(--space-4);font-size:17px;line-height:1.7}
+  h2{margin:var(--space-9) 0 var(--space-4);font-size:32px}
+  .kurz{margin:var(--space-5) 0}
+  .kurz p{margin:0;font-size:16.5px}
+  .punkt{margin:var(--space-5) 0;border-left:3px solid var(--accent)}
+  .punkt .nr{font-size:12px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;font-weight:600}
+  .punkt h3{margin:8px 0 var(--space-3);font-size:21px}
+  .szenario{background:rgba(255,138,61,.09);border:1px solid rgba(255,138,61,.22);
+    border-radius:var(--radius-md);padding:var(--space-4) var(--space-5);font-size:15.5px;margin:4px 0 var(--space-4)}
+  .szenario b{color:var(--accent-tint)}
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);margin-top:var(--space-4)}
+  @media(max-width:600px){.dd{grid-template-columns:1fr}}
+  .dd > div{border-radius:var(--radius-md);padding:var(--space-4) var(--space-5)}
+  .tun{background:rgba(126,226,168,.09);border:1px solid rgba(126,226,168,.24)}
+  .lassen{background:rgba(255,138,107,.08);border:1px solid rgba(255,138,107,.22)}
+  .dd h4{font-family:var(--font-body);margin-bottom:10px;letter-spacing:.04em;
+    text-transform:uppercase;font-size:11.5px;font-weight:700}
+  .tun h4{color:var(--state-good,#7EE2A8)}
+  .lassen h4{color:var(--state-bad,#FF8A6B)}
+  .dd ul{list-style:none}
+  .dd li{position:relative;padding-left:22px;margin-bottom:8px;font-size:15px;line-height:1.5;color:var(--text-body)}
+  .tun li::before{content:"\2713";position:absolute;left:0;color:var(--state-good,#7EE2A8);font-weight:700}
+  .lassen li::before{content:"\2715";position:absolute;left:0;color:var(--state-bad,#FF8A6B);font-weight:700}
+  .ergebnis{font-size:14px;color:var(--state-good,#7EE2A8);font-weight:600;margin-top:var(--space-4)}
+  .merke{border-radius:var(--radius-xl);padding:var(--space-6) var(--space-5);margin:var(--space-7) 0;
+    font-family:var(--font-heading);font-weight:600;font-size:24px;line-height:1.35;color:var(--text-strong);
+    background:linear-gradient(160deg,var(--surface-tool) 0%,var(--surface-card-low) 100%);
+    border:1px solid var(--hairline);box-shadow:var(--shadow-card-raised)}
+  .merke span{color:var(--accent)}
+  .cta{display:block;margin:var(--space-7) 0;text-decoration:none}
+  .cta .t{font-family:var(--font-heading);font-weight:700;font-size:20px;color:var(--text-on-accent)}
+  .cta .s{font-size:15px;color:var(--text-on-accent-muted);display:block;margin-top:6px}
+  .hinweis{font-size:15px;color:var(--text-body)}
+  .hinweis b{color:var(--text-strong)}
+  .tab{width:100%;border-collapse:collapse;font-size:15px;margin:var(--space-4) 0}
+  .tab th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;
+          color:var(--text-muted);padding:10px 12px;border-bottom:1px solid var(--hairline)}
+  .tab td{padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top;color:var(--text-body)}
+  .tab tr:last-child td{border-bottom:0}
+  .tab td b{color:var(--text-strong)}
+  @media(max-width:560px){.tab{font-size:13.5px}.tab th,.tab td{padding:9px 8px}}
+</style>
+</head>
+<body>
+
+<header class="gk-top">
+  <svg class="gk-mark" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="gkT" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A3473"></stop><stop offset="1" stop-color="#0E1434"></stop></linearGradient></defs><path d="M20 0 H67 V33 H100 V80 A20 20 0 0 1 80 100 H20 A20 20 0 0 1 0 80 V20 A20 20 0 0 1 20 0 Z" fill="url(#gkT)"></path><path d="M67 0 L67 33 L100 33 Z" fill="#C4561A"></path><path d="M67 0 L100 0 L100 33 Z" fill="#FF8A3D"></path><rect x="22" y="30" width="10" height="46" fill="#F4F1EC"></rect><path d="M30 54 L56 33 M30 54 L58 74" stroke="#F4F1EC" stroke-width="10" fill="none"></path></svg>
+  <a href="index.html" style="color:inherit"><span class="gk-word">Gastro<span class="kn">kniff</span></span></a>
+  <a class="gk-back" href="index.html">&larr; zur&uuml;ck</a>
+</header>
+
+<main class="wrap-text">
+  <span class="kat">Kasse &middot; Zahlung</span>
+  <h1>Kassensystem: worauf du wirklich achten musst</h1>
+  <p class="lead">Fast alle vergleichen den Monatspreis. Der ist der kleinste Teil der Rechnung.</p>
+  <!-- WERBEHINWEIS — erst einblenden, wenn hier wirklich Affiliate-Links stehen.
+       Vorher waere der Hinweis selbst eine Unwahrheit.
+  <p class="warn-ad card" style="border-left:3px solid var(--accent)">
+    <b>Transparenz:</b> Dieser Artikel enth&auml;lt Werbelinks. Wenn du dar&uuml;ber abschlie&szlig;t,
+    bekommen wir eine Provision — f&uuml;r dich &auml;ndert sich am Preis nichts.
+    Was hier steht, h&auml;ngt davon nicht ab: Anbieter, die wir nicht empfehlen w&uuml;rden,
+    stehen auch dann nicht hier, wenn sie zahlen.
+  </p>
+  -->
+  <div class="card kurz">
+    <p><b style="color:var(--text-strong)">Kurz erkl&auml;rt:</b> Beim Kassensystem vergleichen fast alle den Monatspreis.
+    Der Monatspreis ist aber der kleinste Teil der Rechnung. Teuer wird es an drei Stellen, die in keinem Angebot
+    gro&szlig; stehen: die Kartengeb&uuml;hren, die Bindung und der Tag, an dem du wechseln willst.</p>
+  </div>
+
+  <h2>Was eine Kasse wirklich kostet</h2>
+  <p>Ein Angebot mit „ab 39 &euro; im Monat&ldquo; sagt dir ungef&auml;hr so viel &uuml;ber deine Kosten wie der
+  Wareneinsatz eines Gerichts &uuml;ber den Gewinn des Abends. Rechne stattdessen alles zusammen, was pro Jahr abflie&szlig;t:</p>
+
+  <table class="tab">
+    <thead><tr><th>Posten</th><th>Worauf es ankommt</th></tr></thead>
+    <tbody>
+      <tr><td><b>Software im Monat</b></td><td>Pro Kasse oder pro Betrieb? Ein zweites Terminal verdoppelt bei manchen den Preis.</td></tr>
+      <tr><td><b>Hardware</b></td><td>Kauf oder Miete. Miete ist bequem und &uuml;ber vier Jahre meist teurer.</td></tr>
+      <tr><td><b>TSE</b></td><td>Jahresgeb&uuml;hr oder im Preis enthalten. L&auml;uft sie ab, steht die Kasse.</td></tr>
+      <tr><td><b>Kartengeb&uuml;hr</b></td><td>Der gr&ouml;&szlig;te Posten. Prozentsatz <i>und</i> Mindestgeb&uuml;hr pro Transaktion.</td></tr>
+      <tr><td><b>Vertragslaufzeit</b></td><td>24, 36 oder 48 Monate. Entscheidet, was ein Wechsel kostet.</td></tr>
+      <tr><td><b>Datenexport</b></td><td>Kommst du an deine eigenen Umsatzdaten, wenn du gehst?</td></tr>
+    </tbody>
+  </table>
+  <div class="card punkt">
+    <div class="nr">Punkt 1</div>
+    <h3>Die Kartengeb&uuml;hr ist der eigentliche Preis</h3>
+    <div class="szenario">Stell dir vor: Du zahlst 49 &euro; im Monat f&uuml;r die Software und freust dich &uuml;ber den guten Preis. Bei 30.000 &euro; Kartenumsatz im Monat und 1,2 % Geb&uuml;hr sind das 360 &euro; — <b>siebenmal so viel wie die Software, und niemand hat darauf geschaut.</b></div>
+    <div class="dd">
+      <div class="tun"><h4>Das tust du</h4><ul><li>Prozentsatz und Mindestgeb&uuml;hr pro Transaktion zusammen rechnen</li><li>Mit deinem echten Durchschnittsbon rechnen, nicht mit einem Beispiel</li><li>Girocard, Kreditkarte und Auslandskarten getrennt ansehen — die S&auml;tze unterscheiden sich stark</li><li>Nach sechs Monaten die Abrechnung pr&uuml;fen und gegen das Angebot halten</li></ul></div>
+      <div class="lassen"><h4>Das l&auml;sst du</h4><ul><li>Nicht nur den Monatspreis vergleichen</li><li>Keinen Pauschaltarif nehmen, ohne ihn gegen deinen Kartenmix zu rechnen</li><li>Die Mindestgeb&uuml;hr nicht ignorieren, wenn du viele kleine Bons hast</li><li>Nicht glauben, dass Kartenzahlung „fast nichts&ldquo; kostet</li></ul></div>
+    </div>
+    <p class="ergebnis">Ergebnis: Du kennst deine Zahlungskosten pro Monat, nicht pro Angebot.</p>
+  </div>
+  <div class="card punkt">
+    <div class="nr">Punkt 2</div>
+    <h3>Kleine Bons drehen die Rechnung um</h3>
+    <div class="szenario">Stell dir vor: Zwei Betriebe, derselbe Vertrag. Das Restaurant mit 38 &euro; Durchschnittsbon zahlt rund 1 % Geb&uuml;hr. Das Caf&eacute; mit 4 &euro; Bon zahlt wegen der Mindestgeb&uuml;hr pro Transaktion anteilig ein Vielfaches davon. <b>Derselbe Tarif ist f&uuml;r den einen g&uuml;nstig und f&uuml;r den anderen teuer.</b></div>
+    <div class="dd">
+      <div class="tun"><h4>Das tust du</h4><ul><li>Deinen Durchschnittsbon ausrechnen, bevor du vergleichst</li><li>Bei kleinen Bons gezielt nach Tarifen ohne Mindestgeb&uuml;hr fragen</li><li>Pr&uuml;fen, ob Trinkgeld als eigene Transaktion abgerechnet wird</li><li>Den Anbieter nach einer Beispielrechnung mit deinen Zahlen fragen</li></ul></div>
+      <div class="lassen"><h4>Das l&auml;sst du</h4><ul><li>Keine Vergleichstabelle &uuml;bernehmen, die nur Prozents&auml;tze zeigt</li><li>Nicht den Tarif des Kollegen kopieren, wenn euer Gesch&auml;ft anders aussieht</li><li>Kein Mindestbetrag f&uuml;r Kartenzahlung — das kostet dich G&auml;ste</li><li>Nicht unterschreiben, bevor du die Rechnung einmal selbst gemacht hast</li></ul></div>
+    </div>
+    <p class="ergebnis">Ergebnis: Du w&auml;hlst den Tarif, der zu deinem Gesch&auml;ft passt, nicht zum Durchschnitt.</p>
+  </div>
+  <div class="card punkt">
+    <div class="nr">Punkt 3</div>
+    <h3>Der Tag, an dem du wechseln willst</h3>
+    <div class="szenario">Stell dir vor: Nach zwei Jahren willst du zu einem anderen System. Der Vertrag l&auml;uft noch 22 Monate, die Hardware ist gemietet und geh&ouml;rt dir nicht, und deine Umsatzdaten liegen in einer Cloud, aus der du sie nur als PDF bekommst. <b>Du bleibst, nicht weil es gut ist, sondern weil Gehen teurer ist.</b></div>
+    <div class="dd">
+      <div class="tun"><h4>Das tust du</h4><ul><li>Laufzeit und K&uuml;ndigungsfrist vor der Unterschrift lesen</li><li>Schriftlich kl&auml;ren, wem die Hardware nach Vertragsende geh&ouml;rt</li><li>Pr&uuml;fen, ob du deine Daten als auswertbare Datei exportieren kannst</li><li>Kurze Erstlaufzeit nehmen, auch wenn sie ein paar Euro mehr kostet</li></ul></div>
+      <div class="lassen"><h4>Das l&auml;sst du</h4><ul><li>Keine 48 Monate f&uuml;r ein Ger&auml;t, das in vier Jahren veraltet ist</li><li>Nicht auf den Rabatt f&uuml;r die l&auml;ngere Bindung hereinfallen</li><li>Nicht annehmen, dass du die Daten schon irgendwie bekommst</li><li>Die Verfahrensdokumentation nicht beim Anbieter liegen lassen</li></ul></div>
+    </div>
+    <p class="ergebnis">Ergebnis: Du bleibst bei einem Anbieter, weil er gut ist.</p>
+  </div>
+  <div class="merke">Der Monatspreis steht gro&szlig; im Angebot.
+  Die Geb&uuml;hr, die du wirklich zahlst, steht <span>im Anhang</span>.</div>
+
+  <h2>Was wir selbst nutzen</h2>
+  <p>Wir zahlen mit <b>SumUp</b> ab. Nicht weil es das beste System f&uuml;r jeden ist, sondern weil es zu
+  einem bestimmten Zuschnitt passt: feste Rate pro Zahlung, keine monatliche Bindung, das Ger&auml;t kostet
+  einmalig statt als Miete. Wer heute er&ouml;ffnet und noch nicht wei&szlig;, wie viel &uuml;ber Karte l&auml;uft,
+  geht damit kein Risiko ein — und kann wechseln, ohne eine Laufzeit abzuwarten.</p>
+
+  <div class="card">
+    <p style="margin:0"><b style="color:var(--text-strong)">Was wir zahlen:</b>
+    <i style="color:var(--text-muted)">[Hier tragen wir unsere eigene Abrechnung ein: Satz, Durchschnittsbon,
+    Kosten im Monat. Lieber die echte Zahl aus der eigenen Abrechnung als eine aus einem Werbeblatt.]</i></p>
+  </div>
+
+  <h2>Ein Kartenleser ist noch keine Kasse</h2>
+  <p>Das wird oft verwechselt, und es ist der teuerste Irrtum in diesem Artikel.
+  Ein Kartenlesegerät wickelt die <b>Zahlung</b> ab. Ein Kassensystem f&uuml;hrt die <b>Aufzeichnungen</b>,
+  die das Finanzamt verlangt — mit zertifizierter TSE, Belegausgabe und Verfahrensdokumentation.
+  Das eine ersetzt das andere nicht.</p>
+  <p>Wer nur ein Leseger&auml;t hat und glaubt, die Kassenpflicht damit erf&uuml;llt zu haben, merkt es bei der
+  ersten Pr&uuml;fung. Pr&uuml;f also beide Fragen getrennt: Womit nehme ich Geld an, und womit zeichne ich es auf?</p>
+
+  <div class="card">
+    <p class="hinweis" style="margin:0"><b>Ehrlich gesagt:</b> Es gibt nicht die beste Kasse.
+    Es gibt die, die zu deinem Durchschnittsbon, deiner Betriebsgr&ouml;&szlig;e und deiner Geduld mit Technik passt.
+    Wer dir ohne diese drei Angaben einen Anbieter nennt, verkauft dir etwas.</p>
+  </div>
+
+</main>
+
+<footer class="gk-foot"><div class="gk-foot-in">
+  <a href="index.html">Startseite</a><a href="gruendungs-checkliste.html">Checkliste</a><a href="kostenstruktur.html">Kostenstruktur</a><a href="rechner.html">Alle Rechner</a><a href="impressum.html">Impressum</a>
+  <span>&copy; 2026 Gastrokniff</span>
+</div></footer>
+
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4874637d13da44b99b039a9db0a4fcec"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

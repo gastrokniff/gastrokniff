@@ -1,6 +1,6 @@
 # Interne Arbeitsdokumente (keine Seiten der Website)
 *.md
 kniff-logo.html
-referenz-rechner.html
-referenz-artikel.html
+referenz-*.html
+kniff-transkript-*.txt
 _check/

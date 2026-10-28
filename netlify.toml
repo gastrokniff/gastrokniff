@@ -1,0 +1,17 @@
+# Service Worker und Manifest nie aus dem HTTP-Cache: sonst bleiben installierte Apps auf alten Versionen hängen
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Cache-Control = "no-cache"
+    Content-Type = "application/manifest+json"
+
+# Altes Manifest (vor der PWA) zeigt auf das neue
+[[redirects]]
+  from = "/site.webmanifest"
+  to = "/manifest.webmanifest"
+  status = 301

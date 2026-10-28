@@ -29,4 +29,6 @@ Ogni articolo segue lo schema "cosa fare / cosa evitare": un box verde con quell
 - Una pagina = un file HTML autonomo, CSS inline in `<style>` nell'`<head>`, nessuna dipendenza da build tool.
 - Palette condivisa via CSS custom properties (`--paper`, `--ink`, `--stone`, `--accent`, `--good`, `--warn`, `--line`, `--card`...) — riusare gli stessi valori tra le pagine invece di introdurne di nuovi.
 - Font: Bricolage Grotesque (titoli), Inter (testo), JetBrains Mono (tag/label monospazio).
+- PWA: `manifest.webmanifest`, `sw.js` (service worker), `pwa.js` (registrazione SW + banner "App installieren", incluso in ogni pagina), `offline.html`. Pagine nuove: copiare dall'`<head>` di una pagina esistente il `<link rel="manifest">`, il theme-color, l'apple-touch-icon e `<script src="/pwa.js" defer>`. Un nuovo tool va aggiunto anche a `PRECACHE` in `sw.js` e alla lista in `offline.html`.
+- **A ogni deploy con modifiche, aumentare la versione della cache in `sw.js`** (`const CACHE = 'gk-v1'` → `'gk-v2'` …). Senza, chi ha installato l'app continua a vedere CSS, JS e font vecchi.
 - Naming file: `index.html` (home), `rechner.html` (hub calcolatori), `*-rechner.html` (singoli calcolatori), `artikel-*.html` (articoli), `impressum.html` / `datenschutz.html` (pagine legali).

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Offline | Gastrokniff</title>
+<meta name="robots" content="noindex,follow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#0B1028">
+<!-- Absolute Pfade: diese Seite wird offline auch unter /it/… oder /en/… ausgeliefert -->
+<link rel="stylesheet" href="/fonts.css">
+<link rel="stylesheet" href="/theme.css">
+<style>
+  .kat{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+  h1.title{font-size:clamp(30px,5.2vw,44px);margin:10px 0 14px}
+  .intro{color:var(--text-body);font-size:17px;max-width:66ch;margin-bottom:var(--space-6)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--space-4)}
+  .rech{display:block;color:inherit;transition:transform .2s,border-color .2s}
+  .rech:hover{color:inherit;border-color:var(--accent);transform:translateY(-2px)}
+  .rech .ic{font-size:24px;margin-bottom:10px}
+  .rech h3{font-size:18px;margin-bottom:6px}
+  .rech p{color:var(--text-body);font-size:14px;margin-bottom:10px}
+  .rech .go{font-size:13.5px;color:var(--accent);font-weight:600}
+
+  p.txt{color:var(--text-body);margin-top:var(--space-7);max-width:72ch}
+</style>
+</head>
+<body>
+<header class="gk-top">
+  <svg class="gk-mark" viewBox="0 0 100 100" aria-hidden="true">
+    <defs><linearGradient id="gkT" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" style="stop-color:var(--logo-tile-top)"></stop><stop offset="1" style="stop-color:var(--logo-tile-bottom)"></stop></linearGradient></defs>
+    <path d="M20 0 H67 V33 H100 V80 A20 20 0 0 1 80 100 H20 A20 20 0 0 1 0 80 V20 A20 20 0 0 1 20 0 Z" fill="url(#gkT)" style="stroke:var(--sheen)" stroke-width="1.2"></path>
+    <path d="M67 0 L67 33 L100 33 Z" style="fill:var(--accent-strong)"></path>
+    <path d="M67 0 L100 0 L100 33 Z" style="fill:var(--accent)"></path>
+    <rect x="22" y="30" width="10" height="46" style="fill:var(--cream)"></rect>
+    <path d="M30 54 L56 33 M30 54 L58 74" style="stroke:var(--cream)" stroke-width="10"></path>
+  </svg>
+  <a href="/" style="color:inherit"><span class="gk-word">Gastro<span class="kn">kniff</span></span></a>
+</header>
+
+<div class="wrap">
+  <span class="kat">Keine Verbindung</span>
+  <h1 class="title">Du bist offline.</h1>
+  <p class="intro">Diese Seite ist gerade nicht erreichbar. Deine Rechner funktionieren trotzdem:</p>
+
+  <div class="grid">
+    <a class="card rech" href="/wareneinsatz-rechner.html">
+      <div class="ic">🧮</div>
+      <h3>Wareneinsatz-Rechner</h3>
+      <p>Kalkuliere pro Gericht deinen Wareneinsatz, den Verkaufspreis und den Deckungsbeitrag.</p>
+      <span class="go">Zum Rechner →</span>
+    </a>
+    <a class="card rech" href="/aufschlag-vs-deckungsbeitrag.html">
+      <div class="ic">⚖️</div>
+      <h3>Aufschlag vs. Deckungsbeitrag</h3>
+      <p>Vergleicht „Wareneinsatz × Faktor" mit dem festen Deckungsbeitrag — an deinen Gerichten.</p>
+      <span class="go">Zum Rechner →</span>
+    </a>
+    <a class="card rech" href="/menu-engineering.html">
+      <div class="ic">📊</div>
+      <h3>Menu-Engineering-Rechner</h3>
+      <p>Sortiere deine Gerichte nach Beliebtheit und Marge in Sterne, Renner, Rätsel und Penner.</p>
+      <span class="go">Zum Rechner →</span>
+    </a>
+    <a class="card rech" href="/getraenke-rechner.html">
+      <div class="ic">🍹</div>
+      <h3>Getränke- &amp; Schankkalkulator</h3>
+      <p>Vom Flaschenpreis zum richtigen Glaspreis — inklusive Schankverlust.</p>
+      <span class="go">Zum Rechner →</span>
+    </a>
+    <a class="card rech" href="/break-even-rechner.html">
+      <div class="ic">💶</div>
+      <h3>Break-Even-Rechner</h3>
+      <p>Wie viele Gäste pro Tag brauchst du, damit sich der Laden trägt?</p>
+      <span class="go">Zum Rechner →</span>
+    </a>
+    <a class="card rech" href="/kostenstruktur.html">
+      <div class="ic">📈</div>
+      <h3>Kostenstruktur (Ampel)</h3>
+      <p>Wie viel % vom Umsatz dürfen Ware, Personal und Miete kosten? Die Faustregeln auf einen Blick.</p>
+      <span class="go">Zum Rechner →</span>
+    </a>
+    <a class="card rech" href="/foodwaste-check.html">
+      <div class="ic">♻️</div>
+      <h3>Foodwaste-Check</h3>
+      <p>Was dich Lager, Verschnitt, Überproduktion und Tellerrückläufer pro Monat und Jahr kosten.</p>
+      <span class="go">Zum Rechner →</span>
+    </a>
+    <a class="card rech" href="/produktpass.html">
+      <div class="ic">📋</div>
+      <h3>Produktpass-Generator</h3>
+      <p>Zutaten, Kosten pro Portion, Wareneinsatz in Prozent und Allergene automatisch — zum Ausdrucken für die Küche.</p>
+      <span class="go">Zum Rechner →</span>
+    </a>
+    <a class="card rech" href="/mietcheck.html">
+      <div class="ic">🔑</div>
+      <h3>Mietcheck</h3>
+      <p>Ist deine Miete tragbar? Mietquote, nötiger Umsatz und das Risiko der Restlaufzeit auf einen Blick.</p>
+      <span class="go">Zum Rechner →</span>
+    </a>
+    <a class="card rech" href="/einarbeitungsplan.html">
+      <div class="ic">📋</div>
+      <h3>Einarbeitungsplan</h3>
+      <p>Die ersten zwei Wochen zum Ausdrucken — Tag für Tag, zum Abhaken für Service, Küche und Bar.</p>
+      <span class="go">Zum Plan →</span>
+    </a>
+    <a class="card rech" href="/gruendungs-checkliste.html">
+      <div class="ic">✅</div>
+      <h3>Gründungs-Checkliste</h3>
+      <p>Jeder Schritt von der Idee bis zum ersten Gast: Anmeldungen, Kasse, Hygiene, Lieferanten. Zum Abhaken und Ausdrucken.</p>
+      <span class="go">Zur Checkliste →</span>
+    </a>
+  </div>
+
+  <p class="txt">Artikel, die du schon einmal geöffnet hast, kannst du auch offline lesen. Alles andere ist wieder da, sobald du Netz hast.</p>
+</div>
+</body>
+</html>

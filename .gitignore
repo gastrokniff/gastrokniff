@@ -4,3 +4,7 @@ kniff-logo.html
 referenz-*.html
 kniff-transkript-*.txt
 _check/
+
+# macOS-Metadaten
+.DS_Store
+._*

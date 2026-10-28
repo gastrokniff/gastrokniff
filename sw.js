@@ -1,7 +1,7 @@
 /* Gastrokniff Service Worker.
    Bei JEDEM Deploy mit Änderungen CACHE hochzählen (gk-v1 → gk-v2 …),
    sonst sehen installierte Apps alte CSS/JS/Schriften. */
-const CACHE = 'gk-v1';
+const CACHE = 'gk-v2';
 
 const PRECACHE = [
   '/',

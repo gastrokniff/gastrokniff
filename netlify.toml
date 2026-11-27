@@ -1,9 +1,11 @@
-# Kein echter Build: nur interne Notizen (*.md) vor dem Hochladen löschen,
-# damit z. B. /CLAUDE.md nicht öffentlich ist (liefert dann 404).
-# Weiterleitungen können „*.md“ nicht abfangen (Platzhalter nur am Ende eines Pfads).
+# Kein echter Build: interne Dateien vor dem Hochladen löschen, damit sie 404 liefern:
+# - alle *.md (z. B. /CLAUDE.md); Weiterleitungen können „*.md“ nicht abfangen
+#   (Platzhalter nur am Ende eines Pfads)
+# - /social/ (Vorlagen für Instagram-Karussells, keine Seiten der Website)
+# Die Google-Verifizierungsdatei (google*.html) bleibt öffentlich.
 [build]
   publish = "."
-  command = "find . -path ./.git -prune -o -type f -name '*.md' -print -delete"
+  command = "rm -rf social && find . -path ./.git -prune -o -type f -name '*.md' -print -delete"
 
 # Service Worker und Manifest nie aus dem HTTP-Cache: sonst bleiben installierte Apps auf alten Versionen hängen
 [[headers]]

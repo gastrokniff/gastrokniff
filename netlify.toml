@@ -1,3 +1,10 @@
+# Kein echter Build: nur interne Notizen (*.md) vor dem Hochladen löschen,
+# damit z. B. /CLAUDE.md nicht öffentlich ist (liefert dann 404).
+# Weiterleitungen können „*.md“ nicht abfangen (Platzhalter nur am Ende eines Pfads).
+[build]
+  publish = "."
+  command = "find . -path ./.git -prune -o -type f -name '*.md' -print -delete"
+
 # Service Worker und Manifest nie aus dem HTTP-Cache: sonst bleiben installierte Apps auf alten Versionen hängen
 [[headers]]
   for = "/sw.js"

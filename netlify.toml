@@ -5,7 +5,7 @@
 # Die Google-Verifizierungsdatei (google*.html) bleibt öffentlich.
 [build]
   publish = "."
-  command = "rm -rf social && find . -path ./.git -prune -o -type f -name '*.md' -print -delete"
+  command = "rm -rf social && find . -type f -name '*.md' -not -path './.git/*' -print -delete"
 
 # Service Worker und Manifest nie aus dem HTTP-Cache: sonst bleiben installierte Apps auf alten Versionen hängen
 [[headers]]

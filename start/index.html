@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gastrokniff – Rechne es selbst</title>
+<meta name="description" content="Kostenlose Gastro-Rechner: Wareneinsatz, Break-even und Menu Engineering. Ohne Anmeldung, direkt im Browser.">
+<!-- Nur für den Link in der Instagram-Bio: nicht indexieren, nicht in die Sitemap, nirgends verlinken -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#0B1028">
+<link rel="stylesheet" href="/fonts.css">
+<link rel="stylesheet" href="/theme.css">
+<style>
+  .start{max-width:560px;margin:0 auto;padding:var(--space-5) var(--space-4) var(--space-6)}
+  .brand{display:inline-flex;align-items:center;gap:var(--space-3);color:inherit}
+  .brand:hover{color:inherit}
+  .claim{margin:var(--space-5) 0 var(--space-6);font-size:clamp(20px,5.6vw,26px);line-height:1.3;
+    font-family:var(--font-heading);font-weight:600;color:var(--text-strong)}
+  .claim span{color:var(--accent)}
+
+  .tools{display:flex;flex-direction:column;gap:var(--space-4)}
+  .tool{display:flex;align-items:center;gap:var(--space-3);color:inherit;min-height:96px;
+    padding:var(--space-4) var(--space-4);
+    transition:transform .2s,border-color .2s}
+  .tool:hover,.tool:focus-visible{color:inherit;border-color:var(--accent);transform:translateY(-2px)}
+  .tool:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .tool .ico{flex:none;width:48px;height:48px;border-radius:var(--radius-md);font-size:24px;
+    background:radial-gradient(circle at 50% 35%,rgba(255,138,61,.32),rgba(255,138,61,.08) 70%);
+    box-shadow:var(--glow-icon);display:flex;align-items:center;justify-content:center}
+  .tool .txt{flex:1;min-width:0}
+  .tool h2{font-size:19px;font-weight:700;margin-bottom:4px}
+  .tool p{color:var(--text-body);font-size:15px;line-height:1.4}
+  .tool .arr{flex:none;color:var(--accent);font-size:22px;font-weight:600}
+
+  .more{margin-top:var(--space-6);border-top:1px solid var(--hairline)}
+  .more a{display:flex;justify-content:space-between;padding:var(--space-4) var(--space-1);
+    border-bottom:1px solid var(--hairline);color:var(--text-strong);font-size:16px;font-weight:500}
+  .more a span{color:var(--accent)}
+  .more a:hover{color:var(--accent-tint)}
+
+  .legal{margin-top:var(--space-7);text-align:center;font-size:13.5px;color:var(--text-muted)}
+  .legal a{color:var(--text-body);display:inline-block;padding:var(--space-2)}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="start">
+  <a href="/" class="brand">
+    <svg class="gk-mark" viewBox="0 0 100 100" aria-hidden="true">
+      <defs><linearGradient id="gkT" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" style="stop-color:var(--logo-tile-top)"></stop><stop offset="1" style="stop-color:var(--logo-tile-bottom)"></stop></linearGradient></defs>
+      <path d="M20 0 H67 V33 H100 V80 A20 20 0 0 1 80 100 H20 A20 20 0 0 1 0 80 V20 A20 20 0 0 1 20 0 Z" fill="url(#gkT)" style="stroke:var(--sheen)" stroke-width="1.2"></path>
+      <path d="M67 0 L67 33 L100 33 Z" style="fill:var(--accent-strong)"></path>
+      <path d="M67 0 L100 0 L100 33 Z" style="fill:var(--accent)"></path>
+      <rect x="22" y="30" width="10" height="46" style="fill:var(--cream)"></rect>
+      <path d="M30 54 L56 33 M30 54 L58 74" style="stroke:var(--cream)" stroke-width="10"></path>
+    </svg>
+    <span class="gk-word">Gastro<span class="kn">kniff</span></span>
+  </a>
+
+  <h1 class="claim">Rechne es selbst – <span>kostenlos, ohne Anmeldung, direkt im Browser.</span></h1>
+
+  <nav class="tools" aria-label="Rechner">
+    <a class="card tool" href="/wareneinsatz-rechner.html?von=start">
+      <span class="ico" aria-hidden="true">🍽️</span>
+      <div class="txt"><h2>Wareneinsatz-Rechner</h2><p>Was kostet dein Teller wirklich?</p></div>
+      <span class="arr" aria-hidden="true">→</span>
+    </a>
+    <a class="card tool" href="/break-even-rechner.html?von=start">
+      <span class="ico" aria-hidden="true">📈</span>
+      <div class="txt"><h2>Break-even-Rechner</h2><p>Ab wie vielen Gästen verdienst du Geld?</p></div>
+      <span class="arr" aria-hidden="true">→</span>
+    </a>
+    <a class="card tool" href="/menu-engineering.html?von=start">
+      <span class="ico" aria-hidden="true">📋</span>
+      <div class="txt"><h2>Menu Engineering</h2><p>Welche Gerichte bringen Geld, welche nur Arbeit?</p></div>
+      <span class="arr" aria-hidden="true">→</span>
+    </a>
+  </nav>
+
+  <nav class="more" aria-label="Mehr">
+    <a href="/rechner.html">Alle Rechner <span aria-hidden="true">→</span></a>
+    <a href="/#wissen">Wissen <span aria-hidden="true">→</span></a>
+  </nav>
+
+  <footer class="legal">
+    <a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a>
+  </footer>
+</main>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4874637d13da44b99b039a9db0a4fcec"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
